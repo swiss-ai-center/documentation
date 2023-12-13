@@ -91,8 +91,8 @@ minikube tunnel --bind-address 127.0.0.1
 
 Access the `face-detection` documentation on <http://localhost:8686/docs>.
 
-Access the Core Engine documentation on <http://localhost:8080/docs> to validate
-the backend has been successfully registered to the Core Engine.
+Access the Core engine documentation on <http://localhost:8080/docs> to validate
+the backend has been successfully registered to the Core engine.
 
 ## Start the service locally with minikube and a local Docker image
 
@@ -147,5 +147,5 @@ minikube tunnel --bind-address 127.0.0.1
 
 Access the `face-detection` documentation on <http://localhost:8686/docs>.
 
-Access the Core Engine documentation on <http://localhost:8080/docs> to validate
-the backend has been successfully registered to the Core Engine.
+Access the Core engine documentation on <http://localhost:8080/docs> to validate
+the backend has been successfully registered to the Core engine.

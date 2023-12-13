@@ -5,7 +5,7 @@
 - Documentation: [common-code](./common-code.md)
 - Code: <https://github.com/swiss-ai-center/common-code>
 
-## [Core Engine](core-engine.md)
+## [Core engine](core-engine.md)
 
 - Documentation: [core-engine](./core-engine.md)
 - Code: <https://github.com/swiss-ai-center/core-engine>

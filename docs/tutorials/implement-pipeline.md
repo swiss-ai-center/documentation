@@ -15,11 +15,11 @@ To follow this tutorial, you need to have the following tools installed:
 - [Python 3.10](https://www.python.org/downloads/)
 - An IDE (e.g. [Visual Studio Code](https://code.visualstudio.com/))
 
-### Prepare the Core Engine
+### Prepare the Core engine
 
 To implement a [Pipeline](../reference/core-concepts/pipeline.md), you need to
-have a running [Core Engine](../reference/core-engine.md). If you don't have
-one, you can follow the [Core Engine](../reference/core-engine.md)
+have a running [Core engine](../reference/core-engine.md). If you don't have
+one, you can follow the [Core engine](../reference/core-engine.md)
 documentation.
 
 ### Prepare the services
@@ -43,7 +43,7 @@ documentation to start them.
 
 The [Pipeline](../reference/core-concepts/pipeline.md) is created by posting a
 JSON object to the `/pipelines` endpoint of the
-[Core Engine](../reference/core-engine.md). Create a file named
+[Core engine](../reference/core-engine.md). Create a file named
 `face-blur-pipeline.json` in your IDE with the following code:
 
 ``` json hl_lines="29 36"
@@ -90,7 +90,7 @@ JSON object to the `/pipelines` endpoint of the
 
 !!! note
     You can find the slug of your services by going to the FastAPI documentation of
-    the running [Core Engine](../reference/core-engine.md) and use the `/services`
+    the running [Core engine](../reference/core-engine.md) and use the `/services`
     endpoint. You will find the slug of your services in the response. <!--
     markdownlint-disable MD046 MD038 --> `` ` json hl_lines="6 12"
         [
@@ -115,7 +115,7 @@ The inputs of each step are the outputs of the previous steps. The first step ta
 
 ### Post the pipeline
 
-Now that we have our [Pipeline](../reference/core-concepts/pipeline.md), we can post it to the [Core Engine](../reference/core-engine.md). To do so, go to the FastAPI documentation of the running [Core Engine](../reference/core-engine.md) and use the `/pipelines` endpoint to post the [Pipeline](../reference/core-concepts/pipeline.md) by clicking on the `Try it out` button
+Now that we have our [Pipeline](../reference/core-concepts/pipeline.md), we can post it to the [Core engine](../reference/core-engine.md). To do so, go to the FastAPI documentation of the running [Core engine](../reference/core-engine.md) and use the `/pipelines` endpoint to post the [Pipeline](../reference/core-concepts/pipeline.md) by clicking on the `Try it out` button
 
 Simply copy the content of the `face-blur-pipeline.json` file and paste it in the `body` field of the `/pipelines` endpoint and click on the `Execute` button.
 
@@ -125,11 +125,11 @@ You should receive a `200` response with the [Pipeline](../reference/core-concep
 
 ### Run the pipeline
 
-You can run the pipeline using the FastAPI Swagger interface or by using the [Core Engine](../reference/core-engine.md).
+You can run the pipeline using the FastAPI Swagger interface or by using the [Core engine](../reference/core-engine.md).
 
 #### Using the FastAPI Swagger interface
 
-Now that we have our [Pipeline](../reference/core-concepts/pipeline.md), we can run it. To do so, go to the FastAPI documentation of the running [Core Engine](../reference/core-engine.md) and you should see the [Pipeline](../reference/core-concepts/pipeline.md) you just posted in the `Registered pipelines` endpoint with the slug `/face-blur`.
+Now that we have our [Pipeline](../reference/core-concepts/pipeline.md), we can run it. To do so, go to the FastAPI documentation of the running [Core engine](../reference/core-engine.md) and you should see the [Pipeline](../reference/core-concepts/pipeline.md) you just posted in the `Registered pipelines` endpoint with the slug `/face-blur`.
 
 ![Registered pipelines](../assets/screenshots/registered-pipeline.png)
 
@@ -200,7 +200,7 @@ If the picture you provided had a face, the result should be blurred.
 #### Using the Webapp
 
 You can also run the [Pipeline](../reference/core-concepts/pipeline.md) using
-the [Core Engine](../reference/core-engine.md). To do so, go to the Webapp in
+the [Core engine](../reference/core-engine.md). To do so, go to the Webapp in
 your browser and find the [Pipeline](../reference/core-concepts/pipeline.md) you
 just posted in the `Pipelines` section.
 
@@ -225,4 +225,4 @@ If the picture you provided had a face, the result should be blurred.
     You have successfully created a
     [Pipeline](../reference/core-concepts/pipeline.md) locally. Now, you can use the
     same process to create a [Pipeline](../reference/core-concepts/pipeline.md) on
-    the [Core Engine](../reference/core-engine.md) deployed on the cloud.
+    the [Core engine](../reference/core-engine.md) deployed on the cloud.

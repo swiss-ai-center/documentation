@@ -12,7 +12,7 @@ To see the general architecture of the project, see the global
 [UML Diagram](../reference/core-engine.md#uml-diagram).
 
 This sequence diagram illustrates the interaction between an user and a service,
-without using the Core Engine.
+without using the Core engine.
 
 ```mermaid
 sequenceDiagram
@@ -175,10 +175,10 @@ A JSON representation would look like this:
 }
 ```
 
-### Register to the Core Engine
+### Register to the Core engine
 
-To register the service to the Core Engine, the service must send a POST request
-to the Core Engine `/services` endpoint with the following model:
+To register the service to the Core engine, the service must send a POST request
+to the Core engine `/services` endpoint with the following model:
 
 ```python
 class ExecutionUnitBase(CoreModel):
@@ -280,5 +280,5 @@ A JSON representation would look like this:
 }
 ```
 
-After the service is registered, it will be available on the Core Engine's
+After the service is registered, it will be available on the Core engine's
 `/service-slug` endpoint.

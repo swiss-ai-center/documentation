@@ -473,12 +473,12 @@ app = FastAPI(
    input type.
 2. Change the description of the service.
 3. Change the name and the slug of the service. This is used to identify the
-   service in the Core Engine.
+   service in the Core engine.
 4. Change the input/output fields of the service. The name of the field is the
    key of the dictionary that will be used in the process function. The type of the
    field is the type of the data that will be sent to the service. They are defined
    in the FieldDescriptionType enum. The tags are used to identify the service in
-   the Core Engine. The `has_ai` variable is used to identify if the service is an
+   the Core engine. The `has_ai` variable is used to identify if the service is an
    AI service.
 5. Change the process function. This is the core of the service. The data is a
    dictionary with the keys being the field names set in the data_in_fields. The
@@ -667,11 +667,11 @@ TOTAL                         188     23    88%
 ```
 
 In order to test the [Service](../reference/core-concepts/service.md), you need
-to have a running Core Engine. To do so, follow the instructions in the
-[Core Engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github)
+to have a running Core engine. To do so, follow the instructions in the
+[Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github)
 reference.
 
-Once the Core Engine is running, you can start the
+Once the Core engine is running, you can start the
 [Service](../reference/core-concepts/service.md) by running the following
 command:
 
@@ -680,7 +680,7 @@ uvicorn main:app --reload --host localhost --port 8001 # (1)!
 ```
 
 1. The port must be the same as the one defined in the `.env` file and different
-   from the one used by the Core Engine.
+   from the one used by the Core engine.
 
 The output should be similar to the following:
 
@@ -698,7 +698,7 @@ INFO:     [2023-03-01 11:14:18,023]  [common_code.service.service]: Successfully
 ```
 
 Now, you can test the [Service](../reference/core-concepts/service.md) by
-sending a request to the Core Engine. To do so, open your browser and navigate
+sending a request to the Core engine. To do so, open your browser and navigate
 to the following URL: `http://localhost:8080/`. You should see the following
 page:
 
@@ -786,7 +786,7 @@ The image should be rotated by 90 degrees.
     You have successfully created a [Service](../reference/core-concepts/service.md)
     and tested it locally. Now, you can push the
     [Service](../reference/core-concepts/service.md) to GitHub and deploy it on the
-    Core Engine using the workflow created in the previous section.
+    Core engine using the workflow created in the previous section.
 
 ### 2. Service with a model
 
@@ -1247,12 +1247,12 @@ app = FastAPI(
 1. Import the library.
 2. Change the description of the service.
 3. Change the name and the slug of the service. This is used to identify the
-   service in the Core Engine.
+   service in the Core engine.
 4. Change the input/output fields of the service. The name of the field is the
    key of the dictionary that will be used in the process function. The type of the
    field is the type of the data that will be sent to the service. They are defined
    in the FieldDescriptionType enum. The tags are used to identify the service in
-   the Core Engine. The `has_ai` variable is used to identify if the service is an
+   the Core engine. The `has_ai` variable is used to identify if the service is an
    AI service.
 5. Change the process function. This is the core of the service. The data is a
    dictionary with the keys being the field names set in the data_in_fields. The
@@ -1406,7 +1406,7 @@ jobs:
 !!! success "Congratulations!"
     You have successfully created a [Service](../reference/core-concepts/service.md)
     locally. Now, you can push the [Service](../reference/core-concepts/service.md)
-    to GitHub and deploy it on the Core Engine using the workflow created in the
+    to GitHub and deploy it on the Core engine using the workflow created in the
     previous section.
 
 ### Update the documentation (optional)
@@ -1431,7 +1431,7 @@ nav:
   - Reference:
       - reference/index.md
       - Team: reference/team.md
-      - Core Engine: reference/core-engine.md
+      - Core engine: reference/core-engine.md
       - Service: reference/service.md
       - Pipeline: reference/pipeline.md
       - Webapp: reference/webapp.md

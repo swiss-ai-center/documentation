@@ -24,15 +24,15 @@ Authentication will be delegated to a
 sequenceDiagram
     actor User
     participant Auth service
-    participant Core Engine
+    participant Core engine
 
     Note over User, Auth service: The user request a token
     User->>Auth service: request token(credentials)
     Auth service->>User: Auth token
 
-    Note over User, Core Engine: Given an auth token, the user can access the engine
-    User->>Core Engine: Start service (Auth token + service parameters)
-    Core Engine->>User: Start service (Auth token + service parameters)
+    Note over User, Core engine: Given an auth token, the user can access the engine
+    User->>Core engine: Start service (Auth token + service parameters)
+    Core engine->>User: Start service (Auth token + service parameters)
 ```
 
 ## Authorization
