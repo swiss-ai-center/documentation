@@ -66,9 +66,9 @@ edit_uri: blob/main/docs/
 theme:
   language: en
   custom_dir: docs
-  favicon: assets/images/favicon.svg
+  logo: assets/images/logo.png
+  favicon: assets/images/logo.png
   icon:
-    logo: material/book
     repo: fontawesome/brands/git-alt
   name: material
   palette:

@@ -1,8 +1,8 @@
-# Swiss AI Center
+# Swiss AI Center documentation
 
-Official website: [Swiss AI Center](https://www.hes-so.ch/swiss-ai-center)
-([GitHub](https://github.com/swiss-ai-center/))
+The Swiss AI Center project documentation.
 
-* [Core Engine](https://core-engine-swiss-ai-center.kube.isc.heia-fr.ch)
-* [Web App](https://webapp-swiss-ai-center.kube.isc.heia-fr.ch)
-* [A guide to MLOps](https://mlops.swiss-ai-center.ch/)
+- [Website](https://swiss-ai-center.ch)
+- [Application](https://frontend-swiss-ai-center.kube.isc.heia-fr.ch)
+- [A guide to MLOps](https://mlops.swiss-ai-center)
+- [GitHub](https://github.com/swiss-ai-center)
