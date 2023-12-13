@@ -2,14 +2,18 @@
 
 This page describes the pipeline architecture and its specifications.
 
-The Pipeline is a group of services that are chained together. It is defined by a JSON file that describes the services and their order and is available through a REST API that can be used to process data.
-It does not rely on a Pod or a Docker image since it is a group of services. It is only stored in the database.
+The Pipeline is a group of services that are chained together. It is defined by
+a JSON file that describes the services and their order and is available through
+a REST API that can be used to process data. It does not rely on a Pod or a
+Docker image since it is a group of services. It is only stored in the database.
 
 ## Architecture
 
-To see the general architecture of the project, see the global [UML Diagram](../reference/core-engine.md#uml-diagram).
+To see the general architecture of the project, see the global
+[UML Diagram](../reference/core-engine.md#uml-diagram).
 
-This sequence diagram illustrates the interaction between an user and a pipeline.
+This sequence diagram illustrates the interaction between an user and a
+pipeline.
 
 ```mermaid
 sequenceDiagram
@@ -58,7 +62,8 @@ Any service can be part of a pipeline. It must be registered to the Core Engine.
 
 ### Endpoints
 
-A pipeline will be registered on the Core Engine URL with its slug. For example, if the pipeline slug is `my-pipeline`, the endpoints will be:
+A pipeline will be registered on the Core Engine URL with its slug. For example,
+if the pipeline slug is `my-pipeline`, the endpoints will be:
 
 - `POST /my-pipeline`: Add a task to the pipeline
 
@@ -106,7 +111,8 @@ class PipelineBase(ExecutionUnitBase):
 
 #### Pipeline Step model
 
-Each pipeline is composed of steps. A step is a service that is part of the pipeline. It is defined by the following model:
+Each pipeline is composed of steps. A step is a service that is part of the
+pipeline. It is defined by the following model:
 
 ```python
 class PipelineStepBase(CoreModel):
@@ -129,7 +135,11 @@ class PipelineStepBase(CoreModel):
         arbitrary_types_allowed = True
 ```
 
-A pipeline step is linked to a service and can have a condition. The condition is a python expression that will be evaluated to know if the step should be executed or not. The condition can use the `needs` field to access the outputs of the previous steps. For example, if the step `step1` has an output `output1`, the condition of `step2` can be `output1 == "foo"`.
+A pipeline step is linked to a service and can have a condition. The condition
+is a python expression that will be evaluated to know if the step should be
+executed or not. The condition can use the `needs` field to access the outputs
+of the previous steps. For example, if the step `step1` has an output `output1`,
+the condition of `step2` can be `output1 == "foo"`.
 
 ### JSON representation
 
@@ -177,21 +187,35 @@ A JSON representation of a pipeline would look like this:
 }
 ```
 
-The `needs` field is a list of the identifiers of the previous steps needed to be executed before the current one. So the steps need to be ordered. The `inputs` field is a list of the inputs of the step. The `service_slug` field is the slug of the service that will be executed.
+The `needs` field is a list of the identifiers of the previous steps needed to
+be executed before the current one. So the steps need to be ordered. The
+`inputs` field is a list of the inputs of the step. The `service_slug` field is
+the slug of the service that will be executed.
 
-The `inputs` should be in the following format: `<step_identifier>.<output_name>`. For example, if the step `face-detection` has an output `result`, the input of the step `image-blur` should be `face-detection.result`.
-To access the inputs of the pipeline, the input should be `pipeline.<input_name>`. For example, if the pipeline has an input `image`, the input of the step `face-detection` should be `pipeline.image`.
+The `inputs` should be in the following format:
+`<step_identifier>.<output_name>`. For example, if the step `face-detection` has
+an output `result`, the input of the step `image-blur` should be
+`face-detection.result`. To access the inputs of the pipeline, the input should
+be `pipeline.<input_name>`. For example, if the pipeline has an input `image`,
+the input of the step `face-detection` should be `pipeline.image`.
 
 !!! warning
-    The `inputs` need to be ordered in the same order as the `data_in_fields` of the service linked to the step.
+    The `inputs` need to be ordered in the same order as the `data_in_fields` of the
+    service linked to the step.
 
-On POST, the pipeline will be validated and the steps will be added to the Database.
+On POST, the pipeline will be validated and the steps will be added to the
+Database.
 
-After the pipeline is registered, it will be available on the Core Engine's `/pipeline-slug` endpoint.
+After the pipeline is registered, it will be available on the Core Engine's
+`/pipeline-slug` endpoint.
 
 ## Execution
 
-When launching a pipeline, the Core Engine will create a task for each step of the pipeline. The tasks will be executed in order. The Core Engine will wait for the previous task to be finished before launching the next one. All the tasks will be executed linked to an element called PipelineExecution. This element will be used to store the inputs and outputs of the pipeline execution.
+When launching a pipeline, the Core Engine will create a task for each step of
+the pipeline. The tasks will be executed in order. The Core Engine will wait for
+the previous task to be finished before launching the next one. All the tasks
+will be executed linked to an element called PipelineExecution. This element
+will be used to store the inputs and outputs of the pipeline execution.
 
 ### PipelineExecution
 

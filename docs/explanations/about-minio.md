@@ -22,7 +22,8 @@ _None._
 
 ### Create a bucket on Minio
 
-Go to your MinIO server, connect with the provided credentials and use the GUI to create your bucket.
+Go to your MinIO server, connect with the provided credentials and use the GUI
+to create your bucket.
 
 ### Configure the bucket to delete files after a certain time
 
@@ -33,7 +34,8 @@ Add a lifecycle rule by clicking **Add Lifecycle Rule**.
 Configure the new lifecycle rule as follow:
 
 - **Type of lifecycle**: Expiry
-- **After**: The number of days after which the files older than this will be deleted
+- **After**: The number of days after which the files older than this will be
+  deleted
 
 Click **Save** to save the lifecycle rule.
 
@@ -41,6 +43,7 @@ All files older than the specified number of days will be automatically deleted.
 
 ## Resources and alternatives
 
-These resources and alternatives are related to the current item (in alphabetical order).
+These resources and alternatives are related to the current item (in
+alphabetical order).
 
 - [MinIO Object Lifecycle Management](https://min.io/docs/minio/linux/administration/object-management/object-lifecycle-management.html)

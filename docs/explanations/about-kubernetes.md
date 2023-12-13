@@ -4,7 +4,8 @@ As the website of [Kubernetes](https://kubernetes.io/) mentions:
 
 !!! quote
 
-    Kubernetes, also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.
+    Kubernetes, also known as K8s, is an open-source system for automating
+    deployment, scaling, and management of containerized applications.
 
 ## How and why do we use Kubernetes
 
@@ -20,6 +21,7 @@ _None._
 
 ## Resources and alternatives
 
-These resources and alternatives are related to the current item (in alphabetical order).
+These resources and alternatives are related to the current item (in
+alphabetical order).
 
 _None at the moment._

@@ -1,10 +1,15 @@
 # Implement a service
 
-This tutorial shows how to implement a [Service](../reference/service.md) in the Swiss AI Center project step by step.
-It will guide you through the process of creating a [Service](../reference/service.md) with or without a model.
+This tutorial shows how to implement a
+[Service](../reference/core-concepts/service.md) in the Swiss AI Center project
+step by step. It will guide you through the process of creating a
+[Service](../reference/core-concepts/service.md) with or without a model.
 
 !!! Info
-    Note that a [Service](../reference/service.md) can be implemented in any programming language as long as it follows the [specifications](../reference/service.md/#specifications) of the Swiss AI Center project. This tutorial is using Python 3.10.
+    Note that a [Service](../reference/core-concepts/service.md) can be implemented
+    in any programming language as long as it follows the
+    [specifications](../reference/core-concepts/service.md/#specifications) of the
+    Swiss AI Center project. This tutorial is using Python 3.10.
 
 ## Tutorial
 
@@ -19,11 +24,15 @@ To follow this tutorial, you need to have the following tools installed:
 
 #### 1.1 Get the source code
 
-First, you can download or clone the source code from the [Swiss AI Center service templates repository](https://github.com/swiss-ai-center/services-templates).
+First, you can download or clone the source code from the
+[Swiss AI Center service templates repository](https://github.com/swiss-ai-center/services-templates).
 
-In this tutorial, we will implement a [Service](../reference/service.md) that does not require a model, so we will use the `sample-service-without-model` template.
+In this tutorial, we will implement a
+[Service](../reference/core-concepts/service.md) that does not require a model,
+so we will use the `sample-service-without-model` template.
 
-Open your terminal and copy the content of the template to a new folder called `image-rotate`. Then go inside it.
+Open your terminal and copy the content of the template to a new folder called
+`image-rotate`. Then go inside it.
 
 ```bash
 cp -r sample-service-without-model image-rotate
@@ -32,9 +41,11 @@ cd image-rotate
 
 #### 1.2 Create a virtual environment
 
-Instead of installing the dependencies globally, it is recommended to create a virtual environment.
+Instead of installing the dependencies globally, it is recommended to create a
+virtual environment.
 
-To create a virtual environment, run the following command inside the project folder:
+To create a virtual environment, run the following command inside the project
+folder:
 
 ```sh
 python3.10 -m venv .venv
@@ -48,7 +59,8 @@ source .venv/bin/activate
 
 #### 1.3 Install the dependencies
 
-For the [Service](../reference/service.md) to work we will need to install numpy and opencv-python in addition to the dependencies of the template.
+For the [Service](../reference/core-concepts/service.md) to work we will need to
+install numpy and opencv-python in addition to the dependencies of the template.
 So edit the `requirements.txt` file and add the following lines:
 
 ```txt hl_lines="2 3"
@@ -69,13 +81,16 @@ Create a freeze file to list the dependencies with their versions.
 pip freeze --local --all > requirements-all.txt
 ```
 
-This will install the default [Service](../reference/service.md) dependencies and the ones we just added. The freeze file will be used to ensure all the developers have the same dependencies.
+This will install the default [Service](../reference/core-concepts/service.md)
+dependencies and the ones we just added. The freeze file will be used to ensure
+all the developers have the same dependencies.
 
 #### 1.4 Implement the service
 
 ##### 1.4.1 Update the README
 
-Open the `README.md` file and update the title and the description of the [Service](../reference/service.md).
+Open the `README.md` file and update the title and the description of the
+[Service](../reference/core-concepts/service.md).
 
 ```md
 # Image Rotate
@@ -85,7 +100,10 @@ This service rotates an image by 90, 180 or 270 degrees clockwise.
 
 !!! note
 
-    If the service is part of the Swiss AI Center GitHub organization also add a link to the [Service](../reference/service.md)'s [Reference](../reference/service.md) page in the repository README.md file.
+    If the service is part of the Swiss AI Center GitHub organization also add a
+    link to the [Service](../reference/core-concepts/service.md)'s
+    [Reference](../reference/core-concepts/service.md) page in the repository
+    README.md file.
 
     ```md
     # Image Rotate
@@ -111,7 +129,8 @@ addopts = "--cov-config=.coveragerc --cov-report xml --cov-report term-missing -
 
 ##### 1.4.3 Update the service kubernetes configuration
 
-In the `kubernetes` folder, you will find the configuration files for the [Service](../reference/service.md).
+In the `kubernetes` folder, you will find the configuration files for the
+[Service](../reference/core-concepts/service.md).
 
 Rename all the files by replacing `sample-service` with `image-rotate`.
 
@@ -125,7 +144,8 @@ image-rotate
 └── ...
 ```
 
-Open the `image-rotate.config-map.yaml` file and update `sample-service` with `image-rotate`.
+Open the `image-rotate.config-map.yaml` file and update `sample-service` with
+`image-rotate`.
 
 ```yaml hl_lines="5 8 15"
 apiVersion: v1
@@ -147,9 +167,12 @@ data:
 
 1. Change the name of the config map to `image-rotate-config`
 2. Change the app label to `image-rotate`
-3. Change the service url to `http://image-rotate-service:8001`. The port must be the same as in the `image-rotate.service.yaml` and unused by other services. (this is for local development only)
+3. Change the service url to `http://image-rotate-service:8001`. The port must
+   be the same as in the `image-rotate.service.yaml` and unused by other services.
+   (this is for local development only)
 
-Open the `image-rotate.ingress.yaml` file and update `sample-service` with `image-rotate`.
+Open the `image-rotate.ingress.yaml` file and update `sample-service` with
+`image-rotate`.
 
 ```yaml hl_lines="5 12 20 26"
 apiVersion: networking.k8s.io/v1
@@ -186,9 +209,12 @@ spec:
 4. Change the host to `image-rotate-swiss-ai-center.kube.isc.heia-fr.ch`
 
 !!! info "Note"
-    The host can be changed to your own domain name if the [Service](../reference/service.md) is deployed on another Kubernetes cluster.
+    The host can be changed to your own domain name if the
+    [Service](../reference/core-concepts/service.md) is deployed on another
+    Kubernetes cluster.
 
-Open the `image-rotate.service.yaml` file and update `sample-service` with `image-rotate`.
+Open the `image-rotate.service.yaml` file and update `sample-service` with
+`image-rotate`.
 
 ```yaml hl_lines="5 11 16"
 apiVersion: v1
@@ -210,10 +236,13 @@ spec:
 ```
 
 1. Change the name of the service to `image-rotate-service`
-2. Change the port to `8001`. The port must be the same as in the `image-rotate.config-map.yaml` and unused by other services. (this is for local development only)
+2. Change the port to `8001`. The port must be the same as in the
+   `image-rotate.config-map.yaml` and unused by other services. (this is for local
+   development only)
 3. Change the app label to `image-rotate`
 
-Open the `image-rotate.stateful.yaml` file and update `sample-service` with `image-rotate`.
+Open the `image-rotate.stateful.yaml` file and update `sample-service` with
+`image-rotate`.
 
 ```yaml hl_lines="6 9 12 17 22 26 28 44"
 apiVersion: apps/v1
@@ -268,7 +297,8 @@ spec:
 4. Change the app label to `image-rotate`
 5. Change the app label to `image-rotate`
 6. Change the name of the container to `image-rotate`
-7. Change the image name to `ghcr.io/swiss-ai-center/image-rotate-service:latest`
+7. Change the image name to
+   `ghcr.io/swiss-ai-center/image-rotate-service:latest`
 8. Change the name of the config map to `image-rotate-config`
 
 !!! warning "TODOs"
@@ -276,7 +306,9 @@ spec:
 
 ##### 1.4.4 Update the service code
 
-First open the `.env` file and update the `SERVICE_URL` variable to `http://localhost:8001`. The port must be the same as in the `image-rotate.config-map.yaml` file.
+First open the `.env` file and update the `SERVICE_URL` variable to
+`http://localhost:8001`. The port must be the same as in the
+`image-rotate.config-map.yaml` file.
 
 ```bash hl_lines="12"
 # Log level
@@ -304,8 +336,10 @@ ENGINE_ANNOUNCE_RETRY_DELAY=3
 
 1. Replace the port with the same as in the `image-rotate.config-map.yaml` file.
 
-All the code of the [Service](../reference/service.md) is in the `main.py` file.
-The [Service](../reference/service.md) is a simple image rotation service that rotates the image by 90, 180, 270 degrees clockwise depending on the value of the `rotation` parameter.
+All the code of the [Service](../reference/core-concepts/service.md) is in the
+`main.py` file. The [Service](../reference/core-concepts/service.md) is a simple
+image rotation service that rotates the image by 90, 180, 270 degrees clockwise
+depending on the value of the `rotation` parameter.
 
 Open the `main.py` with your favorite editor and follow the instructions below.
 
@@ -434,17 +468,30 @@ app = FastAPI(
 ...
 ```
 
-1. Import the OpenCV library and the get_extension function from the tasks service. This function is used to guess the extension of the image based on the input type.
+1. Import the OpenCV library and the get_extension function from the tasks
+   service. This function is used to guess the extension of the image based on the
+   input type.
 2. Change the description of the service.
-3. Change the name and the slug of the service. This is used to identify the service in the Core Engine.
-4. Change the input/output fields of the service. The name of the field is the key of the dictionary that will be used in the process function. The type of the field is the type of the data that will be sent to the service. They are defined in the FieldDescriptionType enum. The tags are used to identify the service in the Core Engine. The `has_ai` variable is used to identify if the service is an AI service.
-5. Change the process function. This is the core of the service. The data is a dictionary with the keys being the field names set in the data_in_fields. The result must be a dictionary with the keys being the field names set in the data_out_fields.
+3. Change the name and the slug of the service. This is used to identify the
+   service in the Core Engine.
+4. Change the input/output fields of the service. The name of the field is the
+   key of the dictionary that will be used in the process function. The type of the
+   field is the type of the data that will be sent to the service. They are defined
+   in the FieldDescriptionType enum. The tags are used to identify the service in
+   the Core Engine. The `has_ai` variable is used to identify if the service is an
+   AI service.
+5. Change the process function. This is the core of the service. The data is a
+   dictionary with the keys being the field names set in the data_in_fields. The
+   result must be a dictionary with the keys being the field names set in the
+   data_out_fields.
 6. Change the API description and summary.
 7. Change the API title, version, contact and license.
 
 ##### 1.4.5 Dockerfile
 
-The Dockerfile is used to build the Docker image of the [Service](../reference/service.md). We need to add some packages in order to use the OpenCV library.
+The Dockerfile is used to build the Docker image of the
+[Service](../reference/core-concepts/service.md). We need to add some packages
+in order to use the OpenCV library.
 
 ```dockerfile hl_lines="6"
 # Base image
@@ -460,7 +507,10 @@ RUN apt update && apt install --yes ffmpeg libsm6 libxext6
 
 #### 1.5 Create the Workflow for GitHub Actions
 
-First, if you don't have the file already, download the `sample-service-without-model.yml` file from the [GitHub repository](https://github.com/swiss-ai-center/services-templates/workflows) and rename it to `image-rotate.yml` in the `.github/workflows` folder.
+First, if you don't have the file already, download the
+`sample-service-without-model.yml` file from the
+[GitHub repository](https://github.com/swiss-ai-center/services-templates/workflows)
+and rename it to `image-rotate.yml` in the `.github/workflows` folder.
 
 Open it with your IDE and modify the `sample-service` texts with `image-rotate`
 
@@ -583,13 +633,16 @@ jobs:
 14. Change the path to the Kubernetes configuration files.
 
 !!! info "Note"
-    The host can be changed to your own domain name if the [Service](../reference/service.md) is deployed on another Kubernetes cluster.
+    The host can be changed to your own domain name if the
+    [Service](../reference/core-concepts/service.md) is deployed on another
+    Kubernetes cluster.
 
 #### 1.6 Test the service
 
 Now that the service is ready, we can test it.
 
-Open a terminal, navigate to the `image-rotate/src` and run the following command:
+Open a terminal, navigate to the `image-rotate/src` and run the following
+command:
 
 ```bash
 pytest --cov-report term:skip-covered --cov-report term-missing --cov=. -s --cov-config=.coveragerc
@@ -613,15 +666,21 @@ TOTAL                         188     23    88%
 ========================= 5 passed in 29.12s =========================
 ```
 
-In order to test the [Service](../reference/service.md), you need to have a running Core Engine. To do so, follow the instructions in the [Core Engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github) reference.
+In order to test the [Service](../reference/core-concepts/service.md), you need
+to have a running Core Engine. To do so, follow the instructions in the
+[Core Engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github)
+reference.
 
-Once the Core Engine is running, you can start the [Service](../reference/service.md) by running the following command:
+Once the Core Engine is running, you can start the
+[Service](../reference/core-concepts/service.md) by running the following
+command:
 
 ```bash
 uvicorn main:app --reload --host localhost --port 8001 # (1)!
 ```
 
-1. The port must be the same as the one defined in the `.env` file and different from the one used by the Core Engine.
+1. The port must be the same as the one defined in the `.env` file and different
+   from the one used by the Core Engine.
 
 The output should be similar to the following:
 
@@ -638,17 +697,24 @@ INFO:     [2023-03-01 11:14:18,005]   127.0.0.1:54863 - "GET /status HTTP/1.1" 2
 INFO:     [2023-03-01 11:14:18,023]  [common_code.service.service]: Successfully announced to the engine
 ```
 
-Now, you can test the [Service](../reference/service.md) by sending a request to the Core Engine. To do so, open your browser and navigate to the following URL: `http://localhost:8080/`. You should see the following page:
+Now, you can test the [Service](../reference/core-concepts/service.md) by
+sending a request to the Core Engine. To do so, open your browser and navigate
+to the following URL: `http://localhost:8080/`. You should see the following
+page:
 
 ![image-rotate](../assets/screenshots/image-rotate.png)
 
-Now you can test the [Service](../reference/service.md) by uploading an image and selecting the rotation. Create a file called rotation.txt and add the following content:
+Now you can test the [Service](../reference/core-concepts/service.md) by
+uploading an image and selecting the rotation. Create a file called rotation.txt
+and add the following content:
 
 ```txt
 90
 ```
 
-Now, you can unfold the `/image-rotate` endpoint and click on the Try it out button. Now upload the image and the rotation file and click on the Execute button. The response body should be something similar to the following:
+Now, you can unfold the `/image-rotate` endpoint and click on the Try it out
+button. Now upload the image and the rotation file and click on the Execute
+button. The response body should be something similar to the following:
 
 ```json hl_lines="12"
 {
@@ -702,11 +768,13 @@ Now, you can unfold the `/image-rotate` endpoint and click on the Try it out but
 }
 ```
 
-Now, copy the id of the task and unfold the GET `/tasks/{task_id}` endpoint under the Tasks name.
+Now, copy the id of the task and unfold the GET `/tasks/{task_id}` endpoint
+under the Tasks name.
 
 1. Click on Try it out and paste the id in the task_id field.
 2. Click on Execute.
-3. In the body response, find the `data_out` field and copy the id of the image (e.g. `a38ef233-ac01-431d-adc8-cb6269cdeb71.png`).
+3. In the body response, find the `data_out` field and copy the id of the image
+   (e.g. `a38ef233-ac01-431d-adc8-cb6269cdeb71.png`).
 4. Now, unfold the GET `/storage/{key}` endpoint under the Storage name.
 5. Click on Try it out and paste the id of the image in the key field.
 6. Click on Execute.
@@ -715,7 +783,10 @@ Now, copy the id of the task and unfold the GET `/tasks/{task_id}` endpoint unde
 The image should be rotated by 90 degrees.
 
 !!! success "Congratulations!"
-    You have successfully created a [Service](../reference/service.md) and tested it locally. Now, you can push the [Service](../reference/service.md) to GitHub and deploy it on the Core Engine using the workflow created in the previous section.
+    You have successfully created a [Service](../reference/core-concepts/service.md)
+    and tested it locally. Now, you can push the
+    [Service](../reference/core-concepts/service.md) to GitHub and deploy it on the
+    Core Engine using the workflow created in the previous section.
 
 ### 2. Service with a model
 
@@ -723,11 +794,15 @@ In this section, you will create a service that uses a model.
 
 #### 2.1 Get the source code
 
-First, you can download or clone the source code from the [Swiss AI Center service templates repository](https://github.com/swiss-ai-center/services-templates).
+First, you can download or clone the source code from the
+[Swiss AI Center service templates repository](https://github.com/swiss-ai-center/services-templates).
 
-In this tutorial, we will implement a [Service](../reference/service.md) that does require a model, so we will use the `sample-service-with-model` template.
+In this tutorial, we will implement a
+[Service](../reference/core-concepts/service.md) that does require a model, so
+we will use the `sample-service-with-model` template.
 
-Open your terminal and copy the content of the template to a new folder called `ano-detection`. Then go inside it.
+Open your terminal and copy the content of the template to a new folder called
+`ano-detection`. Then go inside it.
 
 ```bash
 cp -r sample-service-without-model ano-detection
@@ -736,9 +811,11 @@ cd detection
 
 #### 2.2 Create a virtual environment
 
-Instead of installing the dependencies globally, it is recommended to create a virtual environment.
+Instead of installing the dependencies globally, it is recommended to create a
+virtual environment.
 
-To create a virtual environment, run the following command inside the project folder:
+To create a virtual environment, run the following command inside the project
+folder:
 
 ```sh
 python3.10 -m venv .venv
@@ -752,8 +829,8 @@ source .venv/bin/activate
 
 #### 2.3 Install the dependencies
 
-For the service to work we will need to install some dependencies of the template.
-So edit the `requirements.txt` file and add the following lines:
+For the service to work we will need to install some dependencies of the
+template. So edit the `requirements.txt` file and add the following lines:
 
 ```txt hl_lines="2 3"
 common-code[test] @ git+https://github.com/swiss-ai-center/core-engine.git@main#subdirectory=common-code
@@ -776,13 +853,16 @@ Create a freeze file to list the dependencies with their versions.
 pip freeze --local --all > requirements-all.txt
 ```
 
-This will install the default [Service](../reference/service.md) dependencies and the ones we just added. The freeze file will be used to ensure all the developers have the same dependencies.
+This will install the default [Service](../reference/core-concepts/service.md)
+dependencies and the ones we just added. The freeze file will be used to ensure
+all the developers have the same dependencies.
 
 #### 2.4 Implement the service
 
 ##### 2.4.1 Update the README
 
-Open the `README.md` file and update the title and the description of the [Service](../reference/service.md).
+Open the `README.md` file and update the title and the description of the
+[Service](../reference/core-concepts/service.md).
 
 ```md
 # Anomaly detection
@@ -792,7 +872,9 @@ This service detects anomalies in a time series.
 
 !!! note
 
-    If the service is part of the Swiss AI Center GitHub organization also add a link to the [Service](../reference/service.md)'s [Reference](../reference/index.md) page in the repository README.md file.
+    If the service is part of the Swiss AI Center GitHub organization also add a
+    link to the [Service](../reference/core-concepts/service.md)'s
+    [Reference](../reference/index.md) page in the repository README.md file.
 
     ```md
     # Anomaly detection
@@ -818,7 +900,8 @@ addopts = "--cov-config=.coveragerc --cov-report xml --cov-report term-missing -
 
 ##### 2.4.3 Update the service kubernetes configuration
 
-In the `kubernetes` folder, you will find the configuration files for the [Service](../reference/service.md).
+In the `kubernetes` folder, you will find the configuration files for the
+[Service](../reference/core-concepts/service.md).
 
 Rename all the files by replacing `sample-service` with `ano-detection`.
 
@@ -832,7 +915,8 @@ ano-detection
 └── ...
 ```
 
-Open the `ano-detection.config-map.yaml` file and update `sample-service` with `ano-detection`.
+Open the `ano-detection.config-map.yaml` file and update `sample-service` with
+`ano-detection`.
 
 ```yaml hl_lines="5 8 15"
 apiVersion: v1
@@ -854,9 +938,12 @@ data:
 
 1. Change the name of the config map to `ano-detection-config`
 2. Change the app label to `ano-detection`
-3. Change the service url to `http://ano-detection-service:8001`. The port must be the same as in the `ano-detection.service.yaml` and unused by other services. (this is for local development only)
+3. Change the service url to `http://ano-detection-service:8001`. The port must
+   be the same as in the `ano-detection.service.yaml` and unused by other services.
+   (this is for local development only)
 
-Open the `ano-detection.ingress.yaml` file and update `sample-service` with `ano-detection`.
+Open the `ano-detection.ingress.yaml` file and update `sample-service` with
+`ano-detection`.
 
 ```yaml hl_lines="5 12 20 26"
 apiVersion: networking.k8s.io/v1
@@ -893,9 +980,12 @@ spec:
 4. Change the host to `ano-detection-swiss-ai-center.kube.isc.heia-fr.ch`
 
 !!! info "Note"
-    The host can be changed to your own domain name if the [Service](../reference/service.md) is deployed on another Kubernetes cluster.
+    The host can be changed to your own domain name if the
+    [Service](../reference/core-concepts/service.md) is deployed on another
+    Kubernetes cluster.
 
-Open the `ano-detection.service.yaml` file and update `sample-service` with `ano-detection`.
+Open the `ano-detection.service.yaml` file and update `sample-service` with
+`ano-detection`.
 
 ```yaml hl_lines="5 11 16"
 apiVersion: v1
@@ -917,10 +1007,13 @@ spec:
 ```
 
 1. Change the name of the service to `ano-detection-service`
-2. Change the port to `8001`. The port must be the same as in the `ano-detection.config-map.yaml` and unused by other services. (this is for local development only)
+2. Change the port to `8001`. The port must be the same as in the
+   `ano-detection.config-map.yaml` and unused by other services. (this is for local
+   development only)
 3. Change the app label to `ano-detection`
 
-Open the `ano-detection.stateful.yaml` file and update `sample-service` with `ano-detection`.
+Open the `ano-detection.stateful.yaml` file and update `sample-service` with
+`ano-detection`.
 
 ```yaml hl_lines="6 9 12 17 22 26 28 44"
 apiVersion: apps/v1
@@ -975,7 +1068,8 @@ spec:
 4. Change the app label to `ano-detection`
 5. Change the app label to `ano-detection`
 6. Change the name of the container to `ano-detection`
-7. Change the image name to `ghcr.io/swiss-ai-center/ano-detection-service:latest`
+7. Change the image name to
+   `ghcr.io/swiss-ai-center/ano-detection-service:latest`
 8. Change the name of the config map to `ano-detection-config`
 
 !!! warning "TODOs"
@@ -983,7 +1077,9 @@ spec:
 
 ##### 2.4.4 Update the service code
 
-First open the `.env` file and update the `SERVICE_URL` variable to `http://localhost:8001`. The port must be the same as in the `ano-detection.config-map.yaml` file.
+First open the `.env` file and update the `SERVICE_URL` variable to
+`http://localhost:8001`. The port must be the same as in the
+`ano-detection.config-map.yaml` file.
 
 ```bash hl_lines="12"
 # Log level
@@ -1009,9 +1105,11 @@ ENGINE_ANNOUNCE_RETRIES=5
 ENGINE_ANNOUNCE_RETRY_DELAY=3
 ```
 
-1. Replace the port with the same as in the `ano-detection.config-map.yaml` file.
+1. Replace the port with the same as in the `ano-detection.config-map.yaml`
+   file.
 
-All the code of the [Service](../reference/service.md) is in the `main.py` file.
+All the code of the [Service](../reference/core-concepts/service.md) is in the
+`main.py` file.
 
 Open the `main.py` with your favorite editor and follow the instructions below.
 
@@ -1148,15 +1246,26 @@ app = FastAPI(
 
 1. Import the library.
 2. Change the description of the service.
-3. Change the name and the slug of the service. This is used to identify the service in the Core Engine.
-4. Change the input/output fields of the service. The name of the field is the key of the dictionary that will be used in the process function. The type of the field is the type of the data that will be sent to the service. They are defined in the FieldDescriptionType enum. The tags are used to identify the service in the Core Engine. The `has_ai` variable is used to identify if the service is an AI service.
-5. Change the process function. This is the core of the service. The data is a dictionary with the keys being the field names set in the data_in_fields. The result must be a dictionary with the keys being the field names set in the data_out_fields.
+3. Change the name and the slug of the service. This is used to identify the
+   service in the Core Engine.
+4. Change the input/output fields of the service. The name of the field is the
+   key of the dictionary that will be used in the process function. The type of the
+   field is the type of the data that will be sent to the service. They are defined
+   in the FieldDescriptionType enum. The tags are used to identify the service in
+   the Core Engine. The `has_ai` variable is used to identify if the service is an
+   AI service.
+5. Change the process function. This is the core of the service. The data is a
+   dictionary with the keys being the field names set in the data_in_fields. The
+   result must be a dictionary with the keys being the field names set in the
+   data_out_fields.
 6. Change the API description and summary.
 7. Change the API title, version, contact and license.
 
 ##### 2.4.5 Dockerfile
 
-The Dockerfile is used to build the Docker image of the [Service](../reference/service.md). We need to copy the model in the docker.
+The Dockerfile is used to build the Docker image of the
+[Service](../reference/core-concepts/service.md). We need to copy the model in
+the docker.
 
 ```dockerfile hl_lines="3"
 # Copy model
@@ -1168,7 +1277,10 @@ COPY ae_model.h5 .
 
 #### 2.5 Create the Workflow for GitHub Actions
 
-First, if you don't have the file already, download the `sample-service-without-model.yml` file from the [GitHub repository](https://github.com/swiss-ai-center/services-templates/tree/main/.github/workflows) and rename it to `ano-detection.yml` in the `.github/workflows` folder.
+First, if you don't have the file already, download the
+`sample-service-without-model.yml` file from the
+[GitHub repository](https://github.com/swiss-ai-center/services-templates/tree/main/.github/workflows)
+and rename it to `ano-detection.yml` in the `.github/workflows` folder.
 
 Open it with your IDE and modify the `sample-service` texts with `ano-detection`
 
@@ -1287,21 +1399,30 @@ jobs:
 14. Change the path to the Kubernetes configuration files.
 
 !!! info "Note"
-    The host can be changed to your own domain name if the [Service](../reference/service.md) is deployed on another Kubernetes cluster.
+    The host can be changed to your own domain name if the
+    [Service](../reference/core-concepts/service.md) is deployed on another
+    Kubernetes cluster.
 
 !!! success "Congratulations!"
-    You have successfully created a [Service](../reference/service.md) locally. Now, you can push the [Service](../reference/service.md) to GitHub and deploy it on the Core Engine using the workflow created in the previous section.
+    You have successfully created a [Service](../reference/core-concepts/service.md)
+    locally. Now, you can push the [Service](../reference/core-concepts/service.md)
+    to GitHub and deploy it on the Core Engine using the workflow created in the
+    previous section.
 
 ### Update the documentation (optional)
 
-If the [Service](../reference/service.md) is part of the Swiss AI Center GitHub Organization. There is some documentation to update.
+If the [Service](../reference/core-concepts/service.md) is part of the Swiss AI
+Center GitHub Organization. There is some documentation to update.
 
-1. First add the [Service](../reference/service.md) to the list of references with its URL and GitHub repository URL.
+1. First add the [Service](../reference/core-concepts/service.md) to the list of
+   references with its URL and GitHub repository URL.
 
-2. Then create it's own section with all information on how to run the [Service](../reference/service.md) with the same content as the other services
+2. Then create it's own section with all information on how to run the
+   [Service](../reference/core-concepts/service.md) with the same content as the
+   other services
 
-
-Then update the nav section in the `mkdocs.yml` file with the new [Service](../reference/service.md) reference page.
+Then update the nav section in the `mkdocs.yml` file with the new
+[Service](../reference/core-concepts/service.md) reference page.
 
 ```yaml hl_lines="25"
 ...

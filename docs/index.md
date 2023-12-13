@@ -1,16 +1,18 @@
 ---
 template: overrides/home.html
-title: Swiss AI Center documentation
 hide:
   - navigation
   - toc
 ---
 
+# Swiss AI Center
+
 ## Introduction
 
 Welcome to the Swiss AI Center Documentation website!
 
-This documentation is based on the [Diátaxis Documentation Framework](./explanations/about-this-documentation.md).
+This documentation is based on the
+[Diátaxis Documentation Framework](./explanations/about-this-documentation.md).
 
 The documentation is separated in the following axes:
 

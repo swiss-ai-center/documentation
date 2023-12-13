@@ -1,37 +1,44 @@
 # Reference
 
-## [Core Engine](core-engine.md) and [Webapp](webapp.md)
+## [Common code](common-code.md)
 
-| Service                                           | Code                                                      | URL when run locally with minikube    | URL when deployed on Fribourg's Kubernetes                     |
-| ------------------------------------------------- | --------------------------------------------------------- | ------------------------------------- |----------------------------------------------------------------|
-| [Core Engine](./core-engine.md){ style="color: inherit;" }  | <https://github.com/swiss-ai-center/core-engine/tree/main/core-engine>   | <http://localhost:8080/docs>          | <https://core-engine-swiss-ai-center.kube.isc.heia-fr.ch/docs> |
-| [Webapp](./webapp.md){ style="color: inherit;" }  | <https://github.com/swiss-ai-center/core-engine/tree/main/webapp>   | <http://localhost:8181/docs>          | <https://webapp-swiss-ai-center.kube.isc.heia-fr.ch/docs>      |
+- Documentation: [common-code](./common-code.md)
+- Code: <https://github.com/swiss-ai-center/common-code>
 
-## [Authentication](./auth.md)
+## [Core Engine](core-engine.md)
+
+- Documentation: [core-engine](./core-engine.md)
+- Code: <https://github.com/swiss-ai-center/core-engine>
+- Staging URL (frontend):
+  <https://frontend-core-engine-swiss-ai-center.kube.isc.heia-fr.ch>
+- Staging URL (backend):
+  <https://backend-core-engine-swiss-ai-center.kube.isc.heia-fr.ch/docs>
+- Production URL (frontend): <https://app.swiss-ai-center.ch>
+- Production URL (backend): <http://app.swiss-ai-center.ch/api>
 
 ## [Services](./service.md)
 
-| Service                                                                   | Code                                                                          | URL when run locally with minikube    | URL when deployed on Fribourg's Kubernetes                    |
-| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------- |
-| [ae-ano-detection](./ae-ano-detection.md){ style="color: inherit;" }      | <https://github.com/swiss-ai-center/core-engine/tree/main/services/ae-ano-detection>    | <http://localhost:8282/docs>          | <https://ae-ano-detection-swiss-ai-center.kube.isc.heia-fr.ch/docs>  |
-| [average-shade](./average-shade.md){ style="color: inherit;" }            | <https://github.com/swiss-ai-center/core-engine/tree/main/services/average-shade>       | <http://localhost:8383/docs>          | <https://average-shade-swiss-ai-center.kube.isc.heia-fr.ch/docs>     |
-| [digit-recognition](./digit-recognition.md){ style="color: inherit;" }    | <https://github.com/swiss-ai-center/core-engine/tree/main/services/digit-recognition>   | <http://localhost:8484/docs>          | <https://digit-recognition-swiss-ai-center.kube.isc.heia-fr.ch/docs> |
-| [face-analyzer](./face-analyzer.md){ style="color: inherit;" }            | <https://github.com/swiss-ai-center/core-engine/tree/main/services/face-analyzer>       | <http://localhost:8585/docs>          | <https://face-analyzer-swiss-ai-center.kube.isc.heia-fr.ch/docs>     |
-| [face-detection](./face-detection.md){ style="color: inherit;" }          | <https://github.com/swiss-ai-center/core-engine/tree/main/services/face-detection>      | <http://localhost:8686/docs>          | <https://face-detection-swiss-ai-center.kube.isc.heia-fr.ch/docs>    |
-| [image-analyzer](./image-analyzer.md){ style="color: inherit;" }          | <https://github.com/swiss-ai-center/core-engine/tree/main/services/image-analyzer>      | <http://localhost:8787/docs>          | <https://image-analyzer-swiss-ai-center.kube.isc.heia-fr.ch/docs>    |
-| [image-blur](./image-blur.md){ style="color: inherit;" }          | <https://github.com/swiss-ai-center/core-engine/tree/main/services/image-blur>      | <http://localhost:8888/docs>          | <https://image-blur-swiss-ai-center.kube.isc.heia-fr.ch/docs>    |
-| [image-convert](./image-convert.md){ style="color: inherit;" }          | <https://github.com/swiss-ai-center/core-engine/tree/main/services/image-convert>      | <http://localhost:8989/docs>          | <https://image-convert-swiss-ai-center.kube.isc.heia-fr.ch/docs>    |
-| [image-crop](./image-crop.md){ style="color: inherit;" }          | <https://github.com/swiss-ai-center/core-engine/tree/main/services/image-crop>      | <http://localhost:9090/docs>          | <https://image-crop-swiss-ai-center.kube.isc.heia-fr.ch/docs>    |
-| [image-greyscale](./image-greyscale.md){ style="color: inherit;" }          | <https://github.com/swiss-ai-center/core-engine/tree/main/services/image-greyscale>      | <http://localhost:9191/docs>          | <https://image-greyscale-swiss-ai-center.kube.isc.heia-fr.ch/docs>    |
-| [image-resize](./image-resize.md){ style="color: inherit;" }          | <https://github.com/swiss-ai-center/core-engine/tree/main/services/image-resize>      | <http://localhost:9292/docs>          | <https://image-resize-swiss-ai-center.kube.isc.heia-fr.ch/docs>    |
-| [image-rotate](./image-rotate.md){ style="color: inherit;" }          | <https://github.com/swiss-ai-center/core-engine/tree/main/services/image-rotate>      | <http://localhost:9393/docs>          | <https://image-rotate-swiss-ai-center.kube.isc.heia-fr.ch/docs>    |
-| [image-sam](./image-sam.md){ style="color: inherit;" }          | <https://github.com/swiss-ai-center/core-engine/tree/main/services/image-sam>      | <http://localhost:9494/docs>          | <https://image-sam-swiss-ai-center.kube.isc.heia-fr.ch/docs>    |
-| [integrity-checker](./integrity-checker.md){ style="color: inherit;" }          | <https://github.com/swiss-ai-center/core-engine/tree/main/services/integrity-checker>      | <http://localhost:9595/docs>          | <https://intergrity-checker-swiss-ai-center.kube.isc.heia-fr.ch/docs>    |
-| [doodle](./doodle.md){ style="color: inherit;" }          | <https://github.com/swiss-ai-center/doodle>      | <http://localhost:9595/docs>          | <https://doodle-swiss-ai-center.kube.isc.heia-fr.ch/docs>    |
-| [yolov8](./yolov8.md){ style="color: inherit;" }          | <https://github.com/swiss-ai-center/yolov8>      | <http://localhost:9595/docs>          | <https://yolov8-swiss-ai-center.kube.isc.heia-fr.ch/docs>    |
+| Documentation                                 | Code                                                               | Staging URL                                                              | Production URL (not available yet)                    |
+| --------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------ | ----------------------------------------------------- |
+| [ae-ano-detection](./ae-ano-detection.md)     | <https://github.com/swiss-ai-center/ae-ano-detection-service>      | <https://ae-ano-detection-swiss-ai-center.kube.isc.heia-fr.ch/docs>      | <https://ae-ano-detection.swiss-ai-center.ch/docs>    |
+| [average-shade](./average-shade.md)           | <https://github.com/swiss-ai-center/average-shade-service>         | <https://average-shade-swiss-ai-center.kube.isc.heia-fr.ch/docs>         | <https://average-shade.swiss-ai-center.ch/docs>       |
+| [digit-recognition](./digit-recognition.md)   | <https://github.com/swiss-ai-center/digit-recognition-service>     | <https://digit-recognition-swiss-ai-center.kube.isc.heia-fr.ch/docs>     | <https://digit-recognition.swiss-ai-center.ch/docs>   |
+| [face-analyzer](./face-analyzer.md)           | <https://github.com/swiss-ai-center/face-analyzer-service>         | <https://face-analyzer-swiss-ai-center.kube.isc.heia-fr.ch/docs>         | <https://face-analyzer.swiss-ai-center.ch/docs>       |
+| [face-detection](./face-detection.md)         | <https://github.com/swiss-ai-center/face-detection-service>        | <https://face-detection-swiss-ai-center.kube.isc.heia-fr.ch/docs>        | <https://face-detection.swiss-ai-center.ch/docs>      |
+| [image-analyzer](./image-analyzer.md)         | <https://github.com/swiss-ai-center/image-analyzer-service>        | <https://image-analyzer-swiss-ai-center.kube.isc.heia-fr.ch/docs>        | <https://image-analyzer.swiss-ai-center.ch/docs>      |
+| [image-blur](./image-blur.md)                 | <https://github.com/swiss-ai-center/image-blur-service>            | <https://image-blur-swiss-ai-center.kube.isc.heia-fr.ch/docs>            | <https://image-blur.swiss-ai-center.ch/docs>          |
+| [image-convert](./image-convert.md)           | <https://github.com/swiss-ai-center/image-convert-service>         | <https://image-convert-swiss-ai-center.kube.isc.heia-fr.ch/docs>         | <https://image-convert.swiss-ai-center.ch/docs>       |
+| [image-crop](./image-crop.md)                 | <https://github.com/swiss-ai-center/image-crop-service>            | <https://image-crop-swiss-ai-center.kube.isc.heia-fr.ch/docs>            | <https://image-crop.swiss-ai-center.ch/docs>          |
+| [image-greyscale](./image-greyscale.md)       | <https://github.com/swiss-ai-center/image-greyscale-service>       | <https://image-greyscale-swiss-ai-center.kube.isc.heia-fr.ch/docs>       | <https://image-greyscale.swiss-ai-center.ch/docs>     |
+| [image-resize](./image-resize.md)             | <https://github.com/swiss-ai-center/image-resize-service>          | <https://image-resize-swiss-ai-center.kube.isc.heia-fr.ch/docs>          | <https://image-resize.swiss-ai-center.ch/docs>        |
+| [image-rotate](./image-rotate.md)             | <https://github.com/swiss-ai-center/image-rotate-service>          | <https://image-rotate-swiss-ai-center.kube.isc.heia-fr.ch/docs>          | <https://image-rotate.swiss-ai-center.ch/docs>        |
+| [image-sam](./image-sam.md)                   | <https://github.com/swiss-ai-center/image-sam-service>             | <https://image-sam-swiss-ai-center.kube.isc.heia-fr.ch/docs>             | <https://image-sam.swiss-ai-center.ch/docs>           |
+| [integrity-checker](./integrity-checker.md)   | <https://github.com/swiss-ai-center/integrity-checker-service>     | <https://intergrity-checker-swiss-ai-center.kube.isc.heia-fr.ch/docs>    | <https://intergrity-checker.swiss-ai-center.ch/docs>  |
+| [doodle](./doodle.md)                         | <https://github.com/swiss-ai-center/doodle-service>                | <https://doodle-swiss-ai-center.kube.isc.heia-fr.ch/docs>                | <https://doodle.swiss-ai-center.ch/docs>              |
+| [yolov8](./yolov8.md)                         | <https://github.com/swiss-ai-center/yolov8-service>                | <https://yolov8-swiss-ai-center.kube.isc.heia-fr.ch/docs>                | <https://yolov8.swiss-ai-center.ch/docs>              |
 
 ## [Pipelines](./pipeline.md)
 
-| Pipeline                                                                  | Chained services                                                              |
-| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| Face Blur                                                                 | Face detection, Image blur                                                    |
+| Name      | Services                      |
+| --------- | ----------------------------- |
+| Face Blur | Face detection, Image blur    |

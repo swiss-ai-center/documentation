@@ -2,13 +2,17 @@
 
 This page describes the service architecture and its specifications.
 
-The service is a [FastAPI](https://fastapi.tiangolo.com/) application that is deployed on a Kubernetes cluster. It is a REST API that can be used to process data.
+The service is a [FastAPI](https://fastapi.tiangolo.com/) application that is
+deployed on a Kubernetes cluster. It is a REST API that can be used to process
+data.
 
 ## Architecture
 
-To see the general architecture of the project, see the global [UML Diagram](../reference/core-engine.md#uml-diagram).
+To see the general architecture of the project, see the global
+[UML Diagram](../reference/core-engine.md#uml-diagram).
 
-This sequence diagram illustrates the interaction between an user and a service, without using the Core Engine.
+This sequence diagram illustrates the interaction between an user and a service,
+without using the Core Engine.
 
 ```mermaid
 sequenceDiagram
@@ -35,15 +39,18 @@ sequenceDiagram
 
 ## Specifications
 
-Inside the project, the services are implemented using Python. But the service is a REST API, so it can be implemented in any language.
+Inside the project, the services are implemented using Python. But the service
+is a REST API, so it can be implemented in any language.
 
 ### Endpoints
 
 To match the specifications, the service must implement the following endpoints:
 
 - GET `/status` : returns the service availability. (Returns a string)
-- GET `/tasks/{task_id}/status` : returns the status of a task. (Returns a string)
-- POST `/compute` : computes the given task and returns the result. (Returns a string)
+- GET `/tasks/{task_id}/status` : returns the status of a task. (Returns a
+  string)
+- POST `/compute` : computes the given task and returns the result. (Returns a
+  string)
 
 ![service-endpoints](../assets/screenshots/service-endpoints.png)
 
@@ -53,7 +60,8 @@ The different models used in the pipeline are described below.
 
 #### Task Input
 
-The `POST /compute` endpoint must be able to receive a JSON body that matches the following model:
+The `POST /compute` endpoint must be able to receive a JSON body that matches
+the following model:
 
 ```python
 class ServiceTaskTask(BaseModel):
@@ -81,7 +89,8 @@ class ServiceTaskBase(BaseModel):
     callback_url: str
 ```
 
-The `data_in` and `data_out` fields are lists of S3 object keys. The `status` field is a string that can be one of the following values:
+The `data_in` and `data_out` fields are lists of S3 object keys. The `status`
+field is a string that can be one of the following values:
 
 ```python
 class TaskStatus(str, Enum):
@@ -94,7 +103,9 @@ class TaskStatus(str, Enum):
     UNAVAILABLE = "unavailable"
 ```
 
-The S3 settings are used to connect to the S3 storage where the data is stored and where the result will be stored. The `callback_url` is the url where the service should send the response.
+The S3 settings are used to connect to the S3 storage where the data is stored
+and where the result will be stored. The `callback_url` is the url where the
+service should send the response.
 
 A JSON representation would look like this:
 
@@ -120,7 +131,8 @@ A JSON representation would look like this:
 
 #### Task Output
 
-Once the task is computed, the service must PATCH the task on `/tasks/{task_id}` with the following model:
+Once the task is computed, the service must PATCH the task on `/tasks/{task_id}`
+with the following model:
 
 ```python
 class TaskUpdate(BaseModel):
@@ -134,7 +146,8 @@ class TaskUpdate(BaseModel):
     status: TaskStatus | None
 ```
 
-The `data_out` field is a list of S3 object keys. The `status` field is a string that can be one of the following values:
+The `data_out` field is a list of S3 object keys. The `status` field is a string
+that can be one of the following values:
 
 ```python
 class TaskStatus(str, Enum):
@@ -164,7 +177,8 @@ A JSON representation would look like this:
 
 ### Register to the Core Engine
 
-To register the service to the Core Engine, the service must send a POST request to the Core Engine `/services` endpoint with the following model:
+To register the service to the Core Engine, the service must send a POST request
+to the Core Engine `/services` endpoint with the following model:
 
 ```python
 class ExecutionUnitBase(CoreModel):
@@ -198,7 +212,8 @@ class ServiceBase(ExecutionUnitBase):
     url: AnyHttpUrl = Field(nullable=False)
 ```
 
-The `data_in_fields` and `data_out_fields` fields are lists of `FieldDescription` models. A `FieldDescription` model is defined as follows:
+The `data_in_fields` and `data_out_fields` fields are lists of
+`FieldDescription` models. A `FieldDescription` model is defined as follows:
 
 ```python
 class FieldDescriptionType(str, Enum):
@@ -265,4 +280,5 @@ A JSON representation would look like this:
 }
 ```
 
-After the service is registered, it will be available on the Core Engine's `/service-slug` endpoint.
+After the service is registered, it will be available on the Core Engine's
+`/service-slug` endpoint.
