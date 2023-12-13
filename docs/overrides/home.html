@@ -1,0 +1,148 @@
+{% extends "main.html" %}
+
+<!-- Render hero under tabs -->
+{% block tabs %}
+{{ super() }}
+
+<!-- Additional styles for landing page -->
+<style>
+    body {
+        overflow: hidden;
+    }
+
+    .md-typeset h1 {
+        display: none;
+    }
+
+    .md-typeset .md-content__button {
+        display: none;
+
+    }
+
+    /* These two are commented out but can be used to hide the header and tabs completely */
+    /* Remove spacing, as we cannot hide it completely */
+    /* .md-main__inner {
+        margin: 0;
+    } */
+
+    /* Hide main content for now */
+    /* .md-content {
+        display: none;
+    } */
+
+    /* Hide table of contents */
+    @media screen and (min-width: 60em) {
+        .md-sidebar--secondary {
+            display: none;
+        }
+    }
+
+    /* Hide navigation */
+    @media screen and (min-width: 76.25em) {
+        .md-sidebar--primary {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 65em) {
+        .home-section {
+            height: 100vh;
+            flex-direction: column-reverse;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .home-section h1 {
+            font-size: 2rem !important
+        }
+
+        .home-image {
+            width: 350px !important;
+        }
+
+        .home-image-hesso {
+            width: 150px !important;
+        }
+
+        .home-button-logo {
+            justify-content: center;
+            flex-direction: column;
+            gap: 2rem !important;
+        }
+
+        .features-section {
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .features-section .icon-feature {
+            max-width: unset !important;
+        }
+    }
+
+    .home-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        text-align: center;
+        height: calc((100vh - 116px) / 2); /* 116px = header height */
+    }
+
+    .navigation-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        
+    }
+
+    .navigation-section a {
+        color: var(--md-typeset-a-color);
+    }
+
+    .navigation-section p {
+        text-align: center;
+        font-size: 0.8rem;
+    }
+
+    .home-section h1 {
+        font-size: 2.5rem;
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    .home-section p {
+        font-size: 1.25rem;
+        margin: 0 auto;
+        max-width: 35ch;
+        text-align: center;
+    }
+</style>
+
+<section class="home-section">
+    <div>
+        <h1>Swiss AI Center documentation</h1>
+        <p>The official documentation for the Swiss AI Center project</p>
+    </div>
+</section>
+<section class="navigation-section">
+        <p>
+            <a href="https://swiss-ai-center.ch">🌍 Website</a> · 
+            <a href="https://frontend-swiss-ai-center.kube.isc.heia-fr.ch">📦 Application</a> · 
+            <a href="https://mlops.swiss-ai-center">♾️ A guide to MLOps</a> · 
+            <a href="https://mlops.swiss-ai-center">🛠️ GitHub repository</a>
+        </p>
+</section>
+
+{% endblock %}
+
+<!-- Content -->
+{% block content %}
+{{ super() }}
+{% endblock %}
+
+<!-- Application footer -->
+{% block footer %}
+{{ super() }}
+{% endblock %}

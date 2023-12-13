@@ -1,0 +1,7 @@
+## Material for MkDocs
+
+# Cache
+.cache
+
+# Output directory
+/public
