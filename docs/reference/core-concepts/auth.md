@@ -2,7 +2,7 @@
 
 Authorization and authentication have been designed, but not implemented.
 
-The [core-engine](./core-engine.md) is responsible for the authorization and
+The [core-engine](../core-engine.md) is responsible for the authorization and
 authentication.
 
 ## Service authorization

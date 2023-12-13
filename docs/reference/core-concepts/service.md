@@ -9,7 +9,7 @@ data.
 ## Architecture
 
 To see the general architecture of the project, see the global
-[UML Diagram](../reference/core-engine.md#uml-diagram).
+[UML Diagram](../core-engine.md#uml-diagram).
 
 This sequence diagram illustrates the interaction between an user and a service,
 without using the Core engine.
@@ -52,7 +52,7 @@ To match the specifications, the service must implement the following endpoints:
 - POST `/compute` : computes the given task and returns the result. (Returns a
   string)
 
-![service-endpoints](../assets/screenshots/service-endpoints.png)
+![service-endpoints](../../assets/screenshots/service-endpoints.png)
 
 ### Models
 

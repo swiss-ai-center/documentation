@@ -10,7 +10,7 @@ Docker image since it is a group of services. It is only stored in the database.
 ## Architecture
 
 To see the general architecture of the project, see the global
-[UML Diagram](../reference/core-engine.md#uml-diagram).
+[UML Diagram](../core-engine.md#uml-diagram).
 
 This sequence diagram illustrates the interaction between an user and a
 pipeline.
@@ -67,7 +67,7 @@ if the pipeline slug is `my-pipeline`, the endpoints will be:
 
 - `POST /my-pipeline`: Add a task to the pipeline
 
-![pipeline-endpoint](../assets/screenshots/pipeline-endpoint.png)
+![pipeline-endpoint](../../assets/screenshots/pipeline-endpoint.png)
 
 ### Models
 
