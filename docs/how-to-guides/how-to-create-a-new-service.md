@@ -8,8 +8,12 @@ This guide will help you in the steps to create a new service for the
 If you have not already, we highly recommend you to follow the two official
 tutorials to learn how to create a new service:
 
-- [Create a service to rotate an image](TODO)
-- [Create a service to detect anomalies in time series data files](TODO)
+- [Rotate an image](TODO) - Uses the _Create a new service (generic)_ template
+  mentioned below
+- [Summarize a text using an existing model](TODO) - Uses the _Create a new
+  service (generic)_ template mentioned below
+- [Detect anomalies using a model built from scratch](TODO) - Uses the _Create a
+  new service (model from scratch)_ template mentioned below
 
 ## Choose a template
 
@@ -26,14 +30,14 @@ decide the right template for your use case.
 ```mermaid
 flowchart TD
     which_template_to_choose["Which template\nto choose"]
-    does_your_service_uses_ai{"Does your service\nuses AI?"}
+    does_your_service_use_ai{"Does your service\nuse AI?"}
     how_to_you_obtain_the_model{"How do you\nobtain the model"}
     use_the_create_a_new_service_generic_template["Use the 'Create a new service (generic)' template"]
     use_the_create_a_new_service_model_from_scratch_template["Use the 'Create a new service (model from scratch)' template"]
 
-    which_template_to_choose --> does_your_service_uses_ai
-    does_your_service_uses_ai -->|"No"| use_the_create_a_new_service_generic_template
-    does_your_service_uses_ai -->|"Yes"| how_to_you_obtain_the_model
+    which_template_to_choose --> does_your_service_use_ai
+    does_your_service_use_ai -->|"No"| use_the_create_a_new_service_generic_template
+    does_your_service_use_ai -->|"Yes"| how_to_you_obtain_the_model
     how_to_you_obtain_the_model -->|"An existing model (binary file or existing library)"| use_the_create_a_new_service_generic_template
     how_to_you_obtain_the_model -->|"A model built from scratch (code to model)"| use_the_create_a_new_service_model_from_scratch_template
 ```
