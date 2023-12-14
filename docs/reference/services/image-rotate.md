@@ -1,9 +1,10 @@
 # image-rotate
 
+- [:material-account-group: Main author - HEIA-FR](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/image-rotate-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/image-rotate-service/tree/main/kubernetes)
-- [:material-test-tube: Staging](https://image-rotate-swiss-ai-center.kube.isc.heia-fr.ch/docs)
-- [:material-factory: Production (not available yet)](https://image-rotate.swiss-ai-center.ch/docs)
+- [:material-test-tube: Staging](https://image-rotate-swiss-ai-center.kube.isc.heia-fr.ch)
+- [:material-factory: Production (not available yet)](https://image-rotate.swiss-ai-center.ch)
 
 This service uses numpy and OpenCV to rotate an image.
 

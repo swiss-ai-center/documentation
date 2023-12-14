@@ -25,7 +25,7 @@ The documentation is separated in the following axes:
 
 Don't know where to start? Check these first!
 
-- About Swiss AI Center - TODO
+- [About Swiss AI Center](https://swiss-ai-center.ch)
 - [Getting started](./tutorials/getting-started.md)
 - [About this documentation](./explanations/about-this-documentation.md)
 

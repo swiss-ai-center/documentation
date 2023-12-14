@@ -1,9 +1,10 @@
 # ae-ano-detection
 
+- [:material-account-group: Main author - HE-Arc](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/ae-ano-detection-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/ae-ano-detection-service/tree/main/model-serving/kubernetes)
-- [:material-test-tube: Staging](https://ae-ano-detection-swiss-ai-center.kube.isc.heia-fr.ch/docs)
-- [:material-factory: Production (not available yet)](https://ae-ano-detection.swiss-ai-center.ch/docs)
+- [:material-test-tube: Staging](https://ae-ano-detection-swiss-ai-center.kube.isc.heia-fr.ch)
+- [:material-factory: Production (not available yet)](https://ae-ano-detection.swiss-ai-center.ch)
 
 This service uses an autoencoder model to detect an anomaly in a time series.
 

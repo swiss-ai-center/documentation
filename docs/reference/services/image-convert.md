@@ -1,9 +1,10 @@
 # image-convert
 
+- [:material-account-group: Main author - HEIA-FR](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/image-convert-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/image-convert-service/tree/main/kubernetes)
-- [:material-test-tube: Staging](https://image-convert-swiss-ai-center.kube.isc.heia-fr.ch/docs)
-- [:material-factory: Production (not available yet)](https://image-convert.swiss-ai-center.ch/docs)
+- [:material-test-tube: Staging](https://image-convert-swiss-ai-center.kube.isc.heia-fr.ch)
+- [:material-factory: Production (not available yet)](https://image-convert.swiss-ai-center.ch)
 
 This service uses Pillows to convert an image to a different format.
 

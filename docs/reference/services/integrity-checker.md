@@ -1,9 +1,10 @@
 # integrity-checker
 
+- [:material-account-group: Main author - HEIA-FR](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/integrity-checker-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/integrity-checker-service/tree/main/kubernetes)
-- [:material-test-tube: Staging](https://integrity-checker-swiss-ai-center.kube.isc.heia-fr.ch/docs)
-- [:material-factory: Production (not available yet)](https://integrity-checker.swiss-ai-center.ch/docs)
+- [:material-test-tube: Staging](https://integrity-checker-swiss-ai-center.kube.isc.heia-fr.ch)
+- [:material-factory: Production (not available yet)](https://integrity-checker.swiss-ai-center.ch)
 
 This service uses a config file to analyse a dataset and provide a report about
 the dataset integrity.

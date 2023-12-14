@@ -1,9 +1,10 @@
 # yolov8
 
+- [:material-account-group: Main author - HES-SO Valais-Wallis](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/yolov8-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/yolov8-service/tree/main/kubernetes)
-- [:material-test-tube: Staging](https://yolov8-swiss-ai-center.kube.isc.heia-fr.ch/docs)
-- [:material-factory: Production (not available yet)](https://yolov8.swiss-ai-center.ch/docs)
+- [:material-test-tube: Staging](https://yolov8-swiss-ai-center.kube.isc.heia-fr.ch)
+- [:material-factory: Production (not available yet)](https://yolov8.swiss-ai-center.ch)
 
 This service will use Yolov8 to analyse the image content according to the
 selected model type:

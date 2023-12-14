@@ -1,9 +1,10 @@
 # average-shade
 
+- [:material-account-group: Main author - HEIA-FR](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/average-shade-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/average-shade-service/tree/main/kubernetes)
-- [:material-test-tube: Staging](https://average-shade-swiss-ai-center.kube.isc.heia-fr.ch/docs)
-- [:material-factory: Production (not available yet)](https://average-shade.swiss-ai-center.ch/docs)
+- [:material-test-tube: Staging](https://average-shade-swiss-ai-center.kube.isc.heia-fr.ch)
+- [:material-factory: Production (not available yet)](https://average-shade.swiss-ai-center.ch)
 
 This service uses numpy and OpenCV to find the average shade color in an image.
 
