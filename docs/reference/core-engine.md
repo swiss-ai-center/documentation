@@ -11,12 +11,14 @@
 
 The Core engine allows to create and manage pipelines of microservices.
 
-The Core engine is split in two services:
+The Core engine is split in two main services:
 
 - [Core engine Backend](#backend) - The API to register services and create
   pipelines
 - [Core engine Frontend](#frontend) - The user interface to interact with the
   backend
+
+Another service is available, [Glitchtip](TODO), to centralize the logging errors thrown by the Core engine and its services.
 
 ## Backend
 

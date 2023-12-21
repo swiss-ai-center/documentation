@@ -8,5 +8,5 @@ services.
 
 The following elements are shared:
 
-- Models
+- Python Models
 - GitHub Actions
