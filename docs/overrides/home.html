@@ -78,15 +78,16 @@
         justify-content: center;
         gap: 2.5rem;
         text-align: center;
-        height: calc((100vh - 116px) / 2); /* 116px = header height */
+        height: calc((100vh - 116px) / 2);
+        /* 116px = header height */
     }
 
     .navigation-section {
-        display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
-        
+        margin-left: 0.8rem;
+        margin-right: 0.8rem;
     }
 
     .navigation-section a {
@@ -110,6 +111,31 @@
         max-width: 35ch;
         text-align: center;
     }
+
+    .grid {
+        grid-gap: 0.8rem !important;
+    }
+
+    .card {
+        min-height: 180px;
+        border-color: var(--md-primary-fg-color) !important;
+        background-color: var(--md-primary-color);
+        cursor: pointer;
+    }
+
+    .card:hover {
+        transform: scale(1.02);
+        transition: transform 0.2s ease-in-out;
+        border: 2px solid var(--md-primary-fg-color) !important;
+    }
+
+    .card-header {
+        font-size: 1rem;
+    }
+
+    .card-description {
+        font-size: 0.8rem;
+    }
 </style>
 
 <section class="home-section">
@@ -118,15 +144,57 @@
         <p>The official documentation for the Swiss AI Center project</p>
     </div>
 </section>
-<section class="navigation-section">
-        <p>
-            <a href="https://swiss-ai-center.ch">🌍 Website</a> ·
-            <a href="https://frontend-core-engine-swiss-ai-center.kube.isc.heia-fr.ch">📦 Application</a> ·
-            <a href="https://mlops.swiss-ai-center.ch">♾️ A guide to MLOps</a> ·
-            <a href="https://github.com/swiss-ai-center">🛠️ GitHub</a>
-        </p>
+<section class="mdx-container navigation-section ">
+    <div class="md-grid md-typeset" markdown>
+        <div class="grid">
+            <div class="card">
+                <a class="card-header" href="https://swiss-ai-center.ch">
+                    🌍 Website
+                </a>
+                <div class="card-description">
+                    Learn more about the Swiss AI Center project on the official website.
+                </div>
+            </div>
+            <div class="card">
+                <a class="card-header" href="https://frontend-core-engine-swiss-ai-center.kube.isc.heia-fr.ch">
+                    📦 Application
+                </a>
+                <div class="card-description">
+                    Access the showcase application of the Swiss AI Center project where you can test the different
+                    services and pipelines.
+                </div>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <a class="card-header" href="https://mlops.swiss-ai-center.ch">
+                    ♾️ A guide to MLOps
+                </a>
+                <div class="card-description">
+                    Learn more about MLOps and how to use it in your projects. This guide will help you to understand
+                    the different concepts and how to use them with a step-by-step tutorial.
+                </div>
+            </div> 
+            <div class="card">
+                <a class="card-header" href="https://github.com/swiss-ai-center">
+                    🛠️ GitHub
+                </a>
+                <div class="card-description">
+                    Access the GitHub repositories of the Swiss AI Center project. You will find the source code of the Core Engine, the
+                    different services, the backend, the frontend and many more.
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
-
+<script>
+    document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', function(e) {
+        const link = this.querySelector('a.card-header').href;
+        window.location.href = link;
+    });
+});
+</script>
 {% endblock %}
 
 <!-- Content -->
