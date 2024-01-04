@@ -4,12 +4,14 @@ code {
 
 [data-md-color-scheme="default"] {
 	--md-code-hl-color: var(--md-accent-fg-color--transparent);
-	--md-primary-fg-color: #d41367;	
+	--md-primary-fg-color: #d41367;
+	--custom-checkbox-color:  rgba(0, 0, 0, 0.1);
 }
 
 [data-md-color-scheme="slate"] {
 	--md-code-hl-color: var(--md-accent-fg-color--transparent);
 	--md-primary-fg-color: #892650;
+	--custom-checkbox-color:  rgba(255, 255, 255, 0.6);
 }
 
 :root {
@@ -18,7 +20,7 @@ code {
 }
 
 .md-typeset [type="checkbox"]:checked + .task-list-indicator:before {
-	background-color: rgba(0, 0, 0, 0.1);
+	background-color: var(--custom-checkbox-color);
 }
 
 .tabbed-set label.task-list-control {

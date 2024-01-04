@@ -18,18 +18,16 @@ as input, which will be used blur the zones in the image.
 ## Environment variables
 
 All environment variables are described in the
-[`.env`](https://github.com/swiss-ai-center/core-engine/blob/main/services/image-blur/.env)
-file.
+[`.env`](https://github.com/swiss-ai-center/image-blur/blob/main/.env) file.
 
 The environment variables can be overwritten during the CI/CD pipeline described
 in the
-[`image-blur.yml`](https://github.com/swiss-ai-center/core-engine/blob/main/.github/workflows/image-blur.yml)
+[`image-blur.yml`](https://github.com/swiss-ai-center/image-blur/blob/main/.github/workflows/image-blur.yml)
 GitHub workflow file.
 
 ## Start the service locally with Python
 
-In the `services/image-blur` directory, start the service with the following
-commands.
+In the `image-blur` directory, start the service with the following commands.
 
 ```sh
 # Generate the virtual environment
@@ -60,7 +58,7 @@ Access the service documentation on <http://localhost:9090/docs>.
 
 For each module a test file is available to check the correct behavior of the
 code. The tests are run using the `pytest` library with code coverage check. To
-run the tests, use the following command inside the `src` folder:
+run the tests, use the following command inside the `image-blur` folder:
 
 ```sh
 pytest --cov-report term:skip-covered --cov-report term-missing --cov=. -s --cov-config=.coveragerc
@@ -76,9 +74,9 @@ In the `image-blur` directory, start the service with the following commands.
 ```sh
 # Start the image-blur backend
 kubectl apply \
-    -f kubernetes/image-blur.config-map.yml \
-    -f kubernetes/image-blur.stateful.yml \
-    -f kubernetes/image-blur.service.yml
+    -f kubernetes/config-map.yml \
+    -f kubernetes/stateful.yml \
+    -f kubernetes/service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -96,26 +94,25 @@ the backend has been successfully registered to the Core engine.
 
 ## Start the service locally with minikube and a local Docker image
 
-**Note**: The service StatefulSet (`image-blur.stateful.yml` file) must be
-deleted and recreated every time a new Docker image is created.
+**Note**: The service StatefulSet (`stateful.yml` file) must be deleted
+and recreated every time a new Docker image is created.
 
 Start the service with the following commands. This will start the service with
 the a local Docker image for the service.
 
-In the `image-blur` directory, build the Docker image with the following
-commands.
+In the `image-blur` directory, build the Docker image with the following commands.
 
 ```sh
 # Access the Minikube's Docker environment
 eval $(minikube docker-env)
 
 # Build the Docker image
-docker build -t ghcr.io/swiss-ai-center/image-blur:latest .
+docker build -t ghcr.io/swiss-ai-center/image-blur-service:latest .
 
 # Exit the Minikube's Docker environment
 eval $(minikube docker-env -u)
 
-# Edit the `kubernetes/image-blur.stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
+# Edit the `kubernetes/stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
 #
 # From
 #
@@ -131,9 +128,9 @@ In the `image-blur` directory, start the service with the following commands.
 ```sh
 # Start the image-blur backend
 kubectl apply \
-    -f kubernetes/image-blur.config-map.yml \
-    -f kubernetes/image-blur.stateful.yml \
-    -f kubernetes/image-blur.service.yml
+    -f kubernetes/config-map.yml \
+    -f kubernetes/stateful.yml \
+    -f kubernetes/service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The

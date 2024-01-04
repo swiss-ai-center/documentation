@@ -18,18 +18,16 @@ which will be used to find the average shade color in the image.
 ## Environment variables
 
 All environment variables are described in the
-[`.env`](https://github.com/swiss-ai-center/core-engine/blob/main/services/average-shade/.env)
-file.
+[`.env`](https://github.com/swiss-ai-center/average-shade/blob/main/.env) file.
 
 The environment variables can be overwritten during the CI/CD pipeline described
 in the
-[`average-shade.yml`](https://github.com/swiss-ai-center/core-engine/blob/main/.github/workflows/average-shade.yml)
+[`average-shade.yml`](https://github.com/swiss-ai-center/average-shade/blob/main/.github/workflows/average-shade.yml)
 GitHub workflow file.
 
 ## Start the service locally with Python
 
-In the `services/average-shade` directory, start the service with the following
-commands.
+In the `average-shade` directory, start the service with the following commands.
 
 ```sh
 # Generate the virtual environment
@@ -60,7 +58,7 @@ Access the service documentation on <http://localhost:9090/docs>.
 
 For each module a test file is available to check the correct behavior of the
 code. The tests are run using the `pytest` library with code coverage check. To
-run the tests, use the following command inside the `src` folder:
+run the tests, use the following command inside the `average-shade` folder:
 
 ```sh
 pytest --cov-report term:skip-covered --cov-report term-missing --cov=. -s --cov-config=.coveragerc
@@ -76,9 +74,9 @@ In the `average-shade` directory, start the service with the following commands.
 ```sh
 # Start the average-shade backend
 kubectl apply \
-    -f kubernetes/average-shade.config-map.yml \
-    -f kubernetes/average-shade.stateful.yml \
-    -f kubernetes/average-shade.service.yml
+    -f kubernetes/config-map.yml \
+    -f kubernetes/stateful.yml \
+    -f kubernetes/service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -96,26 +94,25 @@ the backend has been successfully registered to the Core engine.
 
 ## Start the service locally with minikube and a local Docker image
 
-**Note**: The service StatefulSet (`average-shade.stateful.yml` file) must be
-deleted and recreated every time a new Docker image is created.
+**Note**: The service StatefulSet (`stateful.yml` file) must be deleted
+and recreated every time a new Docker image is created.
 
 Start the service with the following commands. This will start the service with
 the a local Docker image for the service.
 
-In the `average-shade` directory, build the Docker image with the following
-commands.
+In the `average-shade` directory, build the Docker image with the following commands.
 
 ```sh
 # Access the Minikube's Docker environment
 eval $(minikube docker-env)
 
 # Build the Docker image
-docker build -t ghcr.io/swiss-ai-center/average-shade:latest .
+docker build -t ghcr.io/swiss-ai-center/average-shade-service:latest .
 
 # Exit the Minikube's Docker environment
 eval $(minikube docker-env -u)
 
-# Edit the `kubernetes/average-shade.stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
+# Edit the `kubernetes/stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
 #
 # From
 #
@@ -131,9 +128,9 @@ In the `average-shade` directory, start the service with the following commands.
 ```sh
 # Start the average-shade backend
 kubectl apply \
-    -f kubernetes/average-shade.config-map.yml \
-    -f kubernetes/average-shade.stateful.yml \
-    -f kubernetes/average-shade.service.yml
+    -f kubernetes/config-map.yml \
+    -f kubernetes/stateful.yml \
+    -f kubernetes/service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The

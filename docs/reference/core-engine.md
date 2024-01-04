@@ -78,7 +78,7 @@ sequenceDiagram
 ### Environment variables
 
 All environment variables are described in the
-[`.env`](https://github.com/swiss-ai-center/core-engine/blob/main/core-engine/.env)
+[`.env`](https://github.com/swiss-ai-center/core-engine/blob/main/backend/.env)
 file.
 
 The environment variables can be overwritten during the CI/CD pipeline described
@@ -155,11 +155,11 @@ kubectl apply \
     -f kubernetes/postgres.stateful.yml \
     -f kubernetes/postgres.service.yml
 
-# Start the core-engine
+# Start the Core engine Backend
 kubectl apply \
-    -f kubernetes/core-engine.config-map.yml \
-    -f kubernetes/core-engine.stateful.yml \
-    -f kubernetes/core-engine.service.yml
+    -f kubernetes/backend.config-map.yml \
+    -f kubernetes/backend.stateful.yml \
+    -f kubernetes/backend.service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -184,7 +184,7 @@ In the `backend` directory, build the Docker image with the following commands:
 eval $(minikube docker-env)
 
 # Build the Docker image
-docker build -t ghcr.io/swiss-ai-center/core-engine:latest .
+docker build -t ghcr.io/swiss-ai-center/backend:latest .
 
 # Exit the Minikube's Docker environment
 eval $(minikube docker-env -u)
@@ -218,11 +218,11 @@ kubectl apply \
     -f kubernetes/postgres.stateful.yml \
     -f kubernetes/postgres.service.yml
 
-# Start the core-engine
+# Start the Core engine Backend
 kubectl apply \
-    -f kubernetes/core-engine.config-map.yml \
-    -f kubernetes/core-engine.stateful.yml \
-    -f kubernetes/core-engine.service.yml
+    -f kubernetes/backend.config-map.yml \
+    -f kubernetes/backend.stateful.yml \
+    -f kubernetes/backend.service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -252,11 +252,11 @@ GitHub workflow file.
 
 ### Start the service locally with Node
 
-In the `fronted` directory, start the Frontend with the following commands.
+In the `frontend` directory, start the Frontend with the following commands.
 
 ```sh
 # Install the dependencies
-npm ci --legacy-peer-deps
+npm ci
 
 # Optional: Edit the environment variables to change the Core engine URL
 vim .env
@@ -275,7 +275,7 @@ commands.
 
 ```sh
 # Install the dependencies
-npm ci --legacy-peer-deps
+npm ci
 
 # Build the Core engine Frontend
 npm run build
@@ -293,10 +293,10 @@ with the following commands.
 
 ```sh
 # Build the Docker image with a tag
-docker build -t swiss-ai-center/core-engine-frontend .
+docker build -t swiss-ai-center/frontend .
 
 # Run the Docker image
-docker run -p 3000:80 swiss-ai-center/core-engine-frontend
+docker run -p 3000:80 swiss-ai-center/frontend
 ```
 
 The Core engine Frontend is available on <http://localhost:3000>.
@@ -328,7 +328,7 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the Core engine Frontend on <http://localhost:8686>.
+Access the Core engine Frontend on <http://localhost:3000>.
 
 ### Start the service locally with minikube and a local Docker image
 
@@ -342,7 +342,7 @@ In the `frontend` directory, build the Docker image with the following commands.
 
 ```sh
 # Install Node dependencies
-npm ci --legacy-peer-deps
+npm ci
 
 # Optional: Edit the environment variables to change the Core engine URL
 vim .env
@@ -354,7 +354,7 @@ npm run build
 eval $(minikube docker-env)
 
 # Build the Docker image
-docker build -t ghcr.io/swiss-ai-center/core-engine-frontend:latest .
+docker build -t ghcr.io/swiss-ai-center/frontend:latest .
 
 # Exit the Minikube's Docker environment
 eval $(minikube docker-env -u)
@@ -375,7 +375,6 @@ In the `frontend` directory, start the service with the following commands.
 ```sh
 # Start the Core engine Frontend
 kubectl apply \
-    -f kubernetes/frontend.config-map.yml \
     -f kubernetes/frontend.stateful.yml \
     -f kubernetes/frontend.service.yml
 ```
@@ -388,4 +387,4 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the Core engine Frontend on <http://localhost:8686>.
+Access the Core engine Frontend on <http://localhost:3000>.
