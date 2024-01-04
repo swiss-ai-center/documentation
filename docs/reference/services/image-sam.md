@@ -1,10 +1,10 @@
 # Image Segment Anything Model (SAM)
 
-- [:material-account-group: Main author - HEIG-VD](https://www.hes-so.ch/swiss-ai-center/equipe)
-- [:material-git: Code](https://github.com/swiss-ai-center/image-sam-service)
-- [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/image-sam-service/tree/main/kubernetes)
-- [:material-test-tube: Staging](https://image-sam-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (not available yet)](https://image-sam.swiss-ai-center.ch)
+- [x] [:material-account-group: Main author - HEIG-VD](https://www.hes-so.ch/swiss-ai-center/equipe)
+- [x] [:material-git: Code](https://github.com/swiss-ai-center/image-sam-service)
+- [x] [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/image-sam-service/tree/main/kubernetes)
+- [x] [:material-test-tube: Staging](https://image-sam-swiss-ai-center.kube.isc.heia-fr.ch)
+- [x] [:material-factory: Production (not available yet)](https://image-sam.swiss-ai-center.ch)
 
 This service uses PyTorch and OpenCV to segment everything in an image.
 

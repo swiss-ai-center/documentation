@@ -1,10 +1,10 @@
 # doodle
 
-- [:material-account-group: Main author - HES-SO Valais-Wallis](https://www.hes-so.ch/swiss-ai-center/equipe)
-- [:material-git: Code](https://github.com/swiss-ai-center/doodle-service)
-- [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/doodle-service/tree/main/model-serving/kubernetes)
-- [:material-test-tube: Staging](https://doodle-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (not available yet)](https://doodle.swiss-ai-center.ch)
+- [x] [:material-account-group: Main author - HES-SO Valais-Wallis](https://www.hes-so.ch/swiss-ai-center/equipe)
+- [x] [:material-git: Code](https://github.com/swiss-ai-center/doodle-service)
+- [x] [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/doodle-service/tree/main/model-serving/kubernetes)
+- [x] [:material-test-tube: Staging](https://doodle-swiss-ai-center.kube.isc.heia-fr.ch)
+- [x] [:material-factory: Production (not available yet)](https://doodle.swiss-ai-center.ch)
 
 This service uses a Convolutional Neural Network (CNN) to guess what a user has
 drawn (in a black and white image).

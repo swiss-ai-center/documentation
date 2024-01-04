@@ -1,13 +1,13 @@
 # Core engine
 
-- [:material-account-group: Main author - HEIA-FR & HEIG-VD](https://www.hes-so.ch/swiss-ai-center/equipe)
-- [:material-git: Code](https://github.com/swiss-ai-center/core-engine)
-- [:material-kubernetes: Deployment configuration (backend)](https://github.com/swiss-ai-center/core-engine/tree/main/backend/kubernetes)
-- [:material-kubernetes: Deployment configuration (frontend)](https://github.com/swiss-ai-center/core-engine/tree/main/frontend/kubernetes)
-- [:material-test-tube: Staging (backend)](https://backend-core-engine-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-test-tube: Staging (frontend)](https://frontend-core-engine-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (backend - not available yet)](https://app.swiss-ai-center.ch/api)
-- [:material-factory: Production (frontend - not available yet)](https://app.swiss-ai-center.ch)
+- [x] [:material-account-group: Main author - HEIA-FR & HEIG-VD](https://www.hes-so.ch/swiss-ai-center/equipe)
+- [x] [:material-git: Code](https://github.com/swiss-ai-center/core-engine)
+- [x] [:material-kubernetes: Deployment configuration (backend)](https://github.com/swiss-ai-center/core-engine/tree/main/backend/kubernetes)
+- [x] [:material-kubernetes: Deployment configuration (frontend)](https://github.com/swiss-ai-center/core-engine/tree/main/frontend/kubernetes)
+- [x] [:material-test-tube: Staging (backend)](https://backend-core-engine-swiss-ai-center.kube.isc.heia-fr.ch)
+- [x] [:material-test-tube: Staging (frontend)](https://frontend-core-engine-swiss-ai-center.kube.isc.heia-fr.ch)
+- [x] [:material-factory: Production (backend - not available yet)](https://app.swiss-ai-center.ch/api)
+- [x] [:material-factory: Production (frontend - not available yet)](https://app.swiss-ai-center.ch)
 
 The Core engine allows to create and manage pipelines of microservices.
 

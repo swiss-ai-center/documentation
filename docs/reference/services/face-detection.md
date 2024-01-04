@@ -1,10 +1,10 @@
 # face-detection
 
-- [:material-account-group: Main author - HEIA-FR](https://www.hes-so.ch/swiss-ai-center/equipe)
-- [:material-git: Code](https://github.com/swiss-ai-center/face-detection-service)
-- [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/face-detection-service/tree/main/kubernetes)
-- [:material-test-tube: Staging](https://face-detection-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (not available yet)](https://face-detection.swiss-ai-center.ch)
+- [x] [:material-account-group: Main author - HEIA-FR](https://www.hes-so.ch/swiss-ai-center/equipe)
+- [x] [:material-git: Code](https://github.com/swiss-ai-center/face-detection-service)
+- [x] [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/face-detection-service/tree/main/kubernetes)
+- [x] [:material-test-tube: Staging](https://face-detection-swiss-ai-center.kube.isc.heia-fr.ch)
+- [x] [:material-factory: Production (not available yet)](https://face-detection.swiss-ai-center.ch)
 
 This service uses Pillows and RetinaFace to detect faces in an image.
 

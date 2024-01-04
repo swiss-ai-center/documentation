@@ -1,10 +1,10 @@
 # digit-recognition
 
-- [:material-account-group: Main author - HEIG-VD](https://www.hes-so.ch/swiss-ai-center/equipe)
-- [:material-git: Code](https://github.com/swiss-ai-center/digit-recognition-service)
-- [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/digit-recognition-service/tree/main/model-serving/kubernetes)
-- [:material-test-tube: Staging](https://digit-recognition-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (not available yet)](https://digit-recognition.swiss-ai-center.ch)
+- [x] [:material-account-group: Main author - HEIG-VD](https://www.hes-so.ch/swiss-ai-center/equipe)
+- [x] [:material-git: Code](https://github.com/swiss-ai-center/digit-recognition-service)
+- [x] [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/digit-recognition-service/tree/main/model-serving/kubernetes)
+- [x] [:material-test-tube: Staging](https://digit-recognition-swiss-ai-center.kube.isc.heia-fr.ch)
+- [x] [:material-factory: Production (not available yet)](https://digit-recognition.swiss-ai-center.ch)
 
 This service uses a keras model to guess a digit in an image.
 
