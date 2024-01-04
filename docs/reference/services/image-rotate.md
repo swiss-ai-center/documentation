@@ -1,10 +1,10 @@
 # image-rotate
 
-- [:material-account-group: Main author - HEIA-FR](https://www.hes-so.ch/swiss-ai-center/equipe)
-- [:material-git: Code](https://github.com/swiss-ai-center/image-rotate-service)
-- [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/image-rotate-service/tree/main/kubernetes)
-- [:material-test-tube: Staging](https://image-rotate-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (not available yet)](https://image-rotate.swiss-ai-center.ch)
+- [x] [:material-account-group: Main author - HEIA-FR](https://www.hes-so.ch/swiss-ai-center/equipe)
+- [x] [:material-git: Code](https://github.com/swiss-ai-center/image-rotate-service)
+- [x] [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/image-rotate-service/tree/main/kubernetes)
+- [x] [:material-test-tube: Staging](https://image-rotate-swiss-ai-center.kube.isc.heia-fr.ch)
+- [x] [:material-factory: Production (not available yet)](https://image-rotate.swiss-ai-center.ch)
 
 This service uses numpy and OpenCV to rotate an image.
 
@@ -19,18 +19,16 @@ as input, which will be used to rotate the image according to the provided angle
 ## Environment variables
 
 All environment variables are described in the
-[`.env`](https://github.com/swiss-ai-center/core-engine/blob/main/services/image-rotate/.env)
-file.
+[`.env`](https://github.com/swiss-ai-center/image-rotate/blob/main/.env) file.
 
 The environment variables can be overwritten during the CI/CD pipeline described
 in the
-[`image-rotate.yml`](https://github.com/swiss-ai-center/core-engine/blob/main/.github/workflows/image-rotate.yml)
+[`image-rotate.yml`](https://github.com/swiss-ai-center/image-rotate/blob/main/.github/workflows/image-rotate.yml)
 GitHub workflow file.
 
 ## Start the service locally with Python
 
-In the `services/image-rotate` directory, start the service with the following
-commands.
+In the `image-rotate` directory, start the service with the following commands.
 
 ```sh
 # Generate the virtual environment
@@ -52,16 +50,16 @@ Start the application.
 cd src
 
 # Start the application
-uvicorn --reload --port 9393 main:app
+uvicorn --reload --port 9090 main:app
 ```
 
-Access the service documentation on <http://localhost:9393/docs>.
+Access the service documentation on <http://localhost:9090/docs>.
 
 ## Run the tests with Python
 
 For each module a test file is available to check the correct behavior of the
 code. The tests are run using the `pytest` library with code coverage check. To
-run the tests, use the following command inside the `src` folder:
+run the tests, use the following command inside the `image-rotate` folder:
 
 ```sh
 pytest --cov-report term:skip-covered --cov-report term-missing --cov=. -s --cov-config=.coveragerc
@@ -77,9 +75,9 @@ In the `image-rotate` directory, start the service with the following commands.
 ```sh
 # Start the image-rotate backend
 kubectl apply \
-    -f kubernetes/image-rotate.config-map.yml \
-    -f kubernetes/image-rotate.stateful.yml \
-    -f kubernetes/image-rotate.service.yml
+    -f kubernetes/config-map.yml \
+    -f kubernetes/stateful.yml \
+    -f kubernetes/service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -90,33 +88,32 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the `image-rotate` documentation on <http://localhost:9393/docs>.
+Access the `image-rotate` documentation on <http://localhost:9090/docs>.
 
 Access the Core engine documentation on <http://localhost:8080/docs> to validate
 the backend has been successfully registered to the Core engine.
 
 ## Start the service locally with minikube and a local Docker image
 
-**Note**: The service StatefulSet (`image-rotate.stateful.yml` file) must be
-deleted and recreated every time a new Docker image is created.
+**Note**: The service StatefulSet (`stateful.yml` file) must be deleted
+and recreated every time a new Docker image is created.
 
 Start the service with the following commands. This will start the service with
 the a local Docker image for the service.
 
-In the `image-rotate` directory, build the Docker image with the following
-commands.
+In the `image-rotate` directory, build the Docker image with the following commands.
 
 ```sh
 # Access the Minikube's Docker environment
 eval $(minikube docker-env)
 
 # Build the Docker image
-docker build -t ghcr.io/swiss-ai-center/image-rotate:latest .
+docker build -t ghcr.io/swiss-ai-center/image-rotate-service:latest .
 
 # Exit the Minikube's Docker environment
 eval $(minikube docker-env -u)
 
-# Edit the `kubernetes/image-rotate.stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
+# Edit the `kubernetes/stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
 #
 # From
 #
@@ -132,9 +129,9 @@ In the `image-rotate` directory, start the service with the following commands.
 ```sh
 # Start the image-rotate backend
 kubectl apply \
-    -f kubernetes/image-rotate.config-map.yml \
-    -f kubernetes/image-rotate.stateful.yml \
-    -f kubernetes/image-rotate.service.yml
+    -f kubernetes/config-map.yml \
+    -f kubernetes/stateful.yml \
+    -f kubernetes/service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -145,7 +142,7 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the `image-rotate` documentation on <http://localhost:9393/docs>.
+Access the `image-rotate` documentation on <http://localhost:9090/docs>.
 
 Access the Core engine documentation on <http://localhost:8080/docs> to validate
 the backend has been successfully registered to the Core engine.
