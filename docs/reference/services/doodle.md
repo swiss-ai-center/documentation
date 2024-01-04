@@ -50,10 +50,10 @@ Start the application.
 cd src
 
 # Start the application
-uvicorn --reload --port 9595 main:app
+uvicorn --reload --port 9090 main:app
 ```
 
-Access the service documentation on <http://localhost:9595/docs>.
+Access the service documentation on <http://localhost:9090/docs>.
 
 ## Run the tests with Python
 
@@ -88,7 +88,7 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the `doodle` documentation on <http://localhost:9595/docs>.
+Access the `doodle` documentation on <http://localhost:9090/docs>.
 
 Access the Core engine documentation on <http://localhost:8080/docs> to validate
 the backend has been successfully registered to the Core engine.
@@ -142,7 +142,7 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the `doodle` documentation on <http://localhost:9595/docs>.
+Access the `doodle` documentation on <http://localhost:9090/docs>.
 
 Access the Core engine documentation on <http://localhost:8080/docs> to validate
 the backend has been successfully registered to the Core engine.

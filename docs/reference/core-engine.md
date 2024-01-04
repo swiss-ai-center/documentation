@@ -296,10 +296,10 @@ with the following commands.
 docker build -t swiss-ai-center/core-engine-frontend .
 
 # Run the Docker image
-docker run -p 8181:80 swiss-ai-center/core-engine-frontend
+docker run -p 3000:80 swiss-ai-center/core-engine-frontend
 ```
 
-The Core engine Frontend is available on <http://localhost:8181>.
+The Core engine Frontend is available on <http://localhost:3000>.
 
 > **Q**: _Why don't we build the React application within the Docker image?_
 >
