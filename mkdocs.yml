@@ -16,6 +16,7 @@ nav:
   - Tutorials:
       - tutorials/index.md
       - Getting started: tutorials/getting-started.md
+      - Implement a generic service: tutorials/implement-generic-service.md
       - Implement a service: tutorials/implement-service.md
       - Implement a pipeline: tutorials/implement-pipeline.md
   - How-to guides:
