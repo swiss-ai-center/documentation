@@ -1,10 +1,18 @@
 # ae-ano-detection
+- [:material-account-group: Main author - HE-Arc](https://www.hes-so.ch/swiss-ai-center/equipe)
+- [:material-git: Code](https://github.com/swiss-ai-center/ae-ano-detection-service)
+- [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/ae-ano-detection-service/tree/main/model-serving/kubernetes)
+- [:material-test-tube: Staging](https://ae-ano-detection-swiss-ai-center.kube.isc.heia-fr.ch)
+- [:material-factory: Production (not available yet)](https://ae-ano-detection.swiss-ai-center.ch)
 
-- [x] [:material-account-group: Main author - HE-Arc](https://www.hes-so.ch/swiss-ai-center/equipe)
-- [x] [:material-git: Code](https://github.com/swiss-ai-center/ae-ano-detection-service)
-- [x] [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/ae-ano-detection-service/tree/main/model-serving/kubernetes)
-- [x] [:material-test-tube: Staging](https://ae-ano-detection-swiss-ai-center.kube.isc.heia-fr.ch)
-- [x] [:material-factory: Production (not available yet)](https://ae-ano-detection.swiss-ai-center.ch)
+| | Link |
+|:-:|-|
+| :material-account-group:{.icon} |[Main author - HE-Arc](https://www.hes-so.ch/swiss-ai-center/equipe) |
+| :material-git:{.icon} |[Code](https://github.com/swiss-ai-center/ae-ano-detection-service) |
+| :material-kubernetes:{.icon} |[Deployment configuration](https://github.com/swiss-ai-center/ae-ano-detection-service/tree/main/model-serving/kubernetes) |
+| :material-test-tube:{.icon} |[ Staging](https://ae-ano-detection-swiss-ai-center.kube.isc.heia-fr.ch) |
+| :material-factory:{.icon} |[ Production (not available yet)](https://ae-ano-detection.swiss-ai-center.ch) |
+
 
 This service uses an autoencoder model to detect an anomaly in a time series.
 
