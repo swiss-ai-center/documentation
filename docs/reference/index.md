@@ -51,6 +51,8 @@ mdwrap is a command line tool to format our Markdown documentation made with
 | [integrity-checker](./services/integrity-checker.md)   | <https://github.com/swiss-ai-center/integrity-checker-service>     | <https://intergrity-checker-swiss-ai-center.kube.isc.heia-fr.ch>    | <https://intergrity-checker.swiss-ai-center.ch>  |
 | [doodle](./services/doodle.md)                         | <https://github.com/swiss-ai-center/doodle-service>                | <https://doodle-swiss-ai-center.kube.isc.heia-fr.ch>                | <https://doodle.swiss-ai-center.ch>              |
 | [yolov8](./services/yolov8.md)                         | <https://github.com/swiss-ai-center/yolov8-service>                | <https://yolov8-swiss-ai-center.kube.isc.heia-fr.ch>                | <https://yolov8.swiss-ai-center.ch>              |
+| [document-vectorizer](./services/document-vectorizer.md)                         | <https://github.com/swiss-ai-center/document-vectorizer-service>                | <https://document-vectorizer-swiss-ai-center.kube.isc.heia-fr.ch>                | <https://document-vectorizer.swiss-ai-center.ch>              |
+| [chatbot-ollama](./services/chatbot-ollama.md)                         | <https://github.com/swiss-ai-center/chatbot-ollama-service>                | <https://chatbot-ollama-swiss-ai-center.kube.isc.heia-fr.ch>                | <https://chatbot-ollama.swiss-ai-center.ch>              |
 
 ## Pipelines
 
