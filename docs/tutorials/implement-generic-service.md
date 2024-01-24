@@ -148,7 +148,7 @@ depending on the value of the `rotation` parameter.
 
 Open the `main.py` with your favorite editor and follow the instructions below.
 
-```py hl_lines="23-25 32-34 43-44 50-63 68-95 99-104 108-118"
+```py hl_lines="23-25 32-34 43-44 50-63 68-95 99-105 108-118"
 import asyncio
 import time
 from fastapi import FastAPI
