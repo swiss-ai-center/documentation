@@ -1,4 +1,4 @@
-# Implement a service with an existing model
+# Create a service to summarize a text using an existing model (generic template)
 
 This tutorial shows how to implement a
 [Service](../reference/core-concepts/service.md) in the Swiss AI Center project
@@ -147,16 +147,15 @@ summarizes a text using the [Hugging Face](https://huggingface.co/) library.
 
 Open the `main.py` with your favorite editor and follow the instructions below.
 
-```py hl_lines="23 30-32 41-42 48-60 65-85 89-95 99-107"
+```py hl_lines="23 30-32 41-42 48-60 65-85 89-96 99-109"
 import asyncio
 import time
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from common_code.config import get_settings
-from pydantic import Field
 from common_code.http_client import HttpClient
-from common_code.logger.logger import get_logger
+from common_code.logger.logger import get_logger, Logger
 from common_code.service.controller import router as service_router
 from common_code.service.service import ServiceService
 from common_code.storage.service import StorageService
@@ -167,6 +166,7 @@ from common_code.service.models import Service
 from common_code.service.enums import ServiceStatus
 from common_code.common.enums import FieldDescriptionType, ExecutionUnitTagName, ExecutionUnitTagAcronym
 from common_code.common.models import FieldDescription, ExecutionUnitTag
+from contextlib import asynccontextmanager
 
 # Imports required by the service's model
 # TODO: 1. ADD REQUIRED IMPORTS (ALSO IN THE REQUIREMENTS.TXT) (1)!
@@ -181,9 +181,9 @@ class MyService(Service):
     Text summarizer model
     """
 
-    # Any additional fields must be excluded for Pydantic to work
-    model: object = Field(exclude=True)
-    logger: object = Field(exclude=True)
+    # Any additional fields must be excluded of model by adding a leading underscore for Pydantic to work
+    _model: object
+    _logger: Logger
 
     def __init__(self):
         super().__init__(
@@ -209,7 +209,7 @@ class MyService(Service):
             ],
             has_ai=True,
         )
-        self.logger = get_logger(settings)
+        self._logger = get_logger(settings)
 
     # TODO: 5. CHANGE THE PROCESS METHOD (CORE OF THE SERVICE) (5)!
     def process(self, data):
@@ -234,6 +234,7 @@ class MyService(Service):
             )
         }
 
+...
 
 # TODO: 6. CHANGE THE API DESCRIPTION AND SUMMARY (6)!
 api_summary = """
@@ -247,6 +248,7 @@ Summarize the given text using the HuggingFace transformers library with model b
 # Define the FastAPI application with information
 # TODO: 7. CHANGE THE API TITLE, VERSION, CONTACT AND LICENSE (7)!
 app = FastAPI(
+    lifespan=lifespan,
     title="Text summarizer API.",
     description=api_description,
     version="0.0.1",

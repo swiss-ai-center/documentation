@@ -16,7 +16,7 @@ nav:
   - Tutorials:
       - tutorials/index.md
       - Getting started: tutorials/getting-started.md
-      - Implement a service with an existing model: tutorials/implement-service-with-existing-model.md
+      - Create a service to summarize a text using an existing model (generic template): tutorials/implement-service-with-existing-model.md
       - Implement a service: tutorials/implement-service.md
       - Implement a pipeline: tutorials/implement-pipeline.md
   - How-to guides:
