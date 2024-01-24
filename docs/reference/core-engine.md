@@ -157,9 +157,9 @@ kubectl apply \
 
 # Start the core-engine
 kubectl apply \
-    -f kubernetes/core-engine.config-map.yml \
-    -f kubernetes/core-engine.stateful.yml \
-    -f kubernetes/core-engine.service.yml
+    -f kubernetes/core-engine-backend.config-map.yml \
+    -f kubernetes/core-engine-backend.stateful.yml \
+    -f kubernetes/core-engine-backend.service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -220,9 +220,9 @@ kubectl apply \
 
 # Start the core-engine
 kubectl apply \
-    -f kubernetes/core-engine.config-map.yml \
-    -f kubernetes/core-engine.stateful.yml \
-    -f kubernetes/core-engine.service.yml
+    -f kubernetes/core-engine-backend.config-map.yml \
+    -f kubernetes/core-engine-backend.stateful.yml \
+    -f kubernetes/core-engine-backend.service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -256,7 +256,7 @@ In the `fronted` directory, start the Frontend with the following commands.
 
 ```sh
 # Install the dependencies
-npm ci --legacy-peer-deps
+npm ci
 
 # Optional: Edit the environment variables to change the Core engine URL
 vim .env
@@ -275,7 +275,7 @@ commands.
 
 ```sh
 # Install the dependencies
-npm ci --legacy-peer-deps
+npm ci
 
 # Build the Core engine Frontend
 npm run build
@@ -296,10 +296,10 @@ with the following commands.
 docker build -t swiss-ai-center/core-engine-frontend .
 
 # Run the Docker image
-docker run -p 8181:80 swiss-ai-center/core-engine-frontend
+docker run -p 3000:80 swiss-ai-center/core-engine-frontend
 ```
 
-The Core engine Frontend is available on <http://localhost:8181>.
+The Core engine Frontend is available on <http://localhost:3000>.
 
 > **Q**: _Why don't we build the React application within the Docker image?_
 >
@@ -316,8 +316,8 @@ commands.
 ```sh
 # Start the Core engine Frontend
 kubectl apply \
-    -f kubernetes/frontend.stateful.yml \
-    -f kubernetes/frontend.service.yml
+    -f kubernetes/core-engine-frontend.stateful.yml \
+    -f kubernetes/core-engine-frontend.service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -328,7 +328,7 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the Core engine Frontend on <http://localhost:8686>.
+Access the Core engine Frontend on <http://localhost:3000>.
 
 ### Start the service locally with minikube and a local Docker image
 
@@ -375,9 +375,9 @@ In the `frontend` directory, start the service with the following commands.
 ```sh
 # Start the Core engine Frontend
 kubectl apply \
-    -f kubernetes/frontend.config-map.yml \
-    -f kubernetes/frontend.stateful.yml \
-    -f kubernetes/frontend.service.yml
+    -f kubernetes/core-engine-frontend.config-map.yml \
+    -f kubernetes/core-engine-frontend.stateful.yml \
+    -f kubernetes/core-engine-frontend.service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -388,4 +388,4 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the Core engine Frontend on <http://localhost:8686>.
+Access the Core engine Frontend on <http://localhost:3000>.
