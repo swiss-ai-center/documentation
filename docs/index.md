@@ -17,9 +17,6 @@ Welcome to the Swiss AI Center Documentation website !
 > relocation and create new skills at the interface between laboratories and the
 > practical use of artificial intelligence. - [Swiss AI Center website](https://swiss-ai-center.ch)
 
-This documentation is based on the
-[Diátaxis Documentation Framework](./explanations/about-this-documentation.md).
-
 The documentation is separated in the following axes:
 
 - [Tutorials](./tutorials/index.md) - Follow guided tutorials to better
