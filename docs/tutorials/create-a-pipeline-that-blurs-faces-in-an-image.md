@@ -1,4 +1,4 @@
-# Create a pipeline that blur faces in an image
+# Create a pipeline that blurs faces in an image
 
 This tutorial shows how to implement a
 [Pipeline](../reference/core-concepts/pipeline.md) in the Swiss AI Center
