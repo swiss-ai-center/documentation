@@ -60,10 +60,10 @@ Start the application.
 cd src
 
 # Start the application
-uvicorn --reload --port 8383 main:app
+uvicorn --reload --port 9090 main:app
 ```
 
-Access the service documentation on <http://localhost:8383/docs>.
+Access the service documentation on <http://localhost:9090/docs>.
 
 ## Run the tests with Python
 
@@ -84,11 +84,11 @@ In the `document-vectorizer` directory, start the service with the following
 commands.
 
 ```sh
-# Start the document-vectorizer backend
+# Start the integrity-checker backend
 kubectl apply \
-    -f kubernetes/document-vectorizer.config-map.yml \
-    -f kubernetes/document-vectorizer.stateful.yml \
-    -f kubernetes/document-vectorizer.service.yml
+    -f kubernetes/config-map.yml \
+    -f kubernetes/stateful.yml \
+    -f kubernetes/service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -99,14 +99,14 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the `document-vectorizer` documentation on <http://localhost:8383/docs>.
+Access the `document-vectorizer` documentation on <http://localhost:9090/docs>.
 
 Access the Core engine documentation on <http://localhost:8080/docs> to validate
 the backend has been successfully registered to the Core engine.
 
 ## Start the service locally with minikube and a local Docker image
 
-**Note**: The service StatefulSet (`document-vectorizer.stateful.yml` file) must
+**Note**: The service StatefulSet (`stateful.yml` file) must
 be deleted and recreated every time a new Docker image is created.
 
 Start the service with the following commands. This will start the service with
@@ -125,7 +125,7 @@ docker build -t ghcr.io/swiss-ai-center/document-vectorizer-service:latest .
 # Exit the Minikube's Docker environment
 eval $(minikube docker-env -u)
 
-# Edit the `kubernetes/document-vectorizer.stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
+# Edit the `kubernetes/stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
 #
 # From
 #
@@ -140,11 +140,11 @@ In the `document-vectorizer` directory, start the service with the following
 commands.
 
 ```sh
-# Start the document-vectorizer backend
+# Start the integrity-checker backend
 kubectl apply \
-    -f kubernetes/document-vectorizer.config-map.yml \
-    -f kubernetes/document-vectorizer.stateful.yml \
-    -f kubernetes/document-vectorizer.service.yml
+    -f kubernetes/config-map.yml \
+    -f kubernetes/stateful.yml \
+    -f kubernetes/service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -155,7 +155,7 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the `document-vectorizer` documentation on <http://localhost:8383/docs>.
+Access the `document-vectorizer` documentation on <http://localhost:9090/docs>.
 
 Access the Core engine documentation on <http://localhost:8080/docs> to validate
 the backend has been successfully registered to the Core engine.
