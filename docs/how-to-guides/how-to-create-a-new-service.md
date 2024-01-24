@@ -12,8 +12,8 @@ tutorials to learn how to create a new service:
   mentioned below
 - [Summarize a text using an existing model](TODO) - Uses the _Create a new
   service (generic)_ template mentioned below
-- [Detect anomalies using a model built from scratch](TODO) - Uses the _Create a
-  new service (model from scratch)_ template mentioned below
+- [Detect anomalies using a model built from scratch](../tutorials/create-a-service-to-detect-anomalies-using-a-model-built-from-scratch.md) -
+  Uses the _Create a new service (model from scratch)_ template mentioned below
 
 ## Choose a template
 
@@ -53,8 +53,8 @@ service based on the chosen template:
     If you are part of the Swiss AI Center GitHub organization, this is the
     recommended way to bootstrap a new service.
 
-    You can directly use the "Use the template" button to create a new repository
-    based on the chosen template.
+    Use the "Use the template" button to create a new repository based on the chosen
+    template.
 
 === "Fork the template"
 
@@ -67,8 +67,8 @@ service based on the chosen template:
 
     If you do not want to host your codebase on GitHub or if you do not want to be
     linked to the Swiss AI Center organization, you can download the template as an
-    archive file (ZIP or GZIP) from the GitHub repository and start over locally or
-    in a new Git repository.
+    archive file (_"Download ZIP"_) from the GitHub repository and start over
+    locally or in a new Git repository.
 
 ## Implement your service
 

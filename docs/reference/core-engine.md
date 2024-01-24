@@ -9,11 +9,6 @@
 - [:material-factory: Production (backend - not available yet)](https://app.swiss-ai-center.ch/api)
 - [:material-factory: Production (frontend - not available yet)](https://app.swiss-ai-center.ch)
 
-
-
-- [x] Bonjour
-- [ ] Bonsoir
-
 The Core engine allows to create and manage pipelines of microservices.
 
 The Core engine is split in two main services:
