@@ -6,13 +6,18 @@
 - [:material-test-tube: Staging](https://chatbot-ollama-swiss-ai-center.kube.isc.heia-fr.ch/)
 - [:material-factory: Production (not available yet)](https://chatbot-ollama.swiss-ai-center.ch/)
 
-This service is a streamlit interface to interact with a large language model using the [ollama API](https://ollama.ai/) and langchain.
+This service is a streamlit interface to interact with a large language model
+using the [ollama API](https://ollama.ai/) and langchain.
 
-Ollama is an open source project that aims to provide a simple and easy to use app to download and use LLM models like llama2 or mistral locally.
+Ollama is an open source project that aims to provide a simple and easy to use
+app to download and use LLM models like llama2 or mistral locally.
 
-On the [Ollama official website](https://ollama.ai/), you can find the list of available models and the link to the [github repository](https://github.com/jmorganca/ollama).
+On the [Ollama official website](https://ollama.ai/), you can find the list of
+available models and the link to the
+[github repository](https://github.com/jmorganca/ollama).
 
-Before using this service, you need to vectorize a pdf document using the [document-vectorizer service](/reference/services/document-vectorizer/).
+Before using this service, you need to vectorize a pdf document using the
+[document-vectorizer service](/reference/services/document-vectorizer/).
 
 ## Environment variables
 
@@ -55,7 +60,8 @@ Access the service app on <http://localhost:80>.
 Start the service with the following commands. This will start the service with
 the official Docker images that are hosted on GitHub.
 
-In the `chatbot-ollama` directory, start the service with the following commands.
+In the `chatbot-ollama` directory, start the service with the following
+commands.
 
 ```sh
 # Start the chatbot-ollama
@@ -75,8 +81,8 @@ minikube tunnel --bind-address 127.0.0.1
 
 Access the `chatbot-ollama` app on <http://localhost:9090/>.
 
-Access the Core engine documentation on <http://localhost:8080/docs> to validate
-the backend has been successfully registered to the Core engine.
+Then you must use the document-vectorizer service to vectorize a pdf document before using the chatbot-ollama app.
+See the [document-vectorizer service](/reference/services/document-vectorizer/#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github) documentation to deploy it locally.
 
 ## Start the service locally with minikube and a local Docker image
 
@@ -110,7 +116,8 @@ eval $(minikube docker-env -u)
 #        imagePullPolicy: Never
 ```
 
-In the `chatbot-ollama` directory, start the service with the following commands.
+In the `chatbot-ollama` directory, start the service with the following
+commands.
 
 ```sh
 # Start the chatbot-ollama
