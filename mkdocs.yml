@@ -18,6 +18,7 @@ nav:
       - Getting started: tutorials/getting-started.md
       - Create a service to rotate an image (generic template): tutorials/create-a-service-to-rotate-an-image.md
       - Create a service to summarize a text using an existing model (generic template): tutorials/create-a-service-to-summarize-a-text-using-an-existing-model.md
+      - Create a service to detect anomalies using a model built from scratch (model from scratch template): tutorials/create-a-service-to-detect-anomalies-using-a-model-built-from-scratch.md
       - Create a pipeline that blurs faces in an image: tutorials/create-a-pipeline-that-blurs-faces-in-an-image.md
   - How-to guides:
       - how-to-guides/index.md

@@ -5,7 +5,6 @@ code {
 [data-md-color-scheme="default"] {
 	--md-code-hl-color: var(--md-accent-fg-color--transparent);
 	--md-primary-fg-color: #d41367;
-	
 }
 
 [data-md-color-scheme="slate"] {
