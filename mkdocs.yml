@@ -16,7 +16,7 @@ nav:
   - Tutorials:
       - tutorials/index.md
       - Getting started: tutorials/getting-started.md
-      - Implement a service: tutorials/implement-service.md
+      - Create a service to rotate an image (generic template): tutorials/create-a-service-to-rotate-an-image.md
       - Create a pipeline that blurs faces in an image: tutorials/create-a-pipeline-that-blurs-faces-in-an-image.md
   - How-to guides:
       - how-to-guides/index.md
