@@ -19,17 +19,16 @@ file and the dataset to nalayse, and provide a report in a .csv file.
 ## Environment variables
 
 All environment variables are described in the
-[`.env`](https://github.com/swiss-ai-center/integrity-checker/blob/main/.env)
-file.
+[`.env`](https://github.com/swiss-ai-center/integrity-checker/blob/main/.env) file.
 
 The environment variables can be overwritten during the CI/CD pipeline described
-in the [`GitHub workflow files`]
-(https://github.com/swiss-ai-center/integrity-checker/tree/main/kubernetes).
+in the
+[`integrity-checker.yml`](https://github.com/swiss-ai-center/integrity-checker/blob/main/.github/workflows/integrity-checker.yml)
+GitHub workflow file.
 
 ## Start the service locally with Python
 
-In the `integrity-checker` directory, start the service with the following
-commands.
+In the `integrity-checker` directory, start the service with the following commands.
 
 ```sh
 # Generate the virtual environment
@@ -51,10 +50,10 @@ Start the application.
 cd src
 
 # Start the application
-uvicorn --reload --port 9595 main:app
+uvicorn --reload --port 9090 main:app
 ```
 
-Access the service documentation on <http://localhost:9595/docs>.
+Access the service documentation on <http://localhost:9090/docs>.
 
 ## Run the tests with Python
 
@@ -71,15 +70,14 @@ pytest --cov-report term:skip-covered --cov-report term-missing --cov=. -s --cov
 Start the service with the following commands. This will start the service with
 the official Docker images that are hosted on GitHub.
 
-In the `integrity-checker` directory, start the service with the following
-commands.
+In the `integrity-checker` directory, start the service with the following commands.
 
 ```sh
 # Start the integrity-checker backend
 kubectl apply \
-    -f kubernetes/integrity-checker.config-map.yml \
-    -f kubernetes/integrity-checker.stateful.yml \
-    -f kubernetesintegrity-checker.service.yml
+    -f kubernetes/config-map.yml \
+    -f kubernetes/stateful.yml \
+    -f kubernetes/service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -90,33 +88,32 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the `integrity-checker` documentation on <http://localhost:9595/docs>.
+Access the `integrity-checker` documentation on <http://localhost:9090/docs>.
 
 Access the Core engine documentation on <http://localhost:8080/docs> to validate
 the backend has been successfully registered to the Core engine.
 
 ## Start the service locally with minikube and a local Docker image
 
-**Note**: The service StatefulSet (`integrity-checker.stateful.yml` file) must
-be deleted and recreated every time a new Docker image is created.
+**Note**: The service StatefulSet (`stateful.yml` file) must be deleted
+and recreated every time a new Docker image is created.
 
 Start the service with the following commands. This will start the service with
 the a local Docker image for the service.
 
-In the `integrity-checker` directory, build the Docker image with the following
-commands.
+In the `integrity-checker` directory, build the Docker image with the following commands.
 
 ```sh
 # Access the Minikube's Docker environment
 eval $(minikube docker-env)
 
 # Build the Docker image
-docker build -t ghcr.io/swiss-ai-center/integrity-checker:latest .
+docker build -t ghcr.io/swiss-ai-center/integrity-checker-service:latest .
 
 # Exit the Minikube's Docker environment
 eval $(minikube docker-env -u)
 
-# Edit the `kubernetes/integrity-checker.stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
+# Edit the `kubernetes/stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
 #
 # From
 #
@@ -127,15 +124,14 @@ eval $(minikube docker-env -u)
 #        imagePullPolicy: Never
 ```
 
-In the `integrity-checker` directory, start the service with the following
-commands.
+In the `integrity-checker` directory, start the service with the following commands.
 
 ```sh
 # Start the integrity-checker backend
 kubectl apply \
-    -f kubernetes/integrity-checker.config-map.yml \
-    -f kubernetes/integrity-checker.stateful.yml \
-    -f kubernetes/integrity-checker.service.yml
+    -f kubernetes/config-map.yml \
+    -f kubernetes/stateful.yml \
+    -f kubernetes/service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -146,7 +142,7 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the `integrity-checker` documentation on <http://localhost:9595/docs>.
+Access the `integrity-checker` documentation on <http://localhost:9090/docs>.
 
 Access the Core engine documentation on <http://localhost:8080/docs> to validate
 the backend has been successfully registered to the Core engine.

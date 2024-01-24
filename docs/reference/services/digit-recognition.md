@@ -18,6 +18,27 @@ The service is built in two steps:
 The goal of this step is to prepare the data and train a new model. All further
 commands are ran in the `model-creation` directory.
 
+!!! info
+
+    All following commands are done in the `model-creation` directory.
+
+### Set up the environment
+
+Set up the environment with the following commands.
+
+```sh
+# Generate the virtual environment
+python3.10 -m venv .venv
+
+# Activate the virtual environment
+source .venv/bin/activate
+
+# Install the requirements
+pip install \
+    --requirement requirements.txt \
+    --requirement requirements-all.txt
+```
+
 ### Run the experiment
 
 The model can be tweaked using the `params.yaml` file. The `numbers` parameter
@@ -77,6 +98,28 @@ standard. A user friendly interface provided by Swagger is available under the
 This simple service only has one route `/compute` that takes an image as input,
 which will be used to guess the number.
 
+!!! info
+
+    All following commands are done in the `model-serving`
+    directory.
+
+### Set up the environment
+
+Set up the environment with the following commands.
+
+```sh
+# Generate the virtual environment
+python3.10 -m venv .venv
+
+# Activate the virtual environment
+source .venv/bin/activate
+
+# Install the requirements
+pip install \
+    --requirement requirements.txt \
+    --requirement requirements-all.txt
+```
+
 ### Retrieve the model
 
 Run the following command to get the model created from the previous step.
@@ -91,31 +134,14 @@ cp ../model-creation/mnist_model.h5 .
 ## Environment variables
 
 All environment variables are described in the
-[`.env`](https://github.com/swiss-ai-center/core-engine/blob/main/services/digit-recognition/model-serving/.env)
-file.
+[`.env`](https://github.com/swiss-ai-center/digit-recognition/blob/main/.env) file.
 
 The environment variables can be overwritten during the CI/CD pipeline described
 in the
-[`digit-recognition.yml`](https://github.com/swiss-ai-center/core-engine/blob/main/.github/workflows/digit-recognition.yml)
+[`digit-recognition.yml`](https://github.com/swiss-ai-center/digit-recognition/blob/main/.github/workflows/digit-recognition.yml)
 GitHub workflow file.
 
 ## Start the service locally with Python
-
-In the `services/digit-recognition/model-serving` directory, start the service
-with the following commands.
-
-```sh
-# Generate the virtual environment
-python3 -m venv .venv
-
-# Activate the virtual environment
-source .venv/bin/activate
-
-# Install the requirements
-pip install \
-    --requirement requirements.txt \
-    --requirement requirements-all.txt
-```
 
 Start the application.
 
@@ -124,10 +150,10 @@ Start the application.
 cd src
 
 # Start the application
-uvicorn --reload --port 8484 main:app
+uvicorn --reload --port 9090 main:app
 ```
 
-Access the service documentation on <http://localhost:8484/docs>.
+Access the service documentation on <http://localhost:9090/docs>.
 
 ## Run the tests with Python
 
@@ -163,7 +189,7 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the `digit-recognition` documentation on <http://localhost:8484/docs>.
+Access the `digit-recognition` documentation on <http://localhost:9090/docs>.
 
 Access the Core engine documentation on <http://localhost:8080/docs> to validate
 the backend has been successfully registered to the Core engine.
@@ -219,7 +245,7 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the `digit-recognition` documentation on <http://localhost:8484/docs>.
+Access the `digit-recognition` documentation on <http://localhost:9090/docs>.
 
 Access the Core engine documentation on <http://localhost:8080/docs> to validate
 the backend has been successfully registered to the Core engine.

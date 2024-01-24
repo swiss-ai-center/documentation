@@ -24,7 +24,7 @@ Now that DVC is installed we have to init it, so go to your service folder and u
 dvc init --subdir
 ```
 
-The `--subdir` is important because we are in a monorepos
+The `--subdir` is important because we are in a monorepo
 
 ### Create a bucket on Minio
 

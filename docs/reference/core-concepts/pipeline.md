@@ -78,22 +78,41 @@ The different models used in the pipeline are described below.
 This is the model of a pipeline:
 
 ```python
-class ExecutionUnitBase(CoreModel):
-    """
-    ExecutionUnit model
-    """
-    name: str = Field(nullable=False)
-    slug: str = Field(nullable=False, unique=True)
-    summary: str = Field(nullable=False)
-    description: str | None = Field(default=None, nullable=True)
-    status: ExecutionUnitStatus = Field(default=ExecutionUnitStatus.AVAILABLE, nullable=False)
-    data_in_fields: List[FieldDescription] | None = Field(sa_column=Column(JSON), default=None, nullable=True)
-    data_out_fields: List[FieldDescription] | None = Field(sa_column=Column(JSON), default=None, nullable=True)
-    tags: List[ExecutionUnitTag] | None = Field(sa_column=Column(JSON), default=None, nullable=True)
+class ExecutionUnitTagName(str, Enum):
+    IMAGE_PROCESSING = "Image Processing"
+    IMAGE_RECOGNITION = "Image Recognition"
+    NATURAL_LANGUAGE_PROCESSING = "Natural Language Processing"
+    ANOMALY_DETECTION = "Anomaly Detection"
+    RECOMMENDATION = "Recommendation"
+    TIME_SERIES = "Time Series"
+    CLUSTERING = "Clustering"
+    SEGMENTATION = "Segmentation"
+    SPEECH_RECOGNITION = "Speech Recognition"
+    DATA_PREPROCESSING = "Data Preprocessing"
+    SENTIMENT_ANALYSIS = "Sentiment Analysis"
+    NEURAL_NETWORKS = "Neural Networks"
 
-    # Needed for Column(JSON) to work
-    class Config:
-        arbitrary_types_allowed = True
+
+class ExecutionUnitTagAcronym(str, Enum):
+    IMAGE_PROCESSING = "IP"
+    IMAGE_RECOGNITION = "IR"
+    NATURAL_LANGUAGE_PROCESSING = "NLP"
+    ANOMALY_DETECTION = "AD"
+    RECOMMENDATION = "R"
+    TIME_SERIES = "TS"
+    CLUSTERING = "C"
+    SEGMENTATION = "S"
+    SPEECH_RECOGNITION = "SR"
+    DATA_PREPROCESSING = "DP"
+    SENTIMENT_ANALYSIS = "SA"
+    NEURAL_NETWORKS = "NN"
+
+class ExecutionUnitTag(TypedDict):
+    """
+    Service tag model
+    """
+    name: ExecutionUnitTagName
+    acronym: ExecutionUnitTagAcronym
 
 class ExecutionUnitStatus(Enum):
     AVAILABLE = "available"
@@ -101,12 +120,27 @@ class ExecutionUnitStatus(Enum):
     DISABLED = "disabled"
 
 
-class PipelineBase(ExecutionUnitBase):
+class PipelineBase(CoreModel):
     """
     Base class for a Pipeline
     This model is used in subclasses
     """
-    pass
+    model_config = SettingsConfigDict(arbitrary_types_allowed=True)
+
+    name: str = Field(nullable=False)
+    slug: str = Field(nullable=False, unique=True)
+    summary: str = Field(nullable=False)
+    description: str | None = Field(default=None, nullable=True)
+    status: ExecutionUnitStatus = Field(
+        default=ExecutionUnitStatus.AVAILABLE, nullable=False
+    )
+    data_in_fields: List[FieldDescription] | None = Field(
+        sa_column=Column(JSON), default=None
+    )
+    data_out_fields: List[FieldDescription] | None = Field(
+        sa_column=Column(JSON), default=None
+    )
+    tags: List[ExecutionUnitTag] | None = Field(sa_column=Column(JSON), default=None)
 ```
 
 #### Pipeline Step model
@@ -120,19 +154,20 @@ class PipelineStepBase(CoreModel):
     Base class for a step in a Pipeline
     This model is used in subclasses
     """
-    identifier: str = Field(nullable=False)
-    needs: List[str] | None = Field(sa_column=Column(JSON), default=None, nullable=True)
-    condition: str | None = Field(default=None, nullable=True)
-    inputs: List[str] = Field(sa_column=Column(JSON), nullable=False)
+    model_config = SettingsConfigDict(arbitrary_types_allowed=True)
 
-    @validator("identifier")
+    identifier: str = Field(nullable=False)
+    needs: List[str] | None = Field(sa_column=Column(JSON), default=None)
+    condition: str | None = Field(default=None, nullable=True)
+    inputs: List[str] = Field(sa_column=Column(JSON))
+
+    @field_validator("identifier")
     def identifier_format(cls, v):
         if not re.match(r"[a-z\-]+", v):
-            raise ValueError("Identifier must be in kebab-case format. Example: my-pipeline-step-identifier")
+            raise ValueError(
+                "Identifier must be in kebab-case format. Example: my-pipeline-step-identifier"
+            )
         return v
-
-    class Config:
-        arbitrary_types_allowed = True
 ```
 
 A pipeline step is linked to a service and can have a condition. The condition
@@ -149,8 +184,8 @@ A JSON representation of a pipeline would look like this:
 {
     "name": "Face Blur",
     "slug": "face-blur",
-    "summary": "Face Blur",
-    "description": "Face Blur",
+    "summary": "Blur the faces in an image",
+    "description": "Use Face Detection service to locate the faces in the image and send the bounding boxes to the Image Blur service to get the final result",
     "data_in_fields": [
         {
             "name": "image",
@@ -167,6 +202,16 @@ A JSON representation of a pipeline would look like this:
                 "image/jpeg",
                 "image/png"
             ]
+        }
+    ],
+    "tags": [
+        {
+            "name": "Image Recognition",
+            "acronym": "IR"
+        },
+        {
+            "name": "Image Processing",
+            "acronym": "IP"
         }
     ],
     "steps": [
@@ -226,6 +271,7 @@ class FileKeyReference(TypedDict):
     """
     File key reference model
     """
+
     reference: str
     file_key: str
 
@@ -235,12 +281,14 @@ class PipelineExecutionBase(CoreModel):
     Base class for a Pipeline Execution
     This model is used in subclasses
     """
-    pipeline_id: UUID | None = Field(default=None, nullable=True, foreign_key="pipelines.id")
-    current_pipeline_step_id: UUID | None = Field(default=None, nullable=True, foreign_key="pipeline_steps.id")
+    model_config = SettingsConfigDict(arbitrary_types_allowed=True)
 
-    # Needed for Column(JSON) to work
-    class Config:
-        arbitrary_types_allowed = True
+    pipeline_id: UUID | None = Field(
+        default=None, nullable=True, foreign_key="pipelines.id"
+    )
+    current_pipeline_step_id: UUID | None = Field(
+        default=None, nullable=True, foreign_key="pipeline_steps.id"
+    )
 
 
 class PipelineExecution(PipelineExecutionBase, table=True):
@@ -248,11 +296,15 @@ class PipelineExecution(PipelineExecutionBase, table=True):
     Pipeline Execution model
     This model is the one that is stored in the database
     """
+
     id: UUID = Field(default_factory=uuid4, primary_key=True)
     pipeline: "Pipeline" = Relationship(back_populates="pipeline_executions")
-    current_pipeline_step: Union["PipelineStep", None] = Relationship(back_populates="pipeline_executions")
-    tasks: List[Task] = Relationship(
+    current_pipeline_step: Union["PipelineStep", None] = Relationship(
+        back_populates="pipeline_executions"
+    )
+    tasks: List["Task"] = Relationship(
+        sa_relationship_kwargs={"cascade": "delete"},
         back_populates="pipeline_execution",
     )
-    files: List[FileKeyReference] | None = Field(sa_column=Column(JSON), default=None, nullable=True)
+    files: List[FileKeyReference] | None = Field(sa_column=Column(JSON), default=None)
 ```

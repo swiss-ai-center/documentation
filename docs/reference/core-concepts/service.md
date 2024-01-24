@@ -71,8 +71,10 @@ class ServiceTaskTask(BaseModel):
     """
     id: UUID
     data_in: List[str]
+    data_out: List[str] | None = None
+    status: TaskStatus
     service_id: UUID
-    pipeline_id: UUID | None
+    pipeline_execution_id: UUID | None = None
 
 
 class ServiceTaskBase(BaseModel):
@@ -80,6 +82,7 @@ class ServiceTaskBase(BaseModel):
     Base class for Service task
     This model is used in subclasses
     """
+
     s3_access_key_id: str
     s3_secret_access_key: str
     s3_region: str
@@ -100,6 +103,8 @@ class TaskStatus(str, Enum):
     SAVING = "saving"
     FINISHED = "finished"
     ERROR = "error"
+    SCHEDULED = "scheduled"
+    SKIPPED = "skipped"
     UNAVAILABLE = "unavailable"
 ```
 
@@ -140,10 +145,10 @@ class TaskUpdate(BaseModel):
     Task update model
     This model is used to update a task
     """
-    service: str | None
-    url: str | None
-    data_out: List[str] | None
-    status: TaskStatus | None
+    service: str | None = None
+    url: str | None = None
+    data_out: List[str] | None = None
+    status: TaskStatus | None = None
 ```
 
 The `data_out` field is a list of S3 object keys. The `status` field is a string
@@ -181,35 +186,69 @@ To register the service to the Core engine, the service must send a POST request
 to the Core engine `/services` endpoint with the following model:
 
 ```python
-class ExecutionUnitBase(CoreModel):
-    """
-    ExecutionUnit model
-    """
-    name: str = Field(nullable=False)
-    slug: str = Field(nullable=False, unique=True)
-    summary: str = Field(nullable=False)
-    description: str | None = Field(default=None, nullable=True)
-    status: ExecutionUnitStatus = Field(default=ExecutionUnitStatus.AVAILABLE, nullable=False)
-    data_in_fields: List[FieldDescription] | None = Field(sa_column=Column(JSON), default=None, nullable=True)
-    data_out_fields: List[FieldDescription] | None = Field(sa_column=Column(JSON), default=None, nullable=True)
-    tags: List[ExecutionUnitTag] | None = Field(sa_column=Column(JSON), default=None, nullable=True)
+class ExecutionUnitTagName(str, Enum):
+    IMAGE_PROCESSING = "Image Processing"
+    IMAGE_RECOGNITION = "Image Recognition"
+    NATURAL_LANGUAGE_PROCESSING = "Natural Language Processing"
+    ANOMALY_DETECTION = "Anomaly Detection"
+    RECOMMENDATION = "Recommendation"
+    TIME_SERIES = "Time Series"
+    CLUSTERING = "Clustering"
+    SEGMENTATION = "Segmentation"
+    SPEECH_RECOGNITION = "Speech Recognition"
+    DATA_PREPROCESSING = "Data Preprocessing"
+    SENTIMENT_ANALYSIS = "Sentiment Analysis"
+    NEURAL_NETWORKS = "Neural Networks"
 
-    # Needed for Column(JSON) to work
-    class Config:
-        arbitrary_types_allowed = True
 
+class ExecutionUnitTagAcronym(str, Enum):
+    IMAGE_PROCESSING = "IP"
+    IMAGE_RECOGNITION = "IR"
+    NATURAL_LANGUAGE_PROCESSING = "NLP"
+    ANOMALY_DETECTION = "AD"
+    RECOMMENDATION = "R"
+    TIME_SERIES = "TS"
+    CLUSTERING = "C"
+    SEGMENTATION = "S"
+    SPEECH_RECOGNITION = "SR"
+    DATA_PREPROCESSING = "DP"
+    SENTIMENT_ANALYSIS = "SA"
+    NEURAL_NETWORKS = "NN"
+
+class ExecutionUnitTag(TypedDict):
+    """
+    Service tag model
+    """
+    name: ExecutionUnitTagName
+    acronym: ExecutionUnitTagAcronym
 class ExecutionUnitStatus(Enum):
     AVAILABLE = "available"
     UNAVAILABLE = "unavailable"
     DISABLED = "disabled"
 
-
-class ServiceBase(ExecutionUnitBase):
+class ServiceBase(CoreModel):
     """
     Base class for a Service
     This model is used in subclasses
     """
-    url: AnyHttpUrl = Field(nullable=False)
+    model_config = SettingsConfigDict(arbitrary_types_allowed=True)
+
+    name: str = Field(nullable=False)
+    slug: str = Field(nullable=False, unique=True)
+    summary: str = Field(nullable=False)
+    description: str | None = Field(default=None, nullable=True)
+    status: ExecutionUnitStatus = Field(
+        default=ExecutionUnitStatus.AVAILABLE, nullable=False
+    )
+    data_in_fields: List[FieldDescription] | None = Field(
+        sa_column=Column(JSON), default=None
+    )
+    data_out_fields: List[FieldDescription] | None = Field(
+        sa_column=Column(JSON), default=None
+    )
+    tags: List[ExecutionUnitTag] | None = Field(sa_column=Column(JSON), default=None)
+    url: AnyHttpUrl = Field(sa_column=Column(String))
+    has_ai: bool | None = Field(default=False, nullable=True)
 ```
 
 The `data_in_fields` and `data_out_fields` fields are lists of
@@ -223,13 +262,14 @@ class FieldDescriptionType(str, Enum):
     TEXT_CSV = "text/csv"
     APPLICATION_JSON = "application/json"
     APPLICATION_PDF = "application/pdf"
+    APPLICATION_ZIP = "application/zip"
     AUDIO_MP3 = "audio/mpeg"
     AUDIO_OGG = "audio/ogg"
 
 
 class FieldDescription(TypedDict):
     """
-    Field description
+    Field description model
     """
     name: str
     type: List[FieldDescriptionType]

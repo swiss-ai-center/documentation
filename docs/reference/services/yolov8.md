@@ -25,7 +25,7 @@ the selected model type.
 ## Environment variables
 
 All environment variables are described in the
-[`.env`](https://github.com/swiss-ai-center/yolov8/blob/main/.venv) file.
+[`.env`](https://github.com/swiss-ai-center/yolov8/blob/main/.env) file.
 
 The environment variables can be overwritten during the CI/CD pipeline described
 in the
@@ -56,10 +56,10 @@ Start the application.
 cd src
 
 # Start the application
-uvicorn --reload --port 9696 main:app
+uvicorn --reload --port 9090 main:app
 ```
 
-Access the service documentation on <http://localhost:9696/docs>.
+Access the service documentation on <http://localhost:9090/docs>.
 
 ## Run the tests with Python
 
@@ -81,9 +81,9 @@ In the `yolov8` directory, start the service with the following commands.
 ```sh
 # Start the yolov8 backend
 kubectl apply \
-    -f kubernetes/yolov8.config-map.yml \
-    -f kubernetes/yolov8.stateful.yml \
-    -f kubernetes/yolov8.service.yml
+    -f kubernetes/config-map.yml \
+    -f kubernetes/stateful.yml \
+    -f kubernetes/service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -94,14 +94,14 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the `yolov8` documentation on <http://localhost:9696/docs>.
+Access the `yolov8` documentation on <http://localhost:9090/docs>.
 
 Access the Core engine documentation on <http://localhost:8080/docs> to validate
 the backend has been successfully registered to the Core engine.
 
 ## Start the service locally with minikube and a local Docker image
 
-**Note**: The service StatefulSet (`yolov8.stateful.yml` file) must be deleted
+**Note**: The service StatefulSet (`stateful.yml` file) must be deleted
 and recreated every time a new Docker image is created.
 
 Start the service with the following commands. This will start the service with
@@ -114,12 +114,12 @@ In the `yolov8` directory, build the Docker image with the following commands.
 eval $(minikube docker-env)
 
 # Build the Docker image
-docker build -t ghcr.io/swiss-ai-center/yolov8:latest .
+docker build -t ghcr.io/swiss-ai-center/yolov8-service:latest .
 
 # Exit the Minikube's Docker environment
 eval $(minikube docker-env -u)
 
-# Edit the `kubernetes/yolov8.stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
+# Edit the `kubernetes/stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
 #
 # From
 #
@@ -135,9 +135,9 @@ In the `yolov8` directory, start the service with the following commands.
 ```sh
 # Start the yolov8 backend
 kubectl apply \
-    -f kubernetes/yolov8.config-map.yml \
-    -f kubernetes/yolov8.stateful.yml \
-    -f kubernetes/yolov8.service.yml
+    -f kubernetes/config-map.yml \
+    -f kubernetes/stateful.yml \
+    -f kubernetes/service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -148,7 +148,7 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the `yolov8` documentation on <http://localhost:9696/docs>.
+Access the `yolov8` documentation on <http://localhost:9090/docs>.
 
 Access the Core engine documentation on <http://localhost:8080/docs> to validate
 the backend has been successfully registered to the Core engine.
