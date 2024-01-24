@@ -14,3 +14,7 @@ venv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
+
+## MacOS
+.DS_Store
+._.DS_Store

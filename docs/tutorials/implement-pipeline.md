@@ -1,4 +1,4 @@
-# Implement a pipeline
+# Create a pipeline that blur faces in an image
 
 This tutorial shows how to implement a
 [Pipeline](../reference/core-concepts/pipeline.md) in the Swiss AI Center
@@ -50,8 +50,8 @@ JSON object to the `/pipelines` endpoint of the
 {
     "name": "Face Blur",
     "slug": "face-blur",
-    "summary": "Face Blur",
-    "description": "Face Blur",
+    "summary": "Blur the faces in an image",
+    "description": "Use Face Detection service to locate the faces in the image and send the bounding boxes to the Image Blur service to get the final result",
     "data_in_fields": [
         {
             "name": "image",
@@ -70,19 +70,29 @@ JSON object to the `/pipelines` endpoint of the
             ]
         }
     ],
+    "tags": [
+        {
+            "name": "Image Recognition",
+            "acronym": "IR"
+        },
+        {
+            "name": "Image Processing",
+            "acronym": "IP"
+        }
+    ],
     "steps": [
         {
             "identifier": "face-detection",
             "needs": [],
             "inputs": ["pipeline.image"],
-            "service_slug": "face-detection" // change this with the slug of your face detection service
+            "service_slug": "face-detection" # Change this to your face detection service slug
         },
         {
             "identifier": "image-blur",
             "needs": ["face-detection"],
             "condition": "len(face-detection.result['areas']) > 0",
             "inputs": ["pipeline.image", "face-detection.result"],
-            "service_slug": "image-blur" // change this with the slug of your image blur service
+            "service_slug": "image-blur" # Change this to your image blur service slug
         }
     ]
 }
@@ -92,7 +102,7 @@ JSON object to the `/pipelines` endpoint of the
     You can find the slug of your services by going to the FastAPI documentation of
     the running [Core engine](../reference/core-engine.md) and use the `/services`
     endpoint. You will find the slug of your services in the response. <!--
-    markdownlint-disable MD046 MD038 --> `` ` json hl_lines="6 12"
+    markdownlint-disable MD046 MD038 --> ``` json hl_lines="6 12"
         [
             {
                 "created_at": "2023-06-01T13:55:15.936033", "updated_at":
@@ -121,7 +131,7 @@ Simply copy the content of the `face-blur-pipeline.json` file and paste it in th
 
 ![Post pipeline](../assets/screenshots/post-pipeline.png)
 
-You should receive a `200` response with the [Pipeline](../reference/core-concepts/pipeline.md)ine you just posted.
+You should receive a `200` response with the [Pipeline](../reference/core-concepts/pipeline.md) you just posted.
 
 ### Run the pipeline
 
@@ -139,7 +149,8 @@ Click on the `Try it out` button, add an image to the body and click on the `Exe
 
 You should receive a `200` response with a `Pipeline Execution` object in the response body. This object contains the id of the execution and the tasks that will be executed.
 
-``` json hl_lines="5-24" {
+``` json hl_lines="5-24"
+{
   "pipeline_id": "2175ae79-4e48-4d1b-97df-0bcbba4c5d2b", "current_pipeline
   _step_id": "e0028cf9-0b62-48b4-b0c7-b91ec930d083", ... "tasks": [
     {
@@ -156,7 +167,8 @@ You should receive a `200` response with a `Pipeline Execution` object in the re
       "9557c201-477f-45c6-8b8a-93ce93079f74"
     }
   ]
-} ```
+}
+```
 
 You can check the status of the execution by checking the status of the last
 task with the `/tasks/{task_id}` endpoint. You can find the id of the last task
