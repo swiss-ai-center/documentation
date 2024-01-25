@@ -2,13 +2,14 @@
 
 This tutorial shows how to implement a
 [Service](../reference/core-concepts/service.md) in the Swiss AI Center project
-step by step. The [Service](../reference/core-concepts/service.md) is a simple image rotation tool that
-rotates the image by 90, 180, 270 degrees clockwise depending on the value of the `rotation` parameter.
+step by step. The [Service](../reference/core-concepts/service.md) is a simple
+image rotation tool that rotates the image by 90, 180, 270 degrees clockwise
+depending on the value of the `rotation` parameter.
 
 !!! Info
     Note that a [Service](../reference/core-concepts/service.md) can be implemented
     in any programming language as long as it follows the
-    [specifications](../reference/core-concepts/service.md/#specifications) of the
+    [specifications](../reference/core-concepts/service.md#specifications) of the
     Swiss AI Center project. This tutorial is using Python 3.10.
 
 ## Tutorial
@@ -24,10 +25,12 @@ To follow this tutorial, you need to have the following tools installed:
 
 #### Launch the Core engine
 
-To be able to test the [Service](../reference/core-concepts/service.md) locally when it is ready, 
-you need to have a running [Core engine](../reference/core-engine/). 
-To do so, follow the instructions in the 
-[Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github) reference.
+To be able to test the [Service](../reference/core-concepts/service.md) locally
+when it is ready, you need to have a running
+[Core engine](../reference/core-engine.md). To do so, follow the instructions in
+the
+[Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github)
+reference.
 
 #### Get the source code
 
@@ -36,10 +39,13 @@ To do so, follow the instructions in the
     [Service](../reference/core-concepts/service.md) that does not require a model,
     so we will use the `create-a-new-service-generic-template` template.
 
-First, you can create a repo from the [template](https://github.com/swiss-ai-center/create-a-new-service-generic-template)
-by clicking on the `Use this template` button. You can also fork it or download it.
+First, you can create a repo from the
+[template](https://github.com/swiss-ai-center/create-a-new-service-generic-template)
+by clicking on the `Use this template` button. You can also fork it or download
+it.
 
-Once the repo is created, you can clone it on your computer. (If you downloaded it, you can skip this step.)
+Once the repo is created, you can clone it on your computer. (If you downloaded
+it, you can skip this step.)
 
 ```bash
 git clone
@@ -325,8 +331,7 @@ Now that the service is ready, we can test it.
 
 ##### Test the service using the test scripts
 
-Open a terminal, navigate to the `src` folder and run the following
-command:
+Open a terminal, navigate to the `src` folder and run the following command:
 
 ```bash
 pytest --cov-report term:skip-covered --cov-report term-missing --cov=. -s --cov-config=.coveragerc
@@ -353,12 +358,13 @@ TOTAL                         188     23    88%
 ##### Test the service using the Core engine
 
 In order to test the [Service](../reference/core-concepts/service.md), you need
-to have a running [Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github).
+to have a running
+[Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github).
 If not done yet, follow the instructions in the
 [Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github)
 reference.
 
-Once the [Core engine](../reference/core-engine/) is running, you can start the
+Once the [Core engine](../reference/core-engine.md) is running, you can start the
 [Service](../reference/core-concepts/service.md) by running the following
 command:
 
@@ -385,9 +391,9 @@ INFO:     [2024-01-05 14:36:21,313]  [common_code.service.service]: 	Successfull
 ```
 
 Now, you can test the [Service](../reference/core-concepts/service.md) by
-sending a request to the [Core engine](../reference/core-engine/). To do so, open your browser and navigate
-to the following URL: `http://localhost:8080/`. You should see the following
-page:
+sending a request to the [Core engine](../reference/core-engine.md). To do so,
+open your browser and navigate to the following URL: `http://localhost:8080/`.
+You should see the following page:
 
 ![image-rotate](../assets/screenshots/image-rotate.png)
 
@@ -478,9 +484,18 @@ The image should be rotated by 90 degrees.
 
 ##### Test the service using the Core engine Frontend
 
-In order to test the [Service](../reference/core-concepts/service.md) with the frontend, you need to launch the [Core engine](../reference/core-engine/#start-the-service-locally-with-node) Frontend. To do so, follow the instructions in the [Core engine](../reference/core-engine/#start-the-service-locally-with-node) reference.
+In order to test the [Service](../reference/core-concepts/service.md) with the
+frontend, you need to launch the
+[Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
+Frontend. To do so, follow the instructions in the
+[Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
+reference.
 
-Once the [Core engine](../reference/core-engine/#start-the-service-locally-with-node) Frontend is running, you can start the [Service](../reference/core-concepts/service.md) by running the following command:
+Once the
+[Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
+Frontend is running, you can start the
+[Service](../reference/core-concepts/service.md) by running the following
+command:
 
 ```bash
 uvicorn main:app --reload --host localhost --port 9090 # (1)!
@@ -490,17 +505,25 @@ uvicorn main:app --reload --host localhost --port 9090 # (1)!
    from the one used by the Core engine.
 
 !!! Note
-    The [Core engine](../reference/core-engine/#start-the-service-locally-with-node) Frontend needs a running [Core engine](../reference/core-engine/) to work.
+    The [Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
+    Frontend needs a running [Core engine](../reference/core-engine.md) to work.
 
-As in the previous section, you can test the [Service](../reference/core-concepts/service.md) by sending a request to the [Core engine](../reference/core-engine/). To do so, open your browser and navigate to the following URL: `http://localhost:3000/`. You should see the following page:
+As in the previous section, you can test the
+[Service](../reference/core-concepts/service.md) by sending a request to the
+[Core engine](../reference/core-engine.md). To do so, open your browser and
+navigate to the following URL: `http://localhost:3000/`. You should see the
+following page:
 
 ![image-rotate-frontend](../assets/screenshots/image-rotate-frontend.png)
 
-Now you can test the [Service](../reference/core-concepts/service.md) by clicking the `View` button. Now upload the image and the rotation file and click on the `Run` button.
+Now you can test the [Service](../reference/core-concepts/service.md) by
+clicking the `View` button. Now upload the image and the rotation file and click
+on the `Run` button.
 
 ![image-rotate-frontend-execute](../assets/screenshots/image-rotate-frontend-execute.png)
 
-The execution should start and as soon as it is finished, the `Download` button should be clickable. Use it to download the result.
+The execution should start and as soon as it is finished, the `Download` button
+should be clickable. Use it to download the result.
 
 ![image-rotate-frontend-download](../assets/screenshots/image-rotate-frontend-download.png)
 
@@ -510,4 +533,4 @@ The image should be rotated by 90 degrees.
     You have successfully created a [Service](../reference/core-concepts/service.md)
     and tested it locally. Now, you can push the
     [Service](../reference/core-concepts/service.md) to GitHub and deploy it on the
-    [Core engine](../reference/core-engine/) using the workflow from the repo.
+    [Core engine](../reference/core-engine.md) using the workflow from the repo.
