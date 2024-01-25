@@ -93,140 +93,17 @@ docker compose up
 Access the service at <http://localhost:8080> and validate everything works as
 intended.
 
-## Publish your service
+## Build, publish and deploy your service
 
 Once your service is implemented and you validated it works as intended, you can
 publish your service to a container registry such as GitHub Container Registry
 with the help of [Docker](../explanations/about-docker-and-docker-compose.md)
-and [Docker Compose](../explanations/about-docker-and-docker-compose.md).
+and [Docker Compose](../explanations/about-docker-and-docker-compose.md) using
+the
+[How to build, publish and deploy a service](./how-to-build-publish-and-deploy-a-service.md)
+guide.
 
 If you do not want to publish your service, you can skip this section.
-
-=== "Using a CI/CD pipeline"
-
-    If you use GitHub or GitLab (TODO), the template provides all the configuration
-    files to publish your service using a CI/CD pipeline.
-
-    === "GitHub"
-
-        Add the following environment variables to enable the CI/CD pipeline:
-
-        - `ENABLE_PUBLISHING`: true
-
-        Add the following secrets to enable the CI/CD pipeline:
-
-        - `TODO`: TODO
-
-    === "GitLab"
-
-        Add the following variables to enable the CI/CD pipeline:
-
-        - `ENABLE_PUBLISHING`: true
-
-=== "Manually"
-
-    To publish the service with Docker and Docker Compose manually, start by copying
-    the `.env.example` to `.env`.
-
-    Edit the `.env` file to change the name of the image to the right name stated by
-    your container registry (usually based on the repository name). More information
-    here:
-
-    - TODO
-
-    Login to the container registry using the `docker login` command. More
-    information here:
-
-    - TODO
-
-    Build and publish the Docker image using the following commands:
-
-    ```sh
-    # Build the Docker image
-    docker compose build
-
-    # Publish the Docker image
-    docker compose push
-    ```
-
-    If everything went right, your service should be successfully published to the
-    container registry.
-
-## Deploy your service
-
-Once your service is published, you can deploy it using one of the following
-ways to deploy your new model:
-
-=== "Using Kubernetes"
-
-    This is the recommended method to deploy your service in a production
-    environment. A published Docker image is required.
-
-    === "Using a CI/CD pipeline"
-
-        If you use GitHub or GitLab (TODO), the template provides all the configuration
-        files to deploy your service using a CI/CD pipeline.
-
-        === "GitHub"
-
-            Add the following environment variables to enable the CI/CD pipeline:
-
-            - `ENABLE_DEPLOYING`: true
-
-            Add the following secrets to enable the CI/CD pipeline:
-
-            - `TODO`: TODO
-
-        === "GitLab"
-
-            Add the following variables to enable the CI/CD pipeline:
-
-            - `ENABLE_DEPLOYING`: true
-
-    === "Manually"
-
-        Edit the `stateful.yml` configuration file to use the URL of the published
-        image. Edit the `ingress.yml` configuration file to make usage of your own
-        domain name for the service.
-
-        Apply the configuration files with the help of
-        [kubectl](../explanations/about-kubectl.md).
-
-=== "Using Docker Compose"
-
-    This is the recommended method to deploy your service in a development/testing
-    environment.
-
-    === "Docker Compose using the published image"
-
-        To deploy the service with Docker and Docker Compose using the published image,
-        start by copying the `.env.example` to `.env`.
-
-        Edit the `.env` file to change the name of the image to the URL of the published
-        image.
-
-        Deploy the service with the following command
-
-        ```sh
-        # Pull the Docker image from the container registry
-        docker compose pull
-
-        # Start the Docker container
-        docker compose up
-        ```
-
-    === "Docker Compose using the local image"
-
-        To deploy the service with Docker Compose using the local image with the
-        following commands:
-
-        ```sh
-        # Build the Docker image
-        docker compose build
-
-        # Start the Docker container
-        docker compose up
-        ```
 
 ## Frequently asked questions
 
