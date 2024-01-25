@@ -845,8 +845,8 @@ There are two ways to test the service:
 
     The service should be listed in the **Services** section.
 
-    Try to start a new task with the service. You can use the `model-creation/data/test.csv` file
-    as input.
+    Try to start a new task with the service. You can use the
+    `model-creation/data/test.csv` file as input.
 
     The service should execute the task and return a response with the anomalies.
 
@@ -860,8 +860,8 @@ There are two ways to test the service:
 
     **Start a new task**
 
-    Try to start a new task with the service. You can use the `model-creation/data/test.csv` file
-    as input.
+    Try to start a new task with the service. You can use the
+    `model-creation/data/test.csv` file as input.
 
     A primary JSON response should be returned with the task ID similar to this:
 
@@ -1010,7 +1010,9 @@ other developers.
 
 Now that you have implemented the service, you can build, publish and deploy it.
 
-Follow the [How to build, publish and deploy a service](../how-to-guides/how-to-build-publish-and-deploy-a-service.md) guide to build, publish and deploy the service to Kubernetes.
+Follow the
+[How to build, publish and deploy a service](../how-to-guides/how-to-build-publish-and-deploy-a-service.md)
+guide to build, publish and deploy the service to Kubernetes.
 
 ### Access and test the service
 

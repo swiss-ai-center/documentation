@@ -8,10 +8,10 @@ This guide will help you in the steps to create a new service for the
 If you have not already, we highly recommend you to follow the two official
 tutorials to learn how to create a new service:
 
-- [Rotate an image](TODO) - Uses the _Create a new service (generic)_ template
-  mentioned below
-- [Summarize a text using an existing model](TODO) - Uses the _Create a new
-  service (generic)_ template mentioned below
+- [Rotate an image](../tutorials/create-a-service-to-rotate-an-image.md) - Uses
+  the _Create a new service (generic)_ template mentioned below
+- [Summarize a text using an existing model](../tutorials/create-a-service-to-summarize-a-text-using-an-existing-model.md) -
+  Uses the _Create a new service (generic)_ template mentioned below
 - [Detect anomalies using a model built from scratch](../tutorials/create-a-service-to-detect-anomalies-using-a-model-built-from-scratch.md) -
   Uses the _Create a new service (model from scratch)_ template mentioned below
 

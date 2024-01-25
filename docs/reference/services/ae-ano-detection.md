@@ -97,8 +97,7 @@ which will be used to guess the number.
 
 !!! info
 
-    All following commands are done in the `model-serving`
-    directory.
+    All following commands are done in the `model-serving` directory.
 
 ### Set up the environment
 
@@ -131,8 +130,8 @@ cp ../model-creation/model/ae_model.h5 ./model/ae_model.h5
 ## Environment variables
 
 All environment variables are described in the
-[`.env`](https://github.com/swiss-ai-center/ae-ano-detection/blob/main/.env) file.
-file.
+[`.env`](https://github.com/swiss-ai-center/ae-ano-detection/blob/main/.env)
+file. file.
 
 The environment variables can be overwritten during the CI/CD pipeline described
 in the
@@ -194,8 +193,8 @@ the backend has been successfully registered to the Core engine.
 
 ## Start the service locally with minikube and a local Docker image
 
-**Note**: The service StatefulSet (`stateful.yml` file) must be
-deleted and recreated every time a new Docker image is created.
+**Note**: The service StatefulSet (`stateful.yml` file) must be deleted and
+recreated every time a new Docker image is created.
 
 Start the service with the following commands. This will start the service with
 the a local Docker image for the service.

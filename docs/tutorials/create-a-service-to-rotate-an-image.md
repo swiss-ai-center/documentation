@@ -364,8 +364,8 @@ If not done yet, follow the instructions in the
 [Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github)
 reference.
 
-Once the [Core engine](../reference/core-engine.md) is running, you can start the
-[Service](../reference/core-concepts/service.md) by running the following
+Once the [Core engine](../reference/core-engine.md) is running, you can start
+the [Service](../reference/core-concepts/service.md) by running the following
 command:
 
 ```bash
@@ -505,7 +505,8 @@ uvicorn main:app --reload --host localhost --port 9090 # (1)!
    from the one used by the Core engine.
 
 !!! Note
-    The [Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
+    The
+    [Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
     Frontend needs a running [Core engine](../reference/core-engine.md) to work.
 
 As in the previous section, you can test the

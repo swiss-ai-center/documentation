@@ -1,7 +1,7 @@
 # How to build, publish and deploy a service
 
-This guide will help you in the steps to build, publish and deploy a service for the
-[Core engine](../reference/core-engine.md).
+This guide will help you in the steps to build, publish and deploy a service for
+the [Core engine](../reference/core-engine.md).
 
 ## Follow the official tutorials
 
@@ -111,7 +111,8 @@ You have two ways to build, publish and deploy your service:
     The workflow should start and your service should be built, published and
     deployed automatically:
 
-    1. The `model-serving` directory is reviewed with the help of [Flake8](../explanations/about-flake8.md)
+    1. The `model-serving` directory is reviewed with the help of
+       [Flake8](../explanations/about-flake8.md)
     2. The model is trained in the `model-creation` directory
     3. The model is uploaded to GitHub artifacts using the `MODEL_PATH` variable
     4. The service is tested in the `model-serving` directory with the help of
@@ -127,11 +128,14 @@ You have two ways to build, publish and deploy your service:
 
     !!! info
 
-        If you want to publish the Docker image to a container registry, you will
-        need to tag the Docker image with the URL of the container registry.
+        If you want to publish the Docker image to a container registry, you will need
+        to tag the Docker image with the URL of the container registry.
 
-        See the official [GitHub container registry documentation](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#building-container-images) or
-        the official [GitLab container registry documentation](https://docs.gitlab.com/ee/user/packages/container_registry/build_and_push_images.html) for more information.
+        See the official
+        [GitHub container registry documentation](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#building-container-images)
+        or the official
+        [GitLab container registry documentation](https://docs.gitlab.com/ee/user/packages/container_registry/build_and_push_images.html)
+        for more information.
 
     Build the Docker image using the following command:
 
@@ -173,7 +177,7 @@ You have two ways to build, publish and deploy your service:
     **Update the Kubernetes files**
 
     Edit the following Kubernetes files to configure your service:
-    
+
     - `kubernetes/config-map.yml`
     - `kubernetes/ingress.yml`
     - `kubernetes/service.yml`
@@ -181,7 +185,8 @@ You have two ways to build, publish and deploy your service:
 
     **Deploy the service on Kubernetes**
 
-    Using the Kubeconfig file of your Kubernetes cluster, deploy the service on Kubernetes using the following command:
+    Using the Kubeconfig file of your Kubernetes cluster, deploy the service on
+    Kubernetes using the following command:
 
     ```sh
     # Deploy the service on Kubernetes
