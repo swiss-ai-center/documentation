@@ -18,18 +18,16 @@ which will be analyzed.
 ## Environment variables
 
 All environment variables are described in the
-[`.env`](https://github.com/swiss-ai-center/core-engine/blob/main/services/image-analyzer/.env)
-file.
+[`.env`](https://github.com/swiss-ai-center/image-analyzer/blob/main/.env) file.
 
 The environment variables can be overwritten during the CI/CD pipeline described
 in the
-[`image-analyzer.yml`](https://github.com/swiss-ai-center/core-engine/blob/main/.github/workflows/image-analyzer.yml)
+[`image-analyzer.yml`](https://github.com/swiss-ai-center/image-analyzer/blob/main/.github/workflows/image-analyzer.yml)
 GitHub workflow file.
 
 ## Start the service locally with Python
 
-In the `services/image-analyzer` directory, start the service with the following
-commands.
+In the `image-analyzer` directory, start the service with the following commands.
 
 ```sh
 # Generate the virtual environment
@@ -51,16 +49,16 @@ Start the application.
 cd src
 
 # Start the application
-uvicorn --reload --port 8787 main:app
+uvicorn --reload --port 9090 main:app
 ```
 
-Access the service documentation on <http://localhost:8787/docs>.
+Access the service documentation on <http://localhost:9090/docs>.
 
 ## Run the tests with Python
 
 For each module a test file is available to check the correct behavior of the
 code. The tests are run using the `pytest` library with code coverage check. To
-run the tests, use the following command inside the `src` folder:
+run the tests, use the following command inside the `image-analyzer` folder:
 
 ```sh
 pytest --cov-report term:skip-covered --cov-report term-missing --cov=. -s --cov-config=.coveragerc
@@ -71,15 +69,14 @@ pytest --cov-report term:skip-covered --cov-report term-missing --cov=. -s --cov
 Start the service with the following commands. This will start the service with
 the official Docker images that are hosted on GitHub.
 
-In the `image-analyzer` directory, start the service with the following
-commands.
+In the `image-analyzer` directory, start the service with the following commands.
 
 ```sh
 # Start the image-analyzer backend
 kubectl apply \
-    -f kubernetes/image-analyzer.config-map.yml \
-    -f kubernetes/image-analyzer.stateful.yml \
-    -f kubernetes/image-analyzer.service.yml
+    -f kubernetes/config-map.yml \
+    -f kubernetes/stateful.yml \
+    -f kubernetes/service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -90,33 +87,32 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the `image-analyzer` documentation on <http://localhost:8787/docs>.
+Access the `image-analyzer` documentation on <http://localhost:9090/docs>.
 
 Access the Core engine documentation on <http://localhost:8080/docs> to validate
 the backend has been successfully registered to the Core engine.
 
 ## Start the service locally with minikube and a local Docker image
 
-**Note**: The service StatefulSet (`image-analyzer.stateful.yml` file) must be
-deleted and recreated every time a new Docker image is created.
+**Note**: The service StatefulSet (`stateful.yml` file) must be deleted
+and recreated every time a new Docker image is created.
 
 Start the service with the following commands. This will start the service with
 the a local Docker image for the service.
 
-In the `image-analyzer` directory, build the Docker image with the following
-commands.
+In the `image-analyzer` directory, build the Docker image with the following commands.
 
 ```sh
 # Access the Minikube's Docker environment
 eval $(minikube docker-env)
 
 # Build the Docker image
-docker build -t ghcr.io/swiss-ai-center/image-analyzer:latest .
+docker build -t ghcr.io/swiss-ai-center/image-analyzer-service:latest .
 
 # Exit the Minikube's Docker environment
 eval $(minikube docker-env -u)
 
-# Edit the `kubernetes/image-analyzer.stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
+# Edit the `kubernetes/stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
 #
 # From
 #
@@ -127,15 +123,14 @@ eval $(minikube docker-env -u)
 #        imagePullPolicy: Never
 ```
 
-In the `image-analyzer` directory, start the service with the following
-commands.
+In the `image-analyzer` directory, start the service with the following commands.
 
 ```sh
 # Start the image-analyzer backend
 kubectl apply \
-    -f kubernetes/image-analyzer.config-map.yml \
-    -f kubernetes/image-analyzer.stateful.yml \
-    -f kubernetes/image-analyzer.service.yml
+    -f kubernetes/config-map.yml \
+    -f kubernetes/stateful.yml \
+    -f kubernetes/service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -146,7 +141,7 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the `image-analyzer` documentation on <http://localhost:8787/docs>.
+Access the `image-analyzer` documentation on <http://localhost:9090/docs>.
 
 Access the Core engine documentation on <http://localhost:8080/docs> to validate
 the backend has been successfully registered to the Core engine.

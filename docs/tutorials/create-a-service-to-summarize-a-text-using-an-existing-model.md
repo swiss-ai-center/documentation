@@ -2,13 +2,14 @@
 
 This tutorial shows how to implement a
 [Service](../reference/core-concepts/service.md) in the Swiss AI Center project
-step by step. The [Service](../reference/core-concepts/service.md) is a text summarizer tool that
-summarizes a text using the [Hugging Face](https://huggingface.co/) library.
+step by step. The [Service](../reference/core-concepts/service.md) is a text
+summarizer tool that summarizes a text using the
+[Hugging Face](https://huggingface.co/) library.
 
 !!! Info
     Note that a [Service](../reference/core-concepts/service.md) can be implemented
     in any programming language as long as it follows the
-    [specifications](../reference/core-concepts/service.md/#specifications) of the
+    [specifications](../reference/core-concepts/service.md#specifications) of the
     Swiss AI Center project. This tutorial is using Python 3.10.
 
 ## Tutorial
@@ -24,22 +25,27 @@ To follow this tutorial, you need to have the following tools installed:
 
 #### Launch the Core engine
 
-To be able to test the [Service](../reference/core-concepts/service.md) locally when it is ready, 
-you need to have a running [Core engine](../reference/core-engine/). 
-To do so, follow the instructions in the 
-[Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github) reference.
+To be able to test the [Service](../reference/core-concepts/service.md) locally
+when it is ready, you need to have a running
+[Core engine](../reference/core-engine.md). To do so, follow the instructions in
+the
+[Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github)
+reference.
 
 #### Get the source code
 
 !!! Info
     In this tutorial, we will implement a
-    [Service](../reference/core-concepts/service.md) that uses an existing model
-    so we will use the `create-a-new-service-generic-template` template.
+    [Service](../reference/core-concepts/service.md) that uses an existing model so
+    we will use the `create-a-new-service-generic-template` template.
 
-First, you can create a repo from the [template](https://github.com/swiss-ai-center/create-a-new-service-generic-template)
-by clicking on the `Use this template` button. You can also fork it or download it.
+First, you can create a repo from the
+[template](https://github.com/swiss-ai-center/create-a-new-service-generic-template)
+by clicking on the `Use this template` button. You can also fork it or download
+it.
 
-Once the repo is created, you can clone it on your computer. (If you downloaded it, you can skip this step.)
+Once the repo is created, you can clone it on your computer. (If you downloaded
+it, you can skip this step.)
 
 ```bash
 git clone
@@ -142,8 +148,9 @@ addopts = "--cov-config=.coveragerc --cov-report xml --cov-report term-missing -
 ##### Update the service code
 
 All the code of the [Service](../reference/core-concepts/service.md) is in the
-`main.py` file. The [Service](../reference/core-concepts/service.md) is a text summarizer tool that
-summarizes a text using the [Hugging Face](https://huggingface.co/) library.
+`main.py` file. The [Service](../reference/core-concepts/service.md) is a text
+summarizer tool that summarizes a text using the
+[Hugging Face](https://huggingface.co/) library.
 
 Open the `main.py` with your favorite editor and follow the instructions below.
 
@@ -221,7 +228,7 @@ class MyService(Service):
         # Limit the text to 142 words
         text = " ".join(text.split()[:500])
 
-        # Run the model 
+        # Run the model
         result = classifier(text, max_length=100, min_length=5, do_sample=False)
 
         # Convert the result to bytes
@@ -295,8 +302,7 @@ Now that the service is ready, we can test it.
 
 ##### Test the service using the test scripts
 
-Open a terminal, navigate to the `src` folder and run the following
-command:
+Open a terminal, navigate to the `src` folder and run the following command:
 
 ```bash
 pytest --cov-report term:skip-covered --cov-report term-missing --cov=. -s --cov-config=.coveragerc
@@ -323,12 +329,13 @@ TOTAL                         188     23    88%
 ##### Test the service using the Core engine
 
 In order to test the [Service](../reference/core-concepts/service.md), you need
-to have a running [Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github).
+to have a running
+[Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github).
 If not done yet, follow the instructions in the
 [Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github)
 reference.
 
-Once the [Core engine](../reference/core-engine/) is running, you can start the
+Once the [Core engine](../reference/core-engine.md) is running, you can start the
 [Service](../reference/core-concepts/service.md) by running the following
 command:
 
@@ -355,9 +362,9 @@ INFO:     [2024-01-09 16:49:08,531]  [common_code.service.service]: 	Successfull
 ```
 
 Now, you can test the [Service](../reference/core-concepts/service.md) by
-sending a request to the [Core engine](../reference/core-engine/). To do so, open your browser and navigate
-to the following URL: `http://localhost:8080/`. You should see the following
-page:
+sending a request to the [Core engine](../reference/core-engine.md). To do so,
+open your browser and navigate to the following URL: `http://localhost:8080/`.
+You should see the following page:
 
 ![text-summarizer](../assets/screenshots/text-summarizer.png)
 
@@ -365,8 +372,8 @@ Now you can test the [Service](../reference/core-concepts/service.md) by
 uploading a text file. Create a file called text.txt and add some text in it.
 
 Then, you can unfold the `/text-summarizer` endpoint and click on the Try it out
-button. Now upload the text file and click on the Execute
-button. The response body should be something similar to the following:
+button. Now upload the text file and click on the Execute button. The response
+body should be something similar to the following:
 
 ```json hl_lines="11"
 {
@@ -423,8 +430,8 @@ under the Tasks name.
 
 1. Click on Try it out and paste the id in the task_id field.
 2. Click on Execute.
-3. In the body response, find the `data_out` field and copy the id of the text file
-   (e.g. `a38ef233-ac01-431d-adc8-cb6269cdeb71.png`).
+3. In the body response, find the `data_out` field and copy the id of the text
+   file (e.g. `a38ef233-ac01-431d-adc8-cb6269cdeb71.png`).
 4. Now, unfold the GET `/storage/{key}` endpoint under the Storage name.
 5. Click on Try it out and paste the id of the text file in the key field.
 6. Click on Execute.
@@ -434,9 +441,18 @@ The text should be summarized.
 
 ##### Test the service using the Core engine Frontend
 
-In order to test the [Service](../reference/core-concepts/service.md) with the frontend, you need to launch the [Core engine](../reference/core-engine/#start-the-service-locally-with-node) Frontend. To do so, follow the instructions in the [Core engine](../reference/core-engine/#start-the-service-locally-with-node) reference.
+In order to test the [Service](../reference/core-concepts/service.md) with the
+frontend, you need to launch the
+[Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
+Frontend. To do so, follow the instructions in the
+[Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
+reference.
 
-Once the [Core engine](../reference/core-engine/#start-the-service-locally-with-node) Frontend is running, you can start the [Service](../reference/core-concepts/service.md) by running the following command:
+Once the
+[Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
+Frontend is running, you can start the
+[Service](../reference/core-concepts/service.md) by running the following
+command:
 
 ```bash
 uvicorn main:app --reload --host localhost --port 9090 # (1)!
@@ -446,17 +462,25 @@ uvicorn main:app --reload --host localhost --port 9090 # (1)!
    from the one used by the Core engine.
 
 !!! Note
-    The [Core engine](../reference/core-engine/#start-the-service-locally-with-node) Frontend needs a running [Core engine](../reference/core-engine/) to work.
+    The [Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
+    Frontend needs a running [Core engine](../reference/core-engine.md) to work.
 
-As in the previous section, you can test the [Service](../reference/core-concepts/service.md) by sending a request to the [Core engine](../reference/core-engine/). To do so, open your browser and navigate to the following URL: `http://localhost:3000/`. You should see the following page:
+As in the previous section, you can test the
+[Service](../reference/core-concepts/service.md) by sending a request to the
+[Core engine](../reference/core-engine.md). To do so, open your browser and
+navigate to the following URL: `http://localhost:3000/`. You should see the
+following page:
 
 ![text-summarizer-frontend](../assets/screenshots/text-summarizer-frontend.png)
 
-Now you can test the [Service](../reference/core-concepts/service.md) by clicking the `View` button. Now upload the text file and click on the `Run` button.
+Now you can test the [Service](../reference/core-concepts/service.md) by
+clicking the `View` button. Now upload the text file and click on the `Run`
+button.
 
 ![text-summarizer-frontend-execute](../assets/screenshots/text-summarizer-frontend-execute.png)
 
-The execution should start and as soon as it is finished, the `Download` button should be clickable. Use it to download the result.
+The execution should start and as soon as it is finished, the `Download` button
+should be clickable. Use it to download the result.
 
 ![text-summarizer-frontend-download](../assets/screenshots/text-summarizer-frontend-download.png)
 
@@ -466,4 +490,4 @@ The text should be summarized.
     You have successfully created a [Service](../reference/core-concepts/service.md)
     and tested it locally. Now, you can push the
     [Service](../reference/core-concepts/service.md) to GitHub and deploy it on the
-    [Core engine](../reference/core-engine/) using the workflow from the repo.
+    [Core engine](../reference/core-engine.md) using the workflow from the repo.

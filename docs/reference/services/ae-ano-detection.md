@@ -20,8 +20,7 @@ commands are ran in the `model-creation` directory.
 
 !!! info
 
-    All following commands are done in the
-    `services/ae-ano-detection/model-creation` directory.
+    All following commands are done in the `model-creation` directory.
 
 ### Set up the environment
 
@@ -98,7 +97,7 @@ which will be used to guess the number.
 
 !!! info
 
-    All following commands are done in the `services/ae-ano-detection/model-serving`
+    All following commands are done in the `model-serving`
     directory.
 
 ### Set up the environment
@@ -132,12 +131,12 @@ cp ../model-creation/model/ae_model.h5 ./model/ae_model.h5
 ## Environment variables
 
 All environment variables are described in the
-[`.env`](https://github.com/swiss-ai-center/core-engine/blob/main/services/ae-ano-detection/model-serving/.env)
+[`.env`](https://github.com/swiss-ai-center/ae-ano-detection/blob/main/.env) file.
 file.
 
 The environment variables can be overwritten during the CI/CD pipeline described
 in the
-[`ae-ano-detection.yml`](https://github.com/swiss-ai-center/core-engine/blob/main/.github/workflows/ae-ano-detection.yml)
+[`ae-ano-detection.yml`](https://github.com/swiss-ai-center/ae-ano-detection/blob/main/.github/workflows/doodle.yml)
 GitHub workflow file.
 
 ## Start the service locally with Python
@@ -149,10 +148,10 @@ Start the application.
 cd src
 
 # Start the application
-uvicorn --reload --port 8282 main:app
+uvicorn --reload --port 9090 main:app
 ```
 
-Access the service documentation on <http://localhost:8282/docs>.
+Access the service documentation on <http://localhost:9090/docs>.
 
 ## Run the tests with Python
 
@@ -175,9 +174,9 @@ following commands.
 ```sh
 # Start the ae-ano-detection backend
 kubectl apply \
-    -f kubernetes/ae-ano-detection.config-map.yml \
-    -f kubernetes/ae-ano-detection.stateful.yml \
-    -f kubernetes/ae-ano-detection.service.yml
+    -f kubernetes/config-map.yml \
+    -f kubernetes/stateful.yml \
+    -f kubernetes/service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -188,14 +187,14 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the `ae-ano-detection` documentation on <http://localhost:8282/docs>.
+Access the `ae-ano-detection` documentation on <http://localhost:9090/docs>.
 
 Access the Core engine documentation on <http://localhost:8080/docs> to validate
 the backend has been successfully registered to the Core engine.
 
 ## Start the service locally with minikube and a local Docker image
 
-**Note**: The service StatefulSet (`ae-ano-detection.stateful.yml` file) must be
+**Note**: The service StatefulSet (`stateful.yml` file) must be
 deleted and recreated every time a new Docker image is created.
 
 Start the service with the following commands. This will start the service with
@@ -209,12 +208,12 @@ the following commands.
 eval $(minikube docker-env)
 
 # Build the Docker image
-docker build -t ghcr.io/swiss-ai-center/ae-ano-detection:latest .
+docker build -t ghcr.io/swiss-ai-center/ae-ano-detection-service:latest .
 
 # Exit the Minikube's Docker environment
 eval $(minikube docker-env -u)
 
-# Edit the `kubernetes/ae-ano-detection.stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
+# Edit the `kubernetes/stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
 #
 # From
 #
@@ -231,9 +230,9 @@ following commands.
 ```sh
 # Start the ae-ano-detection backend
 kubectl apply \
-    -f kubernetes/ae-ano-detection.config-map.yml \
-    -f kubernetes/ae-ano-detection.stateful.yml \
-    -f kubernetes/ae-ano-detection.service.yml
+    -f kubernetes/config-map.yml \
+    -f kubernetes/stateful.yml \
+    -f kubernetes/service.yml
 ```
 
 Create a tunnel to access the Kubernetes cluster from the local machine. The
@@ -244,7 +243,7 @@ terminal in which the tunnel is created must stay open.
 minikube tunnel --bind-address 127.0.0.1
 ```
 
-Access the `ae-ano-detection` documentation on <http://localhost:8282/docs>.
+Access the `ae-ano-detection` documentation on <http://localhost:9090/docs>.
 
 Access the Core engine documentation on <http://localhost:8080/docs> to validate
 the backend has been successfully registered to the Core engine.

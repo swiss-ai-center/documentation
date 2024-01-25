@@ -234,7 +234,7 @@ ways to deploy your new model:
 
 Any framework/language can be used to create a new service compatible with the
 Core engine as long as it follows the
-[specifications](../reference/core-concepts/service.md/#specifications) of the
+[specifications](../reference/core-concepts/service.md#specifications) of the
 Swiss AI Center project.
 
 The chosen framework/language must be able to receive/make requests on some HTTP
