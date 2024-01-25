@@ -19,6 +19,29 @@ To access [HEIA-FR](./about-heia-fr.md) Kubernetes cluster, ask a team member.
 
 _None._
 
+## Common tasks
+
+### Visualize pods
+
+To visualize pods (= containers), use the following command.
+
+```sh
+# View pods
+kubectl get pods
+```
+
+To visualize pod's logs, use the following command.
+
+```sh
+# View pod's logs
+kubectl logs <name of the pod>
+
+# or
+
+# Follow the pod's logs (CTRL+C to exit)
+kubectl logs --follow <name of the pod>
+```
+
 ## Resources and alternatives
 
 These resources and alternatives are related to the current item (in
