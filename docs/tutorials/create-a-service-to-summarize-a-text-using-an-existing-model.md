@@ -9,7 +9,7 @@ summarizer tool that summarizes a text using the
 !!! Info
     Note that a [Service](../reference/core-concepts/service.md) can be implemented
     in any programming language as long as it follows the
-    [specifications](../reference/core-concepts/service.md/#specifications) of the
+    [specifications](../reference/core-concepts/service.md#specifications) of the
     Swiss AI Center project. This tutorial is using Python 3.10.
 
 ## Tutorial
@@ -443,13 +443,13 @@ The text should be summarized.
 
 In order to test the [Service](../reference/core-concepts/service.md) with the
 frontend, you need to launch the
-[Core engine](../reference/core-engine/#start-the-service-locally-with-node)
+[Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
 Frontend. To do so, follow the instructions in the
-[Core engine](../reference/core-engine/#start-the-service-locally-with-node)
+[Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
 reference.
 
 Once the
-[Core engine](../reference/core-engine/#start-the-service-locally-with-node)
+[Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
 Frontend is running, you can start the
 [Service](../reference/core-concepts/service.md) by running the following
 command:
@@ -462,7 +462,7 @@ uvicorn main:app --reload --host localhost --port 9090 # (1)!
    from the one used by the Core engine.
 
 !!! Note
-    The [Core engine](../reference/core-engine/#start-the-service-locally-with-node)
+    The [Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
     Frontend needs a running [Core engine](../reference/core-engine.md) to work.
 
 As in the previous section, you can test the

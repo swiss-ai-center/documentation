@@ -9,7 +9,7 @@ hide:
 
 ## Introduction
 
-Welcome to the Swiss AI Center Documentation website !
+Welcome to the Swiss AI Center Documentation website!
 
 > The mission of the Swiss AI Center is to accelerate the adoption of artificial
 > intelligence in the digital transition of Swiss SMEs. The associated
