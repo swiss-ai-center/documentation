@@ -6,7 +6,7 @@
 - [:material-test-tube: Staging](https://image-nsfw-detector-swiss-ai-center.kube.isc.heia-fr.ch)
 - [:material-factory: Production (not available yet)](https://image-nsfw-detector.swiss-ai-center.ch)
 
-This service takes as input an image and returns a json with information about the possibility that it includes NSFW content.
+This service takes as input an image and returns a json with information about the probability that it includes NSFW content.
 
 ## NSFW content detection
 
