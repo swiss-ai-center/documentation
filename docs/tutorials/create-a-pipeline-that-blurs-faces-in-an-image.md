@@ -46,7 +46,7 @@ JSON object to the `/pipelines` endpoint of the
 [Core engine](../reference/core-engine.md). Create a file named
 `face-blur-pipeline.json` in your IDE with the following code:
 
-``` json hl_lines="29 36"
+```json hl_lines="29 36"
 {
     "name": "Face Blur",
     "slug": "face-blur",
@@ -85,14 +85,14 @@ JSON object to the `/pipelines` endpoint of the
             "identifier": "face-detection",
             "needs": [],
             "inputs": ["pipeline.image"],
-            "service_slug": "face-detection" # Change this to your face detection service slug
+            "service_slug": "face-detection" // Change this to your face detection service slug
         },
         {
             "identifier": "image-blur",
             "needs": ["face-detection"],
             "condition": "len(face-detection.result['areas']) > 0",
             "inputs": ["pipeline.image", "face-detection.result"],
-            "service_slug": "image-blur" # Change this to your image blur service slug
+            "service_slug": "image-blur" // Change this to your image blur service slug
         }
     ]
 }
@@ -119,44 +119,69 @@ JSON object to the `/pipelines` endpoint of the
         ]
     ```
 
-What we just did is to create a [Pipeline](../reference/core-concepts/pipeline.md) with two steps. The first step is the face detection service and the second step is the image blur service. The second step will only be executed if the first step detects at least one face. The [Pipeline](../reference/core-concepts/pipeline.md) will take an image as input and return an image as output.
+What we just did is to create a
+[Pipeline](../reference/core-concepts/pipeline.md) with two steps. The first
+step is the face detection service and the second step is the image blur
+service. The second step will only be executed if the first step detects at
+least one face. The [Pipeline](../reference/core-concepts/pipeline.md) will take
+an image as input and return an image as output.
 
-The inputs of each step are the outputs of the previous steps. The first step takes the pipeline's image as input and the second step takes the [Pipeline](../reference/core-concepts/pipeline.md)'s image and the result of the face detection as input.
+The inputs of each step are the outputs of the previous steps. The first step
+takes the pipeline's image as input and the second step takes the
+[Pipeline](../reference/core-concepts/pipeline.md)'s image and the result of the
+face detection as input.
 
 !!! note
-    The `identifier` field of each step is the name of the step in the [Pipeline](../reference/core-concepts/pipeline.md). It is used to reference the step in the `needs` and `inputs` fields.
+    The `identifier` field of each step is the name of the step in the
+    [Pipeline](../reference/core-concepts/pipeline.md). It is used to reference the
+    step in the `needs` and `inputs` fields.
 
 ### Post the pipeline
 
-Now that we have our [Pipeline](../reference/core-concepts/pipeline.md), we can post it to the [Core engine](../reference/core-engine.md). To do so, go to the FastAPI documentation of the running [Core engine](../reference/core-engine.md) and use the `/pipelines` endpoint to post the [Pipeline](../reference/core-concepts/pipeline.md) by clicking on the `Try it out` button
+Now that we have our [Pipeline](../reference/core-concepts/pipeline.md), we can
+post it to the [Core engine](../reference/core-engine.md). To do so, go to the
+FastAPI documentation of the running [Core engine](../reference/core-engine.md)
+and use the `/pipelines` endpoint to post the
+[Pipeline](../reference/core-concepts/pipeline.md) by clicking on the
+`Try it out` button
 
-Simply copy the content of the `face-blur-pipeline.json` file and paste it in the `body` field of the `/pipelines` endpoint and click on the `Execute` button.
+Simply copy the content of the `face-blur-pipeline.json` file and paste it in
+the `body` field of the `/pipelines` endpoint and click on the `Execute` button.
 
 ![Post pipeline](../assets/screenshots/post-pipeline.png)
 
-You should receive a `200` response with the [Pipeline](../reference/core-concepts/pipeline.md) you just posted.
+You should receive a `200` response with the
+[Pipeline](../reference/core-concepts/pipeline.md) you just posted.
 
 ### Run the pipeline
 
-You can run the pipeline using the FastAPI Swagger interface or by using the [Core engine](../reference/core-engine.md).
+You can run the pipeline using the FastAPI Swagger interface or by using the
+[Core engine](../reference/core-engine.md).
 
 #### Using the FastAPI Swagger interface
 
-Now that we have our [Pipeline](../reference/core-concepts/pipeline.md), we can run it. To do so, go to the FastAPI documentation of the running [Core engine](../reference/core-engine.md) and you should see the [Pipeline](../reference/core-concepts/pipeline.md) you just posted in the `Registered pipelines` endpoint with the slug `/face-blur`.
+Now that we have our [Pipeline](../reference/core-concepts/pipeline.md), we can
+run it. To do so, go to the FastAPI documentation of the running
+[Core engine](../reference/core-engine.md) and you should see the
+[Pipeline](../reference/core-concepts/pipeline.md) you just posted in the
+`Registered pipelines` endpoint with the slug `/face-blur`.
 
 ![Registered pipelines](../assets/screenshots/registered-pipeline.png)
 
-Click on the `Try it out` button, add an image to the body and click on the `Execute` button.
+Click on the `Try it out` button, add an image to the body and click on the
+`Execute` button.
 
 ![Post pipeline execution](../assets/screenshots/post-pipeline.png)
 
-You should receive a `200` response with a `Pipeline Execution` object in the response body. This object contains the id of the execution and the tasks that will be executed.
+You should receive a `200` response with a `Pipeline Execution` object in the
+response body. This object contains the id of the execution and the tasks that
+will be executed.
 
 ```json hl_lines="5-23"
 {
   "pipeline_id": "2175ae79-4e48-4d1b-97df-0bcbba4c5d2b",
   "current_pipeline_step_id": "e0028cf9-0b62-48b4-b0c7-b91ec930d083",
-  ...
+  // ...
   "tasks": [
     {
       "data_in": [
@@ -184,7 +209,7 @@ task with the `/tasks/{task_id}` endpoint. You can find the id of the last task
 in the `tasks` array of the [Pipeline](../reference/core-concepts/pipeline.md)
 execution object.
 
-``` json hl_lines="9 14"
+```json hl_lines="9 14"
  {
   "created_at": "2023-06-06T14:45:25.517644",
   "updated_at": "2023-06-13T11:50:10.151580",
@@ -199,7 +224,7 @@ execution object.
   "service_id": "6a20b1b7-ef3d-4a01-bf05-409558bda916",
   "pipeline_execution_id": "a17dd3ef-0682-4154-baaa-cb524650f6f4",
   "id": "9557c201-477f-45c6-8b8a-93ce93079f74",
-  ...
+  // ...
   "pipeline_execution": {
     "created_at": "2023-06-06T14:45:25.517644",
     "updated_at": "2023-06-13T11:50:10.156728",
