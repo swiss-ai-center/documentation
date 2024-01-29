@@ -5,7 +5,7 @@ This guide will help you in the steps to create a new service for the
 
 ## Follow the official tutorials
 
-If you have not already, we highly recommend you to follow the two official
+If you have not already, we highly recommend you to follow the official
 tutorials to learn how to create a new service:
 
 - [Rotate an image (generic template)](../tutorials/create-a-service-to-rotate-an-image.md)

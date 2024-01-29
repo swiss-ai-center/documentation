@@ -101,20 +101,23 @@ JSON object to the `/pipelines` endpoint of the
 !!! note
     You can find the slug of your services by going to the FastAPI documentation of
     the running [Core engine](../reference/core-engine.md) and use the `/services`
-    endpoint. You will find the slug of your services in the response. <!--
-    markdownlint-disable MD046 MD038 --> `` ` json hl_lines="6 11"
+    endpoint. You will find the slug of your services in the response.
+
+    ```json hl_lines="6 11"
         [
             {
-                "created_at": "2023-06-01T13:55:15.936033", "updated_at":
-                "2023-06-01T13:55:19.831817", "name": "Face Detection", "slug":
-                "face-detection",
+                "created_at": "2023-06-01T13:55:15.936033",
+                "updated_at": "2023-06-01T13:55:19.831817",
+                "name": "Face Detection",
+                "slug": "face-detection",
             }, {
-                "created_at": "2023-06-01T13:55:15.936033", "updated_at":
-                "2023-06-01T13:55:19.800560", "name": "Image Blur", "slug": "image-blur",
+                "created_at": "2023-06-01T13:55:15.936033",
+                "updated_at": "2023-06-01T13:55:19.800560",
+                "name": "Image Blur",
+                "slug": "image-blur",
             }
         ]
     ```
-    <!-- markdownlint-enable MD046 MD038 -->
 
 What we just did is to create a [Pipeline](../reference/core-concepts/pipeline.md) with two steps. The first step is the face detection service and the second step is the image blur service. The second step will only be executed if the first step detects at least one face. The [Pipeline](../reference/core-concepts/pipeline.md) will take an image as input and return an image as output.
 
@@ -149,24 +152,32 @@ Click on the `Try it out` button, add an image to the body and click on the `Exe
 
 You should receive a `200` response with a `Pipeline Execution` object in the response body. This object contains the id of the execution and the tasks that will be executed.
 
-``` json hl_lines="5-23" {
-  "pipeline_id": "2175ae79-4e48-4d1b-97df-0bcbba4c5d2b", "current_pipeline
-  _step_id": "e0028cf9-0b62-48b4-b0c7-b91ec930d083", ... "tasks": [
+```json hl_lines="5-23"
+{
+  "pipeline_id": "2175ae79-4e48-4d1b-97df-0bcbba4c5d2b",
+  "current_pipeline_step_id": "e0028cf9-0b62-48b4-b0c7-b91ec930d083",
+  ...
+  "tasks": [
     {
       "data_in": [
         "e930424b-63a8-4a4e-b49c-54eb50cd1996.jpg"
-      ], "data_out": null, "status": "pending", "service_id":
-      "35ace881-6673-4fb6-b454-2f94b1547fd6", "pipeline_execution_id":
-      "a17dd3ef-0682-4154-baaa-cb524650f6f4", "id":
-      "01636a67-b78e-41a6-9127-9efa1f0c1a9a"
+      ],
+      "data_out": null,
+      "status": "pending",
+      "service_id": "35ace881-6673-4fb6-b454-2f94b1547fd6",
+      "pipeline_execution_id": "a17dd3ef-0682-4154-baaa-cb524650f6f4",
+      "id": "01636a67-b78e-41a6-9127-9efa1f0c1a9a"
     }, {
-      "data_in": null, "data_out": null, "status": "scheduled",
-      "service_id": "6a20b1b7-ef3d-4a01-bf05-409558bda916", "pipeline_execution _id":
-      "a17dd3ef-0682-4154-baaa-cb524650f6f4", "id":
-      "9557c201-477f-45c6-8b8a-93ce93079f74"
+      "data_in": null,
+      "data_out": null,
+      "status": "scheduled",
+      "service_id": "6a20b1b7-ef3d-4a01-bf05-409558bda916",
+      "pipeline_execution _id": "a17dd3ef-0682-4154-baaa-cb524650f6f4",
+      "id": "9557c201-477f-45c6-8b8a-93ce93079f74"
     }
   ]
-} ```
+}
+```
 
 You can check the status of the execution by checking the status of the last
 task with the `/tasks/{task_id}` endpoint. You can find the id of the last task

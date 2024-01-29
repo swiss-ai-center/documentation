@@ -131,7 +131,7 @@ cp ../model-creation/model/ae_model.h5 ./model/ae_model.h5
 
 All environment variables are described in the
 [`.env`](https://github.com/swiss-ai-center/ae-ano-detection/blob/main/.env)
-file. file.
+file.
 
 The environment variables can be overwritten during the CI/CD pipeline described
 in the
