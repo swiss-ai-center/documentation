@@ -12,14 +12,32 @@ As the website of [minikube](https://minikube.sigs.k8s.io/docs/) mentions:
 
 We use minikube to deploy our platform locally for development purposes.
 
-## Install minikube
+## Configuration
+
+_None._
+
+## Common tasks
+
+### Install minikube
 
 Install minikube with the official documentation accessible at
 <https://minikube.sigs.k8s.io/docs/start/>
 
-## Configuration
+### Start minikube
 
-_None._
+In order to start minikube, execute the following command.
+
+```sh
+# Start minikube
+minikube start
+```
+
+Validate minikube has successfully started with the following command.
+
+```sh
+# Validate minikube has started
+kubectl get pods --all-namespaces
+```
 
 ## Resources and alternatives
 

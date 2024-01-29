@@ -5,7 +5,7 @@ site_author: Swiss AI Center contributors
 site_url: https://docs.swiss-ai-center.ch
 site_description: >-
   Documentation website for the Swiss AI Center project.
-copyright: Copyright &copy; 2022 - 2023 Swiss AI Center
+copyright: Copyright &copy; 2022 - 2024 Swiss AI Center
 nav:
   - Home:
       - index.md
@@ -16,12 +16,15 @@ nav:
   - Tutorials:
       - tutorials/index.md
       - Getting started: tutorials/getting-started.md
+      - Start the core engine: tutorials/start-the-core-engine.md
       - Create a service to rotate an image (generic template): tutorials/create-a-service-to-rotate-an-image.md
       - Create a service to summarize a text using an existing model (generic template): tutorials/create-a-service-to-summarize-a-text-using-an-existing-model.md
+      - Create a service to detect anomalies using a model built from scratch (model from scratch template): tutorials/create-a-service-to-detect-anomalies-using-a-model-built-from-scratch.md
       - Create a pipeline that blurs faces in an image: tutorials/create-a-pipeline-that-blurs-faces-in-an-image.md
   - How-to guides:
       - how-to-guides/index.md
       - How to create a new service: how-to-guides/how-to-create-a-new-service.md
+      - How to build, publish and deploy a service: how-to-guides/how-to-build-publish-and-deploy-a-service.md
       - How to add DVC to a service: how-to-guides/how-to-add-dvc-to-a-service.md
   - Reference:
       - reference/index.md

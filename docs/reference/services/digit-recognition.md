@@ -100,8 +100,7 @@ which will be used to guess the number.
 
 !!! info
 
-    All following commands are done in the `model-serving`
-    directory.
+    All following commands are done in the `model-serving` directory.
 
 ### Set up the environment
 
@@ -134,7 +133,8 @@ cp ../model-creation/mnist_model.h5 .
 ## Environment variables
 
 All environment variables are described in the
-[`.env`](https://github.com/swiss-ai-center/digit-recognition/blob/main/.env) file.
+[`.env`](https://github.com/swiss-ai-center/digit-recognition/blob/main/.env)
+file.
 
 The environment variables can be overwritten during the CI/CD pipeline described
 in the

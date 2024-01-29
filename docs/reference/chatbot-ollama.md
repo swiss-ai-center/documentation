@@ -81,8 +81,10 @@ minikube tunnel --bind-address 127.0.0.1
 
 Access the `chatbot-ollama` app on <http://localhost:9090/>.
 
-Then you must use the document-vectorizer service to vectorize a pdf document before using the chatbot-ollama app.
-See the [document-vectorizer service](../reference/services/document-vectorizer.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github) documentation to deploy it locally.
+Then you must use the document-vectorizer service to vectorize a pdf document
+before using the chatbot-ollama app. See the
+[document-vectorizer service](../reference/services/document-vectorizer.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github)
+documentation to deploy it locally.
 
 ## Start the service locally with minikube and a local Docker image
 
