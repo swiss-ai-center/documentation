@@ -2,7 +2,7 @@
 
 - [:material-account-group: Main author - HEIA-FR](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/face-analyzer-service)
-- [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/face-analyzer-service/tree/main/model-serving/kubernetes)
+- [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/face-analyzer-service/tree/main/kubernetes)
 - [:material-test-tube: Staging](https://face-analyzer-swiss-ai-center.kube.isc.heia-fr.ch)
 - [:material-factory: Production (not available yet)](https://face-analyzer.swiss-ai-center.ch)
 

@@ -2,12 +2,15 @@
 
 - [:material-account-group: Main author - HEIA-FR & HEIG-VD](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/core-engine)
-- [:material-kubernetes: Deployment configuration (backend)](https://github.com/swiss-ai-center/core-engine/tree/main/backend/kubernetes)
-- [:material-kubernetes: Deployment configuration (frontend)](https://github.com/swiss-ai-center/core-engine/tree/main/frontend/kubernetes)
-- [:material-test-tube: Staging (backend)](https://backend-core-engine-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-test-tube: Staging (frontend)](https://frontend-core-engine-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (backend - not available yet)](https://app.swiss-ai-center.ch/api)
-- [:material-factory: Production (frontend - not available yet)](https://app.swiss-ai-center.ch)
+- :material-kubernetes: Deployment configuration
+  ([backend](https://github.com/swiss-ai-center/core-engine/tree/main/backend/kubernetes))
+  ([frontend](https://github.com/swiss-ai-center/core-engine/tree/main/frontend/kubernetes))
+- :material-test-tube: Staging
+  ([backend](https://backend-core-engine-swiss-ai-center.kube.isc.heia-fr.ch))
+  ([frontend](https://frontend-core-engine-swiss-ai-center.kube.isc.heia-fr.ch))
+- :material-factory: Production
+  ([backend - not available yet](https://app.swiss-ai-center.ch/api))
+  ([frontend - not available yet](https://app.swiss-ai-center.ch))
 
 The Core engine allows to create and manage pipelines of microservices.
 
@@ -87,154 +90,24 @@ in the
 [`backend.yml`](https://github.com/swiss-ai-center/core-engine/blob/main/.github/workflows/backend.yml)
 GitHub workflow file.
 
-### Start the service locally with Python
-
-In the `backend` directory, start the Core engine Backend with the following
-commands:
-
-```sh
-# Generate the virtual environment
-python3 -m venv .venv
-
-# Activate the virtual environment
-source .venv/bin/activate
-
-# Install the requirements
-pip install \
-    --requirement requirements.txt \
-    --requirement requirements-all.txt
-```
-
-Start the dependencies:
-
-``` sh
-docker compose up
-```
-
-Start the application:
-
-```sh
-# Switch to the `src` directory
-cd src
-
-# Start the application
-uvicorn --reload --port 8080 main:app
-```
-
-Access the Core engine Backend documentation at <http://localhost:8080/docs>.
-
 ### Run the tests with Python
+
+!!! info
+
+    You might need to initialize a virtual environment before running the tests.
+
+    Check the
+    [**Start the Core engine locally > Start the Core engine locally with plain Python and Node.js**](#start-the-core-engine-locally)
+    to initialize and activate a virtual environment.
 
 For each module a test file is available to check the correct behavior of the
 code. The tests are run using the `pytest` library with code coverage check. To
 run the tests, use the following command inside the `src` folder:
 
 ```sh
-pytest --cov-report term:skip-covered --cov-report term-missing --cov=. -s --cov-config=.coveragerc
+# Run the tests
+pytest
 ```
-
-### Start the service locally with minikube and the Docker image hosted on GitHub
-
-Start the Core engine Backend with the following commands. This will start the
-Core engine with the official Docker images that are hosted on GitHub.
-
-In the `backend` directory, start the Core engine Backend with the following
-commands:
-
-```sh
-# Start MinIO
-kubectl apply \
-    -f kubernetes/minio.pvc.yml \
-    -f kubernetes/minio.config-map.yml \
-    -f kubernetes/minio.stateful.yml \
-    -f kubernetes/minio.service.yml
-
-# Start PostgreSQL
-kubectl apply \
-    -f kubernetes/postgres.pvc.yml \
-    -f kubernetes/postgres.config-map.yml \
-    -f kubernetes/postgres.stateful.yml \
-    -f kubernetes/postgres.service.yml
-
-# Start the core-engine
-kubectl apply \
-    -f kubernetes/core-engine-backend.config-map.yml \
-    -f kubernetes/core-engine-backend.stateful.yml \
-    -f kubernetes/core-engine-backend.service.yml
-```
-
-Create a tunnel to access the Kubernetes cluster from the local machine. The
-terminal in which the tunnel is created must stay open:
-
-```sh
-# Open a tunnel to the Kubernetes cluster
-minikube tunnel --bind-address 127.0.0.1
-```
-
-Access the Core engine Backend documentation on <http://localhost:8080/docs>.
-
-### Start the service locally with minikube and a local Docker image
-
-**Note**: The Core engine Backend StatefulSet (`core-engine.stateful.yml` file)
-must be deleted and recreated every time a new Docker image is created.
-
-In the `backend` directory, build the Docker image with the following commands:
-
-```sh
-# Access the Minikube's Docker environment
-eval $(minikube docker-env)
-
-# Build the Docker image
-docker build -t ghcr.io/swiss-ai-center/core-engine:latest .
-
-# Exit the Minikube's Docker environment
-eval $(minikube docker-env -u)
-
-# Edit the `kubernetes/core-engine.stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
-#
-# From
-#
-#        # imagePullPolicy: Never
-#
-# To
-#
-#        imagePullPolicy: Never
-```
-
-In the `backend` directory, start the Core engine Backend with the following
-commands:
-
-```sh
-# Start MinIO
-kubectl apply \
-    -f kubernetes/minio.pvc.yml \
-    -f kubernetes/minio.config-map.yml \
-    -f kubernetes/minio.stateful.yml \
-    -f kubernetes/minio.service.yml
-
-# Start PostgreSQL
-kubectl apply \
-    -f kubernetes/postgres.pvc.yml \
-    -f kubernetes/postgres.config-map.yml \
-    -f kubernetes/postgres.stateful.yml \
-    -f kubernetes/postgres.service.yml
-
-# Start the core-engine
-kubectl apply \
-    -f kubernetes/core-engine-backend.config-map.yml \
-    -f kubernetes/core-engine-backend.stateful.yml \
-    -f kubernetes/core-engine-backend.service.yml
-```
-
-Create a tunnel to access the Kubernetes cluster from the local machine. The
-terminal in which the tunnel is created must stay open:
-
-```sh
-# Open a tunnel to the Kubernetes cluster
-minikube tunnel --bind-address 127.0.0.1
-```
-
-Access the Core engine Backend documentation on <http://localhost:8080/docs>.
 
 ## Frontend
 
@@ -250,24 +123,6 @@ The environment variables can be overwritten during the CI/CD pipeline described
 in the
 [`frontend.yml`](https://github.com/swiss-ai-center/core-engine/blob/main/.github/workflows/frontend.yml)
 GitHub workflow file.
-
-### Start the service locally with Node
-
-In the `fronted` directory, start the Frontend with the following commands.
-
-```sh
-# Install the dependencies
-npm ci
-
-# Optional: Edit the environment variables to change the Core engine URL
-vim .env
-
-# Start the Core engine Frontend
-npm run start
-```
-
-A browser should open on <http://localhost:3000> with the frontend running and
-querying the Core engine backend.
 
 ### Build the application
 
@@ -304,89 +159,290 @@ The Core engine Frontend is available on <http://localhost:3000>.
 
 > **Q**: _Why don't we build the React application within the Docker image?_
 >
-> **A**: This setup allows us to speed up the build process of the Docker image: it does not need to download and install all dependencies every time the `package.json` file is updated. In a CI/CD set up, the `node_modules` can be cached in the `build` stage and the output can be passed to the `publish` stage.
+> **A**: This setup allows us to speed up the build process of the Docker image:
+> it does not need to download and install all dependencies every time the
+> `package.json` file is updated. In a CI/CD set up, the `node_modules` can be
+> cached in the `build` stage and the output can be passed to the `publish`
+> stage.
 
-### Start the service locally with minikube and the Docker image hosted on GitHub
+## Start the Core engine locally
 
-Start the Core engine Frontend with the following commands. This will start the
-Core engine Frontend with the official Docker images that are hosted on GitHub.
+!!! tip
 
-In the `frontend` directory, start the Core engine Frontend with the following
-commands.
+    If you are not familiar with the Core engine and its services, we recommend to
+    follow the [**Getting started**](../tutorials/getting-started.md) guide first.
 
-```sh
-# Start the Core engine Frontend
-kubectl apply \
-    -f kubernetes/core-engine-frontend.stateful.yml \
-    -f kubernetes/core-engine-frontend.service.yml
-```
+You have several options to start the Core engine locally:
 
-Create a tunnel to access the Kubernetes cluster from the local machine. The
-terminal in which the tunnel is created must stay open.
+- Start the Core engine locally with Docker Compose (recommended)
+- Start the Core engine locally with plain Python and Node.js
+- Start the Core engine locally with minikube and official Docker images
+- Start the Core engine locally with minikube and local Docker images
 
-```sh
-# Open a tunnel to the Kubernetes cluster
-minikube tunnel --bind-address 127.0.0.1
-```
+=== "Docker Compose (recommended)"
 
-Access the Core engine Frontend on <http://localhost:3000>.
+    In the `backend` directory, start the Core engine Backend with the following
+    commands:
 
-### Start the service locally with minikube and a local Docker image
+    ```sh
+    # Build the Docker image
+    docker compose build
 
-**Note**: The service StatefulSet (`frontend.stateful.yml` file) must be deleted
-and recreated every time a new Docker image is created.
+    # Start the Core engine Backend
+    docker compose up
+    ```
 
-Start the service with the following commands. This will start the service with
-the a local Docker image for the service.
+    Access the Core engine Backend documentation at <http://localhost:8080/docs>.
 
-In the `frontend` directory, build the Docker image with the following commands.
+    In the `frontend` directory, start the Core engine Frontend with the following
+    commands:
 
-```sh
-# Install Node dependencies
-npm ci
+    ```sh
+    # Build the Docker image
+    docker compose build
 
-# Optional: Edit the environment variables to change the Core engine URL
-vim .env
+    # Start the Core engine Frontend
+    docker compose up
+    ```
 
-# Build the Core engine Frontend
-npm run build
+    Access the Core engine Frontend on <http://localhost:3000>.
 
-# Access the Minikube's Docker environment
-eval $(minikube docker-env)
+=== "Plain Python and Node.js"
 
-# Build the Docker image
-docker build -t ghcr.io/swiss-ai-center/core-engine-frontend:latest .
+    In the `backend` directory, start the Core engine Backend with the following
+    commands:
 
-# Exit the Minikube's Docker environment
-eval $(minikube docker-env -u)
+    ```sh
+    # Start the dependencies
+    docker compose up minio db
 
-# Edit the `kubernetes/frontend.stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
-#
-# From
-#
-#        # imagePullPolicy: Never
-#
-# To
-#
-#        imagePullPolicy: Never
-```
+    # Generate the virtual environment
+    python3.10 -m venv .venv
 
-In the `frontend` directory, start the service with the following commands.
+    # Activate the virtual environment
+    source .venv/bin/activate
 
-```sh
-# Start the Core engine Frontend
-kubectl apply \
-    -f kubernetes/core-engine-frontend.config-map.yml \
-    -f kubernetes/core-engine-frontend.stateful.yml \
-    -f kubernetes/core-engine-frontend.service.yml
-```
+    # Install the requirements
+    pip install \
+        --requirement requirements.txt \
+        --requirement requirements-all.txt
+    ```
 
-Create a tunnel to access the Kubernetes cluster from the local machine. The
-terminal in which the tunnel is created must stay open.
+    Start the application.
 
-```sh
-# Open a tunnel to the Kubernetes cluster
-minikube tunnel --bind-address 127.0.0.1
-```
+    ```sh
+    # Optional: Edit the environment variables
+    vim .env
 
-Access the Core engine Frontend on <http://localhost:3000>.
+    # Switch to the `src` directory
+    cd src
+
+    # Start the application
+    uvicorn --reload --port 8080 main:app
+    ```
+
+    Access the Core engine Backend documentation at <http://localhost:8080/docs>.
+
+    In the `frontend` directory, start the Core engine Frontend with the following
+    commands:
+
+    ```sh
+    # Install the dependencies
+    npm ci
+
+    # Optional: Edit the environment variables
+    vim .env
+
+    # Start the Core engine Frontend
+    npm run start
+    ```
+
+    Access the Core engine Frontend on <http://localhost:3000>.
+
+=== "minikube and official Docker images"
+
+    Start the Core engine Backend with the following commands. This will start the
+    Core engine with the official Docker images that are hosted on GitHub.
+
+    In the `backend` directory, start the Core engine Backend with the following
+    commands:
+
+    ```sh
+    # Start MinIO
+    kubectl apply \
+        -f kubernetes/minio.pvc.yml \
+        -f kubernetes/minio.config-map.yml \
+        -f kubernetes/minio.stateful.yml \
+        -f kubernetes/minio.service.yml
+
+    # Start PostgreSQL
+    kubectl apply \
+        -f kubernetes/postgres.pvc.yml \
+        -f kubernetes/postgres.config-map.yml \
+        -f kubernetes/postgres.stateful.yml \
+        -f kubernetes/postgres.service.yml
+
+    # Start the core-engine
+    kubectl apply \
+        -f kubernetes/core-engine-backend.config-map.yml \
+        -f kubernetes/core-engine-backend.stateful.yml \
+        -f kubernetes/core-engine-backend.service.yml
+    ```
+
+    Create a tunnel to access the Kubernetes cluster from the local machine. The
+    terminal in which the tunnel is created must stay open:
+
+    ```sh
+    # Open a tunnel to the Kubernetes cluster
+    minikube tunnel --bind-address 127.0.0.1
+    ```
+
+    Access the Core engine Backend documentation on <http://localhost:8080/docs>.
+
+    Start the Core engine Frontend with the following commands. This will start the
+    Core engine Frontend with the official Docker images that are hosted on GitHub.
+
+    In the `frontend` directory, start the Core engine Frontend with the following
+    commands.
+
+    ```sh
+    # Start the Core engine Frontend
+    kubectl apply \
+        -f kubernetes/core-engine-frontend.stateful.yml \
+        -f kubernetes/core-engine-frontend.service.yml
+    ```
+
+    Create a tunnel to access the Kubernetes cluster from the local machine. The
+    terminal in which the tunnel is created must stay open.
+
+    ```sh
+    # Open a tunnel to the Kubernetes cluster
+    minikube tunnel --bind-address 127.0.0.1
+    ```
+
+    Access the Core engine Frontend on <http://localhost:3000>.
+
+=== "minikube and local Docker images"
+
+    !!! warning
+
+        The Core engine Backend StatefulSet (`core-engine.stateful.yml` file) must be
+        deleted and recreated every time a new Docker image is created.
+
+    In the `backend` directory, build the Docker image with the following commands:
+
+    ```sh
+    # Access the Minikube's Docker environment
+    eval $(minikube docker-env)
+
+    # Build the Docker image
+    docker build -t ghcr.io/swiss-ai-center/core-engine:latest .
+
+    # Exit the Minikube's Docker environment
+    eval $(minikube docker-env -u)
+
+    # Edit the `kubernetes/core-engine.stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
+    #
+    # From
+    #
+    #        # imagePullPolicy: Never
+    #
+    # To
+    #
+    #        imagePullPolicy: Never
+    ```
+
+    In the `backend` directory, start the Core engine Backend with the following
+    commands:
+
+    ```sh
+    # Start MinIO
+    kubectl apply \
+        -f kubernetes/minio.pvc.yml \
+        -f kubernetes/minio.config-map.yml \
+        -f kubernetes/minio.stateful.yml \
+        -f kubernetes/minio.service.yml
+
+    # Start PostgreSQL
+    kubectl apply \
+        -f kubernetes/postgres.pvc.yml \
+        -f kubernetes/postgres.config-map.yml \
+        -f kubernetes/postgres.stateful.yml \
+        -f kubernetes/postgres.service.yml
+
+    # Start the core-engine
+    kubectl apply \
+        -f kubernetes/core-engine-backend.config-map.yml \
+        -f kubernetes/core-engine-backend.stateful.yml \
+        -f kubernetes/core-engine-backend.service.yml
+    ```
+
+    Create a tunnel to access the Kubernetes cluster from the local machine. The
+    terminal in which the tunnel is created must stay open:
+
+    ```sh
+    # Open a tunnel to the Kubernetes cluster
+    minikube tunnel --bind-address 127.0.0.1
+    ```
+
+    Access the Core engine Backend documentation on <http://localhost:8080/docs>.
+
+    !!! warning
+
+        The service StatefulSet (`frontend.stateful.yml` file) must be deleted and
+        recreated every time a new Docker image is created.
+
+    Start the service with the following commands. This will start the service with
+    the a local Docker image for the service.
+
+    In the `frontend` directory, build the Docker image with the following commands.
+
+    ```sh
+    # Install Node dependencies
+    npm ci
+
+    # Optional: Edit the environment variables to change the Core engine URL
+    vim .env
+
+    # Build the Core engine Frontend
+    npm run build
+
+    # Access the Minikube's Docker environment
+    eval $(minikube docker-env)
+
+    # Build the Docker image
+    docker build -t ghcr.io/swiss-ai-center/core-engine-frontend:latest .
+
+    # Exit the Minikube's Docker environment
+    eval $(minikube docker-env -u)
+
+    # Edit the `kubernetes/frontend.stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
+    #
+    # From
+    #
+    #        # imagePullPolicy: Never
+    #
+    # To
+    #
+    #        imagePullPolicy: Never
+    ```
+
+    In the `frontend` directory, start the service with the following commands.
+
+    ```sh
+    # Start the Core engine Frontend
+    kubectl apply \
+        -f kubernetes/core-engine-frontend.config-map.yml \
+        -f kubernetes/core-engine-frontend.stateful.yml \
+        -f kubernetes/core-engine-frontend.service.yml
+    ```
+
+    Create a tunnel to access the Kubernetes cluster from the local machine. The
+    terminal in which the tunnel is created must stay open.
+
+    ```sh
+    # Open a tunnel to the Kubernetes cluster
+    minikube tunnel --bind-address 127.0.0.1
+    ```
+
+    Access the Core engine Frontend on <http://localhost:3000>.

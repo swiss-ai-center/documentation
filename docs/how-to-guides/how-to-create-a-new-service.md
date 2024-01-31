@@ -102,6 +102,12 @@ guide.
 
 If you do not want to publish your service, you can skip this section.
 
+## Update the documentation for your service
+
+If you have published your service, you can update the documentation for your
+service by following the
+[How to update the documentation](./how-to-update-the-documentation.md) guide.
+
 ## Frequently asked questions
 
 ### Which framework/language to use

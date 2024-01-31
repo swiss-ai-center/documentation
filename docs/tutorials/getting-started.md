@@ -37,9 +37,8 @@ TODO
 
 ### Install minikube (optional)
 
-!!! info
-    This is only required if you want to run the Core engine locally using
-    Kubernetes.
+!!! info This is only required if you want to run the Core engine locally using
+Kubernetes.
 
 TODO
 
