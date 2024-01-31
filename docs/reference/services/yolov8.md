@@ -29,7 +29,7 @@ All environment variables are described in the
 
 The environment variables can be overwritten during the CI/CD pipeline described
 in the
-[`yolov8.yml`](https://github.com/swiss-ai-center/yolov8/blob/main/.github/workflows/yolov8.yml)
+[`workflow.yml`](https://github.com/swiss-ai-center/yolov8/blob/main/.github/workflows/yolov8.yml)
 GitHub workflow file.
 
 ## Start the service locally with Python
