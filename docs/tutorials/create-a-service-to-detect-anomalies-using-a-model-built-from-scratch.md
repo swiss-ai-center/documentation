@@ -1057,5 +1057,4 @@ You might want to store the model data in a cloud storage service like AWS S3.
 [DVC](../explanations/about-dvc.md) is the perfect tool to do that.
 
 Learn how to move the model data to S3 with the help of DVC in the
-[How to add DVC to a service](./move-model-data-to-s3-with-the-help-of-dvc.md)
-how-to guide.
+[How to add DVC to a service](../how-to-guides/how-to-add-dvc-to-a-service.md) guide.

@@ -26,6 +26,7 @@ nav:
       - How to create a new service: how-to-guides/how-to-create-a-new-service.md
       - How to build, publish and deploy a service: how-to-guides/how-to-build-publish-and-deploy-a-service.md
       - How to update the documentation: how-to-guides/how-to-update-the-documentation.md
+      - How to configure a new GitHub repository: how-to-guides/how-to-configure-a-new-github-repository.md
       - How to add DVC to a service: how-to-guides/how-to-add-dvc-to-a-service.md
   - Reference:
       - reference/index.md
