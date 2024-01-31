@@ -60,9 +60,7 @@ Add teams and collaborators to the repository as needed. For most of the Swiss
 AI Center projects, we recommend to add the following teams:
 
 - [@swiss-ai-center/core-developers](https://github.com/orgs/swiss-ai-center/teams/core-developers)
-  team with **Maintain** access. TODO: Maybe this should be **Admin** access? Does
-  the **Maintain** access allow to change the repository settings such as the
-  GitHub Actions' Variables and Secrets?
+  team with **Maintain** access.
 - [@swiss-ai-center/managers](https://github.com/orgs/swiss-ai-center/teams/managers)
   team with **Maintain** access.
 - [@swiss-ai-center/contributors](https://github.com/orgs/swiss-ai-center/teams/contributors)
