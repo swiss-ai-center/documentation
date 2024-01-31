@@ -1,8 +1,8 @@
 # ydata-profiling
 
 - [:material-account-group: Main author - HES-SO Valais-Wallis](https://www.hes-so.ch/swiss-ai-center/equipe)
-- [:material-git: Code](https://github.com/swiss-ai-center/ydata-profiling/)
-- [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/ydata-profiling/tree/main/kubernetes)
+- [:material-git: Code](https://github.com/swiss-ai-center/ydata-profiling-service/)
+- [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/ydata-profiling-service/tree/main/kubernetes)
 - [:material-test-tube: Staging](https://ydata-profiling-swiss-ai-center.kube.isc.heia-fr.ch)
 - [:material-factory: Production (not available yet)](https://ydata-profiling.swiss-ai-center.ch)
 
@@ -17,11 +17,11 @@ This simple service only has one route `/compute` that takes a database in csv f
 ## Environment variables
 
 All environment variables are described in the
-[`.env`](https://github.com/swiss-ai-center/ydata-profiling/blob/main/.env) file.
+[`.env`](https://github.com/swiss-ai-center/ydata-profiling-service/blob/main/.env) file.
 
 The environment variables can be overwritten during the CI/CD pipeline described
 in the
-[`workflow.yml`](https://github.com/swiss-ai-center/ydata-profiling/blob/main/.github/workflows/ydata-profiling.yml)
+[`workflow.yml`](https://github.com/swiss-ai-center/ydata-profiling-service/blob/main/.github/workflows/workflow.yml)
 GitHub workflow file.
 
 ## Start the service locally with Python

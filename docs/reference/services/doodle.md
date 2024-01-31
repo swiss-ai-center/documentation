@@ -23,7 +23,7 @@ All environment variables are described in the
 
 The environment variables can be overwritten during the CI/CD pipeline described
 in the
-[`workflow.yml`](https://github.com/swiss-ai-center/doodle/blob/main/.github/workflows/doodle.yml)
+[`workflow.yml`](https://github.com/swiss-ai-center/doodle/blob/main/.github/workflows/workflow.yml)
 GitHub workflow file.
 
 ## Start the service locally with Python
