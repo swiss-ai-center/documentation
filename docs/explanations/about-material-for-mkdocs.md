@@ -10,7 +10,7 @@ to help organize your documentation with Markdown.
 
 We use Material for MkDocs to generate the documentation website.
 
-## Install Material for MkDocs
+## Install and run Material for MkDocs
 
 Following the instructions in the
 [documentation](https://github.com/swiss-ai-center/documentation) repository to
