@@ -9,11 +9,17 @@ This guide will help you to get started with the Swiss AI Center projects.
 In order to run the Swiss AI Center projects locally, you will need to install
 the following tools:
 
-- [An IDE](#install-an-ide)
-- [Docker and Docker Compose](#install-docker-and-docker-compose)
-- [Git](#install-git)
-- [minikube (optional)](#install-minikube-optional)
-- [Python](#install-python)
+- [Prerequisites](#prerequisites)
+  - [Install an IDE](#install-an-ide)
+  - [Install Docker and Docker Compose](#install-docker-and-docker-compose)
+  - [Install Git](#install-git)
+  - [Install minikube (optional)](#install-minikube-optional)
+  - [Install Python](#install-python)
+- [Follow the tutorials](#follow-the-tutorials)
+  - [Start the Core engine](#start-the-core-engine)
+  - [Create new services](#create-new-services)
+  - [Create pipelines](#create-pipelines)
+- [Go further](#go-further)
 
 ### Install an IDE
 
@@ -37,7 +43,9 @@ TODO
 
 ### Install minikube (optional)
 
-!!! info This is only required if you want to run the Core engine locally using
+!!! info
+
+    This is only required if you want to run the Core engine locally using
 Kubernetes.
 
 TODO
