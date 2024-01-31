@@ -12,6 +12,8 @@
   ([backend - not available yet](https://app.swiss-ai-center.ch/api))
   ([frontend - not available yet](https://app.swiss-ai-center.ch))
 
+## Description
+
 The Core engine allows to create and manage pipelines of microservices.
 
 The Core engine is split in two main services:
