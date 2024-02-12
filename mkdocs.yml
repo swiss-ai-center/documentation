@@ -57,6 +57,7 @@ nav:
         - yolov8 service: reference/services/yolov8.md
       - Common code: reference/common-code.md
       - Core engine: reference/core-engine.md
+      - Glitchtip: reference/glitchtip.md
       - mdwrap: reference/mdwrap.md
       - chatbot-ollama: reference/chatbot-ollama.md
       - Team: reference/team.md
