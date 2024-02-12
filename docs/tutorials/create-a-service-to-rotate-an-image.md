@@ -6,58 +6,93 @@ step by step. The [Service](../reference/core-concepts/service.md) is a simple
 image rotation tool that rotates the image by 90, 180, 270 degrees clockwise
 depending on the value of the `rotation` parameter.
 
-!!! Info
-    Note that a [Service](../reference/core-concepts/service.md) can be implemented
-    in any programming language as long as it follows the
-    [specifications](../reference/core-concepts/service.md#specifications) of the
-    Swiss AI Center project. This tutorial is using Python 3.10.
+## Introduction
 
-## Tutorial
+This tutorial show how to implement a service that rotates the image by 90, 180,
+270 degrees clockwise depending on the value of the `rotation` parameter.
 
-### Prerequisites
+## Prerequisites
 
-To follow this tutorial, you need to have the following tools installed:
+To follow this tutorial, we highly recommend you to follow the
+[Getting started](../tutorials/getting-started.md) guide first.
 
-- [Python 3.10](https://www.python.org/downloads/)
-- An IDE (e.g. [Visual Studio Code](https://code.visualstudio.com/))
+It contains all the required tools to follow this tutorial.
 
-### Prepare the development environment
+## Bootstrap the service based on the generic template
 
-#### Launch the Core engine
+In this section, you will bootstrap a new service based on the
+[_Create a new service (generic) template_](https://github.com/swiss-ai-center/create-a-new-service-generic-template).
 
-To be able to test the [Service](../reference/core-concepts/service.md) locally
-when it is ready, you need to have a running
-[Core engine](../reference/core-engine.md). To do so, follow the instructions in
-the
-[Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github)
-reference.
+You have three ways to bootstrap a new service based on the template:
 
-#### Get the source code
+=== "Use the template"
 
-!!! Info
-    In this tutorial, we will implement a
-    [Service](../reference/core-concepts/service.md) that does not require a model,
-    so we will use the `create-a-new-service-generic-template` template.
+    If you are part of the Swiss AI Center GitHub organization, this is the
+    recommended way to bootstrap a new service.
 
-First, you can create a repo from the
-[template](https://github.com/swiss-ai-center/create-a-new-service-generic-template)
-by clicking on the `Use this template` button. You can also fork it or download
-it.
+    Access the
+    [_Create a new service (generic) template_](https://github.com/swiss-ai-center/create-a-new-service-generic-template).
 
-Once the repo is created, you can clone it on your computer. (If you downloaded
-it, you can skip this step.)
+    Use the **"Use the template"** button to create a new repository based on the
+    template in the Swiss AI Center GitHub organization or in your own GitHub
+    account.
 
-```bash
-git clone
-```
+    For the **Repository name**, use `my-image-rotate-service`.
 
-Open your terminal and go to the folder where the source code is located.
+    Clone the newly created repository locally.
 
-```bash
-cd path/to/the/source/code
-```
+    This will be the root directory of your new service for the rest of this
+    tutorial.
 
-#### Create a virtual environment
+=== "Fork the template"
+
+    If you are not part of the Swiss AI Center GitHub organization, this is the
+    recommended way to bootstrap a new service.
+
+    Fork the
+    [_Create a new service (generic) template_](https://github.com/swiss-ai-center/create-a-new-service-generic-template).
+    to fork a new repository based on the chosen template.
+
+    For the **Repository name**, use `my-image-rotate-service`.
+
+    Clone the newly created repository locally.
+
+    This will be the root directory of your new service for the rest of this
+    tutorial.
+
+=== "Download the template"
+
+    If you do not want to host your codebase on GitHub or if you do not want to be
+    linked to the Swiss AI Center organization, download the
+    [_Create a new service (generic) template_](https://github.com/swiss-ai-center/create-a-new-service-generic-template).
+    as an archive file (**"Download ZIP"**) from the GitHub repository and start
+    over locally or in a new Git repository.
+
+    Extract the archive and name the directory `my-image-rotate-service`.
+
+    This will be the root directory of your new service for the rest of this
+    tutorial.
+
+## Explaining the template
+
+In this section, you will learn about the different files and folders that are
+part of the template.
+
+### `README.md`
+
+This file contains a checklist of the steps to follow to bootstrap a new service
+based on the template. This can help you to follow step-by-step what you need to
+do to bootstrap a new service based on the template.
+
+### Other files and folders
+
+The other files and folders contain everything to serve the model. This is where
+you will implement the code to load the model from the binary file and serve it
+over a [FastAPI](../explanations/about-fastapi.md) REST API.
+
+## Implement the service
+
+### Create a virtual environment
 
 Instead of installing the dependencies globally, it is recommended to create a
 virtual environment.
@@ -65,21 +100,24 @@ virtual environment.
 To create a virtual environment, run the following command inside the project
 folder:
 
-```sh
+```sh title="Execute this in the 'root' folder"
+# Create a virtual environment
 python3.10 -m venv .venv
 ```
 
 Then, activate the virtual environment:
 
-```sh
+```sh title="Execute this in the 'root' folder"
+# Activate the virtual environment
 source .venv/bin/activate
 ```
 
-#### Install the dependencies
+### Install the dependencies
 
-For the [Service](../reference/core-concepts/service.md) to work we will need to
-install numpy and opencv-python in addition to the dependencies of the template.
-So edit the `requirements.txt` file and add the following lines:
+!!! warning
+    Make sure you are in the virtual environment.
+
+Update the `requirements.txt` file with the following content:
 
 ```txt hl_lines="2 3"
 common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main
@@ -87,25 +125,31 @@ numpy==1.24.1
 opencv-python==4.7.0.72
 ```
 
-Then, install the dependencies:
+The `common-code` package is required to serve the model over a FastAPI REST API
+and boilerplate code to handle the configuration.
 
-```sh
+We will also need to install numpy and opencv-python for the service to work.
+
+Install the dependencies as explained in the previous section:
+
+```sh title="Execute this in the virtual environment"
+# Install the dependencies
 pip install --requirement requirements.txt
 ```
 
-Create a freeze file to list the dependencies with their versions.
+Create a freeze file to pin all dependencies to their current versions:
 
-```sh
+```sh title="Execute this in the virtual environment"
+# Freeze the dependencies
 pip freeze --local --all > requirements-all.txt
 ```
 
-This will install the default [Service](../reference/core-concepts/service.md)
-dependencies and the ones we just added. The freeze file will be used to ensure
-all the developers have the same dependencies.
+This will ensure that the same versions of the dependencies are installed on
+every machine if you ever share your code with someone else.
 
-#### Implement the service
+### Update the template files
 
-##### Update the README
+#### Update the README
 
 Open the `README.md` file and update the title and the description of the
 [Service](../reference/core-concepts/service.md).
@@ -131,11 +175,10 @@ This service rotates an image by 90, 180 or 270 degrees clockwise.
     _Check the [related documentation](https://swiss-ai-center.github.io/swiss-ai-center/reference/image-rotate) for more information._
     ```
 
-##### Update the service pyproject title
+##### Update the `pyproject.toml` file
 
-```toml hl_lines="3"
+```toml title="pyproject.toml" hl_lines="2"
 [project]
-# TODO: 1. CHANGE THE NAME OF THE PROJECT (1)!
 name = "image-rotate"
 
 [tool.pytest.ini_options]
@@ -145,7 +188,7 @@ addopts = "--cov-config=.coveragerc --cov-report xml --cov-report term-missing -
 
 1. Change the name of the project to `image-rotate`.
 
-##### Update the service code
+#### Update the `src/main.py` file
 
 All the code of the [Service](../reference/core-concepts/service.md) is in the
 `main.py` file. The [Service](../reference/core-concepts/service.md) is a simple
@@ -307,231 +350,209 @@ app = FastAPI(
 !!! Note
     The `process` function TaskData object must be serializable.
 
-##### Dockerfile
+#### Update the `Dockerfile` file
 
-The Dockerfile is used to build the Docker image of the
-[Service](../reference/core-concepts/service.md). We need to add some packages
-in order to use the OpenCV library.
+Update the Dockerfile to install all required packages that might be required by
+the model and the model itself:
 
-```dockerfile hl_lines="6"
+```dockerfile hl_lines="5"
 # Base image
 FROM python:3.10
 
 # Install all required packages to run the model
-# TODO: 1. Add any additional packages required to run your model (1)!
 RUN apt update && apt install --yes ffmpeg libsm6 libxext6
 ...
 ```
 
 1. Add any additional packages required to run your model.
 
-#### Test the service
+### Start the service
 
-Now that the service is ready, we can test it.
+!!! tip
 
-##### Test the service using the test scripts
+    Start the Core engine as mentioned in the
+    [Getting started](../tutorials/getting-started.md) guide for this step.
 
-Open a terminal, navigate to the `src` folder and run the following command:
+Start the service with the following command:
 
-```bash
-pytest --cov-report term:skip-covered --cov-report term-missing --cov=. -s --cov-config=.coveragerc
+```sh title="Execute this in the virtual environment"
+# Switch to the `src` directory
+cd src
+
+# Start the application
+uvicorn --reload --port 9090 main:app
 ```
 
-All the tests should pass.
+The service should try to announce itself to the Core engine.
 
-```bash
-======================== test session starts =========================
---------- coverage: platform darwin, python 3.10.10-final-0 ----------
-Name                        Stmts   Miss  Cover   Missing
----------------------------------------------------------
-src/main.py                    70     11    84%   53-70
-src/tests/test_storage_service.py      83     12    86%   13-18, 24-30, 114-115
----------------------------------------------------------
-TOTAL                         188     23    88%
+It will then be available at <http://localhost:9090>.
 
-4 files skipped due to complete coverage.
+Access the Core engine either at <http://localhost:3000> (Frontend UI) or
+<http://localhost:9090> (Backend UI).
 
+The service should be listed in the **Services** section.
 
-========================= 5 passed in 29.12s =========================
-```
+### Test the service
 
-##### Test the service using the Core engine
+!!! tip
 
-In order to test the [Service](../reference/core-concepts/service.md), you need
-to have a running
-[Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github).
-If not done yet, follow the instructions in the
-[Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github)
-reference.
+    Start the Core engine as mentioned in the
+    [Getting started](../tutorials/getting-started.md) guide for this step.
 
-Once the [Core engine](../reference/core-engine.md) is running, you can start
-the [Service](../reference/core-concepts/service.md) by running the following
-command:
-
-```bash
-uvicorn main:app --reload --host localhost --port 9090 # (1)!
-```
-
-1. The port must be the same as the one defined in the `.env` file and different
-   from the one used by the Core engine.
-
-The output should be similar to the following:
-
-```bash
-INFO:     Uvicorn running on http://127.0.0.1:9090 (Press CTRL+C to quit)
-INFO:     Started reloader process [20195] using StatReload
-INFO:     Started server process [20197]
-INFO:     Waiting for application startup.
-INFO:     [2024-01-05 14:36:21,212]  [common_code.service.service]: 	Started tasks service
-DEBUG:    [2024-01-05 14:36:21,212]  [common_code.service.service]: 	Announcing service: {'name': 'Image Rotate', 'slug': 'image-rotate', 'url': 'http://localhost:9090', 'summary': '\nRotate an image by 90 degrees clockwise.\n', 'description': '\nRotate an image by 90 degrees clockwise depending on the value of the `rotation` parameter. (90, 180, 270)\n', 'status': 'available', 'data_in_fields': [{'name': 'image', 'type': ['image/png', 'image/jpeg']}, {'name': 'rotation', 'type': ['text/plain']}], 'data_out_fields': [{'name': 'result', 'type': ['image/png', 'image/jpeg']}], 'tags': [{'name': 'Image Processing', 'acronym': 'IP'}], 'has_ai': False}
-DEBUG:    [2024-01-05 14:36:21,213]  [common_code.service.service]: 	url: http://localhost:8080
-INFO:     [2024-01-05 14:36:21,215]  Application startup complete.
-INFO:     [2024-01-05 14:36:21,286]   127.0.0.1:52362 - "GET /status HTTP/1.1" 200 OK
-INFO:     [2024-01-05 14:36:21,313]  [common_code.service.service]: 	Successfully announced to the engine
-```
-
-Now, you can test the [Service](../reference/core-concepts/service.md) by
-sending a request to the [Core engine](../reference/core-engine.md). To do so,
-open your browser and navigate to the following URL: `http://localhost:8080/`.
-You should see the following page:
-
-![image-rotate](../assets/screenshots/image-rotate.png)
-
-Now you can test the [Service](../reference/core-concepts/service.md) by
-uploading an image and selecting the rotation. Create a file called rotation.txt
-and add the following content:
+Create a file called rotation.txt and add the following content:
 
 ```txt
 90
 ```
 
-Now, you can unfold the `/image-rotate` endpoint and click on the Try it out
-button. Now upload the image and the rotation file and click on the Execute
-button. The response body should be something similar to the following:
+There are two ways to test the service:
 
-```json hl_lines="12"
-{
-  "created_at": "2024-01-05T14:34:48.520282",
-  "updated_at": "2024-01-05T14:38:48.979189",
-  "data_in": [
-    "ace30502-7274-496e-b332-74e0e4c41e68.jpg",
-    "316044be-015b-4640-bf92-fd15c6cd2296.txt"
-  ],
-  "data_out": null,
-  "status": "pending",
-  "service_id": "943f8f35-e688-4431-a426-90addbaa56c0",
-  "pipeline_execution_id": null,
-  "id": "056c3d3a-fc34-47b9-aa64-e233e1adc490",
-  "service": {
-    "created_at": "2024-01-05T14:34:48.520282",
-    "updated_at": "2024-01-05T14:36:21.279182",
-    "description": "\nRotate an image by 90 degrees clockwise depending on the value of the `rotation` parameter. (90, 180, 270)\n",
-    "status": "available",
-    "data_in_fields": [
-      {
-        "name": "image",
-        "type": [
-          "image/png",
-          "image/jpeg"
-        ]
+=== "Using the Frontend UI (recommended)"
+
+    Access the Core engine at <http://localhost:3000>.
+
+    ![image-rotate-frontend](../assets/screenshots/image-rotate-frontend.png)
+
+    Now you can test the [Service](../reference/core-concepts/service.md) by
+    clicking the `View` button. Now upload an image and the rotation file and click
+    on the `Run` button.
+
+    ![image-rotate-frontend-execute](../assets/screenshots/image-rotate-frontend-execute.png)
+
+    The execution should start and as soon as it is finished, the `Download` button
+    should be clickable. Use it to download the result.
+
+    ![image-rotate-frontend-download](../assets/screenshots/image-rotate-frontend-download.png)
+
+    The image should be rotated by 90 degrees.
+
+=== "Using the Backend UI"
+
+    Access the Core engine at <http://localhost:9090>.
+
+    The service should be listed in the **Registered Services** section.
+
+    **Start a new task**
+
+    Try to start a new task with the service.
+
+    Unfold the `/image-rotate` endpoint and click on the Try it out button. Upload
+    the image and the rotation file and click on the Execute button. The response
+    body should be something similar to the following:
+
+    ```json hl_lines="12"
+    {
+      "created_at": "2024-01-05T14:34:48.520282",
+      "updated_at": "2024-01-05T14:38:48.979189",
+      "data_in": [
+        "ace30502-7274-496e-b332-74e0e4c41e68.jpg",// (1)!
+        "316044be-015b-4640-bf92-fd15c6cd2296.txt"
+      ],
+      "data_out": null,// (2)!
+      "status": "pending",
+      "service_id": "943f8f35-e688-4431-a426-90addbaa56c0",
+      "pipeline_execution_id": null,
+      "id": "056c3d3a-fc34-47b9-aa64-e233e1adc490",// (3)!
+      "service": {
+        "created_at": "2024-01-05T14:34:48.520282",
+        "updated_at": "2024-01-05T14:36:21.279182",
+        "description": "\nRotate an image by 90 degrees clockwise depending on the value of the `rotation` parameter. (90, 180, 270)\n",
+        "status": "available",
+        "data_in_fields": [
+          {
+            "name": "image",
+            "type": [
+              "image/png",
+              "image/jpeg"
+            ]
+          },
+          {
+            "name": "rotation",
+            "type": [
+              "text/plain"
+            ]
+          }
+        ],
+        "data_out_fields": [
+          {
+            "name": "result",
+            "type": [
+              "image/png",
+              "image/jpeg"
+            ]
+          }
+        ],
+        "tags": [
+          {
+            "name": "Image Processing",
+            "acronym": "IP"
+          }
+        ],
+        "has_ai": false,
+        "id": "943f8f35-e688-4431-a426-90addbaa56c0",
+        "name": "Image Rotate",
+        "slug": "image-rotate",
+        "summary": "\nRotate an image by 90 degrees clockwise.\n",
+        "url": "http://localhost:9090"
       },
-      {
-        "name": "rotation",
-        "type": [
-          "text/plain"
-        ]
-      }
-    ],
-    "data_out_fields": [
-      {
-        "name": "result",
-        "type": [
-          "image/png",
-          "image/jpeg"
-        ]
-      }
-    ],
-    "tags": [
-      {
-        "name": "Image Processing",
-        "acronym": "IP"
-      }
-    ],
-    "has_ai": false,
-    "id": "943f8f35-e688-4431-a426-90addbaa56c0",
-    "name": "Image Rotate",
-    "slug": "image-rotate",
-    "summary": "\nRotate an image by 90 degrees clockwise.\n",
-    "url": "http://localhost:9090"
-  },
-  "pipeline_execution": null
-}
-```
+      "pipeline_execution": null
+    }
+    ```
 
-Now, copy the id of the task and unfold the GET `/tasks/{task_id}` endpoint
-under the Tasks name.
+    1. The input data is stored in the `data_in` field.
+    2. The output is not available yet and will be stored in the `data_out` field.
+    3. The task ID is stored in the `id` field.
 
-1. Click on Try it out and paste the id in the task_id field.
-2. Click on Execute.
-3. In the body response, find the `data_out` field and copy the id of the image
-   (e.g. `a38ef233-ac01-431d-adc8-cb6269cdeb71.png`).
-4. Now, unfold the GET `/storage/{key}` endpoint under the Storage name.
-5. Click on Try it out and paste the id of the image in the key field.
-6. Click on Execute.
-7. Click on the Download file button and save the image in your computer.
+    **Get the task status and result**
 
-The image should be rotated by 90 degrees.
+    You can then use the task ID to get the task status and the task result from the
+    **Tasks** section.
 
-##### Test the service using the Core engine Frontend
+    1. Click on Try it out and paste the id in the task_id field.
+    2. Click on Execute.
+    3. In the body response, if the status is `finished` find the `data_out` field
+       and copy the id of the image
+      (e.g. `a38ef233-ac01-431d-adc8-cb6269cdeb71.png`).
+    4. Now, unfold the GET `/storage/{key}` endpoint under the Storage name.
+    5. Click on Try it out and paste the id of the image in the key field.
+    6. Click on Execute.
+    7. Click on the Download file button and save the image in your computer.
 
-In order to test the [Service](../reference/core-concepts/service.md) with the
-frontend, you need to launch the
-[Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
-Frontend. To do so, follow the instructions in the
-[Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
-reference.
+    The image should be rotated by 90 degrees.
+You have validated that the service works as expected.
 
-Once the
-[Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
-Frontend is running, you can start the
-[Service](../reference/core-concepts/service.md) by running the following
-command:
+## Commit and push the changes (optional)
 
-```bash
-uvicorn main:app --reload --host localhost --port 9090 # (1)!
-```
+Commit and push the changes to the Git repository so it is available for the
+other developers.
 
-1. The port must be the same as the one defined in the `.env` file and different
-   from the one used by the Core engine.
+## Build, publish and deploy the service
 
-!!! Note
-    The
-    [Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
-    Frontend needs a running [Core engine](../reference/core-engine.md) to work.
+Now that you have implemented the service, you can build, publish and deploy it.
 
-As in the previous section, you can test the
-[Service](../reference/core-concepts/service.md) by sending a request to the
-[Core engine](../reference/core-engine.md). To do so, open your browser and
-navigate to the following URL: `http://localhost:3000/`. You should see the
-following page:
+Follow the
+[How to build, publish and deploy a service](../how-to-guides/how-to-build-publish-and-deploy-a-service.md)
+guide to build, publish and deploy the service to Kubernetes.
 
-![image-rotate-frontend](../assets/screenshots/image-rotate-frontend.png)
+## Access and test the service
 
-Now you can test the [Service](../reference/core-concepts/service.md) by
-clicking the `View` button. Now upload the image and the rotation file and click
-on the `Run` button.
+Access the service using its URL (either by the URL defined in the
+`DEV_SERVICE_URL`/ `PROD_SERVICE_URL` variable or by the URL defined in the
+Kubernetes Ingress file).
 
-![image-rotate-frontend-execute](../assets/screenshots/image-rotate-frontend-execute.png)
+You should be able to access the FastAPI Swagger UI.
 
-The execution should start and as soon as it is finished, the `Download` button
-should be clickable. Use it to download the result.
+The service should be available in the **Services** section of the Core engine
+it has announced itself to.
 
-![image-rotate-frontend-download](../assets/screenshots/image-rotate-frontend-download.png)
+You should be able to send a request to the service and get a response.
 
-The image should be rotated by 90 degrees.
+## Conclusion
 
-!!! success "Congratulations!"
-    You have successfully created a [Service](../reference/core-concepts/service.md)
-    and tested it locally. Now, you can push the
-    [Service](../reference/core-concepts/service.md) to GitHub and deploy it on the
-    [Core engine](../reference/core-engine.md) using the workflow from the repo.
+Congratulations! You have successfully created a service to rotate an image.
+
+The service has then been published to a container registry and deployed on
+Kubernetes.
+
+The service is now accessible through a REST API on the Internet and you have
+completed this tutorial! Well done!
