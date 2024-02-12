@@ -21,8 +21,8 @@ corner of the repository to get the menu) as shown in the following screenshot:
 
 - Add a meaningful description of the repository in the **Description** field.
 - Add a link to the documentation of the repository in the **Website** field as
-mentioned in the
-[How to update the documentation](./how-to-update-the-documentation.md) guide.
+  mentioned in the
+  [How to update the documentation](./how-to-update-the-documentation.md) guide.
 - Add tags to the repository in the **Topics** field.
 - All the other settings can be left to their default values.
 
