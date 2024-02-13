@@ -27,9 +27,9 @@ This simple service only has one route `/compute` that takes a pdf document as
 input, and then returns a zip archive containing the vectorized document.
 
 This archive can be used in the
-[chatbot-ollama service](../reference/chatbot-ollama.md/). This chatbot enables
-you to ask questions about the content of the document to a large language
-model.
+[chatbot-ollama service](../../reference/chatbot-ollama.md/). This chatbot
+enables you to ask questions about the content of the document to a large
+language model.
 
 ## Environment variables
 
