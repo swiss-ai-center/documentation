@@ -63,9 +63,12 @@ nav:
   - Explanations:
       - explanations/index.md
       - About this documentation: explanations/about-this-documentation.md
+      - About Docker and Docker Compose: explanations/about-docker-and-docker-compose.md
       - About DVC: explanations/about-dvc.md
       - About envsubst: explanations/about-envsubst.md
       - About Exoscale: explanations/about-exoscale.md
+      - About FastAPI: explanations/about-fastapi.md
+      - About flake8: explanations/about-flake8.md
       - About GitHub: explanations/about-github.md
       - About GitHub Actions: explanations/about-github-actions.md
       - About GitHub Secrets: explanations/about-github-secrets.md
@@ -76,6 +79,7 @@ nav:
       - About minikube: explanations/about-minikube.md
       - About MinIO: explanations/about-minio.md
       - About pytest: explanations/about-pytest.md
+      - About Python: explanations/about-python.md
       - About yq: explanations/about-yq.md
 edit_uri: blob/main/docs/
 theme:

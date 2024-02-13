@@ -14,7 +14,7 @@ We use envsubst to substitute environment variables from
 [Kubernetes](./about-kubernetes.md) configuration files with secrets stored on
 [GitHub Secrets](./about-github-secrets.md) before deployment.
 
-## Install yq
+## Install envsubst
 
 envsubst is installed by default on many UNIX distributions.
 
