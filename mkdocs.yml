@@ -72,6 +72,7 @@ nav:
       - About GitHub: explanations/about-github.md
       - About GitHub Actions: explanations/about-github-actions.md
       - About GitHub Secrets: explanations/about-github-secrets.md
+      - About GlitchTip: explanations/about-glitchtip.md
       - About HEIA-FR: explanations/about-heia-fr.md
       - About kubectl: explanations/about-kubectl.md
       - About Kubernetes: explanations/about-kubernetes.md
