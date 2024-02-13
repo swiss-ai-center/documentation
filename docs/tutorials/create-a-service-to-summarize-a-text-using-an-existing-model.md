@@ -6,58 +6,94 @@ step by step. The [Service](../reference/core-concepts/service.md) is a text
 summarizer tool that summarizes a text using the
 [Hugging Face](https://huggingface.co/) library.
 
-!!! Info
-    Note that a [Service](../reference/core-concepts/service.md) can be implemented
-    in any programming language as long as it follows the
-    [specifications](../reference/core-concepts/service.md#specifications) of the
-    Swiss AI Center project. This tutorial is using Python 3.10.
+## Introduction
 
-## Tutorial
+This tutorial shows how to implement a
+[Service](../reference/core-concepts/service.md) that uses an existing model to
+summarize a text from Hugging Face.
 
-### Prerequisites
+## Prerequisites
 
-To follow this tutorial, you need to have the following tools installed:
+To follow this tutorial, we highly recommend you to follow the
+[Getting started](../tutorials/getting-started.md) guide first.
 
-- [Python 3.10](https://www.python.org/downloads/)
-- An IDE (e.g. [Visual Studio Code](https://code.visualstudio.com/))
+It contains all the required tools to follow this tutorial.
 
-### Prepare the development environment
+## Bootstrap the service based on the generic template
 
-#### Launch the Core engine
+In this section, you will bootstrap a new service based on the
+[_Create a new service (generic) template_](https://github.com/swiss-ai-center/create-a-new-service-generic-template).
 
-To be able to test the [Service](../reference/core-concepts/service.md) locally
-when it is ready, you need to have a running
-[Core engine](../reference/core-engine.md). To do so, follow the instructions in
-the
-[Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github)
-reference.
+You have three ways to bootstrap a new service based on the template:
 
-#### Get the source code
+=== "Use the template"
 
-!!! Info
-    In this tutorial, we will implement a
-    [Service](../reference/core-concepts/service.md) that uses an existing model so
-    we will use the `create-a-new-service-generic-template` template.
+    If you are part of the Swiss AI Center GitHub organization, this is the
+    recommended way to bootstrap a new service.
 
-First, you can create a repo from the
-[template](https://github.com/swiss-ai-center/create-a-new-service-generic-template)
-by clicking on the `Use this template` button. You can also fork it or download
-it.
+    Access the
+    [_Create a new service (generic) template_](https://github.com/swiss-ai-center/create-a-new-service-generic-template).
 
-Once the repo is created, you can clone it on your computer. (If you downloaded
-it, you can skip this step.)
+    Use the **"Use the template"** button to create a new repository based on the
+    template in the Swiss AI Center GitHub organization or in your own GitHub
+    account.
 
-```bash
-git clone
-```
+    For the **Repository name**, use `my-text-summarizer-service`.
 
-Open your terminal and go to the folder where the source code is located.
+    Clone the newly created repository locally.
 
-```bash
-cd path/to/the/source/code
-```
+    This will be the root directory of your new service for the rest of this
+    tutorial.
 
-#### Create a virtual environment
+=== "Fork the template"
+
+    If you are not part of the Swiss AI Center GitHub organization, this is the
+    recommended way to bootstrap a new service.
+
+    Fork the
+    [_Create a new service (generic) template_](https://github.com/swiss-ai-center/create-a-new-service-generic-template).
+    to fork a new repository based on the chosen template.
+
+    For the **Repository name**, use `my-text-summarizer-service`.
+
+    Clone the newly created repository locally.
+
+    This will be the root directory of your new service for the rest of this
+    tutorial.
+
+=== "Download the template"
+
+    If you do not want to host your codebase on GitHub or if you do not want to be
+    linked to the Swiss AI Center organization, download the
+    [_Create a new service (generic) template_](https://github.com/swiss-ai-center/create-a-new-service-generic-template).
+    as an archive file (**"Download ZIP"**) from the GitHub repository and start
+    over locally or in a new Git repository.
+
+    Extract the archive and name the directory `my-text-summarizer-service`.
+
+    This will be the root directory of your new service for the rest of this
+    tutorial.
+
+## Explaining the template
+
+In this section, you will learn about the different files and folders that are
+part of the template.
+
+### `README.md`
+
+This file contains a checklist of the steps to follow to bootstrap a new service
+based on the template. This can help you to follow step-by-step what you need to
+do to bootstrap a new service based on the template.
+
+### Other files and folders
+
+The other files and folders contain everything to serve your tool. This is where
+you will implement to do it over a [FastAPI](../explanations/about-fastapi.md)
+REST API.
+
+## Implement the service
+
+### Create a virtual environment
 
 Instead of installing the dependencies globally, it is recommended to create a
 virtual environment.
@@ -65,21 +101,24 @@ virtual environment.
 To create a virtual environment, run the following command inside the project
 folder:
 
-```sh
+```sh title="Execute this in the 'root' folder"
+# Create a virtual environment
 python3.10 -m venv .venv
 ```
 
 Then, activate the virtual environment:
 
-```sh
+```sh title="Execute this in the 'root' folder"
+# Activate the virtual environment
 source .venv/bin/activate
 ```
 
-#### Install the dependencies
+### Install the dependencies
 
-For the [Service](../reference/core-concepts/service.md) to work we will need to
-install transformers and torch in addition to the dependencies of the template.
-So edit the `requirements.txt` file and add the following lines:
+!!! warning
+    Make sure you are in the virtual environment.
+
+Update the `requirements.txt` file with the following content:
 
 ```txt hl_lines="2 3"
 common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main
@@ -87,25 +126,31 @@ transformers==4.36.2
 torch==2.1.2
 ```
 
-Then, install the dependencies:
+The `common-code` package is required to serve the model over a FastAPI REST API
+and boilerplate code to handle the configuration.
 
-```sh
+We will also need to install transformers and torch for the service to work.
+
+Install the dependencies as explained in the previous section:
+
+```sh title="Execute this in the virtual environment"
+# Install the dependencies
 pip install --requirement requirements.txt
 ```
 
-Create a freeze file to list the dependencies with their versions.
+Create a freeze file to pin all dependencies to their current versions:
 
-```sh
+```sh title="Execute this in the virtual environment"
+# Freeze the dependencies
 pip freeze --local --all > requirements-all.txt
 ```
 
-This will install the default [Service](../reference/core-concepts/service.md)
-dependencies and the ones we just added. The freeze file will be used to ensure
-all the developers have the same dependencies.
+This will ensure that the same versions of the dependencies are installed on
+every machine if you ever share your code with someone else.
 
-#### Implement the service
+### Update the template files
 
-##### Update the README
+#### Update the README
 
 Open the `README.md` file and update the title and the description of the
 [Service](../reference/core-concepts/service.md).
@@ -131,11 +176,10 @@ This service summarizes a text using the Hugging Face library.
     _Check the [related documentation](https://swiss-ai-center.github.io/swiss-ai-center/reference/text-summarizer) for more information._
     ```
 
-##### Update the service pyproject title
+#### Update the `pyproject.toml` file
 
-```toml hl_lines="3"
+```toml title="pyproject.toml" hl_lines="2"
 [project]
-# TODO: 1. CHANGE THE NAME OF THE PROJECT (1)!
 name = "text-summarizer"
 
 [tool.pytest.ini_options]
@@ -145,7 +189,7 @@ addopts = "--cov-config=.coveragerc --cov-report xml --cov-report term-missing -
 
 1. Change the name of the project to `text-summarizer`.
 
-##### Update the service code
+#### Update the `src/main.py` file
 
 All the code of the [Service](../reference/core-concepts/service.md) is in the
 `main.py` file. The [Service](../reference/core-concepts/service.md) is a text
@@ -296,199 +340,180 @@ app = FastAPI(
 !!! Note
     The `process` function TaskData object must be serializable.
 
-#### Test the service
+### Start the service
 
-Now that the service is ready, we can test it.
+!!! tip
 
-##### Test the service using the test scripts
+    Start the Core engine as mentioned in the
+    [Getting started](../tutorials/getting-started.md) guide for this step.
 
-Open a terminal, navigate to the `src` folder and run the following command:
+Start the service with the following command:
 
-```bash
-pytest --cov-report term:skip-covered --cov-report term-missing --cov=. -s --cov-config=.coveragerc
+```sh title="Execute this in the virtual environment"
+# Switch to the `src` directory
+cd src
+
+# Start the application
+uvicorn --reload --port 9090 main:app
 ```
 
-All the tests should pass.
+The service should try to announce itself to the Core engine.
 
-```bash
-======================== test session starts =========================
---------- coverage: platform darwin, python 3.10.10-final-0 ----------
-Name                        Stmts   Miss  Cover   Missing
----------------------------------------------------------
-src/main.py                    70     11    84%   53-70
-src/tests/test_storage_service.py      83     12    86%   13-18, 24-30, 114-115
----------------------------------------------------------
-TOTAL                         188     23    88%
+It will then be available at <http://localhost:9090>.
 
-4 files skipped due to complete coverage.
+Access the Core engine either at <http://localhost:3000> (Frontend UI) or
+<http://localhost:9090> (Backend UI).
 
+The service should be listed in the **Services** section.
 
-========================= 5 passed in 29.12s =========================
-```
+### Test the service
 
-##### Test the service using the Core engine
+!!! tip
 
-In order to test the [Service](../reference/core-concepts/service.md), you need
-to have a running
-[Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github).
-If not done yet, follow the instructions in the
-[Core engine](../reference/core-engine.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github)
-reference.
+    Start the Core engine as mentioned in the
+    [Getting started](../tutorials/getting-started.md) guide for this step.
 
-Once the [Core engine](../reference/core-engine.md) is running, you can start
-the [Service](../reference/core-concepts/service.md) by running the following
-command:
+Create a file called text.txt and add some text in it.
 
-```bash
-uvicorn main:app --reload --host localhost --port 9090 # (1)!
-```
+There are two ways to test the service:
 
-1. The port must be the same as the one defined in the `.env` file and different
-   from the one used by the Core engine.
+=== "Using the Frontend UI (recommended)"
 
-The output should be similar to the following:
+    Access the Core engine at <http://localhost:3000>.
 
-```bash
-INFO:     Uvicorn running on http://127.0.0.1:9090 (Press CTRL+C to quit)
-INFO:     Started reloader process [4455] using StatReload
-INFO:     Started server process [4457]
-INFO:     Waiting for application startup.
-INFO:     [2024-01-09 16:49:08,417]  [common_code.service.service]: 	Started tasks service
-DEBUG:    [2024-01-09 16:49:08,417]  [common_code.service.service]: 	Announcing service: {'name': 'Text Summarizer', 'slug': 'text-summarizer', 'url': 'http://localhost:9090', 'summary': '\nSummarize the given text.\n', 'description': '\nSummarize the given text using the HuggingFace transformers library with model bart-large-cnn-samsum.\n', 'status': 'available', 'data_in_fields': [{'name': 'text', 'type': ['text/plain']}], 'data_out_fields': [{'name': 'summarized_text', 'type': ['text/plain']}], 'tags': [{'name': 'Natural Language Processing', 'acronym': 'NLP'}], 'has_ai': True}
-DEBUG:    [2024-01-09 16:49:08,417]  [common_code.service.service]: 	url: http://localhost:8080
-INFO:     [2024-01-09 16:49:08,419]  Application startup complete.
-INFO:     [2024-01-09 16:49:08,507]   127.0.0.1:54785 - "GET /status HTTP/1.1" 200 OK
-INFO:     [2024-01-09 16:49:08,531]  [common_code.service.service]: 	Successfully announced to the engine
-```
+    ![text-summarizer-frontend](../assets/screenshots/text-summarizer-frontend.png)
 
-Now, you can test the [Service](../reference/core-concepts/service.md) by
-sending a request to the [Core engine](../reference/core-engine.md). To do so,
-open your browser and navigate to the following URL: `http://localhost:8080/`.
-You should see the following page:
+    Now you can test the [Service](../reference/core-concepts/service.md) by
+    clicking the `View` button. Now upload the text file and click on the `Run`
+    button.
 
-![text-summarizer](../assets/screenshots/text-summarizer.png)
+    ![text-summarizer-frontend-execute](../assets/screenshots/text-summarizer-frontend-execute.png)
 
-Now you can test the [Service](../reference/core-concepts/service.md) by
-uploading a text file. Create a file called text.txt and add some text in it.
+    The execution should start and as soon as it is finished, the `Download` button
+    should be clickable. Use it to download the result.
 
-Then, you can unfold the `/text-summarizer` endpoint and click on the Try it out
-button. Now upload the text file and click on the Execute button. The response
-body should be something similar to the following:
+    ![text-summarizer-frontend-download](../assets/screenshots/text-summarizer-frontend-download.png)
 
-```json hl_lines="11"
-{
-  "created_at": "2024-01-09T16:30:22.627620",
-  "updated_at": "2024-01-09T16:54:58.221528",
-  "data_in": [
-    "8a3bb409-bfe6-444d-9f94-8e245b0370b6.txt"
-  ],
-  "data_out": null,
-  "status": "pending",
-  "service_id": "c0ddda6c-9ffa-4912-90a2-b4e9b1769b56",
-  "pipeline_execution_id": null,
-  "id": "b7b73c95-88d1-4f02-87f6-29feabf41d7e",
-  "service": {
-    "created_at": "2024-01-09T16:30:22.627620",
-    "updated_at": "2024-01-09T16:49:08.499620",
-    "description": "\nSummarize the given text using the HuggingFace transformers library with model bart-large-cnn-samsum.\n",
-    "status": "available",
-    "data_in_fields": [
-      {
-        "name": "text",
-        "type": [
-          "text/plain"
-        ]
-      }
-    ],
-    "data_out_fields": [
-      {
-        "name": "result",
-        "type": [
-          "text/plain"
-        ]
-      }
-    ],
-    "tags": [
-      {
-        "name": "Natural Language Processing",
-        "acronym": "NLP"
-      }
-    ],
-    "has_ai": true,
-    "id": "c0ddda6c-9ffa-4912-90a2-b4e9b1769b56",
-    "name": "Text Summarizer",
-    "slug": "text-summarizer",
-    "summary": "\nSummarize the given text.\n",
-    "url": "http://localhost:9090"
-  },
-  "pipeline_execution": null
-}
-```
+    The text should be summarized.
 
-Now, copy the id of the task and unfold the GET `/tasks/{task_id}` endpoint
-under the Tasks name.
+=== "Using the Backend UI"
 
-1. Click on Try it out and paste the id in the task_id field.
-2. Click on Execute.
-3. In the body response, find the `data_out` field and copy the id of the text
-   file (e.g. `a38ef233-ac01-431d-adc8-cb6269cdeb71.png`).
-4. Now, unfold the GET `/storage/{key}` endpoint under the Storage name.
-5. Click on Try it out and paste the id of the text file in the key field.
-6. Click on Execute.
-7. Click on the Download file button and save the text file in your computer.
+    Access the Core engine at <http://localhost:9090>.
 
-The text should be summarized.
+    The service should be listed in the **Registered Services** section.
 
-##### Test the service using the Core engine Frontend
+    **Start a new task**
 
-In order to test the [Service](../reference/core-concepts/service.md) with the
-frontend, you need to launch the
-[Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
-Frontend. To do so, follow the instructions in the
-[Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
-reference.
+    Try to start a new task with the service.
 
-Once the
-[Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
-Frontend is running, you can start the
-[Service](../reference/core-concepts/service.md) by running the following
-command:
+    Unfold the `/text-summarizer` endpoint and click on the Try it out button.
+    Upload the text file and click on the Execute button. The response body should
+    be something similar to the following:
 
-```bash
-uvicorn main:app --reload --host localhost --port 9090 # (1)!
-```
+    ```json hl_lines="12"
+    {
+      "created_at": "2024-01-09T16:30:22.627620",
+      "updated_at": "2024-01-09T16:54:58.221528",
+      "data_in": [
+        "8a3bb409-bfe6-444d-9f94-8e245b0370b6.txt"//(1)!
+      ],
+      "data_out": null,//(2)!
+      "status": "pending",
+      "service_id": "c0ddda6c-9ffa-4912-90a2-b4e9b1769b56",
+      "pipeline_execution_id": null,
+      "id": "b7b73c95-88d1-4f02-87f6-29feabf41d7e",//(3)!
+      "service": {
+        "created_at": "2024-01-09T16:30:22.627620",
+        "updated_at": "2024-01-09T16:49:08.499620",
+        "description": "\nSummarize the given text using the HuggingFace transformers library with model bart-large-cnn-samsum.\n",
+        "status": "available",
+        "data_in_fields": [
+          {
+            "name": "text",
+            "type": [
+              "text/plain"
+            ]
+          }
+        ],
+        "data_out_fields": [
+          {
+            "name": "result",
+            "type": [
+              "text/plain"
+            ]
+          }
+        ],
+        "tags": [
+          {
+            "name": "Natural Language Processing",
+            "acronym": "NLP"
+          }
+        ],
+        "has_ai": true,
+        "id": "c0ddda6c-9ffa-4912-90a2-b4e9b1769b56",
+        "name": "Text Summarizer",
+        "slug": "text-summarizer",
+        "summary": "\nSummarize the given text.\n",
+        "url": "http://localhost:9090"
+      },
+      "pipeline_execution": null
+    }
+    ```
 
-1. The port must be the same as the one defined in the `.env` file and different
-   from the one used by the Core engine.
+    1. The input data is stored in the `data_in` field.
+    2. The output is not available yet and will be stored in the `data_out` field.
+    3. The task ID is stored in the `id` field.
 
-!!! Note
-    The
-    [Core engine](../reference/core-engine.md#start-the-service-locally-with-node)
-    Frontend needs a running [Core engine](../reference/core-engine.md) to work.
+    **Get the task status and result**
 
-As in the previous section, you can test the
-[Service](../reference/core-concepts/service.md) by sending a request to the
-[Core engine](../reference/core-engine.md). To do so, open your browser and
-navigate to the following URL: `http://localhost:3000/`. You should see the
-following page:
+    You can then use the task ID to get the task status and the task result from the
+    **Tasks** section.
 
-![text-summarizer-frontend](../assets/screenshots/text-summarizer-frontend.png)
+    1. Click on Try it out and paste the id in the task_id field.
+    2. Click on Execute.
+    3. In the body response, if the status is `finished` find the `data_out` field
+       and copy the id of the image
+      (e.g. `a38ef233-ac01-431d-adc8-cb6269cdeb71.png`).
+    4. Now, unfold the GET `/storage/{key}` endpoint under the Storage name.
+    5. Click on Try it out and paste the id of the text file in the key field.
+    6. Click on Execute.
+    7. Click on the Download file button and save the file in your computer.
 
-Now you can test the [Service](../reference/core-concepts/service.md) by
-clicking the `View` button. Now upload the text file and click on the `Run`
-button.
+    The text should be summarized.
+You have validated that the service works as expected.
 
-![text-summarizer-frontend-execute](../assets/screenshots/text-summarizer-frontend-execute.png)
+## Commit and push the changes (optional)
 
-The execution should start and as soon as it is finished, the `Download` button
-should be clickable. Use it to download the result.
+Commit and push the changes to the Git repository so it is available for the
+other developers.
 
-![text-summarizer-frontend-download](../assets/screenshots/text-summarizer-frontend-download.png)
+## Build, publish and deploy the service
 
-The text should be summarized.
+Now that you have implemented the service, you can build, publish and deploy it.
 
-!!! success "Congratulations!"
-    You have successfully created a [Service](../reference/core-concepts/service.md)
-    and tested it locally. Now, you can push the
-    [Service](../reference/core-concepts/service.md) to GitHub and deploy it on the
-    [Core engine](../reference/core-engine.md) using the workflow from the repo.
+Follow the
+[How to build, publish and deploy a service](../how-to-guides/how-to-build-publish-and-deploy-a-service.md)
+guide to build, publish and deploy the service to Kubernetes.
+
+## Access and test the service
+
+Access the service using its URL (either by the URL defined in the
+`DEV_SERVICE_URL`/ `PROD_SERVICE_URL` variable or by the URL defined in the
+Kubernetes Ingress file).
+
+You should be able to access the FastAPI Swagger UI.
+
+The service should be available in the **Services** section of the Core engine
+it has announced itself to.
+
+You should be able to send a request to the service and get a response.
+
+## Conclusion
+
+Congratulations! You have successfully created a service to summarize a text.
+
+The service has then been published to a container registry and deployed on
+Kubernetes.
+
+The service is now accessible through a REST API on the Internet and you have
+completed this tutorial! Well done!

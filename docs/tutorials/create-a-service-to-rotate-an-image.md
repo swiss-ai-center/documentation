@@ -8,8 +8,9 @@ depending on the value of the `rotation` parameter.
 
 ## Introduction
 
-This tutorial show how to implement a service that rotates the image by 90, 180,
-270 degrees clockwise depending on the value of the `rotation` parameter.
+This tutorial shows how to implement a
+[Service](../reference/core-concepts/service.md) that rotates the image by 90,
+180, 270 degrees clockwise depending on the value of the `rotation` parameter.
 
 ## Prerequisites
 
@@ -86,9 +87,9 @@ do to bootstrap a new service based on the template.
 
 ### Other files and folders
 
-The other files and folders contain everything to serve the model. This is where
-you will implement the code to load the model from the binary file and serve it
-over a [FastAPI](../explanations/about-fastapi.md) REST API.
+The other files and folders contain everything to serve your tool. This is where
+you will implement to do it over a [FastAPI](../explanations/about-fastapi.md)
+REST API.
 
 ## Implement the service
 
@@ -175,7 +176,7 @@ This service rotates an image by 90, 180 or 270 degrees clockwise.
     _Check the [related documentation](https://swiss-ai-center.github.io/swiss-ai-center/reference/image-rotate) for more information._
     ```
 
-##### Update the `pyproject.toml` file
+#### Update the `pyproject.toml` file
 
 ```toml title="pyproject.toml" hl_lines="2"
 [project]
