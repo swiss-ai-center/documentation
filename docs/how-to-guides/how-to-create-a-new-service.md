@@ -112,7 +112,7 @@ service by following the
 
 If you store your service's code on GitHub, you can configure the GitHub
 repository for your service by following the
-[How to configure a new GitHub repository](./how-to-create-and-configure-a-new-github-repository.md)
+[How to configure a new GitHub repository](./how-to-configure-a-new-github-repository.md)
 guide.
 
 ## Frequently asked questions
