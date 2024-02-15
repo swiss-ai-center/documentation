@@ -26,39 +26,54 @@ the following tools:
 (e.g. [PyCharm](https://www.jetbrains.com/pycharm/) or
 [Visual Studio Code](https://code.visualstudio.com/))
 
-TODO
+An Integrated Development Environment (IDE) is a software application that
+provides comprehensive facilities to computer programmers for software
+development.
+
+The following IDEs are recommended for Python development:
+
+- [PyCharm](https://www.jetbrains.com/help/pycharm/installation-guide.html)
+  _"The Python IDE for Professional Developers"_
+- [Visual Studio Code](https://code.visualstudio.com/download)
+  _"Free. Open source. Runs everywhere."_
 
 ### Install Docker and Docker Compose
 
-TODO
-
 [Docker](https://docker.com/)
-_"delivers software in packages called containers"_. Follow the
+_"delivers software in packages called containers"_.
+
+Follow the
 [_Install Docker Engine_ - docs.docker.com](https://docs.docker.com/engine/install/)
 guide to install and configure Docker.
 
 ### Install Git
 
-TODO
+Git is a free and open-source distributed version control system designed to
+handle everything from small to very large projects with speed and efficiency.
+
+Follow the
+[_Git installation tutorial_ - github.com](https://github.com/git-guides/install-git)
+to install and configure Git.
 
 ### Install minikube (optional)
 
 !!! info
 
     This is only required if you want to run the Core engine locally using
-Kubernetes.
-
-TODO
+    Kubernetes.
 
 [minikube](https://minikube.sigs.k8s.io/)
 _"quickly sets up a local Kubernetes cluster on macOS, Linux, and Windows"_.
+
 Follow the
 [_Get Started!_ - minikube.sigs.k8s.io](https://minikube.sigs.k8s.io/docs/start/)
 guide to install and configure minikube.
 
 ### Install Python
 
-TODO
+Follow the
+[_Python installation tutorial_ - realpython.com](https://realpython.com/installing-python/)
+to install and configure Python.
 
 ## Follow the tutorials
 
