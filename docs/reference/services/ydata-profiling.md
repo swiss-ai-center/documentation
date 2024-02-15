@@ -16,131 +16,18 @@ This simple service only has one route `/compute` that takes a database in csv f
 
 ## Environment variables
 
-All environment variables are described in the
-[`.env`](https://github.com/swiss-ai-center/ydata-profiling-service/blob/main/.env) file.
-
-The environment variables can be overwritten during the CI/CD pipeline described
-in the
-[`workflow.yml`](https://github.com/swiss-ai-center/ydata-profiling-service/blob/main/.github/workflows/workflow.yml)
-GitHub workflow file.
-
-## Start the service locally with Python
-
-In the `ydata-profiling` directory, start the service with the following commands.
-
-```sh
-# Generate the virtual environment
-python3 -m venv .venv
-
-# Activate the virtual environment
-source .venv/bin/activate
-
-# Install the requirements
-pip install \
-    --requirement requirements.txt \
-    --requirement requirements-all.txt
-```
-
-Start the application.
-
-```sh
-# Switch to the `src` directory
-cd src
-
-# Start the application
-uvicorn --reload --port 9090 main:app
-```
-
-Access the service documentation on [http://localhost:9090/docs](http://localhost:9090/docs).
+Check the
+[**Core concepts > Service > Environment variables**](../core-concepts/service.md#environment-variables)
+documentation for more details.
 
 ## Run the tests with Python
 
-For each module a test file is available to check the correct behavior of the
-code. The tests are run using the `pytest` library with code coverage check. To
-run the tests, use the following command inside the `ydata-profiling` folder:
+Check the
+[**Core concepts > Service > Run the tests with Python**](../core-concepts/service.md#run-the-tests-with-python)
+documentation for more details.
 
-```sh
-pytest --cov-report term:skip-covered --cov-report term-missing --cov=. -s --cov-config=.coveragerc
-```
+## Start the service locally
 
-## Start the service locally with minikube and the Docker image hosted on GitHub
-
-Start the service with the following commands. This will start the service with
-the official Docker images that are hosted on GitHub.
-
-In the `ydata-profiling` directory, start the service with the following commands.
-
-```sh
-# Start the ydata-profiling backend
-kubectl apply \
-    -f kubernetes/config-map.yml \
-    -f kubernetes/stateful.yml \
-    -f kubernetes/service.yml
-```
-
-Create a tunnel to access the Kubernetes cluster from the local machine. The
-terminal in which the tunnel is created must stay open.
-
-```sh
-# Open a tunnel to the Kubernetes cluster
-minikube tunnel --bind-address 127.0.0.1
-```
-
-Access the `ydata-profiling` documentation on [http://localhost:9090/docs](http://localhost:9090/docs).
-
-Access the Core engine documentation on [http://localhost:8080/docs](http://localhost:8080/docs) to validate
-the backend has been successfully registered to the Core engine.
-
-## Start the service locally with minikube and a local Docker image
-
-**Note**: The service StatefulSet (`stateful.yml` file) must be deleted and
-recreated every time a new Docker image is created.
-
-Start the service with the following commands. This will start the service with
-the a local Docker image for the service.
-
-In the `ydata-profiling` directory, build the Docker image with the following commands.
-
-```sh
-# Access the Minikube's Docker environment
-eval $(minikube docker-env)
-
-# Build the Docker image
-docker build -t ghcr.io/swiss-ai-center/ydata-profiling-service:latest .
-
-# Exit the Minikube's Docker environment
-eval $(minikube docker-env -u)
-
-# Edit the `kubernetes/stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
-#
-# From
-#
-#        # imagePullPolicy: Never
-#
-# To
-#
-#        imagePullPolicy: Never
-```
-
-In the `ydata-profiling` directory, start the service with the following commands.
-
-```sh
-# Start the ydata-profiling backend
-kubectl apply \
-    -f kubernetes/config-map.yml \
-    -f kubernetes/stateful.yml \
-    -f kubernetes/service.yml
-```
-
-Create a tunnel to access the Kubernetes cluster from the local machine. The
-terminal in which the tunnel is created must stay open.
-
-```sh
-# Open a tunnel to the Kubernetes cluster
-minikube tunnel --bind-address 127.0.0.1
-```
-
-Access the `ydata-profiling` documentation on [http://localhost:9090/docs](http://localhost:9090/docs).
-
-Access the Core engine documentation on [http://localhost:8080/docs](http://localhost:8080/docs) to validate
-the backend has been successfully registered to the Core engine.
+Check the
+[**Core concepts > Service > Start the service locally**](../core-concepts/service.md#start-the-service-locally)
+documentation for more details.
