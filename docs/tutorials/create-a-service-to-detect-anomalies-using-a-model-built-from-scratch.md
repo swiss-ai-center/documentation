@@ -788,7 +788,7 @@ WORKDIR "/app/src"
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
 ```
 
-1. Some OS packages might need to be intalled in order to run the model. If
+1. Some OS packages might need to be installed in order to run the model. If
    needed, you can add them here.
 2. Change the name of the model file to match the name of your model file.
 

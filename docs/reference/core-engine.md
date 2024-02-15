@@ -23,8 +23,8 @@ The Core engine is split in two main services:
 - [Core engine Frontend](#frontend) - The user interface to interact with the
   backend
 
-Another service is available, [GlitchTip](../reference/glitchtip.md), to
-centralize the logging errors thrown by the Core engine and its services.
+Another service is available, [GlitchTip](../explanations/about-glitchtip.md),
+to centralize the logging errors thrown by the Core engine and its services.
 
 ## Backend
 
