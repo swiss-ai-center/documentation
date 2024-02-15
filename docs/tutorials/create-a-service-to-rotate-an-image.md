@@ -351,6 +351,11 @@ app = FastAPI(
 !!! Note
     The `process` function TaskData object must be serializable.
 
+!!! Note
+    The input and output data of the process function are bytes. Depending on the
+    wanted type of the data, you might need to convert the data to the expected
+    type.
+
 #### Update the `Dockerfile` file
 
 Update the Dockerfile to install all required packages that might be required by

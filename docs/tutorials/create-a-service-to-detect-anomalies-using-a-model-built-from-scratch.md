@@ -742,6 +742,11 @@ async def root():
 18. Edit the contact information of the service.
 19. Edit the license information of the service.
 
+!!! Note
+    The input and output data of the process function are bytes. Depending on the
+    wanted type of the data, you might need to convert the data to the expected
+    type.
+
 ##### Update the `Dockerfile` file
 
 Update the Dockerfile to install all required packages that might be required by
