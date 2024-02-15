@@ -55,7 +55,7 @@ mdwrap is a command line tool to format our Markdown documentation made with
 | [nlp-langid](./services/nlp-langid.md)                   | <https://github.com/swiss-ai-center/nlp-langid-service>            | <https://nlp-langid-swiss-ai-center.kube.isc.heia-fr.ch>            | -              |
 | [text-summarizer](./services/text-summarizer.md)         | <https://github.com/swiss-ai-center/text-summarizer-service>       | <https://text-summarizer-swiss-ai-center.kube.isc.heia-fr.ch>       | -              |
 | [yolov8](./services/yolov8.md)                           | <https://github.com/swiss-ai-center/yolov8-service>                | <https://yolov8-swiss-ai-center.kube.isc.heia-fr.ch>                | -              |
-| [yolov8](./services/ydata-profiling.md)                  | <https://github.com/swiss-ai-center/ydata-profiling>               | <https://ydata-profiling-swiss-ai-center.kube.isc.heia-fr.ch>       | -              |
+| [ydata-profiling](./services/ydata-profiling.md)                  | <https://github.com/swiss-ai-center/ydata-profiling>               | <https://ydata-profiling-swiss-ai-center.kube.isc.heia-fr.ch>       | -              |
 
 ## Pipelines
 
