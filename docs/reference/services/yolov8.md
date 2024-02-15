@@ -6,6 +6,13 @@
 - [:material-test-tube: Staging](https://yolov8-swiss-ai-center.kube.isc.heia-fr.ch)
 - [:material-factory: Production (not available yet)](https://yolov8.swiss-ai-center.ch)
 
+## Description
+
+!!! note
+
+    More information about the service specification can be found in the
+    [**Core concepts > Service**](../core-concepts/service.md) documentation.
+
 This service will use Yolov8 to analyse the image content according to the
 selected model type:
 

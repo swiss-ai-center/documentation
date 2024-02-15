@@ -17,7 +17,8 @@ they can be fed to [envsubst](./about-envsubst.md) through
 
 ## Install yq
 
-TODO
+To install yq follow the
+[official tutorial](https://github.com/mikefarah/yq/#install).
 
 ## Resources and alternatives
 

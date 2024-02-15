@@ -12,7 +12,8 @@ We use MinIO to store our datasets and models from DVC.
 
 ## Install MinIO
 
-TODO
+To install MinIO follow the
+[official tutorial](https://min.io/docs/minio/linux/operations/installation.html).
 
 ## Configuration
 

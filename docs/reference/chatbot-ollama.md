@@ -6,6 +6,8 @@
 - [:material-test-tube: Staging](https://chatbot-ollama-swiss-ai-center.kube.isc.heia-fr.ch/)
 - [:material-factory: Production (not available yet)](https://chatbot-ollama.swiss-ai-center.ch/)
 
+## Description
+
 This service is a streamlit interface to interact with a large language model
 using the [ollama API](https://ollama.ai/) and langchain.
 

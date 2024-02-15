@@ -788,7 +788,7 @@ WORKDIR "/app/src"
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
 ```
 
-1. Some OS packages might need to be intalled in order to run the model. If
+1. Some OS packages might need to be installed in order to run the model. If
    needed, you can add them here.
 2. Change the name of the model file to match the name of your model file.
 
@@ -1057,5 +1057,5 @@ You might want to store the model data in a cloud storage service like AWS S3.
 [DVC](../explanations/about-dvc.md) is the perfect tool to do that.
 
 Learn how to move the model data to S3 with the help of DVC in the
-[How to add DVC to a service](./move-model-data-to-s3-with-the-help-of-dvc.md)
-how-to guide.
+[How to add DVC to a service](../how-to-guides/how-to-add-dvc-to-a-service.md)
+guide.

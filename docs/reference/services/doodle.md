@@ -6,6 +6,13 @@
 - [:material-test-tube: Staging](https://doodle-swiss-ai-center.kube.isc.heia-fr.ch)
 - [:material-factory: Production (not available yet)](https://doodle.swiss-ai-center.ch)
 
+## Description
+
+!!! note
+
+    More information about the service specification can be found in the
+    [**Core concepts > Service**](../core-concepts/service.md) documentation.
+
 This service uses a Convolutional Neural Network (CNN) to guess what a user has
 drawn (in a black and white image).
 

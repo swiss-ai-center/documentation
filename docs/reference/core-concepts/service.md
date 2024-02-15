@@ -322,3 +322,181 @@ A JSON representation would look like this:
 
 After the service is registered, it will be available on the Core engine's
 `/service-slug` endpoint.
+
+## Environment variables
+
+All environment variables are described in the `.env` file at the root of the
+repository.
+
+## Run the tests with Python
+
+!!! info
+
+    You might need to initialize a virtual environment before running the tests.
+
+    Check the
+    [**Start the service locally > Start the service locally with plain Python**](#start-the-service-locally)
+    to initialize and activate a virtual environment.
+
+For each module a test file is available to check the correct behavior of the
+code. The tests are run using the `pytest` library with code coverage check. To
+run the tests, use the following command inside the service folder:
+
+```sh
+# Run the tests
+pytest
+```
+
+## Start the service locally
+
+!!! tip
+
+    If you are not familiar with the Core engine and its services, we recommend to
+    follow the [**Getting started**](../../tutorials/getting-started.md) guide
+    first.
+
+    The Core engine is highly recommended to test the service locally.
+
+You have several options to start the service locally:
+
+- Start the service locally with Docker Compose (recommended)
+- Start the service locally with plain Python
+- Start the service locally with minikube and official Docker images
+- Start the service locally with minikube and local Docker images
+
+=== "Docker Compose (recommended)"
+
+    In the service directory, start the service with the following commands:
+
+    ```sh
+    # Build the Docker image
+    docker compose build
+
+    # Start the service
+    docker compose up
+    ```
+
+    Access the service documentation at <http://localhost:9090/docs>.
+
+    Access the Core engine on <http://localhost:3000> or
+    <http://localhost:8080/docs> to validate the service has been successfully
+    registered to the Core engine.
+
+=== "Plain Python"
+
+    In the service directory, start the service with the following commands:
+
+    ```sh
+    # Generate the virtual environment
+    python3 -m venv .venv
+
+    # Activate the virtual environment
+    source .venv/bin/activate
+
+    # Install the requirements
+    pip install \
+        --requirement requirements.txt \
+        --requirement requirements-all.txt
+    ```
+
+    Start the application.
+
+    ```sh
+    # Switch to the `src` directory
+    cd src
+
+    # Start the application
+    uvicorn --reload --port 9090 main:app
+    ```
+
+    Access the service documentation on <http://localhost:9090/docs>.
+
+    Access the Core engine on <http://localhost:3000> or
+    <http://localhost:8080/docs> to validate the service has been successfully
+    registered to the Core engine.
+
+=== "minikube and official Docker images"
+
+    Start the service with the following commands. This will start the service with
+    the official Docker images that are hosted on GitHub.
+
+    In the service directory, start the service with the following commands:
+
+    ```sh
+    # Start the average-shade backend
+    kubectl apply \
+        -f kubernetes/config-map.yml \
+        -f kubernetes/stateful.yml \
+        -f kubernetes/service.yml
+    ```
+
+    Create a tunnel to access the Kubernetes cluster from the local machine. The
+    terminal in which the tunnel is created must stay open:
+
+    ```sh
+    # Open a tunnel to the Kubernetes cluster
+    minikube tunnel --bind-address 127.0.0.1
+    ```
+
+    Access the service documentation on <http://localhost:9090/docs>.
+
+    Access the Core engine on <http://localhost:3000> or
+    <http://localhost:8080/docs> to validate the service has been successfully
+    registered to the Core engine.
+
+=== "minikube and local Docker images"
+
+    !!! warning
+
+        The service StatefulSet (`stateful.yml` file) must be deleted and recreated
+        every time a new Docker image is created.
+
+    Start the service with the following commands. This will start the service with
+    the a local Docker image for the service.
+
+    In the service directory, build the Docker image with the following commands.
+
+    ```sh
+    # Access the Minikube's Docker environment
+    eval $(minikube docker-env)
+
+    # Build the Docker image
+    docker build -t ghcr.io/swiss-ai-center/<repository name>:latest .
+
+    # Exit the Minikube's Docker environment
+    eval $(minikube docker-env -u)
+
+    # Edit the `kubernetes/stateful.yml` file to use the local image by uncommented the line `imagePullPolicy`
+    #
+    # From
+    #
+    #        # imagePullPolicy: Never
+    #
+    # To
+    #
+    #        imagePullPolicy: Never
+    ```
+
+    In the service directory, start the service with the following commands.
+
+    ```sh
+    # Start the service
+    kubectl apply \
+        -f kubernetes/config-map.yml \
+        -f kubernetes/stateful.yml \
+        -f kubernetes/service.yml
+    ```
+
+    Create a tunnel to access the Kubernetes cluster from the local machine. The
+    terminal in which the tunnel is created must stay open.
+
+    ```sh
+    # Open a tunnel to the Kubernetes cluster
+    minikube tunnel --bind-address 127.0.0.1
+    ```
+
+    Access the service documentation on <http://localhost:9090/docs>.
+
+    Access the Core engine on <http://localhost:3000> or
+    <http://localhost:8080/docs> to validate the service has been successfully
+    registered to the Core engine.

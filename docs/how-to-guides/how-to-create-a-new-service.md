@@ -102,6 +102,19 @@ guide.
 
 If you do not want to publish your service, you can skip this section.
 
+## Update the documentation for your service
+
+If you have published your service, you can update the documentation for your
+service by following the
+[How to update the documentation](./how-to-update-the-documentation.md) guide.
+
+## Configure the GitHub repository for your service
+
+If you store your service's code on GitHub, you can configure the GitHub
+repository for your service by following the
+[How to configure a new GitHub repository](./how-to-configure-a-new-github-repository.md)
+guide.
+
 ## Frequently asked questions
 
 ### Which framework/language to use
