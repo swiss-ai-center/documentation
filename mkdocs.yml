@@ -82,6 +82,7 @@ nav:
       - About MinIO: explanations/about-minio.md
       - About pytest: explanations/about-pytest.md
       - About Python: explanations/about-python.md
+      - About SQLModel: explanations/about-sqlmodel.md
       - About yq: explanations/about-yq.md
 edit_uri: blob/main/docs/
 theme:
