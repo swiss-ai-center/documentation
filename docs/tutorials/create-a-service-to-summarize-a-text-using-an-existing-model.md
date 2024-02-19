@@ -198,7 +198,7 @@ summarizer tool that summarizes a text using the
 
 Open the `main.py` with your favorite editor and follow the instructions below.
 
-```py hl_lines="23 30-32 41-42 48-60 65-85 89-96 99-109"
+```py hl_lines="23 30-32 41-42 48-61 66-86 90-97 100-110"
 import asyncio
 import time
 from fastapi import FastAPI
@@ -259,10 +259,11 @@ class MyService(Service):
                 ),
             ],
             has_ai=True,
+            docs_url="https://docs.swiss-ai-center.ch/reference/core-concepts/service/", # (5)!
         )
         self._logger = get_logger(settings)
 
-    # TODO: 5. CHANGE THE PROCESS METHOD (CORE OF THE SERVICE) (5)!
+    # TODO: 5. CHANGE THE PROCESS METHOD (CORE OF THE SERVICE) (6)!
     def process(self, data):
                 # Get the text to analyze from storage
         text = data["text"].data
@@ -287,7 +288,7 @@ class MyService(Service):
 
 ...
 
-# TODO: 6. CHANGE THE API DESCRIPTION AND SUMMARY (6)!
+# TODO: 6. CHANGE THE API DESCRIPTION AND SUMMARY (7)!
 api_summary = """
 Summarize the given text.
 """
@@ -297,7 +298,7 @@ Summarize the given text using the HuggingFace transformers library with model b
 """
 
 # Define the FastAPI application with information
-# TODO: 7. CHANGE THE API TITLE, VERSION, CONTACT AND LICENSE (7)!
+# TODO: 7. CHANGE THE API TITLE, VERSION, CONTACT AND LICENSE (8)!
 app = FastAPI(
     lifespan=lifespan,
     title="Text summarizer API.",
@@ -330,12 +331,13 @@ app = FastAPI(
    in the FieldDescriptionType enum. The tags are used to identify the service in
    the Core engine. The `has_ai` variable is used to identify if the service is an
    AI service.
-5. Change the process function. This is the core of the service. The data is a
+5. Optional: Edit the documentation URL of the service.
+6. Change the process function. This is the core of the service. The data is a
    dictionary with the keys being the field names set in the data_in_fields. The
    result must be a dictionary with the keys being the field names set in the
    data_out_fields.
-6. Change the API description and summary.
-7. Change the API title, version, contact and license.
+7. Change the API description and summary.
+8. Change the API title, version, contact and license.
 
 !!! Note
     The `process` function TaskData object must be serializable.
