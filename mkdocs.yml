@@ -64,7 +64,6 @@ nav:
   - Explanations:
       - explanations/index.md
       - About this documentation: explanations/about-this-documentation.md
-      - About Databases: explanations/about-databases.md
       - About Docker and Docker Compose: explanations/about-docker-and-docker-compose.md
       - About DVC: explanations/about-dvc.md
       - About envsubst: explanations/about-envsubst.md
@@ -81,8 +80,10 @@ nav:
       - About Material for MkDocs: explanations/about-material-for-mkdocs.md
       - About minikube: explanations/about-minikube.md
       - About MinIO: explanations/about-minio.md
+      - About PostgreSQL: explanations/about-postgresql.md
       - About pytest: explanations/about-pytest.md
       - About Python: explanations/about-python.md
+      - About SQLite: explanations/about-sqlite.md
       - About yq: explanations/about-yq.md
 edit_uri: blob/main/docs/
 theme:
