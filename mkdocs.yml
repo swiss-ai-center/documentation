@@ -80,8 +80,10 @@ nav:
       - About Material for MkDocs: explanations/about-material-for-mkdocs.md
       - About minikube: explanations/about-minikube.md
       - About MinIO: explanations/about-minio.md
+      - About Pydantic: explanations/about-pydantic.md
       - About pytest: explanations/about-pytest.md
       - About Python: explanations/about-python.md
+      - About SQLAlchemy: explanations/about-sqlalchemy.md
       - About SQLModel: explanations/about-sqlmodel.md
       - About yq: explanations/about-yq.md
 edit_uri: blob/main/docs/

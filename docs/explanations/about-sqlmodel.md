@@ -11,9 +11,9 @@ As the website of [SQLModel](https://sqlmodel.tiangolo.com/) mentions:
 
 `SQLModel` is used to create a simple and robust ORM for SQL databases. It is
 used to create models and interact with the database. It is a framework based on
-[Pydantic](https://pydantic.dev/) and [SQLAlchemy](https://www.sqlalchemy.org/).
+`Pydantic` and `SQLAlchemy`.
 
-## Install FastAPI
+## Install SQLModel
 
 SQLModel can be installed using pip:
 
@@ -41,4 +41,7 @@ engine = create_engine(DATABASE_URL, echo=True)
 These resources and alternatives are related to the current item (in
 alphabetical order).
 
-_None at the moment._
+- [PostgreSQL](./about-postgresql.md)
+- [Pydantic](./about-pydantic.md)
+- [SQLite](./about-sqlite.md)
+- [SQLModel](./about-sqlmodel.md)
