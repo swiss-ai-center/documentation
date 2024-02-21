@@ -500,7 +500,7 @@ addopts = "--cov-config=.coveragerc --cov-report xml --cov-report term-missing -
 Update the `src/main.py` file to load the model binary file and serve it over
 FastAPI:
 
-```py title="src/main.py" hl_lines="21-31 37-39 47 48 53-61 62-66 67-76 77 81-83 85-118 173-178 179-180 185 187 188-192 197-200"
+```py title="src/main.py" hl_lines="21-31 37-39 47 48 53-78 82-84 86-119 174-179 180-181 186 188 189-193 198-201"
 import asyncio
 import time
 from fastapi import FastAPI
@@ -578,24 +578,25 @@ class MyService(Service):# (2)!
                 ),
             ],
             has_ai=True,# (8)!
+            docs_url="https://docs.swiss-ai-center.ch/reference/core-concepts/service/", # (9)!
         )
         self._logger = get_logger(settings)
 
-        self._model = tf.keras.models.load_model(# (9)!
+        self._model = tf.keras.models.load_model(# (10)!
             os.path.join(os.path.dirname(__file__), "..", "anomalies_detection_model.h5")
         )
 
     def process(self, data):
         # NOTE that the data is a dictionary with the keys being the field names set in the data_in_fields
-        raw = data["dataset"].data# (10)!
-        input_type = data["dataset"].type# (11)!
+        raw = data["dataset"].data# (11)!
+        input_type = data["dataset"].type# (12)!
 
         print("Input type: ", str(input_type))
 
         X_test = pd.read_csv(io.BytesIO(raw))
 
         # Use the model to reconstruct the original time series data
-        reconstructed_X = self._model.predict(X_test)# (12)!
+        reconstructed_X = self._model.predict(X_test)# (13)!
 
         # Calculate the reconstruction error for each point in the time series
         reconstruction_error = np.square(X_test - reconstructed_X).mean(axis=1)
@@ -617,7 +618,7 @@ class MyService(Service):# (2)!
 
         # NOTE that the result must be a dictionary with the keys being the field names set in the data_out_fields
         return {
-            "result": TaskData(data=buf.read(), type=FieldDescriptionType.IMAGE_PNG)# (13)!
+            "result": TaskData(data=buf.read(), type=FieldDescriptionType.IMAGE_PNG)# (14)!
         }
 
 
@@ -678,17 +679,17 @@ api_description = """This service detects anomalies in a time series using an au
 The service expects a CSV file with a single column containing the time series data.
 
 The service returns a plot of the time series with the detected anomalies highlighted in red.
-"""# (14)!
-api_summary = """My anomalies detection service detects anomalies in a time series using an autoencoder.
 """# (15)!
+api_summary = """My anomalies detection service detects anomalies in a time series using an autoencoder.
+"""# (16)!
 
 # Define the FastAPI application with information
 app = FastAPI(
     lifespan=lifespan,
     title="My anomalies detection service API.",# (16)!
     description=api_description,
-    version="0.0.1",# (17)!
-    contact={# (18)!
+    version="0.0.1",# (18)!
+    contact={# (19)!
         "name": "Swiss AI Center",
         "url": "https://swiss-ai-center.ch/",
         "email": "info@swiss-ai-center.ch",
@@ -697,7 +698,7 @@ app = FastAPI(
         "tagsSorter": "alpha",
         "operationsSorter": "method",
     },
-    license_info={# (19)!
+    license_info={# (20)!
         "name": "GNU Affero General Public License v3.0 (GNU AGPLv3)",
         "url": "https://choosealicense.com/licenses/agpl-3.0/",
     },
@@ -730,17 +731,18 @@ async def root():
 6. Edit the output fields of the service.
 7. Edit the tags of the service.
 8. Edit the `has_ai` field of the service.
-9. Load the model binary file.
-10. Get the raw data from the `dataset` field.
-11. Get the type of the data from the `dataset` field.
-12. Use the model to reconstruct the original time series data.
-13. Return the result of the service.
-14. Edit the description of the service.
-15. Edit the summary of the service.
-16. Edit the title of the service.
-17. Edit the version of the service.
-18. Edit the contact information of the service.
-19. Edit the license information of the service.
+9. Optional: Edit the documentation URL of the service.
+10. Load the model binary file.
+11. Get the raw data from the `dataset` field.
+12. Get the type of the data from the `dataset` field.
+13. Use the model to reconstruct the original time series data.
+14. Return the result of the service.
+15. Edit the description of the service.
+16. Edit the summary of the service.
+17. Edit the title of the service.
+18. Edit the version of the service.
+19. Edit the contact information of the service.
+20. Edit the license information of the service.
 
 !!! Note
     The input and output data of the process function are bytes. Depending on the
