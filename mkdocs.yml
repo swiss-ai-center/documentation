@@ -65,7 +65,7 @@ nav:
       - explanations/index.md
       - About this documentation: explanations/about-this-documentation.md
       - About Docker and Docker Compose: explanations/about-docker-and-docker-compose.md
-      - About Dotenv support: explanations/about-dotenv-support.md
+      - About dotenv support: explanations/about-dotenv-support.md
       - About DVC: explanations/about-dvc.md
       - About envsubst: explanations/about-envsubst.md
       - About Exoscale: explanations/about-exoscale.md
