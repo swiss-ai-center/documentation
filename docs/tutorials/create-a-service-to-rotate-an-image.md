@@ -198,7 +198,7 @@ depending on the value of the `rotation` parameter.
 
 Open the `main.py` with your favorite editor and follow the instructions below.
 
-```py hl_lines="23-25 32-34 43-44 50-63 68-95 99-105 108-118"
+```py hl_lines="23-25 32-34 43-44 50-64 68-96 100-106 109-119"
 import asyncio
 import time
 from fastapi import FastAPI
@@ -261,11 +261,12 @@ class MyService(Service):
                     acronym=ExecutionUnitTagAcronym.IMAGE_PROCESSING
                 ),
             ],
-            has_ai=False
+            has_ai=False,
+            docs_url="https://docs.swiss-ai-center.ch/reference/core-concepts/service/", # (5)!
         )
         self._logger = get_logger(settings)
 
-    # TODO: 5. CHANGE THE PROCESS METHOD (CORE OF THE SERVICE) (5)!
+    # TODO: 5. CHANGE THE PROCESS METHOD (CORE OF THE SERVICE) (6)!
     def process(self, data):
         # NOTE that the data is a dictionary with the keys being the field names set in the data_in_fields
         raw = data["image"].data
@@ -297,7 +298,7 @@ class MyService(Service):
 
 ...
 
-# TODO: 6. CHANGE THE API DESCRIPTION AND SUMMARY (6)!
+# TODO: 6. CHANGE THE API DESCRIPTION AND SUMMARY (7)!
 api_description = """
 Rotate an image by 90 degrees clockwise depending on the value of the `rotation` parameter. (90, 180, 270)
 """
@@ -306,7 +307,7 @@ Rotate an image by 90 degrees clockwise.
 """
 
 # Define the FastAPI application with information
-# TODO: 7. CHANGE THE API TITLE, VERSION, CONTACT AND LICENSE (7)!
+# TODO: 7. CHANGE THE API TITLE, VERSION, CONTACT AND LICENSE (8)!
 app = FastAPI(
     lifespan=lifespan,
     title="Image Rotate API.",
@@ -341,12 +342,13 @@ app = FastAPI(
    in the FieldDescriptionType enum. The tags are used to identify the service in
    the Core engine. The `has_ai` variable is used to identify if the service is an
    AI service.
-5. Change the process function. This is the core of the service. The data is a
+5. Optional: Edit the documentation URL of the service.
+6. Change the process function. This is the core of the service. The data is a
    dictionary with the keys being the field names set in the data_in_fields. The
    result must be a dictionary with the keys being the field names set in the
    data_out_fields.
-6. Change the API description and summary.
-7. Change the API title, version, contact and license.
+7. Change the API description and summary.
+8. Change the API title, version, contact and license.
 
 !!! Note
     The `process` function TaskData object must be serializable.
