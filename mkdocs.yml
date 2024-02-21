@@ -65,6 +65,7 @@ nav:
       - explanations/index.md
       - About this documentation: explanations/about-this-documentation.md
       - About Docker and Docker Compose: explanations/about-docker-and-docker-compose.md
+      - About dotenv support: explanations/about-dotenv-support.md
       - About DVC: explanations/about-dvc.md
       - About envsubst: explanations/about-envsubst.md
       - About Exoscale: explanations/about-exoscale.md
@@ -80,11 +81,13 @@ nav:
       - About Material for MkDocs: explanations/about-material-for-mkdocs.md
       - About minikube: explanations/about-minikube.md
       - About MinIO: explanations/about-minio.md
+      - About PostgreSQL: explanations/about-postgresql.md
       - About Pydantic: explanations/about-pydantic.md
       - About pytest: explanations/about-pytest.md
       - About Python: explanations/about-python.md
       - About SQLAlchemy: explanations/about-sqlalchemy.md
       - About SQLModel: explanations/about-sqlmodel.md
+      - About SQLite: explanations/about-sqlite.md
       - About yq: explanations/about-yq.md
 edit_uri: blob/main/docs/
 theme:
@@ -144,7 +147,7 @@ extra:
       link: https://swiss-ai-center.ch
       name: Swiss AI Center
     - icon: material/github
-      link: https://github.com/swiss-ai-center/core-engine
+      link: https://github.com/swiss-ai-center/
       name: Swiss AI Center on GitHub
 markdown_extensions:
   - abbr
