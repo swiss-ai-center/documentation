@@ -141,7 +141,7 @@ extra:
       link: https://swiss-ai-center.ch
       name: Swiss AI Center
     - icon: material/github
-      link: https://github.com/swiss-ai-center/core-engine
+      link: https://github.com/swiss-ai-center/
       name: Swiss AI Center on GitHub
 markdown_extensions:
   - abbr
