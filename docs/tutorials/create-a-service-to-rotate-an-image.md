@@ -347,7 +347,9 @@ app = FastAPI(
    dictionary with the keys being the field names set in the data_in_fields. The
    result must be a dictionary with the keys being the field names set in the
    data_out_fields.
-7. Change the API description and summary.
+7. Change the API description and summary. The description is a markdown string
+   that will be displayed in the API documentation. The summary is a short
+   description of the API.
 8. Change the API title, version, contact and license.
 
 !!! Note
@@ -448,7 +450,7 @@ There are two ways to test the service:
     the image and the rotation file and click on the Execute button. The response
     body should be something similar to the following:
 
-    ```json hl_lines="12"
+    ```json hl_lines="4-8 12"
     {
       "created_at": "2024-01-05T14:34:48.520282",
       "updated_at": "2024-01-05T14:38:48.979189",
@@ -501,7 +503,8 @@ There are two ways to test the service:
         "name": "Image Rotate",
         "slug": "image-rotate",
         "summary": "\nRotate an image by 90 degrees clockwise.\n",
-        "url": "http://localhost:9090"
+        "url": "http://localhost:9090",
+        "docs_url": "https://docs.swiss-ai-center.ch/reference/services/image-rotate/",
       },
       "pipeline_execution": null
     }
