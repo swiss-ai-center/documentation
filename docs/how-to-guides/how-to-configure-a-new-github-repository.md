@@ -60,11 +60,11 @@ Add teams and collaborators to the repository as needed. For most of the Swiss
 AI Center projects, we recommend to add the following teams:
 
 - [@swiss-ai-center/core-developers](https://github.com/orgs/swiss-ai-center/teams/core-developers)
-  team with **Maintain** access.
+  team with **Admin** access.
 - [@swiss-ai-center/managers](https://github.com/orgs/swiss-ai-center/teams/managers)
-  team with **Maintain** access.
+  team with **Admin** access.
 - [@swiss-ai-center/contributors](https://github.com/orgs/swiss-ai-center/teams/contributors)
-  team with **Triage** access.
+  team with **Maintain** access.
 
 ### Branches
 
