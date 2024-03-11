@@ -103,7 +103,7 @@ folder:
 
 ```sh title="Execute this in the 'root' folder"
 # Create a virtual environment
-python3.10 -m venv .venv
+python3.11 -m venv .venv
 ```
 
 Then, activate the virtual environment:
@@ -120,7 +120,7 @@ source .venv/bin/activate
 
 Update the `requirements.txt` file with the following content:
 
-```txt hl_lines="2 3"
+```txt title="requirements.txt" hl_lines="2 3"
 common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main
 numpy==1.24.1
 opencv-python==4.7.0.72
@@ -155,7 +155,7 @@ every machine if you ever share your code with someone else.
 Open the `README.md` file and update the title and the description of the
 [Service](../reference/core-concepts/service.md).
 
-```md
+```md title="README.md"
 # Image Rotate
 
 This service rotates an image by 90, 180 or 270 degrees clockwise.
@@ -180,7 +180,7 @@ This service rotates an image by 90, 180 or 270 degrees clockwise.
 
 ```toml title="pyproject.toml" hl_lines="2"
 [project]
-name = "image-rotate"
+name = "image-rotate" # (1)!
 
 [tool.pytest.ini_options]
 pythonpath = [".", "src"]
@@ -198,7 +198,7 @@ depending on the value of the `rotation` parameter.
 
 Open the `main.py` with your favorite editor and follow the instructions below.
 
-```py hl_lines="23-25 32-34 43-44 50-64 68-96 100-106 109-119"
+```py title="main.py" hl_lines="23-25 32-34 43-44 50-64 68-96 100-106 109-119"
 import asyncio
 import time
 from fastapi import FastAPI
@@ -363,9 +363,9 @@ app = FastAPI(
 Update the Dockerfile to install all required packages that might be required by
 the model and the model itself:
 
-```dockerfile hl_lines="5"
+```dockerfile title="Dockerfile" hl_lines="5"
 # Base image
-FROM python:3.10
+FROM python:3.11
 
 # Install all required packages to run the model
 RUN apt update && apt install --yes ffmpeg libsm6 libxext6
@@ -388,8 +388,18 @@ Start the service with the following command:
 cd src
 
 # Start the application
-uvicorn --reload --port 9090 main:app
+uvicorn --reload --host 0.0.0.0 --port 9090 main:app
 ```
+
+??? tip "Selecting the IP port for the service"
+
+    Each service should be made available on a different port that is not in use.
+
+    If you followed the previous tutorial to start the core engine, port 9090
+    should already be in use by the dummy `average-shade-service` service. In
+    that case, you can use a different port number, or alternatively shut down
+    the running service and reset the database that recorded the port entry by
+    removing the `backend/core-engine.db` file.
 
 The service should try to announce itself to the Core engine.
 

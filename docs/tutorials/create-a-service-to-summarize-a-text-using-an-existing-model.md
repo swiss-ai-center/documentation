@@ -265,7 +265,7 @@ class MyService(Service):
 
     # TODO: 5. CHANGE THE PROCESS METHOD (CORE OF THE SERVICE) (6)!
     def process(self, data):
-                # Get the text to analyze from storage
+        # Get the text to analyze from storage
         text = data["text"].data
         # Convert bytes to string
         text = text.decode("utf-8")
