@@ -373,7 +373,7 @@ Run the following command to train the model:
 
 ```sh title="Execute this in the virtual environment"
 # Train the model
-python src/train_model.py --dataset data/train.txt
+python src/train_model.py --train-dataset data/train.csv
 ```
 
 The model will be saved in the `model-creation/model` folder under the name
@@ -388,7 +388,7 @@ Run the following command to evaluate the model:
 
 ```sh title="Execute this in the virtual environment"
 # Evaluate the model
-python src/evaluate_model.py --model model/anomalies_detection_model.h5 --test-dataset data/test.txt
+python src/evaluate_model.py --model model/anomalies_detection_model.h5 --test-dataset data/test.csv
 ```
 
 A plot of the anomalies detected will be saved in the

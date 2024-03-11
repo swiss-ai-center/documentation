@@ -63,7 +63,7 @@ You have three ways to bootstrap a new service based on the template:
 
 === "Download the template"
 
-    If you do not want to host your codebase on GitHub or if you do not want to be
+    If you do notwant to host your codebase on GitHub or if you do not want to be
     linked to the Swiss AI Center organization, download the
     [_Create a new service (generic) template_](https://github.com/swiss-ai-center/create-a-new-service-generic-template).
     as an archive file (**"Download ZIP"**) from the GitHub repository and start
@@ -122,8 +122,8 @@ Update the `requirements.txt` file with the following content:
 
 ```txt hl_lines="2 3"
 common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main
-transformers==4.36.2
-torch==2.1.2
+transformers==4.39.3
+torch==2.2.2
 ```
 
 The `common-code` package is required to serve the model over a FastAPI REST API
@@ -147,6 +147,10 @@ pip freeze --local --all > requirements-all.txt
 
 This will ensure that the same versions of the dependencies are installed on
 every machine if you ever share your code with someone else.
+
+As a last step, remove the `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
+line in `requirements-all.txt`, as it will conflict with the existing line in
+`requirements.txt` because of the explicit commit reference.
 
 ### Update the template files
 
@@ -265,7 +269,7 @@ class MyService(Service):
 
     # TODO: 5. CHANGE THE PROCESS METHOD (CORE OF THE SERVICE) (6)!
     def process(self, data):
-                # Get the text to analyze from storage
+        # Get the text to analyze from storage
         text = data["text"].data
         # Convert bytes to string
         text = text.decode("utf-8")
@@ -363,7 +367,7 @@ Start the service with the following command:
 cd src
 
 # Start the application
-uvicorn --reload --port 9090 main:app
+uvicorn --reload --host 0.0.0.0 --port 9090 main:app
 ```
 
 The service should try to announce itself to the Core engine.
