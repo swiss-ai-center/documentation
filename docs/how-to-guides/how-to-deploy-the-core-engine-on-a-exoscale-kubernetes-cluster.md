@@ -8,17 +8,21 @@ cluster.
 ### Install and configure the Exoscale CLI
 
 Install and configure the Exoscale CLI by following the instructions in the
-official documentation at <https://community.exoscale.com/documentation/tools/exoscale-command-line-interface/#installation> and <https://community.exoscale.com/documentation/tools/exoscale-command-line-interface/#configuration>.
+official documentation at
+<https://community.exoscale.com/documentation/tools/exoscale-command-line-interface/#installation>
+and
+<https://community.exoscale.com/documentation/tools/exoscale-command-line-interface/#configuration>.
 
 ### Install kubectl
 
-Install kubectl by following the instructions in the
-[official documentation](https://kubernetes.io/docs/tasks/tools/#kubectl).
+Install kubectl by following the instructions in the official documentation at
+<https://kubernetes.io/docs/tasks/tools/#kubectl>.
 
 ### Create a Kubernetes cluster
 
 Create a Kubernetes cluster by executing the following commands (inspired by the
-[official documentation](https://community.exoscale.com/documentation/kubernetes/quickstart/)):
+official documentation at
+<https://community.exoscale.com/documentation/kubernetes/quickstart/>):
 
 ```sh title="Execute the following command(s) in a terminal"
 # Create the security group
@@ -61,6 +65,9 @@ exo compute sks list
 # Get the kubeconfig file
 exo compute sks kubeconfig swiss-ai-center-prod-cluster kube-admin > exoscale.kubeconfig
 
+# Display the Kubernetes cluster configuration
+cat exoscale.kubeconfig
+
 # Validate kubectl can access the Kubernetes cluster
 kubectl --kubeconfig exoscale.kubeconfig \
     get node
@@ -69,10 +76,10 @@ kubectl --kubeconfig exoscale.kubeconfig \
 #### Install Nginx Ingress Controller
 
 Install Nginx Ingress Controller by executing the following commands (inspired
-by the
-[official documentation](https://kubernetes.github.io/ingress-nginx/deploy/#exoscale)
-and the
-[official Exoscale documentation](https://community.exoscale.com/documentation/sks/loadbalancer-ingress/)):
+by the official documentation at
+<https://kubernetes.github.io/ingress-nginx/deploy/#exoscale> and the official
+Exoscale documentation at
+<https://community.exoscale.com/documentation/sks/loadbalancer-ingress/>):
 
 ```sh title="Execute the following command(s) in a terminal"
 # Install the Nginx Ingress Controller
@@ -98,7 +105,7 @@ external IP address. You can use a wildcard `*.swiss-ai-center.ch` (for example)
 ### Install and configure cert-manager
 
 Install cert-manager by executing the following commands (inspired by the
-[official documentation](https://cert-manager.io/docs/installation/kubectl/)):
+official documentation at <https://cert-manager.io/docs/installation/kubectl/>):
 
 ```sh title="Execute the following command(s) in a terminal"
 # Install cert-manager
@@ -111,6 +118,11 @@ kubectl --kubeconfig exoscale.kubeconfig \
 ```
 
 #### Configure Let's Encrypt issuer with HTTP-01 challenge
+
+Configure Let's Encrypt issuer with HTTP-01 challenge by executing the following
+commands (inspired by the official documentation at
+<https://cert-manager.io/docs/configuration/acme/> and the tutorial at
+<https://cert-manager.io/docs/tutorials/acme/nginx-ingress/>):
 
 ```sh title="Execute the following command(s) in a terminal"
 # Create a Let's Encrypt issuer
@@ -147,7 +159,8 @@ kubectl --kubeconfig exoscale.kubeconfig \
 #### Deploy a dummy pod to validate the Kubernetes cluster configuration
 
 Deploy a dummy pod to validate the Kubernetes cluster configuration by executing
-the following commands:
+the following commands (inspired by the tutorial at
+<https://cert-manager.io/docs/tutorials/acme/nginx-ingress/>):
 
 ```sh title="Execute the following command(s) in a terminal"
 # Create the Kubernetes configuration file
@@ -230,6 +243,164 @@ URI: /
 Request ID: caabe951ce74b20c70460b9a1705b88e
 ```
 
+You can delete the dummy pod by executing the following command:
+
+```sh title="Execute the following command(s) in a terminal"
+# Delete the dummy pod
+kubectl --kubeconfig exoscale.kubeconfig \
+    delete -f dummy-pod.yaml
+```
+
+### Create a PostgreSQL database
+
+Create a PostgreSQL database by executing the following commands (inspired by
+the official documentation
+<https://community.exoscale.com/documentation/dbaas/quick-start/>):
+
+```sh title="Execute the following command(s) in a terminal"
+# Create a PostgreSQL database
+exo dbaas create pg hobbyist-2 core-engine-prod-database --zone ch-gva-2
+
+# Validate the creation of the PostgreSQL database
+exo dbaas --zone ch-gva-2 show core-engine-prod-database
+
+# Get the PostgreSQL database URL
+exo dbaas --zone ch-gva-2 show core-engine-prod-database --uri
+```
+
+### Allow the Kubernetes cluster to access the PostgreSQL database
+
+Allow the Kubernetes cluster to access the PostgreSQL database by executing the
+following commands (inspired by the blog post at
+<https://www.exoscale.com/syslog/sks-dbaas-terraform/> and the GitHub repository
+at <https://github.com/exoscale-labs/sks-sample-manifests/>):
+
+```sh title="Execute the following command(s) in a terminal"
+# Create a new role for Kubernetes
+exo iam role create k8s --policy '{"default-service-strategy":"deny","services":{"dbaas":{"type":"allow","rules":[]}}}'
+
+# Create a new API key for Kubernetes
+exo iam api-key create k8s-dbaas k8s
+
+# Create a new secret for the API key
+kubectl --kubeconfig exoscale.kubeconfig \
+    -n kube-system create secret generic exoscale-k8s-dbaas-credentials \
+    --from-literal=api-key='API_KEY' \
+    --from-literal=api-secret='API_SECRET'
+
+# Download the Kubernetes manifest
+curl -o k8s-dbaas.yaml https://raw.githubusercontent.com/exoscale-labs/sks-sample-manifests/main/exo-k8s-dbaas-filter/exo-k8s-dbaas-filter.yaml
+
+# Edit the Kubernetes manifest to use the correct API key and secret and database(s) name(s)
+#
+# Example:
+#
+# ```yaml
+#         env:
+#           - name: EXOSCALE_API_KEY
+#             valueFrom:
+#               secretKeyRef:
+#                 key: api-key
+#                 # change the name of the secret if necessary
+#                 name: exoscale-k8s-dbaas-credentials
+#           - name: EXOSCALE_API_SECRET
+#             valueFrom:
+#               secretKeyRef:
+#                 key: api-secret
+#                 # change the name of the secret if necessary
+#                 name: exoscale-k8s-dbaas-credentials
+# ```
+#
+# and
+#
+# `exo dbaas update --pg-ip-filter "$IPLISTFOREXO" core-engine-prod-database -z ch-gva-2`
+
+# Deploy the Kubernetes manifest
+kubectl --kubeconfig exoscale.kubeconfig \
+    apply -f k8s-dbaas.yaml
+
+# Validate the deployment
+kubectl --kubeconfig exoscale.kubeconfig \
+    get pods -n kube-system \
+    -l app=exo-k8s-dbaas-filter --watch
+
+# View the logs of the pod
+kubectl --kubeconfig exoscale.kubeconfig \
+    logs -n kube-system \
+    -l app=exo-k8s-dbaas-filter
+```
+
+### Create a S3 bucket
+
+Create a S3 bucket by executing the following commands (inspired by the
+[official documentation](https://community.exoscale.com/documentation/object-storage/quick-start/#create-a-bucket)):
+
+```sh title="Execute the following command(s) in a terminal"
+# Create a S3 bucket
+exo storage mb --zone ch-gva-2 sos://core-engine-prod-bucket
+
+# Validate the creation of the S3 bucket
+exo storage ls --zone ch-gva-2
+```
+
+### Allow the Core engine to access the S3 bucket
+
+Allow the Core engine to access the S3 bucket by executing the following
+commands:
+
+```sh title="Execute the following command(s) in a terminal"
+# Create a new role for the Core engine
+exo iam role create core-engine --policy '{"default-service-strategy":"deny","services":{"sos":{"type":"allow","rules":[]}}}'
+
+# Create a new API key for the Core engine
+exo iam api-key create s3 core-engine
+```
+
+### Update the Core engine GitHub Actions configuration
+
+Update the Core engine GitHub Actions configuration by adding/updating the
+following secrets:
+
+- `PROD_KUBE_CONFIG`: The content of the Kubernetes configuration file (this is an Organization secret in our repository)
+- `PROD_DATABASE_URL`: The URL of the PostgreSQL database
+- `PROD_S3_ACCESS_KEY_ID`: The access key ID of the S3 bucket
+- `PROD_S3_SECRET_ACCESS_KEY`: The secret access key of the S3 bucket
+- `PROD_S3_HOST`: The host of the S3 bucket (ex: `https://sos-ch-gva-2.exo.io` -
+  <https://community.exoscale.com/api/sos/>)
+
+Update the Core engine GitHub Actions configuration by adding/updating the
+following variables:
+
+- `DEPLOY_PROD`: `true`
+- `PROD_HOST`: The host of the Core engine backend
+- `PROD_BACKEND_URL`: The URL of the Core engine backend used by the frontend
+- `PROD_BACKEND_WS_URL`: The WebSocket URL of the Core engine backend used by
+  the frontend
+- `PROD_S3_BUCKET`: The name of the S3 bucket
+- `PROD_S3_REGION`: The region of the S3 bucket (ex: `ch-gva-2`)
+
+### Deploy the Core engine
+
+Run the GitHub Actions workflow to deploy the Core engine.
+
+### Deploy a service
+
+TODO
+
+## Related explanations
+
+These explanations are related to the current item (in alphabetical order).
+
+_None at the moment._
+
+## Resources
+
+These resources are related to the current item (in alphabetical order).
+
+_None at the moment._
+
+## Old documentation - to be removed/merged with current documentation
+
 #### Configure Let's Encrypt issuer with DNS-01 challenge
 
 This configuration uses Infomaniak as the DNS provider. You must change the
@@ -293,24 +464,6 @@ kubectl --kubeconfig exoscale.kubeconfig \
 kubectl --kubeconfig exoscale.kubeconfig \
     describe issuer letsencrypt
 ```
-
-
-
-
-cat <<EOF | kubectl apply --kubeconfig exoscale.kubeconfig -f -
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: swiss-ai-center-ch
-spec:
-  secretName: swiss-ai-center-ch-tls
-  issuerRef:
-    name: letsencrypt
-    kind: ClusterIssuer
-  dnsNames:
-  - 'hello2.swiss-ai-center.ch'
-EOF
 
 #### Deploy a dummy pod to validate the Kubernetes cluster configuration
 
@@ -396,47 +549,3 @@ Date: 13/Mar/2024:10:34:34 +0000
 URI: /
 Request ID: caabe951ce74b20c70460b9a1705b88e
 ```
-
-### Create a PostgreSQL database
-
-Create a PostgreSQL database by executing the following commands (inspired by the
-[official documentation](https://community.exoscale.com/documentation/dbaas/quick-start/)):
-
-```sh title="Execute the following command(s) in a terminal"
-# Create a PostgreSQL database
-exo dbaas create pg hobbyist-2 core-engine-prod-database --zone ch-gva-2
-
-# Get the connection string
-exo dbaas --zone ch-gva-2 show core-engine-prod-database --uri
-```
-
-### Create a S3 bucket
-
-Create a S3 bucket by executing the following commands (inspired by the
-[official documentation](https://community.exoscale.com/documentation/object-storage/quick-start/#create-a-bucket)):
-
-```sh title="Execute the following command(s) in a terminal"
-# Create a S3 bucket
-exo storage mb --zone ch-gva-2 sos://core-engine-prod-bucket
-
-# Validate the creation of the S3 bucket
-exo storage ls --zone ch-gva-2
-```
-
-### Update the Core engine GitHub Actions configuration
-
-### Deploy the Core engine
-
-### Deploy a service
-
-## Related explanations
-
-These explanations are related to the current item (in alphabetical order).
-
-_None at the moment._
-
-## Resources
-
-These resources are related to the current item (in alphabetical order).
-
-_None at the moment._
