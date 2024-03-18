@@ -1,6 +1,6 @@
-# How to deploy the Core engine on a Exoscale Kuburnetes cluster
+# How to deploy the Core engine on an Exoscale Kubernetes cluster
 
-This guide will help you to deploy the Core engine on a Exoscale Kubernetes
+This guide will help you to deploy the Core engine on an Exoscale Kubernetes
 cluster.
 
 ## Guide
@@ -675,7 +675,8 @@ kubectl --kubeconfig exoscale.kubeconfig \
 
 ### Delete all resources
 
-If you ever need to delete all resources, you can execute the following commands:
+If you ever need to delete all resources, you can execute the following
+commands:
 
 ```sh title="Execute the following command(s) in a terminal"
 # Delete all node pools

@@ -28,7 +28,7 @@ nav:
       - How to update the documentation: how-to-guides/how-to-update-the-documentation.md
       - How to configure a new GitHub repository: how-to-guides/how-to-configure-a-new-github-repository.md
       - How to add DVC to a service: how-to-guides/how-to-add-dvc-to-a-service.md
-      - How to deploy the Core engine on a Exoscale Kuburnetes cluster: how-to-guides/how-to-deploy-the-core-engine-on-a-exoscale-kubernetes-cluster.md
+      - How to deploy the Core engine on an Exoscale Kuburnetes cluster: how-to-guides/how-to-deploy-the-core-engine-on-an-exoscale-kubernetes-cluster.md
   - Reference:
       - reference/index.md
       - Core concepts:
