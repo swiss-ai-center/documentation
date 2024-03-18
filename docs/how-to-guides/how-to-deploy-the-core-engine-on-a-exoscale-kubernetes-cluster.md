@@ -456,13 +456,17 @@ the tutorial at <https://cert-manager.io/docs/tutorials/acme/nginx-ingress/>).
 
 Deploy the dummy pod by executing the following commands:
 
+!!! info
+
+    It can take a few minutes for the certificate to be issued.
+
 ```sh title="Execute the following command(s) in a terminal"
 # Deploy the dummy pod
 kubectl --kubeconfig exoscale.kubeconfig \
     apply -f dummy-pod.yaml
 
 # Validate the deployment
-curl http://hello.swiss-ai-center.ch
+curl https://hello.swiss-ai-center.ch
 ```
 
 The output should be similar to the following:
@@ -595,6 +599,11 @@ exo iam api-key create s3 core-engine
 Update the Core engine GitHub Actions configuration by adding/updating the
 following secrets:
 
+!!! warning
+
+    The `PROD_DATABASE_URL` must be saved with `postgresql://` protocol. The default
+    value is `postgres://`.
+
 - `PROD_KUBE_CONFIG`: The content of the Kubernetes configuration file (this is
   an Organization secret in our repository)
 - `PROD_DATABASE_URL`: The URL of the PostgreSQL database
@@ -619,6 +628,20 @@ following variables:
 
 Run the GitHub Actions workflow to deploy the Core engine.
 
+#### Validate the deployment
+
+Validate the deployment by executing the following commands:
+
+```sh title="Execute the following command(s) in a terminal"
+# Check the pods
+kubectl --kubeconfig exoscale.kubeconfig \
+    get pods
+
+# Check the logs
+kubectl --kubeconfig exoscale.kubeconfig \
+    logs core-engine-backend-stateful-0
+```
+
 ### Deploy a service
 
 Deploying a service is similar to deploying the core engine. You need to update
@@ -635,6 +658,62 @@ variables:
 - `SERVICE_NAME`: The name of the service
 
 Run the GitHub Actions workflow to deploy the service.
+
+#### Validate the deployment
+
+Validate the deployment by executing the following commands:
+
+```sh title="Execute the following command(s) in a terminal"
+# Check the pods
+kubectl --kubeconfig exoscale.kubeconfig \
+    get pods
+
+# Check the logs
+kubectl --kubeconfig exoscale.kubeconfig \
+    logs average-shade-stateful-0
+```
+
+### Delete all resources
+
+If you ever need to delete all resources, you can execute the following commands:
+
+```sh title="Execute the following command(s) in a terminal"
+# Delete all node pools
+exo compute sks nodepool delete swiss-ai-center-prod-cluster swiss-ai-center-prod-nodepool-1
+
+# Delete the Kubernetes cluster
+exo compute sks delete swiss-ai-center-prod-cluster
+
+# List the load balancers
+exo compute load-balancer list
+
+# Delete the load balancer
+exo compute load-balancer delete k8s-9fb0fdfd-c90d-4234-b50c-871885f0982d
+
+# Delete the security group
+exo compute security-group delete swiss-ai-center-prod-security-group
+
+# Remove terminations protection from the PostgreSQL database
+exo dbaas update core-engine-prod-database --zone ch-gva-2 --termination-protection=false
+
+# Delete the PostgreSQL database
+exo dbaas delete core-engine-prod-database --zone ch-gva-2
+
+# Delete the S3 bucket
+exo storage rb --recursive sos://core-engine-prod-bucket
+
+# Delete the API key for Kubernetes
+exo iam api-key delete k8s-dbaas
+
+# Delete the role for Kubernetes
+exo iam role delete k8s
+
+# Delete the API key for the Core engine
+exo iam api-key delete s3
+
+# Delete the role for the Core engine
+exo iam role delete core-engine
+```
 
 ## Related explanations
 
