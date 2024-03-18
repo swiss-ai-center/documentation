@@ -10,10 +10,11 @@ cluster.
 #### Exoscale CLI
 
 Install and configure the Exoscale CLI by following the instructions in the
-official documentation at
-<https://community.exoscale.com/documentation/tools/exoscale-command-line-interface/#installation>
-and
-<https://community.exoscale.com/documentation/tools/exoscale-command-line-interface/#configuration>.
+official documentation:
+
+ - <https://community.exoscale.com/documentation/tools/exoscale-command-line-interface/#installation>
+
+ - <https://community.exoscale.com/documentation/tools/exoscale-command-line-interface/#configuration>.
 
 #### kubectl
 
