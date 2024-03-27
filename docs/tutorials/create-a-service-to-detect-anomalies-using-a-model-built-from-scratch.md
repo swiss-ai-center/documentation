@@ -128,7 +128,7 @@ folder:
 
 ```sh title="Execute this in the 'model-creation' folder"
 # Create a virtual environment
-python3.10 -m venv .venv
+python3.11 -m venv .venv
 ```
 
 Then, activate the virtual environment:
@@ -414,7 +414,7 @@ Create a new Python virtual environment as explained in the previous section:
 
 ```sh title="Execute this in the 'model-serving' folder"
 # Create a virtual environment
-python3.10 -m venv .venv
+python3.11 -m venv .venv
 ```
 
 Then, activate the virtual environment:
@@ -756,7 +756,7 @@ the model and the model itself:
 
 ```dockerfile title="Dockerfile" hl_lines="4-5 20-21"
 # Base image
-FROM python:3.10
+FROM python:3.11
 
 # Install all required packages to run the model(1)
 # RUN apt update && apt install --yes package1 package2 ...

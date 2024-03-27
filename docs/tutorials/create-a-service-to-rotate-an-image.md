@@ -103,7 +103,7 @@ folder:
 
 ```sh title="Execute this in the 'root' folder"
 # Create a virtual environment
-python3.10 -m venv .venv
+python3.11 -m venv .venv
 ```
 
 Then, activate the virtual environment:
@@ -365,7 +365,7 @@ the model and the model itself:
 
 ```dockerfile hl_lines="5"
 # Base image
-FROM python:3.10
+FROM python:3.11
 
 # Install all required packages to run the model
 RUN apt update && apt install --yes ffmpeg libsm6 libxext6
