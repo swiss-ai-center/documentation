@@ -163,13 +163,14 @@ classDiagram
     Pipeline "*" --> "*" FieldDescription: has
 
     PipelineExecution "1" --> "*" FileKeyReference: has
-    PipelineExecution "0..*" --> "1..1" Pipeline: refer to
+    PipelineExecution "0..*" --> "1..1" Pipeline: refers to
     PipelineExecution "1..1" --> "0..*" PipelineStep: has
 
-    PipelineStep "0..*" --> "1..1" Pipeline: refer to
+    PipelineStep "0..*" --> "1..1" Pipeline: refers to
+    PipelineStep "0..*" --> "1..1" Service: refers to
 
     PipelineExecution "1..1" --> "0..*" Task: has
-    Task "0..*" --> "1..1" Service: refer to
+    Task "0..*" --> "1..1" Service: refers to
 ```
 #### UML diagram (future and ideal version)
 
@@ -299,11 +300,11 @@ classDiagram
     PipelineExecution "0..*" --> "1..1" Pipeline: has
     PipelineExecution "1..1" --> "0..*" PipelineStep: has
 
-    PipelineStep "0..*" --> "1..1" Pipeline: belong to
-    PipelineStep "0..*" --> "1..1" ExecutionUnit
+    PipelineStep "0..*" --> "1..1" Pipeline: belongs to
+    PipelineStep "0..*" --> "1..1" ExecutionUnit: links to
 
     Task "0..*" --> "1..1" PipelineExecution: has
-    Task "0..*" --> "1..1" Service: belong to
+    Task "0..*" --> "1..1" Service: belongs to
 ```
 
 #### Sequence
