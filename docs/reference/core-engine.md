@@ -37,11 +37,147 @@ standard. A user-friendly interface provided by Swagger is available under the
 
 ### Diagrams
 
-#### UML diagram
+#### UML diagram (current version)
 
-The models defined for each class is represented as follows:
+The models defined for each class is represented as follows. This diagram
+represents the current version of the Core engine. A future and ideal version is
+available in the
+[**UML diagram (future and ideal vision)**](#uml-diagram-future-and-ideal-vision).
 
-![UML Diagram](../assets/screenshots/models_diagram.svg)
+```mermaid
+TODO
+```
+#### UML diagram (future and ideal vision)
+
+The models defined for each class is represented as follows. This diagram
+represents the future vision and ideal version of the Core engine.
+
+At the time being, the Core engine is not fully implemented as described in the
+diagram, mostly due to [SQLModel](../explanations/about-sqlmodel.md) limitations
+with inherence. The diagram is a vision of the Core engine and its services.
+
+```mermaid
+classDiagram
+    note for CoreModel "An abstract class to\norder by in the database"
+
+    class CoreModel {
+        <<abstract>>
+        +id: UUID
+        +created_at: datetime
+        +updated_at: datetime
+    }
+
+    note for ExecutionUnit "An execution unit is\nan abstract class to\nrun services or pipelines"
+
+    class ExecutionUnit {
+        <<abstract>>
+        +name: str
+        +slug: str
+        +summary: str
+        +description: str
+        +tags: List[ExecutionUnitTag]
+        +data_in_fields: List[FieldDescription]
+        +data_out_fields: List[FieldDescription]
+        +status: ExecutionUnitStatus
+    }
+
+    note for PipelineExecution "A pipeline execution\nis the current execution\nperformed by a given\npipeline"
+
+    class PipelineExecution {
+        +pipeline: Pipeline
+        +current_pipeline_step: PipelineStep | None
+        +tasks: List[Task]
+        +files: List[FileKeyReference]
+    }
+
+    note for Task "A task is given\nto a service that\nperform an action\non the inputs and\nstore its results\nas outputs"
+
+    class Task {
+        +service: Service
+        +pipeline_execution: PipelineExecution | None
+        +data_in: List[str]
+        +data_out: List[str]
+        +status: Enum[TaskStatus]
+    }
+
+    class ExecutionUnitTag {
+        +name: str
+        +acronym: str
+    }
+
+    class FieldDescription {
+        +name: str
+        +type: str
+    }
+
+    class Service {
+        +url: str
+    }
+
+    class Pipeline {
+        +steps: List[PipelineStep]
+    }
+
+    note for PipelineStep "A pipeline step is\none step in the\nwhole pipeline with\nits dependencies,\ninputs, etc."
+
+    class PipelineStep {
+        +identifier: str
+        +needs: List[str]
+        +condition: str | None
+        +inputs: List[str]
+    }
+
+    note for FileKeyReference "A FileKeyReference references an object in the S3 storage bucket"
+
+    class FileKeyReference {
+        +reference: str
+        +object_key: str
+    }
+
+    class TaskStatus {
+        <<enumeration>>
+
+        str PENDING
+        str FETCHING
+        str PROCESSING
+        str SAVING
+        str FINISHED
+        str ERROR
+        str SCHEDULED
+        str SKIPPED
+        str ARCHIVED
+        str UNAVAILABLE
+    }
+
+    class ExecutionUnitStatus {
+        <<enumeration>>
+
+        str AVAILABLE
+        str UNAVAILABLE
+        str DISABLED
+    }
+
+    CoreModel <|-- Task
+    CoreModel <|-- ExecutionUnit
+    CoreModel <|-- PipelineStep
+    CoreModel <|-- PipelineExecution
+
+    ExecutionUnit <|-- Service
+    ExecutionUnit <|-- Pipeline
+
+    ExecutionUnit "*" --> "*" ExecutionUnitTag: has
+    ExecutionUnit "*" --> "*" FieldDescription: has
+
+    PipelineExecution "1" --> "*" FileKeyReference: has
+    PipelineExecution "0..*" --> "1..1" Pipeline: has
+    PipelineExecution "1..1" --> "0..*" PipelineStep: has
+
+    PipelineStep "0..*" --> "1..1" Pipeline: belong to
+    PipelineStep "0..*" --> "1..1" ExecutionUnit
+
+    Task "0..*" --> "1..1" PipelineExecution: has
+    Task "0..*" --> "1..1" Service: belong to
+```
 
 #### Sequence
 
