@@ -45,7 +45,130 @@ available in the
 [**UML diagram (future and ideal vision)**](#uml-diagram-future-and-ideal-vision).
 
 ```mermaid
-TODO
+classDiagram
+    note for CoreModel "An abstract class to\norder by in the database"
+
+    class CoreModel {
+        <<abstract>>
+        +id: UUID
+        +created_at: datetime
+        +updated_at: datetime
+    }
+
+    note for PipelineExecution "A pipeline execution\nis the current execution\nperformed by a given\npipeline"
+
+    class PipelineExecution {
+        +pipeline: Pipeline
+        +current_pipeline_step: PipelineStep | None
+        +tasks: List[Task]
+        +files: List[FileKeyReference]
+    }
+
+    note for Task "A task is given\nto a service that\nperform an action\non the inputs and\nstore its results\nas outputs"
+
+    class Task {
+        +service: Service
+        +pipeline_execution: PipelineExecution | None
+        +data_in: List[str]
+        +data_out: List[str]
+        +status: Enum[TaskStatus]
+    }
+
+    class ExecutionUnitTag {
+        +name: str
+        +acronym: str
+    }
+
+    class FieldDescription {
+        +name: str
+        +type: str
+    }
+
+    class Service {
+        +name: str
+        +slug: str
+        +summary: str
+        +description: str
+        +tags: List[ExecutionUnitTag]
+        +data_in_fields: List[FieldDescription]
+        +data_out_fields: List[FieldDescription]
+        +status: ExecutionUnitStatus
+        +docs_url: str | none
+        +has_ai: bool
+        +url: str
+    }
+
+    class Pipeline {
+        +name: str
+        +slug: str
+        +summary: str
+        +description: str
+        +tags: List[ExecutionUnitTag]
+        +data_in_fields: List[FieldDescription]
+        +data_out_fields: List[FieldDescription]
+        +status: ExecutionUnitStatus
+        +steps: List[PipelineStep]
+    }
+
+    note for PipelineStep "A pipeline step is\none step in the\nwhole pipeline with\nits dependencies,\ninputs, etc."
+
+    class PipelineStep {
+        +identifier: str
+        +needs: List[str]
+        +condition: str | None
+        +inputs: List[str]
+        +pipeline: Pipeline
+        +pipeline_executions: List[PipelineExecution]
+        +service: Service
+    }
+
+    note for FileKeyReference "A FileKeyReference references an object in the S3 storage bucket"
+
+    class FileKeyReference {
+        +reference: str
+        +file_key: str
+    }
+
+    class TaskStatus {
+        <<enumeration>>
+
+        str PENDING
+        str FETCHING
+        str PROCESSING
+        str SAVING
+        str FINISHED
+        str ERROR
+        str SCHEDULED
+        str SKIPPED
+        str ARCHIVED
+        str UNAVAILABLE
+    }
+
+    class ExecutionUnitStatus {
+        <<enumeration>>
+
+        str AVAILABLE
+        str UNAVAILABLE
+        str DISABLED
+    }
+
+    CoreModel <|-- Task 
+    CoreModel <|-- PipelineStep
+    CoreModel <|-- PipelineExecution
+    CoreModel <|-- Pipeline
+    CoreModel <|-- Service
+
+    Pipeline "*" --> "*" ExecutionUnitTag: has
+    Pipeline "*" --> "*" FieldDescription: has
+
+    PipelineExecution "1" --> "*" FileKeyReference: has
+    PipelineExecution "0..*" --> "1..1" Pipeline: refer to
+    PipelineExecution "1..1" --> "0..*" PipelineStep: has
+
+    PipelineStep "0..*" --> "1..1" Pipeline: refer to
+
+    PipelineExecution "1..1" --> "0..*" Task: has
+    Task "0..*" --> "1..1" Service: refer to
 ```
 #### UML diagram (future and ideal vision)
 
@@ -112,6 +235,8 @@ classDiagram
 
     class Service {
         +url: str
+        +docs_url: str | None
+        +has_ai: bool
     }
 
     class Pipeline {
@@ -131,7 +256,7 @@ classDiagram
 
     class FileKeyReference {
         +reference: str
-        +object_key: str
+        +file_key: str
     }
 
     class TaskStatus {
