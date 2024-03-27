@@ -39,10 +39,11 @@ standard. A user-friendly interface provided by Swagger is available under the
 
 #### UML diagram (current version)
 
-The models defined for each class is represented as follows. This diagram
-represents the current version of the Core engine. A future and ideal version is
-available in the
+This diagram represents the current version of the Core engine. A future and
+ideal version is available in the
 [**UML diagram (future and ideal vision)**](#uml-diagram-future-and-ideal-vision).
+
+The models defined for each class is represented as follow:
 
 ```mermaid
 classDiagram
@@ -152,7 +153,7 @@ classDiagram
         str DISABLED
     }
 
-    CoreModel <|-- Task 
+    CoreModel <|-- Task
     CoreModel <|-- PipelineStep
     CoreModel <|-- PipelineExecution
     CoreModel <|-- Pipeline
@@ -170,14 +171,15 @@ classDiagram
     PipelineExecution "1..1" --> "0..*" Task: has
     Task "0..*" --> "1..1" Service: refer to
 ```
-#### UML diagram (future and ideal vision)
+#### UML diagram (future and ideal version)
 
-The models defined for each class is represented as follows. This diagram
-represents the future vision and ideal version of the Core engine.
+This diagram represents the future vision and ideal version of the Core engine.
 
 At the time being, the Core engine is not fully implemented as described in the
 diagram, mostly due to [SQLModel](../explanations/about-sqlmodel.md) limitations
 with inherence. The diagram is a vision of the Core engine and its services.
+
+The models defined for each class is represented as follow.
 
 ```mermaid
 classDiagram
