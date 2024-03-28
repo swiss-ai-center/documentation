@@ -37,6 +37,7 @@ mdwrap is a command line tool to format our Markdown documentation made with
 | ------------------------------------------------------   | ------------------------------------------------------------------ | --------------------------------------------------------------------| -------------- |
 | [ae-ano-detection](./services/ae-ano-detection.md)       | <https://github.com/swiss-ai-center/ae-ano-detection-service>      | <https://ae-ano-detection-swiss-ai-center.kube.isc.heia-fr.ch>      | -              |
 | [average-shade](./services/average-shade.md)             | <https://github.com/swiss-ai-center/average-shade-service>         | <https://average-shade-swiss-ai-center.kube.isc.heia-fr.ch>         | -              |
+| [classification-benchmark](./services/classification-benchmark.md)                           | <https://github.com/swiss-ai-center/classification-benchmark-service>                | <https://classification-benchmark-swiss-ai-center.kube.isc.heia-fr.ch>                | -              |
 | [digit-recognition](./services/digit-recognition.md)     | <https://github.com/swiss-ai-center/digit-recognition-service>     | <https://digit-recognition-swiss-ai-center.kube.isc.heia-fr.ch>     | -              |
 | [document-vectorizer](./services/document-vectorizer.md) | <https://github.com/swiss-ai-center/document-vectorizer-service>   | <https://document-vectorizer-swiss-ai-center.kube.isc.heia-fr.ch>   | -              |
 | [doodle](./services/doodle.md)                           | <https://github.com/swiss-ai-center/doodle-service>                | <https://doodle-swiss-ai-center.kube.isc.heia-fr.ch>                | -              |
@@ -53,11 +54,10 @@ mdwrap is a command line tool to format our Markdown documentation made with
 | [image-sam](./services/image-sam.md)                     | <https://github.com/swiss-ai-center/image-sam-service>             | <https://image-sam-swiss-ai-center.kube.isc.heia-fr.ch>             | -              |
 | [integrity-checker](./services/integrity-checker.md)     | <https://github.com/swiss-ai-center/integrity-checker-service>     | <https://intergrity-checker-swiss-ai-center.kube.isc.heia-fr.ch>    | -              |
 | [nlp-langid](./services/nlp-langid.md)                   | <https://github.com/swiss-ai-center/nlp-langid-service>            | <https://nlp-langid-swiss-ai-center.kube.isc.heia-fr.ch>            | -              |
+| [regression-benchmark](./services/regression-benchmark.md)                           | <https://github.com/swiss-ai-center/regression-benchmark-service>                | <https://regression-benchmark-swiss-ai-center.kube.isc.heia-fr.ch>                | -              |
 | [text-summarizer](./services/text-summarizer.md)         | <https://github.com/swiss-ai-center/text-summarizer-service>       | <https://text-summarizer-swiss-ai-center.kube.isc.heia-fr.ch>       | -              |
 | [yolov8](./services/yolov8.md)                           | <https://github.com/swiss-ai-center/yolov8-service>                | <https://yolov8-swiss-ai-center.kube.isc.heia-fr.ch>                | -              |
 | [ydata-profiling](./services/ydata-profiling.md)                  | <https://github.com/swiss-ai-center/ydata-profiling>               | <https://ydata-profiling-swiss-ai-center.kube.isc.heia-fr.ch>       | -              |
-| [classification-benchmark](./services/classification-benchmark.md)                           | <https://github.com/swiss-ai-center/classification-benchmark-service>                | <https://classification-benchmark-swiss-ai-center.kube.isc.heia-fr.ch>                | -              |
-| [regression-benchmark](./services/regression-benchmark.md)                           | <https://github.com/swiss-ai-center/regression-benchmark-service>                | <https://regression-benchmark-swiss-ai-center.kube.isc.heia-fr.ch>                | -              |
 
 ## Pipelines
 
