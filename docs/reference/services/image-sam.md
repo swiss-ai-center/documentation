@@ -39,6 +39,14 @@ documentation for more details.
 
 ## Start the service locally
 
-Check the
+In order to start the service locally, you need to download the model weights
+with the following command:
+
+```bash
+# Download the model's weights
+wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth -P model/
+```
+
+Then, you can start the service following the instructions in the
 [**Core concepts > Service > Start the service locally**](../core-concepts/service.md#start-the-service-locally)
 documentation for more details.
