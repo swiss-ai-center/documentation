@@ -33,21 +33,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-      
-      - uses: actions/setup-python@v4
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
         with:
-          python-version: 3.x
-      
-      - uses: actions/cache@v3
+          python-version: 3.11
+
+      - uses: actions/cache@v4
         with:
           key: ${{ github.ref }}
           path: .cache
-      
+
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v2
-      
+        uses: actions/configure-pages@v4
+
       - name: Install Material for MkDocs dependencies
         shell: bash
         run: |
@@ -58,21 +58,15 @@ jobs:
             libjpeg-dev \
             libpng-dev \
             libz-dev
-          pip install \
-            cairosvg \
-            mkdocs-material \
-            mkdocs-minify-plugin \
-            mkdocs-git-revision-date-localized-plugin \
-            mkdocs-glightbox \
-            pillow
-      
+          pip install -r requirements.txt -r requirements-all.txt
+
       - name: Build Material for MkDocs
         shell: bash
         run: |
           mkdocs build --site-dir public
-      
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
@@ -87,4 +81,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v2
