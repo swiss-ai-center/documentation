@@ -328,6 +328,10 @@ After the service is registered, it will be available on the Core engine's
 All environment variables are described in the `.env` file at the root of the
 repository.
 
+The values can be changed for local development. For example, to have multiple
+services running on the same machine, The `SERVICE_PORT` variable can be changed
+to a different port number.
+
 ## Run the tests with Python
 
 !!! info
@@ -344,8 +348,7 @@ run the tests, use the following command inside the service folder:
 
 ```sh
 # Run the tests
-pytest
-```
+pytest ```
 
 ## Start the service locally
 
@@ -373,8 +376,7 @@ You have several options to start the service locally:
     docker compose build
 
     # Start the service
-    docker compose up
-    ```
+    docker compose up ```
 
     Access the service documentation at <http://localhost:9090/docs>.
 
