@@ -202,7 +202,7 @@ summarizer tool that summarizes a text using the
 
 Open the `main.py` with your favorite editor and follow the instructions below.
 
-```py hl_lines="23 30-32 41-42 48-61 66-86 90-97 100-110"
+```py hl_lines="23 26 31-33 42-43 49-62 67-87 91-98 101-111"
 import asyncio
 import time
 from fastapi import FastAPI
@@ -228,6 +228,7 @@ from contextlib import asynccontextmanager
 from transformers import pipeline
 
 settings = get_settings()
+classifier = pipeline("summarization", model="philschmid/bart-large-cnn-samsum")
 
 
 class MyService(Service):
