@@ -103,7 +103,7 @@ folder:
 
 ```sh title="Execute this in the 'root' folder"
 # Create a virtual environment
-python3.10 -m venv .venv
+python3.11 -m venv .venv
 ```
 
 Then, activate the virtual environment:
