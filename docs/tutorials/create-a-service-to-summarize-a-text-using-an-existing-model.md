@@ -336,7 +336,9 @@ app = FastAPI(
    dictionary with the keys being the field names set in the data_in_fields. The
    result must be a dictionary with the keys being the field names set in the
    data_out_fields.
-7. Change the API description and summary.
+7. Change the API description and summary. The description is a markdown string
+   that will be displayed in the API documentation. The summary is a short
+   description of the API.
 8. Change the API title, version, contact and license.
 
 !!! Note
@@ -417,7 +419,7 @@ There are two ways to test the service:
     Upload the text file and click on the Execute button. The response body should
     be something similar to the following:
 
-    ```json hl_lines="12"
+    ```json hl_lines="4-7 11"
     {
       "created_at": "2024-01-09T16:30:22.627620",
       "updated_at": "2024-01-09T16:54:58.221528",
@@ -461,7 +463,8 @@ There are two ways to test the service:
         "name": "Text Summarizer",
         "slug": "text-summarizer",
         "summary": "\nSummarize the given text.\n",
-        "url": "http://localhost:9090"
+        "url": "http://localhost:9090",
+        "docs_url": "https://docs.swiss-ai-center.ch/reference/services/text-summarizer/",
       },
       "pipeline_execution": null
     }

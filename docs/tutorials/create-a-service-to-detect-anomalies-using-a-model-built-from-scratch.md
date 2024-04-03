@@ -737,7 +737,8 @@ async def root():
 12. Get the type of the data from the `dataset` field.
 13. Use the model to reconstruct the original time series data.
 14. Return the result of the service.
-15. Edit the description of the service.
+15. Change the API description. The description is a markdown string
+   that will be displayed in the API documentation.
 16. Edit the summary of the service.
 17. Edit the title of the service.
 18. Edit the version of the service.
@@ -989,7 +990,8 @@ There are two ways to test the service:
             "acronym": "TS"
         }
         ],
-        "has_ai": true
+        "has_ai": true,
+        "docs_url": "https://docs.swiss-ai-center.ch/reference/services/ae-ano-detection/",
     },
     "pipeline_execution": null
     }
