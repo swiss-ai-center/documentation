@@ -63,7 +63,7 @@ You have three ways to bootstrap a new service based on the template:
 
 === "Download the template"
 
-    If you do notwant to host your codebase on GitHub or if you do not want to be
+    If you do not want to host your codebase on GitHub or if you do not want to be
     linked to the Swiss AI Center organization, download the
     [_Create a new service (generic) template_](https://github.com/swiss-ai-center/create-a-new-service-generic-template).
     as an archive file (**"Download ZIP"**) from the GitHub repository and start
