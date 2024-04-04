@@ -146,11 +146,11 @@ source .venv/bin/activate
 Create a `requirements.txt` file with the following content:
 
 ```text title="requirements.txt"
-matplotlib==3.6.3
-numpy==1.24.2
-pandas==1.5.3
-scikit-learn==1.2.1
-tensorflow==2.9.0
+matplotlib==3.8.4
+numpy==1.26.4
+pandas==2.2.1
+scikit-learn==1.4.1.post1
+tensorflow==2.16.1
 ```
 
 These are the dependencies required to create the model to detect anomalies.
@@ -171,6 +171,10 @@ pip freeze --local --all > requirements-all.txt
 
 This will ensure that the same versions of the dependencies are installed on
 every machine if you ever share your code with someone else.
+
+As a last step, remove the `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
+line in `requirements-all.txt`, as it will conflict with the existing line in
+`requirements.txt` because of the explicit commit reference.
 
 #### Create the source files
 
@@ -376,6 +380,17 @@ Run the following command to train the model:
 python src/train_model.py --train-dataset data/train.csv
 ```
 
+!!! note
+
+    If you encounter a `libdevice not found at ./libdevice.10.bc` error message
+    while utilizing an Nvidia GPU with CUDA, you should export the CUDA library
+    path by executing the command:
+
+    `export XLA_FLAGS=--xla_gpu_cuda_data_dir=/opt/cuda`
+
+    Adjust the path accordingly. This step is necessary to enable successful
+    GPU-based training for the model.
+
 The model will be saved in the `model-creation/model` folder under the name
 `anomalies_detection_model.h5`.
 
@@ -399,6 +414,15 @@ A plot of the anomalies detected will be saved in the
 The model binary file is saved in the `model-creation/model` folder under the
 name `anomalies_detection_model.h5`. You will need this file in the next
 section.
+
+#### Exit the virtual environment
+
+Run the following command to exit the virtual environment:
+
+```sh title="Execute this in the virtual environment"
+# Deactivate the virtual environment
+deactivate
+```
 
 ### Implement the model serving
 
@@ -436,11 +460,11 @@ Update the `requirements.txt` file with the following content:
 
 ```text title="requirements.txt" hl_lines="2-6"
 common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main
-matplotlib==3.6.3
-numpy==1.24.2
-pandas==1.5.3
-scikit-learn==1.2.1
-tensorflow==2.9.0
+matplotlib==3.8.4
+numpy==1.26.4
+pandas==2.2.1
+scikit-learn==1.4.1.post1
+tensorflow==2.16.1
 ```
 
 The `common-code` package is required to serve the model over a FastAPI REST API
@@ -466,6 +490,10 @@ pip freeze --local --all > requirements-all.txt
 
 This will ensure that the same versions of the dependencies are installed on
 every machine if you ever share your code with someone else.
+
+As a last step, remove the `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
+line in `requirements-all.txt`, as it will conflict with the existing line in
+`requirements.txt` because of the explicit commit reference.
 
 #### Copy the model binary file
 
@@ -826,7 +854,7 @@ Start the service with the following command:
 cd src
 
 # Start the application
-uvicorn --reload --port 9090 main:app
+uvicorn --reload --host 0.0.0.0 --port 9090 main:app
 ```
 
 The service should try to announce itself to the Core engine.
