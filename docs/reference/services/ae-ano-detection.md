@@ -62,6 +62,17 @@ dvc pull
 dvc repro
 ```
 
+!!! note
+
+    If you encounter a `libdevice not found at ./libdevice.10.bc` error message
+    while utilizing an Nvidia GPU with CUDA, you should export the CUDA library
+    path by executing the command:
+
+    `export XLA_FLAGS=--xla_gpu_cuda_data_dir=/opt/cuda`
+
+    Adjust the path accordingly. This step is necessary to enable successful
+    GPU-based training for the model.
+
 The DVC pipeline is described in the `dvc.yaml` file.
 
 Each stage describes the dependencies and the outputs of the stage. Every time a
