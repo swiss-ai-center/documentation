@@ -12,7 +12,8 @@ and blur them.
 
 To follow this tutorial, you need to have the following tools installed:
 
-- [Python 3.11](https://www.python.org/downloads/) (You can use Python 3.10 if you encounter issues with Python 3.11)
+- [Python 3.11](https://www.python.org/downloads/) (You can use Python 3.10 if
+  you encounter issues with Python 3.11)
 - An IDE (e.g. [Visual Studio Code](https://code.visualstudio.com/))
 
 ### Prepare the Core engine

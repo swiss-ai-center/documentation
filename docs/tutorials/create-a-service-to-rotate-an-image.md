@@ -145,22 +145,26 @@ Create a freeze file to pin all dependencies to their current versions:
 pip freeze --local --all > requirements-all.txt
 ```
 
-Finally, copy the line `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>` from
-the `requirements-all.txt` file into the `requirements.txt` file, replacing the generic existing line.
+Finally, copy the line
+`common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
+from the `requirements-all.txt` file into the `requirements.txt` file, replacing
+the generic existing line.
 
 This will ensure that the same versions of the dependencies are installed on
 every machine if you ever share your code with someone else.
 
 !!! note
 
-    To facilitate easier updates to services in the event of a  common-code  dependency update,
-    consider removing the specific line referencing `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
-    from `requirements-all.txt`. This specific line may conflict with the more general line in `requirements.txt`
-    due to its explicit commit reference.
+    To facilitate easier updates to services in the event of a common-code
+    dependency update, consider removing the specific line referencing
+    `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
+    from `requirements-all.txt`. This specific line may conflict with the more
+    general line in `requirements.txt` due to its explicit commit reference.
 
-    By removing this specific line, updates to the `common-code` dependency won't require any modifications
-    to the service configuration before redeployment. Do note however that this approach will not guarantee
-    that the `common-code` dependency remains consistent across different service deployments.
+    By removing this specific line, updates to the `common-code` dependency won't
+    require any modifications to the service configuration before redeployment. Do
+    note however that this approach will not guarantee that the `common-code`
+    dependency remains consistent across different service deployments.
 
 ### Update the template files
 
@@ -411,11 +415,11 @@ uvicorn --reload --host 0.0.0.0 --port 9090 main:app
 
     Each service should be made available on a different port that is not in use.
 
-    If you followed the previous tutorial to start the core engine, port 9090
-    should already be in use by the dummy `average-shade-service` service. In
-    that case, you can use a different port number, or alternatively shut down
-    the running service and reset the database that recorded the port entry by
-    removing the `backend/core-engine.db` file.
+    If you followed the previous tutorial to start the core engine, port 9090 should
+    already be in use by the dummy `average-shade-service` service. In that case,
+    you can use a different port number, or alternatively shut down the running
+    service and reset the database that recorded the port entry by removing the
+    `backend/core-engine.db` file.
 
 The service should try to announce itself to the Core engine.
 

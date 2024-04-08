@@ -65,8 +65,8 @@ dvc repro
 !!! note
 
     If you encounter a `libdevice not found at ./libdevice.10.bc` error message
-    while utilizing an Nvidia GPU with CUDA, you should export the CUDA library
-    path by executing the command:
+    while utilizing an Nvidia GPU with CUDA, you should export the CUDA library path
+    by executing the command:
 
     `export XLA_FLAGS=--xla_gpu_cuda_data_dir=/opt/cuda`
 
