@@ -1,5 +1,5 @@
 CairoSVG==2.7.1
-mdwrap @ git+https://github.com/swiss-ai-center/mdwrap.git@a93eb79da302f67f574433917216857d21a3d9d2
+mdwrap @ git+https://github.com/swiss-ai-center/mdwrap.git@35300ae05e4e387ace6cf1bf8a5c234a797709f9
 mkdocs-git-revision-date-localized-plugin==1.2.4
 mkdocs-glightbox==0.3.7
 mkdocs-material==9.5.17
