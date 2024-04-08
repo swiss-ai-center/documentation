@@ -145,12 +145,22 @@ Create a freeze file to pin all dependencies to their current versions:
 pip freeze --local --all > requirements-all.txt
 ```
 
+Finally, copy the line `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>` from
+the `requirements-all.txt` file into the `requirements.txt` file, replacing the generic existing line.
+
 This will ensure that the same versions of the dependencies are installed on
 every machine if you ever share your code with someone else.
 
-As a last step, remove the `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
-line in `requirements-all.txt`, as it will conflict with the existing line in
-`requirements.txt` because of the explicit commit reference.
+!!! note
+
+    To facilitate easier updates to services in the event of a  common-code  dependency update,
+    consider removing the specific line referencing `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
+    from `requirements-all.txt`. This specific line may conflict with the more general line in `requirements.txt`
+    due to its explicit commit reference.
+
+    By removing this specific line, updates to the `common-code` dependency won't require any modifications
+    to the service configuration before redeployment. Do note however that this approach will not guarantee
+    that the `common-code` dependency remains consistent across different service deployments.
 
 ### Update the template files
 
