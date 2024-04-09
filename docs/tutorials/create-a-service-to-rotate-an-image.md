@@ -120,10 +120,10 @@ source .venv/bin/activate
 
 Update the `requirements.txt` file with the following content:
 
-```txt hl_lines="2 3"
+```txt title="requirements.txt" hl_lines="2 3"
 common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main
-numpy==1.24.1
-opencv-python==4.7.0.72
+numpy==1.26.4
+opencv-python==4.9.0.80
 ```
 
 The `common-code` package is required to serve the model over a FastAPI REST API
@@ -145,8 +145,21 @@ Create a freeze file to pin all dependencies to their current versions:
 pip freeze --local --all > requirements-all.txt
 ```
 
-This will ensure that the same versions of the dependencies are installed on
-every machine if you ever share your code with someone else.
+The specific
+`common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
+line will conflict with the more general line in `requirements.txt` due to the
+explicit commit reference.
+
+From there, you have two options:
+
+* **Easier update:** Remove the specific
+  `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
+  line from `requirements-all.txt`. This allows for easier updates of the
+  common-code dependency without adjusting service dependencies.
+* **Consistent dependencies:** Remove the generic line in `requirements.txt` to
+  keep dependencies consistent across machines and time. This will ensure that the
+  same versions of the dependencies are installed on every machine if you ever
+  share your code with someone else.
 
 ### Update the template files
 
@@ -155,7 +168,7 @@ every machine if you ever share your code with someone else.
 Open the `README.md` file and update the title and the description of the
 [Service](../reference/core-concepts/service.md).
 
-```md
+```md title="README.md"
 # Image Rotate
 
 This service rotates an image by 90, 180 or 270 degrees clockwise.
@@ -180,7 +193,7 @@ This service rotates an image by 90, 180 or 270 degrees clockwise.
 
 ```toml title="pyproject.toml" hl_lines="2"
 [project]
-name = "image-rotate"
+name = "image-rotate" # (1)!
 
 [tool.pytest.ini_options]
 pythonpath = [".", "src"]
@@ -198,7 +211,7 @@ depending on the value of the `rotation` parameter.
 
 Open the `main.py` with your favorite editor and follow the instructions below.
 
-```py hl_lines="23-25 32-34 43-44 50-64 68-96 100-106 109-119"
+```py title="main.py" hl_lines="23-25 32-34 43-44 50-64 68-96 100-106 109-119"
 import asyncio
 import time
 from fastapi import FastAPI
@@ -365,7 +378,7 @@ app = FastAPI(
 Update the Dockerfile to install all required packages that might be required by
 the model and the model itself:
 
-```dockerfile hl_lines="5"
+```dockerfile title="Dockerfile" hl_lines="5"
 # Base image
 FROM python:3.11
 
@@ -390,8 +403,18 @@ Start the service with the following command:
 cd src
 
 # Start the application
-uvicorn --reload --port 9090 main:app
+uvicorn --reload --host 0.0.0.0 --port 9090 main:app
 ```
+
+??? tip "Selecting the IP port for the service"
+
+    Each service should be made available on a different port that is not in use.
+
+    If you followed the previous tutorial to start the core engine, port 9090 should
+    already be in use by the dummy `average-shade-service` service. In that case,
+    you can use a different port number, or alternatively shut down the running
+    service and reset the database that recorded the port entry by removing the
+    `backend/core-engine.db` file.
 
 The service should try to announce itself to the Core engine.
 

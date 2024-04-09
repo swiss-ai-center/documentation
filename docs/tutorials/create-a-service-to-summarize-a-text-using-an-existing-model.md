@@ -122,8 +122,8 @@ Update the `requirements.txt` file with the following content:
 
 ```txt hl_lines="2 3"
 common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main
-transformers==4.36.2
-torch==2.1.2
+transformers==4.39.3
+torch==2.2.2
 ```
 
 The `common-code` package is required to serve the model over a FastAPI REST API
@@ -145,8 +145,21 @@ Create a freeze file to pin all dependencies to their current versions:
 pip freeze --local --all > requirements-all.txt
 ```
 
-This will ensure that the same versions of the dependencies are installed on
-every machine if you ever share your code with someone else.
+The specific
+`common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
+line will conflict with the more general line in `requirements.txt` due to the
+explicit commit reference.
+
+From there, you have two options:
+
+* **Easier update:** Remove the specific
+  `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
+  line from `requirements-all.txt`. This allows for easier updates of the
+  common-code dependency without adjusting service dependencies.
+* **Consistent dependencies:** Remove the generic line in `requirements.txt` to
+  keep dependencies consistent across machines and time. This will ensure that the
+  same versions of the dependencies are installed on every machine if you ever
+  share your code with someone else.
 
 ### Update the template files
 
@@ -198,7 +211,7 @@ summarizer tool that summarizes a text using the
 
 Open the `main.py` with your favorite editor and follow the instructions below.
 
-```py hl_lines="23 30-32 41-42 48-61 66-86 90-97 100-110"
+```py hl_lines="23 26 31-33 42-43 49-62 67-87 91-98 101-111"
 import asyncio
 import time
 from fastapi import FastAPI
@@ -224,6 +237,7 @@ from contextlib import asynccontextmanager
 from transformers import pipeline
 
 settings = get_settings()
+classifier = pipeline("summarization", model="philschmid/bart-large-cnn-samsum")
 
 
 class MyService(Service):
@@ -265,7 +279,7 @@ class MyService(Service):
 
     # TODO: 5. CHANGE THE PROCESS METHOD (CORE OF THE SERVICE) (6)!
     def process(self, data):
-                # Get the text to analyze from storage
+        # Get the text to analyze from storage
         text = data["text"].data
         # Convert bytes to string
         text = text.decode("utf-8")
@@ -363,7 +377,7 @@ Start the service with the following command:
 cd src
 
 # Start the application
-uvicorn --reload --port 9090 main:app
+uvicorn --reload --host 0.0.0.0 --port 9090 main:app
 ```
 
 The service should try to announce itself to the Core engine.
