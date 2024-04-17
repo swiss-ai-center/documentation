@@ -4,7 +4,7 @@
 - [:material-git: Code](https://github.com/swiss-ai-center/image-greyscale-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/image-greyscale-service/tree/main/kubernetes)
 - [:material-test-tube: Staging](https://image-greyscale-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (not available yet)](https://image-greyscale.swiss-ai-center.ch)
+- [:material-factory: Production](https://image-greyscale-service.swiss-ai-center.ch)
 
 ## Description
 

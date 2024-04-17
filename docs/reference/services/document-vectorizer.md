@@ -4,7 +4,7 @@
 - [:material-git: Code](https://github.com/swiss-ai-center/document-vectorizer-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/document-vectorizer-service/tree/main/kubernetes)
 - [:material-test-tube: Staging](https://document-vectorizer-swiss-ai-center.kube.isc.heia-fr.ch/docs)
-- [:material-factory: Production (not available yet)](https://document-vectorizer.swiss-ai-center.ch)
+- [:material-factory: Production](https://document-vectorizer-service.swiss-ai-center.ch)
 
 ## Description
 
