@@ -4,7 +4,7 @@
 - [:material-git: Code](https://github.com/swiss-ai-center/text-summarizer-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/text-summarizer-service/tree/main/kubernetes)
 - [:material-test-tube: Staging](https://text-summarizer-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (not available yet)](https://text-summarizer.swiss-ai-center.ch)
+- [:material-factory: Production](https://text-summarizer-service.swiss-ai-center.ch)
 
 ## Description
 

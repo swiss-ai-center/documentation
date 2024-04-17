@@ -4,7 +4,7 @@
 - [:material-git: Code](https://gitlab.com/swiss-ai-center/image-sam-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/image-sam-service/tree/main/kubernetes)
 - [:material-test-tube: Staging](https://image-sam-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (not available yet)](https://image-sam.swiss-ai-center.ch)
+- [:material-factory: Production](https://image-sam-service.swiss-ai-center.ch)
 
 ## Description
 
