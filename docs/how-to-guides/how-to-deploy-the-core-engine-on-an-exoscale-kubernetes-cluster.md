@@ -674,6 +674,48 @@ kubectl --kubeconfig exoscale.kubeconfig \
     logs average-shade-stateful-0
 ```
 
+### Scale the Kubernetes cluster node pools
+At some point, if you deploy more services, you may need to scale the Kubernetes
+cluster node pools. You can do this by executing the following commands:
+
+```sh title="Execute the following command(s) in a terminal"
+# Scale the Kubernetes cluster node pools to the double of the current size
+exo compute sks nodepool update swiss-ai-center-prod-cluster swiss-ai-center-prod-nodepool-1 --size 4
+
+# Validate the scaling of the Kubernetes cluster node pools
+exo compute sks nodepool list swiss-ai-center-prod-cluster
+```
+
+If you only also wanted to change the instance type and/or disk size, you can do
+this by executing the following commands:
+
+```sh title="Execute the following command(s) in a terminal"
+# Change the type of the Kubernetes cluster node pools to a different instance type and bigger disk-size
+exo compute sks nodepool update swiss-ai-center-prod-cluster swiss-ai-center-prod-nodepool-1 --instance-type "standard.medium" --disk-size 400
+
+# Scale the Kubernetes cluster node pools to the double of the current size
+# ...see the code snippet above
+
+# Validate the scaling of the Kubernetes cluster node pools
+exo compute sks nodepool show swiss-ai-center-prod-cluster swiss-ai-center-prod-nodepool-1
+# You should see Disk size: 400 and Instance type: standard.medium
+```
+
+```sh title="Execute the following command(s) in a terminal"
+# You now need to drain the old nodes to move the pods to the new nodes and delete the old nodes. You can do this by executing the following commands:
+
+# Find the node pool names
+kubectl get nodes --kubeconfig exoscale.kubeconfig
+
+# For each old node, drain the node to move the pods to the new nodes and delete the old node
+# Note: To find which node are the old nodes, you can look at the AGE column in the output of the previous command
+kubectl drain <old-node-name> --kubeconfig exoscale.kubeconfig --ignore-daemonsets --delete-emptydir-data
+
+exo compute sks nodepool evict swiss-ai-center-prod-cluster swiss-ai-center-prod-nodepool-1 <old-node-name>
+```
+
+
+
 ### Delete all resources
 
 If you ever need to delete all resources, you can execute the following
