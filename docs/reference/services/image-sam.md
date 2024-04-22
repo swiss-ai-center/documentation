@@ -10,7 +10,8 @@
 
 !!! note
 
-    This service is the first that has his code hosted on GitLab. It uses the CI/CD pipeline adapted to GitLab.
+    This service is the first that has his code hosted on GitLab. It uses the CI/CD
+    pipeline adapted to GitLab.
 
 !!! note
 
