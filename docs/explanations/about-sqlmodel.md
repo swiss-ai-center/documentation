@@ -43,5 +43,6 @@ alphabetical order).
 
 - [PostgreSQL](./about-postgresql.md)
 - [Pydantic](./about-pydantic.md)
+- [Python pitfalls](./about-python-pitfalls.md)
 - [SQLite](./about-sqlite.md)
 - [SQLModel](./about-sqlmodel.md)

@@ -26,4 +26,4 @@ _None._
 These resources and alternatives are related to the current item (in
 alphabetical order).
 
-_None at the moment._
+- [Python pitfalls](./about-python-pitfalls.md)
