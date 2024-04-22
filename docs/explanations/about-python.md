@@ -15,7 +15,8 @@ developed using Python.
 ## Install Python
 
 Download the installation package for your operating system on the official
-[Download center](https://www.python.org/downloads/) and install it.
+[Download center](https://www.python.org/downloads/) and install it (we
+currently use 3.11 in our codebase).
 
 ## Configuration
 
