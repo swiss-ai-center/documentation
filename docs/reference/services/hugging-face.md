@@ -12,7 +12,8 @@
     More information about the service specification can be found in the
     [**Core concepts > Service**](../core-concepts/service.md) documentation.
 
-This service uses Hugging Face's model hub API to directly query AI models \n
+This service uses Hugging Face's model hub API to directly query AI models.
+
 You can choose from any model available on the inference API from the [Hugging Face Hub](https://huggingface.co/models)
 that takes image, audio or text(json) files as input and outputs one of the mentioned types.
 

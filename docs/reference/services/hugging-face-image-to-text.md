@@ -29,7 +29,7 @@ json_description.json example:
  ```json
  {
      "api_token": "your_token",
-     "api_url": "https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-base"
+     "api_url": "https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-base",
      "desired_output" : "generated_text"
 }
 ```
