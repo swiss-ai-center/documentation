@@ -4,7 +4,7 @@
 - [:material-git: Code](https://github.com/swiss-ai-center/face-detection-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/face-detection-service/tree/main/kubernetes)
 - [:material-test-tube: Staging](https://face-detection-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (not available yet)](https://face-detection.swiss-ai-center.ch)
+- [:material-factory: Production](https://face-detection-service.swiss-ai-center.ch)
 
 ## Description
 

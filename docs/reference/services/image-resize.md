@@ -4,7 +4,7 @@
 - [:material-git: Code](https://github.com/swiss-ai-center/image-resize-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/image-resize-service/tree/main/kubernetes)
 - [:material-test-tube: Staging](https://image-resize-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (not available yet)](https://image-resize.swiss-ai-center.ch)
+- [:material-factory: Production](https://image-resize-service.swiss-ai-center.ch)
 
 ## Description
 

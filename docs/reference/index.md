@@ -21,7 +21,7 @@ The Core engine allows to create and manage pipelines of microservices.
 - Staging URL (backend):
   <https://backend-core-engine-swiss-ai-center.kube.isc.heia-fr.ch>
 - Production URL (frontend): <https://app.swiss-ai-center.ch>
-- Production URL (backend): <https://app.swiss-ai-center.ch/api>
+- Production URL (backend): <https://core-engine.swiss-ai-center.ch>
 
 ## mdwrap
 

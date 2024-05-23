@@ -4,7 +4,7 @@
 - [:material-git: Code](https://github.com/swiss-ai-center/digit-recognition-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/digit-recognition-service/tree/main/model-serving/kubernetes)
 - [:material-test-tube: Staging](https://digit-recognition-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (not available yet)](https://digit-recognition.swiss-ai-center.ch)
+- [:material-factory: Production](https://digit-recognition-service.swiss-ai-center.ch)
 
 ## Description
 

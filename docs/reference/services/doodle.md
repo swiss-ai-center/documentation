@@ -4,7 +4,7 @@
 - [:material-git: Code](https://github.com/swiss-ai-center/doodle-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/doodle-service/tree/main/kubernetes)
 - [:material-test-tube: Staging](https://doodle-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (not available yet)](https://doodle.swiss-ai-center.ch)
+- [:material-factory: Production](https://doodle-service.swiss-ai-center.ch)
 
 ## Description
 

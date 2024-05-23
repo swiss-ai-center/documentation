@@ -38,7 +38,7 @@ nav:
       - Services:
           - ae-ano-detection service: reference/services/ae-ano-detection.md
           - average-shade service: reference/services/average-shade.md
-          - classification benchmark service: reference/services/classification-benchmark.md
+          - classification-benchmark service: reference/services/classification-benchmark.md
           - digit-recognition service: reference/services/digit-recognition.md
           - document-vectorizer service: reference/services/document-vectorizer.md
           - doodle service: reference/services/doodle.md
@@ -60,7 +60,7 @@ nav:
           - image-sam service: reference/services/image-sam.md
           - integrity-checker service: reference/services/integrity-checker.md
           - nlp-langid service: reference/services/nlp-langid.md
-          - regression benchmark service: reference/services/regression-benchmark.md
+          - regression-benchmark service: reference/services/regression-benchmark.md
           - text-summarizer service: reference/services/text-summarizer.md
           - yolov8 service: reference/services/yolov8.md
           - ydata-profiling service: reference/services/ydata-profiling.md
@@ -94,6 +94,7 @@ nav:
       - About Pydantic: explanations/about-pydantic.md
       - About pytest: explanations/about-pytest.md
       - About Python: explanations/about-python.md
+      - About Python pitfalls: explanations/about-python-pitfalls.md
       - About SQLAlchemy: explanations/about-sqlalchemy.md
       - About SQLModel: explanations/about-sqlmodel.md
       - About SQLite: explanations/about-sqlite.md

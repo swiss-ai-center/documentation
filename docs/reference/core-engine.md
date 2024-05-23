@@ -9,8 +9,8 @@
   ([backend](https://backend-core-engine-swiss-ai-center.kube.isc.heia-fr.ch))
   ([frontend](https://frontend-core-engine-swiss-ai-center.kube.isc.heia-fr.ch))
 - :material-factory: Production
-  ([backend - not available yet](https://app.swiss-ai-center.ch/api))
-  ([frontend - not available yet](https://app.swiss-ai-center.ch))
+  ([backend](https://core-engine.swiss-ai-center.ch))
+  ([frontend](https://app.swiss-ai-center.ch))
 
 ## Description
 
