@@ -39,7 +39,9 @@ json example:
     "api_token": "your_token", "api_url":
     "https://api-inference.huggingface.co/models/stabilityai/stable-cascade"
 }
-``` input_text example:
+```
+
+input_text example:
 
 ```text
 A majestic Hummingbird
