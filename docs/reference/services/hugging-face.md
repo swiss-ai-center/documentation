@@ -1,4 +1,5 @@
 # hugging face
+
 - [:material-account-group: Main author - HEIA-FR](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/hugging-face-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/hugging-face-service/tree/main/kubernetes)
@@ -14,38 +15,43 @@
 
 This service uses Hugging Face's model hub API to directly query AI models.
 
-You can choose from any model available on the inference API from the [Hugging Face Hub](https://huggingface.co/models)
-that takes image, audio or text(json) files as input and outputs one of the mentioned types.
+You can choose from any model available on the inference API from the
+[Hugging Face Hub](https://huggingface.co/models) that takes image, audio or
+text(json) files as input and outputs one of the mentioned types.
 
 This service has two input files:
-- A json file that defines the model you want to use, your access token and the input/output types you expect.
+
+- A json file that defines the model you want to use, your access token and the
+  input/output types you expect.
 - A zip file containing the input data for the model.
 
-json_description.json example:
- ```json
- {
+json example:
+
+```json
+{
     "api_token": "your_token",
     "api_url": "https://api-inference.huggingface.co/models/deepset/roberta-base-squad2",
     "input_type": "application/json",
     "output_type": "application/json"
 }
 ```
-This specific model, "roberta-base-squad2", was trained on question-answer pairs, including unanswerable questions,
-for the task of Question Answering.
+
+This specific model, "roberta-base-squad2", was trained on question-answer
+pairs, including unanswerable questions, for the task of Question Answering.
 
 The input looks like this:
 
 ```json
 {
-   "inputs":{
+   "inputs": {
       "question":"What is my name?",
       "context":"My name is Clara Postlethwaite and I live in Berkeley."
    }
 }
 ```
-This is an example, check the model hub to see what the input of the model you want to use looks like.
-Don't forget to compress it before!
 
+This is an example, check the model hub to see what the input of the model you
+want to use looks like. Don't forget to compress it before!
 
 ---
 

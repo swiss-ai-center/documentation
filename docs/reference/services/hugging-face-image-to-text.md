@@ -1,5 +1,5 @@
 # hugging face image-to-text
-TODO! Update
+
 - [:material-account-group: Main author - HEIA-FR](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/hugging-face-image-to-text-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/hugging-face-image-to-text-service/tree/main/kubernetes)
@@ -15,25 +15,29 @@ TODO! Update
 
 This service uses Hugging Face's inference API to query image-to-text AI models.
 
-You can choose from any model available on the inference API from the [Hugging Face Hub](https://huggingface.co/models)
-that takes an image as input and outputs text(JSON).
-The model must take only one image as input.
-
+You can choose from any model available on the inference API from the
+[Hugging Face Hub](https://huggingface.co/models) that takes an image as input
+and outputs text(JSON). The model must take only one image as input.
 
 This service takes two input files:
-- A JSON file that defines the model you want to use, your access token and optionally, you can set a specific field
-  from the json answer as the output. If you specify nothing, the whole json will be returned.
+
+- A JSON file that defines the model you want to use, your access token and
+  optionally, you can set a specific field from the json answer as the output. If
+  you specify nothing, the whole json will be returned.
 - The image file used as input.
 
 json_description.json example:
- ```json
- {
+
+```json
+{
      "api_token": "your_token",
      "api_url": "https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-base",
      "desired_output" : "generated_text"
 }
 ```
-This model example "Salesforce/blip-image-captioning-base" is used for image captioning.
+
+In this model example "Salesforce/blip-image-captioning-base" is used for image
+captioning.
 
 ---
 
