@@ -23,7 +23,25 @@ permissions:
   id-token: write
 
 jobs:
-  build:
+  # Linting job
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install --requirement requirements.txt --requirement requirements-all.txt
+
+      - name: Lint
+        run: mdwrap --check docs
+  
+  # Build job
+  build-material-for-mkdocs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -59,13 +77,80 @@ jobs:
         run: |
           mkdocs build --site-dir public
 
-      - name: Upload artifact
+      - name: Upload files
+        uses: actions/upload-artifact@v4
+        with:
+          name: material-for-mkdocs-files
+          path: |
+            public
+          if-no-files-found: error
+          retention-days: 1
+
+  # Build Marp job
+  build-marp:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build presentation content with Marp (HTML)
+        uses: docker://marpteam/marp-cli:v3.0.2
+        with:
+          args: --config .github/workflows/marp.config.js --html --output "presentation/index.html" "presentation/README.md"
+        env:
+          MARP_USER: root:root
+
+      - name: Build presentation content with Marp (PDF)
+        uses: docker://marpteam/marp-cli:v3.0.2
+        with:
+          args: --config .github/workflows/marp.config.js --html --allow-local-files --jpeg-quality 100 --pdf --output "presentation/swiss-ai-center-presentation.pdf" "presentation/README.md"
+        env:
+          MARP_USER: root:root
+
+      - name: Upload files
+        uses: actions/upload-artifact@v4
+        with:
+          name: marp-files
+          path: |
+            presentation/images
+            presentation/swiss-ai-center-presentation.pdf
+            presentation/index.html
+          if-no-files-found: error
+          retention-days: 1
+
+  merge-files-for-github-pages:
+    runs-on: ubuntu-latest
+    needs: [build-material-for-mkdocs, build-marp]
+    steps:
+      - name: Download files
+        uses: actions/download-artifact@v4
+        with:
+          pattern: "*-files"
+
+      - name: Merge files
+        run: |
+          # Copy Material for MkDocs files to the `public` directory
+          mv material-for-mkdocs-files public
+          
+          # Check if the `presentation` directory exists in the `public` directory
+          if [ -d "presentation" ]; then
+            echo "The 'presentation' directory already exists in the `public` directory"
+            exit 1
+          fi
+
+          # Move the Marp files to the `presentation` directory
+          mv marp-files public/presentation
+
+      - name: Upload files to GitHub Pages
+        # Only run on main
+        if: github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
   deploy:
-    needs: build
+    needs: merge-files-for-github-pages
     runs-on: ubuntu-latest
     # Only run on main
     if: success() && github.ref == 'refs/heads/main'

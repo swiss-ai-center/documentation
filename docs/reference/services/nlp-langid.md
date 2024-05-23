@@ -4,7 +4,7 @@
 - [:material-git: Code](https://github.com/swiss-ai-center/nlp-langid-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/nlp-langid-service/tree/main/model-serving/kubernetes)
 - [:material-test-tube: Staging](https://langid-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (not available yet)](https://langid.swiss-ai-center.ch)
+- [:material-factory: Production](https://langid-service.swiss-ai-center.ch)
 
 ## Description
 

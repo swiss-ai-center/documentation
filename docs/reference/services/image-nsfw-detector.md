@@ -4,7 +4,7 @@
 - [:material-git: Code](https://github.com/swiss-ai-center/image-nsfw-detector-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/image-nsfw-detector-service/tree/main/kubernetes)
 - [:material-test-tube: Staging](https://image-nsfw-detector-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (not available yet)](https://image-nsfw-detector.swiss-ai-center.ch)
+- [:material-factory: Production (not available yet)](https://image-nsfw-detector-service.swiss-ai-center.ch)
 
 ## Description
 

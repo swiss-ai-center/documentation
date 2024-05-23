@@ -4,7 +4,7 @@
 - [:material-git: Code](https://github.com/swiss-ai-center/classification-benchmark-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/classification-benchmark-service/tree/main/kubernetes)
 - [:material-test-tube: Staging](https://classification-benchmark-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (not available yet)](https://classification-benchmark.swiss-ai-center.ch)
+- [:material-factory: Production](https://classification-benchmark-service.swiss-ai-center.ch)
 
 ## Description
 

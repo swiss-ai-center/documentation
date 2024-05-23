@@ -4,7 +4,7 @@
 - [:material-git: Code](https://github.com/swiss-ai-center/average-shade-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/average-shade-service/tree/main/kubernetes)
 - [:material-test-tube: Staging](https://average-shade-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (not available yet)](https://average-shade.swiss-ai-center.ch)
+- [:material-factory: Production](https://average-shade-service.swiss-ai-center.ch)
 
 ## Description
 

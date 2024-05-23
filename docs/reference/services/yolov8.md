@@ -4,7 +4,7 @@
 - [:material-git: Code](https://github.com/swiss-ai-center/yolov8-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/yolov8-service/tree/main/kubernetes)
 - [:material-test-tube: Staging](https://yolov8-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production (not available yet)](https://yolov8.swiss-ai-center.ch)
+- [:material-factory: Production](https://yolov8-service.swiss-ai-center.ch)
 
 ## Description
 
