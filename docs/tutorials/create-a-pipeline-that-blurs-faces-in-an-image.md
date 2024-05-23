@@ -41,8 +41,89 @@ documentation to start them.
 - [Image blur](../reference/services/image-blur.md)
 
 ### Create the pipeline
+=== "Using the Core engine interface (recommended)"
 
-=== "Using a json file"
+    [Start the frontend](./start-the-core-engine/#start-the-core-engine-locally-with-docker-compose)
+    if you haven't already. Then navigate to the
+    `http://localhost:3000/create-pipeline` page. From here you can choose among all
+    available services the one you want to add to the new pipeline. First, select
+    the Face Detection service. You can use the search bar and filters on the side
+    to help you find it.
+
+    ![Select Face Detection](../assets/screenshots/pipeline-creation-select-face-detection.png)
+
+    Click the `Add` button of the service. This will a add a new node in the flow
+    chart.
+
+    ![Flow Chart service](../assets/screenshots/pipeline-creation-flow-chart-add-service.png)
+
+    Do the same with the Image Blur service. You should now have 4 nodes in the flow
+    chart. You can click on the nodes to drag and move them around to rearrange
+    their disposition.
+
+    There are 3 types of nodes:
+
+    - **Entry node**. It defines the input files the pipeline needs, and their
+      types. Each input file has a handle you can connect to a service to pass on the
+      data as input for the service.
+
+    - **Exit node**. It is the last node of the pipeline. The services connected to
+      it define what the output of the pipeline will be.
+
+    - **Service node**. Each one represents a distinct service. For each data input
+      the service needs, there is a handle you can connect to a data source, either
+      the output of another service or the input files of the pipeline defined by the
+      entry node.
+
+    Click the `Add input file` button on the entry node, select a name for your
+    input, and select the types `image/jpeg` and `image/png`.
+
+    The new input can now be connected to the services. Each of them takes an image,
+    in this case it will be the same one. Click on the handle next to the input on
+    the entry Node and drag your mouse to the handle next to the service's input
+    called "image". Repeat this action for both services.
+
+    ![Connect input to services](../assets/screenshots/pipeline-creation-connect-input-to-services.png)
+
+    There are two steps in the pipeline. The first one detects faces in a given
+    image and the second blurs them. The output of the first service can be given to
+    the second for the blurring process. To do so, link the output of Face Detection
+    to the input of Image Blur as you did with the entry node inputs.
+
+    The second step should only be executed if at least one face was detected by the
+    first service. Conditions can be added on input files by clicking the circled
+    plus icon on the edge. Click on the edge connecting the output of the Face
+    Detection to the Image Blur and input the following:
+
+    ```python
+    len(face-detection.result['areas']) > 0
+    ```
+
+    Conditions are python expressions that will be evaluated to determine if the
+    service should be executed. You can remove a condition by clicking the "x"
+    button next to it.
+
+    The second service can now be connected to the Exit node, completing the
+    pipeline. Your pipeline should look something like this.
+
+    ![Pipeline complete](../assets/screenshots/pipeline-creation-complete.png)
+
+    As a last step, the pipeline information must be completed. Input the following
+    in the corresponding text fields.
+
+    ```
+    Pipeline name: Face Blur
+    Pipeline-slug: face-blur
+    summary: Blur the faces in an image
+    Pipeline description: Use Face Detection service to locate the faces in the image and send the bounding boxes to the Image Blur service to get the final result
+    ```
+
+    Before creating the pipeline, make sure sure it's valid by clicking the
+    `Check Validitiy` button under the pipeline information. An information box
+    should be appear to inform you of the validity of the pipeline. Once the
+    pipeline is valid, you can create it by clicking `Create pipeline`.
+
+=== "Using a JSON file"
 
     The [Pipeline](../reference/core-concepts/pipeline.md) is created by posting a
     JSON object to the `/pipelines` endpoint of the
@@ -155,88 +236,6 @@ documentation to start them.
 
     You should receive a `200` response with the
     [Pipeline](../reference/core-concepts/pipeline.md) you just posted.
-
-=== "Using the Core engine interface (recommended)"
-
-    On your browser, go to the [Core engine](../reference/core-engine.md) frontend
-    (here's how to [start the frontend](./start-the-core-engine.md) if you haven't
-    already) on the `http://localhost:3000/create-pipeline` page. From here you can choose from all
-    available services to add to the new pipeline. First, select the Face Detection
-    service. You can use the search bar and filters on the side to help you find it.
-
-    ![Select Face Detection](../assets/screenshots/pipeline-creation-select-face-detection.png)
-
-    Click the `Add` button of the service. This will a add a new new node in the
-    flow chart.
-
-    ![Flow Chart service](../assets/screenshots/pipeline-creation-flow-chart-add-service.png)
-
-    Do the same with the Image Blur service. You should now have 4 nodes in the flow
-    chart. You can click on the nodes to drag and move them around to rearrange
-    their disposition.
-
-    There are 3 types of nodes:
-
-    - **Entry node**. It defines the input files the pipeline needs, and their
-      types. Each input file has a handle you can connect to a service to pass on the
-      data as input for the service.
-
-    - **Exit node**. It is the last node of the pipeline. Only one service (one
-      handle) can be connected to it. The service connected to it defines what the
-      output of the pipeline will be.
-
-    - **Service node**. Each one represents a distinct service. For each data input
-      the service needs, there is a handle you can connect to a data source, either
-      the output of another service or the input files of the pipeline defined by the
-      entry node.
-
-    Click the `Add input file` button on the entry node, select a name for your
-    input, and select the types image/jpeg and image/png.
-
-    The new input can now be connected to the services. Each of them takes an image,
-    in this case it will be the same one. Click on the handle next to the input on
-    the entry Node and drag your mouse to the handle next to the service's input
-    called "image". Repeat this action for both services.
-
-    ![Connect input to services](../assets/screenshots/pipeline-creation-connect-input-to-services.png)
-
-    There are two steps in the pipeline. The first one detects faces in a given
-    image and the second blurs them. The output of the first service can be given to
-    the second for the blurring process. To do so, link the output of Face Detection
-    to the input of Image Blur as you did with the entry node inputs.
-
-    The second step should only be executed if at least one face was detected by the
-    first service. Conditions can be added on input files by clicking the circled
-    plus icon on the edge. Click on the edge connecting the output of the Face
-    Detection to the Image Blur and input the following:
-
-    ```python
-    len(face-detection.result['areas']) > 0
-    ``` 
-    Conditions are python expressions that will be evaluated to determine if
-    the service should be executed.
-    You can remove a condition by clicking the "x" button next to it.
-
-    The second service can now be connected to the Exit node, completing the
-    pipeline. Your pipeline should look something like this.
-
-    ![Pipeline complete](../assets/screenshots/pipeline-creation-complete.png)
-
-    As a last step, the pipeline information must be completed. Input the following
-    in the corresponding text fields.
-
-    ``` 
-    Pipeline name: Face Blur
-    Pipeline-slug: face-blur
-    summary: Blur the faces in an image
-    Pipeline description: Use Face Detection service to locate the faces in the image and send the bounding boxes to the Image Blur service to get the final result
-    ```
-
-
-    Before creating the pipeline, make sure sure it's valid by clicking the
-    `Check Validitiy` button under the pipeline information. An information box
-    should be appear to inform you of the validity of the pipeline. Once the
-    pipeline is valid, you can create it by clicking `Create pipeline`.
 
 ### Run the pipeline
 
