@@ -889,6 +889,13 @@ anomalies_detection_model.h5 # (1)!
     uvicorn --reload --host 0.0.0.0 --port 9090 main:app
     ```
 
+    !!! Warning
+
+        The above Uvicorn command tests service registration but lacks access to the
+        core-engine database in Docker.
+
+        For full testing, start with Docker or run the database outside Docker.
+
 The service should try to announce itself to the Core engine.
 
 It will then be available at <http://localhost:9090>.
