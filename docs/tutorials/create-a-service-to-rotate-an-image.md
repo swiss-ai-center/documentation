@@ -396,15 +396,29 @@ RUN apt update && apt install --yes ffmpeg libsm6 libxext6
     Start the Core engine as mentioned in the
     [Getting started](../tutorials/getting-started.md) guide for this step.
 
-Start the service with the following command:
+=== "Using docker"
 
-```sh title="Execute this in the virtual environment"
-# Switch to the `src` directory
-cd src
+    Start the service with the following command:
 
-# Start the application
-uvicorn --reload --host 0.0.0.0 --port 9090 main:app
-```
+    ```sh
+    # Build the Docker image
+    docker compose build
+
+    # Start the Core engine Backend
+    docker compose up
+    ```
+
+=== "Using uvicorn"
+
+    Start the service with the following command:
+
+    ```sh title="Execute this in the virtual environment"
+    # Switch to the `src` directory
+    cd src
+
+    # Start the application
+    uvicorn --reload --host 0.0.0.0 --port 9090 main:app
+    ```
 
 ??? tip "Selecting the IP port for the service"
 
