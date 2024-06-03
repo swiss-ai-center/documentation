@@ -420,6 +420,13 @@ RUN apt update && apt install --yes ffmpeg libsm6 libxext6
     uvicorn --reload --host 0.0.0.0 --port 9090 main:app
     ```
 
+    !!! Warning
+
+        The above Uvicorn command tests service registration but lacks access to the
+        core-engine database in Docker.
+
+        For full testing, start with Docker or run the database outside Docker.
+
 ??? tip "Selecting the IP port for the service"
 
     Each service should be made available on a different port that is not in use.
