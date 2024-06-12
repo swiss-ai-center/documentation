@@ -229,139 +229,139 @@ documentation to start them.
         [Pipeline](../reference/core-concepts/pipeline.md). It is used to reference the
         step in the `needs` and `inputs` fields.
 
-    ### Post the pipeline
+### Post the pipeline
 
-    Now that we have our [Pipeline](../reference/core-concepts/pipeline.md), we can
-    post it to the [Core engine](../reference/core-engine.md). To do so, go to the
-    FastAPI documentation of the running [Core engine](../reference/core-engine.md)
-    and use the `/pipelines` endpoint to post the
-    [Pipeline](../reference/core-concepts/pipeline.md) by clicking on the
-    `Try it out` button
+Now that we have our [Pipeline](../reference/core-concepts/pipeline.md), we can
+post it to the [Core engine](../reference/core-engine.md). To do so, go to the
+FastAPI documentation of the running [Core engine](../reference/core-engine.md)
+and use the `/pipelines` endpoint to post the
+[Pipeline](../reference/core-concepts/pipeline.md) by clicking on the
+`Try it out` button
 
-    Simply copy the content of the `face-blur-pipeline.json` file and paste it in
-    the `body` field of the `/pipelines` endpoint and click on the `Execute` button.
+Simply copy the content of the `face-blur-pipeline.json` file and paste it in
+the `body` field of the `/pipelines` endpoint and click on the `Execute` button.
 
-    ![Post pipeline](../assets/screenshots/post-pipeline.png)
+![Post pipeline](../assets/screenshots/post-pipeline.png)
 
-    You should receive a `200` response with the
-    [Pipeline](../reference/core-concepts/pipeline.md) you just posted.
+You should receive a `200` response with the
+[Pipeline](../reference/core-concepts/pipeline.md) you just posted.
 
 ### Run the pipeline
 
 You can run the pipeline using the FastAPI Swagger interface or by using the
 [Core engine](../reference/core-engine.md).
 
-#### Using the FastAPI Swagger interface
+=== "Using the Webapp"
 
-Now that we have our [Pipeline](../reference/core-concepts/pipeline.md), we can
-run it. To do so, go to the FastAPI documentation of the running
-[Core engine](../reference/core-engine.md) and you should see the
-[Pipeline](../reference/core-concepts/pipeline.md) you just posted in the
-`Registered pipelines` endpoint with the slug `/face-blur`.
+    You can also run the [Pipeline](../reference/core-concepts/pipeline.md) using
+    the [Core engine](../reference/core-engine.md). To do so, go to the Webapp in
+    your browser and find the [Pipeline](../reference/core-concepts/pipeline.md) you
+    just posted in the `Pipelines` section.
 
-![Registered pipelines](../assets/screenshots/registered-pipeline.png)
+    ![Pipelines](../assets/screenshots/pipelines.png)
 
-Click on the `Try it out` button, add an image to the body and click on the
-`Execute` button.
+    Click on the `VIEW` button and you should see the
+    [Pipeline](../reference/core-concepts/pipeline.md) as a Flow.
 
-![Post pipeline execution](../assets/screenshots/post-pipeline.png)
+    ![Pipeline flow](../assets/screenshots/pipeline-flow.png)
 
-You should receive a `200` response with a `Pipeline Execution` object in the
-response body. This object contains the id of the execution and the tasks that
-will be executed.
+    Click on the `UPLOAD` button and upload an image. Now you can click on the `RUN`
+    button and the [Pipeline](../reference/core-concepts/pipeline.md) will be
+    executed. When the [Pipeline](../reference/core-concepts/pipeline.md) is
+    finished, you can download the result by clicking on the `DOWNLOAD` button that
+    will be enabled.
 
-```json hl_lines="5-23"
-{
-  "pipeline_id": "2175ae79-4e48-4d1b-97df-0bcbba4c5d2b",
-  "current_pipeline_step_id": "e0028cf9-0b62-48b4-b0c7-b91ec930d083",
-  // ...
-  "tasks": [
+    ![Pipeline result](../assets/screenshots/pipeline-result-webapp.png)
+
+    If the picture you provided had a face, the result should be blurred.
+
+    !!! success "Congratulations!"
+        You have successfully created a
+        [Pipeline](../reference/core-concepts/pipeline.md) locally. Now, you can use the
+        same process to create a [Pipeline](../reference/core-concepts/pipeline.md) on
+        the [Core engine](../reference/core-engine.md) deployed on the cloud.
+
+=== "Using the FastAPI Swagger interface"
+
+    Now that we have our [Pipeline](../reference/core-concepts/pipeline.md), we can
+    run it. To do so, go to the FastAPI documentation of the running
+    [Core engine](../reference/core-engine.md) and you should see the
+    [Pipeline](../reference/core-concepts/pipeline.md) you just posted in the
+    `Registered pipelines` endpoint with the slug `/face-blur`.
+
+    ![Registered pipelines](../assets/screenshots/registered-pipeline.png)
+
+    Click on the `Try it out` button, add an image to the body and click on the
+    `Execute` button.
+
+    ![Post pipeline execution](../assets/screenshots/post-pipeline.png)
+
+    You should receive a `200` response with a `Pipeline Execution` object in the
+    response body. This object contains the id of the execution and the tasks that
+    will be executed.
+
+    ```json hl_lines="5-23"
     {
-      "data_in": [
-        "e930424b-63a8-4a4e-b49c-54eb50cd1996.jpg"
-      ],
-      "data_out": null,
-      "status": "pending",
-      "service_id": "35ace881-6673-4fb6-b454-2f94b1547fd6",
-      "pipeline_execution_id": "a17dd3ef-0682-4154-baaa-cb524650f6f4",
-      "id": "01636a67-b78e-41a6-9127-9efa1f0c1a9a"
-    }, {
-      "data_in": null,
-      "data_out": null,
-      "status": "scheduled",
-      "service_id": "6a20b1b7-ef3d-4a01-bf05-409558bda916",
-      "pipeline_execution _id": "a17dd3ef-0682-4154-baaa-cb524650f6f4",
-      "id": "9557c201-477f-45c6-8b8a-93ce93079f74"
+      "pipeline_id": "2175ae79-4e48-4d1b-97df-0bcbba4c5d2b",
+      "current_pipeline_step_id": "e0028cf9-0b62-48b4-b0c7-b91ec930d083",
+      // ...
+      "tasks": [
+        {
+          "data_in": [
+            "e930424b-63a8-4a4e-b49c-54eb50cd1996.jpg"
+          ],
+          "data_out": null,
+          "status": "pending",
+          "service_id": "35ace881-6673-4fb6-b454-2f94b1547fd6",
+          "pipeline_execution_id": "a17dd3ef-0682-4154-baaa-cb524650f6f4",
+          "id": "01636a67-b78e-41a6-9127-9efa1f0c1a9a"
+        }, {
+          "data_in": null,
+          "data_out": null,
+          "status": "scheduled",
+          "service_id": "6a20b1b7-ef3d-4a01-bf05-409558bda916",
+          "pipeline_execution _id": "a17dd3ef-0682-4154-baaa-cb524650f6f4",
+          "id": "9557c201-477f-45c6-8b8a-93ce93079f74"
+        }
+      ]
     }
-  ]
-}
-```
+    ```
 
-You can check the status of the execution by checking the status of the last
-task with the `/tasks/{task_id}` endpoint. You can find the id of the last task
-in the `tasks` array of the [Pipeline](../reference/core-concepts/pipeline.md)
-execution object.
+    You can check the status of the execution by checking the status of the last
+    task with the `/tasks/{task_id}` endpoint. You can find the id of the last task
+    in the `tasks` array of the [Pipeline](../reference/core-concepts/pipeline.md)
+    execution object.
 
-```json hl_lines="9 14"
- {
-  "created_at": "2023-06-06T14:45:25.517644",
-  "updated_at": "2023-06-13T11:50:10.151580",
-  "data_in": [
-    "e930424b-63a8-4a4e-b49c-54eb50cd1996.jpg",
-    "2594162e-7927-4dc9-9a22-d135154f9e93.json"
-  ],
-  "data_out": [
-    "bfc86360-ad3f-4249-aaa1-21d36e84f612.jpg"
-  ],
-  "status": "finished",
-  "service_id": "6a20b1b7-ef3d-4a01-bf05-409558bda916",
-  "pipeline_execution_id": "a17dd3ef-0682-4154-baaa-cb524650f6f4",
-  "id": "9557c201-477f-45c6-8b8a-93ce93079f74",
-  // ...
-  "pipeline_execution": {
-    "created_at": "2023-06-06T14:45:25.517644",
-    "updated_at": "2023-06-13T11:50:10.156728",
-    "pipeline_id": "2175ae79-4e48-4d1b-97df-0bcbba4c5d2b",
-    "current_pipeline_step_id": null,
-    "id": "a17dd3ef-0682-4154-baaa-cb524650f6f4",
-    "files": null
-  }
-}
-```
+    ```json hl_lines="9 14"
+    {
+      "created_at": "2023-06-06T14:45:25.517644",
+      "updated_at": "2023-06-13T11:50:10.151580",
+      "data_in": [
+        "e930424b-63a8-4a4e-b49c-54eb50cd1996.jpg",
+        "2594162e-7927-4dc9-9a22-d135154f9e93.json"
+      ],
+      "data_out": [
+        "bfc86360-ad3f-4249-aaa1-21d36e84f612.jpg"
+      ],
+      "status": "finished",
+      "service_id": "6a20b1b7-ef3d-4a01-bf05-409558bda916",
+      "pipeline_execution_id": "a17dd3ef-0682-4154-baaa-cb524650f6f4",
+      "id": "9557c201-477f-45c6-8b8a-93ce93079f74",
+      // ...
+      "pipeline_execution": {
+        "created_at": "2023-06-06T14:45:25.517644",
+        "updated_at": "2023-06-13T11:50:10.156728",
+        "pipeline_id": "2175ae79-4e48-4d1b-97df-0bcbba4c5d2b",
+        "current_pipeline_step_id": null,
+        "id": "a17dd3ef-0682-4154-baaa-cb524650f6f4",
+        "files": null
+      }
+    }
+    ```
 
-Once the status of the last task is `finished`, you can download the result by
-copying the data_out file keys and use them with the `/storage/{key}` endpoint.
+    Once the status of the last task is `finished`, you can download the result by
+    copying the data_out file keys and use them with the `/storage/{key}` endpoint.
 
-![Get result](../assets/screenshots/pipeline-result.png)
+    ![Get result](../assets/screenshots/pipeline-result.png)
 
-If the picture you provided had a face, the result should be blurred.
-
-#### Using the Webapp
-
-You can also run the [Pipeline](../reference/core-concepts/pipeline.md) using
-the [Core engine](../reference/core-engine.md). To do so, go to the Webapp in
-your browser and find the [Pipeline](../reference/core-concepts/pipeline.md) you
-just posted in the `Pipelines` section.
-
-![Pipelines](../assets/screenshots/pipelines.png)
-
-Click on the `VIEW` button and you should see the
-[Pipeline](../reference/core-concepts/pipeline.md) as a Flow.
-
-![Pipeline flow](../assets/screenshots/pipeline-flow.png)
-
-Click on the `UPLOAD` button and upload an image. Now you can click on the `RUN`
-button and the [Pipeline](../reference/core-concepts/pipeline.md) will be
-executed. When the [Pipeline](../reference/core-concepts/pipeline.md) is
-finished, you can download the result by clicking on the `DOWNLOAD` button that
-will be enabled.
-
-![Pipeline result](../assets/screenshots/pipeline-result-webapp.png)
-
-If the picture you provided had a face, the result should be blurred.
-
-!!! success "Congratulations!"
-    You have successfully created a
-    [Pipeline](../reference/core-concepts/pipeline.md) locally. Now, you can use the
-    same process to create a [Pipeline](../reference/core-concepts/pipeline.md) on
-    the [Core engine](../reference/core-engine.md) deployed on the cloud.
+    If the picture you provided had a face, the result should be blurred.
