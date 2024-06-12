@@ -83,6 +83,10 @@ documentation to start them.
     the entry Node and drag your mouse to the handle next to the service's input
     called "image". Repeat this action for both services.
 
+    !!! note
+        The edges can be removed by clicking on them and pressing the `Delete` key on
+        your keyboard.
+
     ![Connect input to services](../assets/screenshots/pipeline-creation-connect-input-to-services.png)
 
     There are two steps in the pipeline. The first one detects faces in a given
@@ -118,10 +122,15 @@ documentation to start them.
     Pipeline description: Use Face Detection service to locate the faces in the image and send the bounding boxes to the Image Blur service to get the final result
     ```
 
+    You can check the state of the pipeline JSON object by clicking the `Show JSON`
+    button.
+
+    ![Pipeline JSON](../assets/screenshots/pipeline-creation-json-inspect.png)
+
     Before creating the pipeline, make sure sure it's valid by clicking the
     `Check Validitiy` button under the pipeline information. An information box
     should be appear to inform you of the validity of the pipeline. Once the
-    pipeline is valid, you can create it by clicking `Create pipeline`.
+    pipeline is valid, you can create it by clicking `Submit`.
 
 === "Using a JSON file"
 
