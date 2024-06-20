@@ -183,7 +183,7 @@ A JSON file containing base information:
 
 <small>
 
-<p class="normal-text">And a list of “Steps” representing the sequel of services to run with the following data:</p>
+<p class="left-text">And a list of “Steps” representing the sequel of services to run with the following data:</p>
 
 - **Identifier** (used in the “needs”, “conditions” and “inputs” values)
 - **Needs** (used to wait until all the services in the array finished their task)
@@ -201,6 +201,11 @@ A JSON file containing base information:
 
 ![bg right:45% 90%](./images/pipeline.png)
 
+---
+
+
+![bg 90%](./images/pipeline-creation-complete.png)
+
 ## Next steps
 
 <!--
@@ -215,8 +220,6 @@ _paginate: false
 <small>
 
 - Pipeline parallelization
-- Pipeline frontend editor (student project)
-- Pipelines ideas (student projects)
 - Toy datasets
 - Functional tests on service declaration
 - And many more…
