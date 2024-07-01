@@ -169,22 +169,6 @@ Create a freeze file to pin all dependencies to their current versions:
 pip freeze --local --all > requirements-all.txt
 ```
 
-The specific
-`common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
-line will conflict with the more general line in `requirements.txt` due to the
-explicit commit reference.
-
-From there, you have two options:
-
-* **Easier update:** Remove the specific
-  `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
-  line from `requirements-all.txt`. This allows for easier updates of the
-  common-code dependency without adjusting service dependencies.
-* **Consistent dependencies:** Remove the generic line in `requirements.txt` to
-  keep dependencies consistent across machines and time. This will ensure that the
-  same versions of the dependencies are installed on every machine if you ever
-  share your code with someone else.
-
 #### Create the source files
 
 Create a `src/train_model.py` file with the following content:
