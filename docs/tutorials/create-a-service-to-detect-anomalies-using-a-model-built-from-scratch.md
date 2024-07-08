@@ -157,14 +157,14 @@ These are the dependencies required to create the model to detect anomalies.
 
 Then, install the dependencies:
 
-```sh title="Execute this in the 'model-serving' folder"
+```sh title="Execute this in the 'model-creation' folder"
 # Install the dependencies
 pip install --requirement requirements.txt
 ```
 
 Create a freeze file to pin all dependencies to their current versions:
 
-```sh title="Execute this in the 'model-serving' folder"
+```sh title="Execute this in the 'model-creation' folder"
 # Freeze the dependencies
 pip freeze --local --all > requirements-all.txt
 ```
