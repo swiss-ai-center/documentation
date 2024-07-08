@@ -157,33 +157,17 @@ These are the dependencies required to create the model to detect anomalies.
 
 Then, install the dependencies:
 
-```sh title="Execute this in the 'model-serving' folder"
+```sh title="Execute this in the 'model-creation' folder"
 # Install the dependencies
 pip install --requirement requirements.txt
 ```
 
 Create a freeze file to pin all dependencies to their current versions:
 
-```sh title="Execute this in the 'model-serving' folder"
+```sh title="Execute this in the 'model-creation' folder"
 # Freeze the dependencies
 pip freeze --local --all > requirements-all.txt
 ```
-
-The specific
-`common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
-line will conflict with the more general line in `requirements.txt` due to the
-explicit commit reference.
-
-From there, you have two options:
-
-* **Easier update:** Remove the specific
-  `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
-  line from `requirements-all.txt`. This allows for easier updates of the
-  common-code dependency without adjusting service dependencies.
-* **Consistent dependencies:** Remove the generic line in `requirements.txt` to
-  keep dependencies consistent across machines and time. This will ensure that the
-  same versions of the dependencies are installed on every machine if you ever
-  share your code with someone else.
 
 #### Create the source files
 
