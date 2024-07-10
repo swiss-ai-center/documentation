@@ -186,7 +186,7 @@ This service rotates an image by 90, 180 or 270 degrees clockwise.
 
     This service rotates an image by 90, 180 or 270 degrees clockwise.
 
-    _Check the [related documentation](https://swiss-ai-center.github.io/swiss-ai-center/reference/image-rotate) for more information._
+    _Check the [related documentation](https://docs.swiss-ai-center.ch/reference/services/image-rotate/) for more information._
     ```
 
 #### Update the `pyproject.toml` file
@@ -275,7 +275,7 @@ class MyService(Service):
                 ),
             ],
             has_ai=False,
-            docs_url="https://docs.swiss-ai-center.ch/reference/core-concepts/service/", # (5)!
+            docs_url="https://docs.swiss-ai-center.ch/reference/services/image-rotate/", # (5)!
         )
         self._logger = get_logger(settings)
 
