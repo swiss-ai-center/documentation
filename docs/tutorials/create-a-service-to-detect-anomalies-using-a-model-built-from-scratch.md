@@ -608,7 +608,7 @@ class MyService(Service):# (2)!
                 ),
             ],
             has_ai=True,# (8)!
-            docs_url="https://docs.swiss-ai-center.ch/reference/core-concepts/service/", # (9)!
+            docs_url="https://docs.swiss-ai-center.ch/reference/services/ae-ano-detection/", # (9)!
         )
         self._logger = get_logger(settings)
 
