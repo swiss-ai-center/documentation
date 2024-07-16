@@ -22,7 +22,7 @@ technique showed by langchain. Each document will be summarized individually
 (Mapping phase) and then all the summaries will be combined into a single
 summary (Reduce phase).
 
-The LLMs used by this service are hosted by Ollama.
+The LLMs used by this service are hosted by [Ollama](https://ollama.ai/).
 
 ## Environment variables
 
