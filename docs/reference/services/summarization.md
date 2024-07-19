@@ -41,3 +41,29 @@ documentation for more details.
 Check the
 [**Core concepts > Service > Start the service locally**](../core-concepts/service.md#start-the-service-locally)
 documentation for more details.
+
+### Deploy ollama locally
+
+add the following container to the `stateful.yml` deployment file
+
+```yaml
+- name: ollama
+image: ollama/ollama
+ports:
+- name: http
+    containerPort: 11434
+command: ["/bin/bash", "-c"]
+args:
+- |
+    ollama serve &
+    sleep 10
+    ollama pull mistral:instruct
+    sleep infinity
+resources:
+    requests:
+    tencent.com/vcuda-core: 20
+    tencent.com/vcuda-memory: 8
+    limits:
+    tencent.com/vcuda-core: 20
+    tencent.com/vcuda-memory: 8
+```

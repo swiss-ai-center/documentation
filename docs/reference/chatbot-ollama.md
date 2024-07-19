@@ -88,6 +88,32 @@ before using the chatbot-ollama app. See the
 [document-vectorizer service](../reference/services/document-vectorizer.md#start-the-service-locally-with-minikube-and-the-docker-image-hosted-on-github)
 documentation to deploy it locally.
 
+### Deploy ollama locally
+
+add the following container to the `chatbot-ollama.stateful` deployment file
+
+```yaml
+- name: ollama
+image: ollama/ollama
+ports:
+- name: http
+    containerPort: 11434
+command: ["/bin/bash", "-c"]
+args:
+- |
+    ollama serve &
+    sleep 10
+    ollama pull mistral:instruct
+    sleep infinity
+resources:
+    requests:
+    tencent.com/vcuda-core: 20
+    tencent.com/vcuda-memory: 8
+    limits:
+    tencent.com/vcuda-core: 20
+    tencent.com/vcuda-memory: 8
+```
+
 ## Start the service locally with minikube and a local Docker image
 
 **Note**: The service StatefulSet (`chatbot-ollama.stateful.yml` file) must be
