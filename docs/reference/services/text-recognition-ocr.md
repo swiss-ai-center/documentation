@@ -13,12 +13,15 @@
     More information about the service specification can be found in the
     [**Core concepts > Service**](../core-concepts/service.md) documentation.
 
-This service takes a PNG or JPG image as input and performs optical text recognition (OCR) on it using Tesseract 5.
-The result is returned as a JSON containing the detected text and its bounding boxes.
+This service takes a PNG or JPG image as input and performs optical text
+recognition (OCR) on it using Tesseract 5. The result is returned as a JSON
+containing the detected text and its bounding boxes.
 
 ## Model
-This service uses Tesseract through [pytesseract](https://pypi.org/project/pytesseract/).
-For more details about Tesseract 5, head to its [github page](https://github.com/tesseract-ocr/tesseract/releases).
+This service uses Tesseract through
+[pytesseract](https://pypi.org/project/pytesseract/). For more details about
+Tesseract 5, head to its
+[github page](https://github.com/tesseract-ocr/tesseract/releases).
 
 
 ## Environment variables
