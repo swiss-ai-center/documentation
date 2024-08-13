@@ -64,6 +64,7 @@ nav:
           - nlp-langid service: reference/services/nlp-langid.md
           - regression-benchmark service: reference/services/regression-benchmark.md
           - summarization service: reference/services/summarization.md
+          - text recognition OCR service: reference/services/text-recognition-ocr.md
           - text-summarizer service: reference/services/text-summarizer.md
           - yolov8 service: reference/services/yolov8.md
           - ydata-profiling service: reference/services/ydata-profiling.md
