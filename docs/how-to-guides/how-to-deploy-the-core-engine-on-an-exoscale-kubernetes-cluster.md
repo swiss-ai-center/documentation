@@ -680,7 +680,7 @@ cluster node pools. You can do this by executing the following commands:
 
 ```sh title="Execute the following command(s) in a terminal"
 # Scale the Kubernetes cluster node pools to the double of the current size
-exo compute sks nodepool update swiss-ai-center-prod-cluster swiss-ai-center-prod-nodepool-1 --size 4
+exo compute sks nodepool scale swiss-ai-center-prod-cluster swiss-ai-center-prod-nodepool-1 4
 
 # Validate the scaling of the Kubernetes cluster node pools
 exo compute sks nodepool list swiss-ai-center-prod-cluster
