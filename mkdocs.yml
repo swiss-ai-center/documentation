@@ -55,6 +55,7 @@ nav:
           - image-blur service: reference/services/image-blur.md
           - image-convert service: reference/services/image-convert.md
           - image-crop service: reference/services/image-crop.md
+          - image-draw-bounding-boxes: reference/services/image-draw-bounding-boxes.md
           - image-greyscale service: reference/services/image-greyscale.md
           - image-nsfw-detector service: reference/services/image-nsfw-detector.md
           - image-resize service: reference/services/image-resize.md
