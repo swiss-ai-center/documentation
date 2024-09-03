@@ -55,7 +55,7 @@ nav:
           - image-blur service: reference/services/image-blur.md
           - image-convert service: reference/services/image-convert.md
           - image-crop service: reference/services/image-crop.md
-          - image-draw-bounding-boxes: reference/services/image-draw-bounding-boxes.md
+          - image-draw-bounding-boxes service: reference/services/image-draw-bounding-boxes.md
           - image-greyscale service: reference/services/image-greyscale.md
           - image-nsfw-detector service: reference/services/image-nsfw-detector.md
           - image-resize service: reference/services/image-resize.md
@@ -65,7 +65,6 @@ nav:
           - nlp-langid service: reference/services/nlp-langid.md
           - regression-benchmark service: reference/services/regression-benchmark.md
           - summarization service: reference/services/summarization.md
-          - text recognition OCR service: reference/services/text-recognition-ocr.md
           - text-recognition-ocr service: reference/services/text-recognition-ocr.md
           - text-summarizer service: reference/services/text-summarizer.md
           - yolov8 service: reference/services/yolov8.md
