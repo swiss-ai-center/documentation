@@ -1,10 +1,10 @@
 # Urban sound classifier
 
 - [:material-account-group: Main author - HES-SO Valais-Wallis](https://www.hes-so.ch/swiss-ai-center/equipe)
-- [:material-git: Code](https://github.com/swiss-ai-center/urban-sound-classifier)
+- [:material-git: Code](https://github.com/swiss-ai-center/urban-sound-classifier-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/urban-sound-classifier/tree/main/kubernetes)
 - [:material-test-tube: Staging](https://urban-sound-classifier-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production](https://urban-sound-classifier.swiss-ai-center.ch)
+- [:material-factory: Production](https://urban-sound-classifier-service.swiss-ai-center.ch)
 
 ## Description
 
