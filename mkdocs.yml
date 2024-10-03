@@ -67,6 +67,7 @@ nav:
           - summarization service: reference/services/summarization.md
           - text-recognition-ocr service: reference/services/text-recognition-ocr.md
           - text-summarizer service: reference/services/text-summarizer.md
+          - urban-sound-classifier service: reference/services/urban-sound-classifier.md
           - yolov8 service: reference/services/yolov8.md
           - ydata-profiling service: reference/services/ydata-profiling.md
       - Common code: reference/common-code.md
