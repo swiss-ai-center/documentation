@@ -1,4 +1,4 @@
-# Urban sound classifier
+# urban-sound-classifier
 
 - [:material-account-group: Main author - HES-SO Valais-Wallis](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/urban-sound-classifier-service)
