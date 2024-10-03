@@ -36,10 +36,23 @@ Set up the environment with the following commands.
 ```sh
 # Generate the virtual environment
 python3.11 -m venv .venv
+```
 
-# Activate the virtual environment
-source .venv/bin/activate
+=== ":simple-linux: Linux / :simple-apple: macOS"
 
+    ```sh
+    # Activate the virtual environment
+    source .venv/bin/activate
+    ```
+
+=== ":fontawesome-brands-windows: Windows"
+
+    ```sh
+    # Activate the virtual environment
+    .\venv\Scripts\activate
+    ```
+
+```sh
 # Install the requirements
 pip install \
     --requirement requirements.txt \

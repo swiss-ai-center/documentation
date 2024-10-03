@@ -108,10 +108,19 @@ python3.11 -m venv .venv
 
 Then, activate the virtual environment:
 
-```sh title="Execute this in the 'root' folder"
-# Activate the virtual environment
-source .venv/bin/activate
-```
+=== ":simple-linux: Linux / :simple-apple: macOS"
+
+    ```sh title="Execute this in the 'root' folder"
+    # Activate the virtual environment
+    source .venv/bin/activate
+    ```
+
+=== ":fontawesome-brands-windows: Windows"
+
+    ```sh title="Execute this in the 'root' folder"
+    # Activate the virtual environment
+    .\venv\Scripts\activate
+    ```
 
 ### Install the dependencies
 

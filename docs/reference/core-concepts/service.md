@@ -348,7 +348,8 @@ run the tests, use the following command inside the service folder:
 
 ```sh
 # Run the tests
-pytest ```
+pytest
+```
 
 ## Start the service locally
 
@@ -376,7 +377,8 @@ You have several options to start the service locally:
     docker compose build
 
     # Start the service
-    docker compose up ```
+    docker compose up
+    ```
 
     Access the service documentation at <http://localhost:9090/docs>.
 
@@ -391,10 +393,28 @@ You have several options to start the service locally:
     ```sh
     # Generate the virtual environment
     python3 -m venv .venv
+    ```
 
+    ```sh
     # Activate the virtual environment
     source .venv/bin/activate
+    ```
 
+    === ":simple-linux: Linux / :simple-apple: macOS"
+
+        ```sh
+        # Activate the virtual environment
+        source .venv/bin/activate
+        ```
+
+    === ":fontawesome-brands-windows: Windows"
+
+        ```sh
+        # Activate the virtual environment
+        .\venv\Scripts\activate
+        ```
+
+    ```sh
     # Install the requirements
     pip install \
         --requirement requirements.txt \
