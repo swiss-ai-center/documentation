@@ -13,7 +13,12 @@
     More information about the service specification can be found in the
     [**Core concepts > Service**](../core-concepts/service.md) documentation.
 
-This service uses [MOMENT](https://github.com/moment-timeseries-foundation-model/moment) to identify anomalies in time series. The serviced provided works in a zero-shot-fashion. However, MOMENT allows fine-tuning. If interested, check their [docs and tutorials](https://github.com/moment-timeseries-foundation-model/moment/tree/main/tutorials).
+This service uses
+[MOMENT](https://github.com/moment-timeseries-foundation-model/moment) to
+identify anomalies in time series. The serviced provided works in a
+zero-shot-fashion. However, MOMENT allows fine-tuning. If interested, check
+their
+[docs and tutorials](https://github.com/moment-timeseries-foundation-model/moment/tree/main/tutorials).
 
 !!! note
 
