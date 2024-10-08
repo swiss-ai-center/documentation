@@ -68,8 +68,8 @@ mdwrap is a command line tool to format our Markdown documentation made with
 | [text-summarizer](./services/text-summarizer.md)                       | <https://github.com/swiss-ai-center/text-summarizer-service>            | <https://text-summarizer-swiss-ai-center.kube.isc.heia-fr.ch>            | <https://text-summarizer-service.swiss-ai-center.ch>          |
 | [ts-anomaly_detection](./services/ts-anomaly_detection.md)             | <https://github.com/swiss-ai-center/ts-anomaly-detection-service>       | <https://ts-anomaly-detection-swiss-ai-center.kube.isc.heia-fr.ch>       | <https://ts-anomaly-detection-service.swiss-ai-center.ch>     |
 | [urban-sound-classifier](./services/urban-sound-classifier.md)         | <https://github.com/swiss-ai-center/urban-sound-classifier-service>     | <https://urban-sound-classifier-swiss-ai-center.kube.isc.heia-fr.ch>     | <https://urban-sound-classifier-service.swiss-ai-center.ch>   |
-| [yolov8](./services/yolov8.md)                                         | <https://github.com/swiss-ai-center/yolov8-service>                     | <https://yolov8-swiss-ai-center.kube.isc.heia-fr.ch>                     | <https://yolov8-service.swiss-ai-center.ch>                   |
 | [ydata-profiling](./services/ydata-profiling.md)                       | <https://github.com/swiss-ai-center/ydata-profiling>                    | <https://ydata-profiling-swiss-ai-center.kube.isc.heia-fr.ch>            | <https://ydata-profiling-service.swiss-ai-center.ch>          |
+| [yolov8](./services/yolov8.md)                                         | <https://github.com/swiss-ai-center/yolov8-service>                     | <https://yolov8-swiss-ai-center.kube.isc.heia-fr.ch>                     | <https://yolov8-service.swiss-ai-center.ch>                   |
 
 ## Pipelines
 
