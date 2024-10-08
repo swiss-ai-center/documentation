@@ -63,6 +63,7 @@ nav:
           - image-sam service: reference/services/image-sam.md
           - integrity-checker service: reference/services/integrity-checker.md
           - nlp-langid service: reference/services/nlp-langid.md
+          - pdf-extractor service: reference/services/pdf-extractor.md
           - regression-benchmark service: reference/services/regression-benchmark.md
           - summarization service: reference/services/summarization.md
           - text-recognition-ocr service: reference/services/text-recognition-ocr.md
