@@ -71,6 +71,7 @@ mdwrap is a command line tool to format our Markdown documentation made with
 | [urban-sound-classifier](./services/urban-sound-classifier.md)         | <https://github.com/swiss-ai-center/urban-sound-classifier-service>     | <https://urban-sound-classifier-swiss-ai-center.kube.isc.heia-fr.ch>     | <https://urban-sound-classifier-service.swiss-ai-center.ch>   |
 | [ydata-profiling](./services/ydata-profiling.md)                       | <https://github.com/swiss-ai-center/ydata-profiling>                    | <https://ydata-profiling-swiss-ai-center.kube.isc.heia-fr.ch>            | <https://ydata-profiling-service.swiss-ai-center.ch>          |
 | [yolov8](./services/yolov8.md)                                         | <https://github.com/swiss-ai-center/yolov8-service>                     | <https://yolov8-swiss-ai-center.kube.isc.heia-fr.ch>                     | <https://yolov8-service.swiss-ai-center.ch>                   |
+| [zigzag-binarization](./services/zigzag-binarization.md)               | <https://github.com/swiss-ai-center/zigzag-binarization-service>        | <https://zigzag-binarization-swiss-ai-center.kube.isc.heia-fr.ch>        | <https://zigzag-binarization-service.swiss-ai-center.ch>      |
 
 ## Pipelines
 
