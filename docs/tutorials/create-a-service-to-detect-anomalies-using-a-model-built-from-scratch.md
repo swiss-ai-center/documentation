@@ -133,10 +133,19 @@ python3.11 -m venv .venv
 
 Then, activate the virtual environment:
 
-```sh title="Execute this in the 'model-creation' folder"
-# Activate the virtual environment
-source .venv/bin/activate
-```
+=== ":simple-linux: Linux / :simple-apple: macOS"
+
+    ```sh title="Execute this in the 'model-creation' folder"
+    # Activate the virtual environment
+    source .venv/bin/activate
+    ```
+
+=== ":fontawesome-brands-windows: Windows"
+
+    ```sh title="Execute this in the 'model-creation' folder"
+    # Activate the virtual environment
+    .\venv\Scripts\activate
+    ```
 
 #### Install the dependencies
 
@@ -436,10 +445,19 @@ python3.11 -m venv .venv
 
 Then, activate the virtual environment:
 
-```sh title="Execute this in the 'model-serving' folder"
-# Activate the virtual environment
-source .venv/bin/activate
-```
+=== ":simple-linux: Linux / :simple-apple: macOS"
+
+    ```sh title="Execute this in the 'model-serving' folder"
+    # Activate the virtual environment
+    source .venv/bin/activate
+    ```
+
+=== ":fontawesome-brands-windows: Windows"
+
+    ```sh title="Execute this in the 'model-serving' folder"
+    # Activate the virtual environment
+    .\venv\Scripts\activate
+    ```
 
 This will ensure that the dependencies of the model creation and the model
 serving are isolated.
