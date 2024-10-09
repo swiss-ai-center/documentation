@@ -348,7 +348,8 @@ run the tests, use the following command inside the service folder:
 
 ```sh
 # Run the tests
-pytest ```
+pytest
+```
 
 ## Start the service locally
 
