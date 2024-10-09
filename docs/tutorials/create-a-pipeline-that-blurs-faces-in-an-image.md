@@ -43,7 +43,7 @@ documentation to start them.
 ### Create the pipeline
 === "Using the Core engine interface (recommended)"
 
-    [Start the frontend](./start-the-core-engine/#start-the-core-engine-locally-with-docker-compose)
+    [Start the frontend](start-the-core-engine.md#start-the-core-engine-locally-with-docker-compose)
     if you haven't already. Then navigate to the
     `http://localhost:3000/create-pipeline` page. From here you can choose among all
     available services the one you want to add to the new pipeline. First, select
