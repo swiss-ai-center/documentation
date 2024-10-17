@@ -1,4 +1,4 @@
-# hugging face text-to-text
+# hugging-face-text-to-text
 
 - [:material-account-group: Main author - HEIA-FR](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/hugging-face-text-to-text-service)
