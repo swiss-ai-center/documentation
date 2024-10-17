@@ -1,4 +1,4 @@
-# Image Segment Anything Model (SAM)
+# image-sam
 
 - [:material-account-group: Main author - HEIG-VD](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://gitlab.com/swiss-ai-center/image-sam-service)

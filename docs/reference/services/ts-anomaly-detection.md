@@ -1,4 +1,4 @@
-# Time Series Anomaly Detection using foundation models (MOMENT)
+# ts-anomaly-detection
 
 - [:material-account-group: Main author - HES-SO Valais-Wallis](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/ts-anomaly-detection-service)
