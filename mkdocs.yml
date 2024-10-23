@@ -45,6 +45,7 @@ nav:
           - doodle service: reference/services/doodle.md
           - face-analyzer service: reference/services/face-analyzer.md
           - face-detection service: reference/services/face-detection.md
+          - flipml service: reference/services/flipml.md
           - gradcam service: reference/services/gradcam.md
           - hugging-face-image-to-text service: reference/services/hugging-face-image-to-text.md
           - hugging-face-text-to-audio service: reference/services/hugging-face-text-to-audio.md
