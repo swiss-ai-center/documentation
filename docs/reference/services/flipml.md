@@ -12,8 +12,10 @@
     More information about the service specification can be found in the
     [**Core concepts > Service**](../core-concepts/service.md) documentation.
 
-This service uses a machine learning model to detect if a scanned document is upside down. The document can be uploaded as a png or jpeg image. 
-It is resized to 512x512 px before being processed by the model. The return value is either 0 (0° rotation) or 180 (180° rotation, upside down).
+This service uses a machine learning model to detect if a scanned document is
+upside down. The document can be uploaded as a png or jpeg image. It is resized
+to 512x512 px before being processed by the model. The return value is either 0
+(0° rotation) or 180 (180° rotation, upside down).
 
 ## Environment variables
 
