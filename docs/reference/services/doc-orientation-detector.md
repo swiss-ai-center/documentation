@@ -1,9 +1,9 @@
-# flipml
+# doc-orientation-detector
 - [:material-account-group: Main author - HEIA-FR](https://www.hes-so.ch/swiss-ai-center/equipe)
-- [:material-git: Code](https://github.com/swiss-ai-center/flipml-service)
-- [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/flipml-service/tree/main/kubernetes)
-- [:material-test-tube: Staging](https://flipml-swiss-ai-center.kube.isc.heia-fr.ch)
-- [:material-factory: Production](https://flipml.swiss-ai-center.ch)
+- [:material-git: Code](https://github.com/swiss-ai-center/doc-orientation-detector-service)
+- [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/doc-orientation-detector-service/tree/main/kubernetes)
+- [:material-test-tube: Staging](https://doc-orientation-detector-swiss-ai-center.kube.isc.heia-fr.ch)
+- [:material-factory: Production](https://doc-orientation-detector.swiss-ai-center.ch)
 
 ## Description
 

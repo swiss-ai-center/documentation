@@ -41,11 +41,11 @@ nav:
           - class-rebalancing service: reference/services/class-rebalancing.md
           - classification-benchmark service: reference/services/classification-benchmark.md
           - digit-recognition service: reference/services/digit-recognition.md
+          - doc-orientation-detector service: reference/services/doc-orientation-detector.md
           - document-vectorizer service: reference/services/document-vectorizer.md
           - doodle service: reference/services/doodle.md
           - face-analyzer service: reference/services/face-analyzer.md
           - face-detection service: reference/services/face-detection.md
-          - flipml service: reference/services/flipml.md
           - gradcam service: reference/services/gradcam.md
           - hugging-face-image-to-text service: reference/services/hugging-face-image-to-text.md
           - hugging-face-text-to-audio service: reference/services/hugging-face-text-to-audio.md
