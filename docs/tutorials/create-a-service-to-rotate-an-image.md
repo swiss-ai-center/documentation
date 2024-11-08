@@ -382,18 +382,30 @@ app = FastAPI(
     wanted type of the data, you might need to convert the data to the expected
     type.
 
-#### Update the `Dockerfile` file
+#### Update the `Dockerfile` and `development.Dockerfile` files
 
-Update the Dockerfile to install all required packages that might be required by
+Update the Dockerfiles to install all required packages that might be required by
 the model and the model itself:
 
-```dockerfile title="Dockerfile" hl_lines="5"
+```dockerfile title="Dockerfile" hl_lines="6"
 # Base image
 FROM python:3.11
 
 # Install all required packages to run the model
+# (1)!
 RUN apt update && apt install --yes ffmpeg libsm6 libxext6
 ...
+```
+
+1. Add any additional packages required to run your model.
+
+```dockerfile title="development.Dockerfile" hl_lines="6"
+# Base image
+FROM python:3.11
+
+# Install all required packages to run the model
+# (1)!
+RUN apt update && apt install --yes ffmpeg libsm6 libxext6
 ```
 
 1. Add any additional packages required to run your model.
