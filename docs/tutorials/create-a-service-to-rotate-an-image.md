@@ -132,7 +132,7 @@ Update the `requirements.txt` file with the following content:
 ```txt title="requirements.txt" hl_lines="2 3"
 common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main
 numpy==1.26.4
-opencv-python-headless==4.9.0.80
+opencv-python==4.9.0.80
 ```
 
 The `common-code` package is required to serve the model over a FastAPI REST API
