@@ -29,7 +29,6 @@ The JSON file may contain additional fields; they will be ignored.
 ## Tools
 The service uses Pillow to draw the boxes.
 
-
 ## Environment variables
 
 Check the

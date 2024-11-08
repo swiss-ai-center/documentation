@@ -23,7 +23,6 @@ This service uses Tesseract through
 Tesseract 5, head to its
 [github page](https://github.com/tesseract-ocr/tesseract/releases).
 
-
 ## Environment variables
 
 Check the

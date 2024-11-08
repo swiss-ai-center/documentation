@@ -384,8 +384,8 @@ app = FastAPI(
 
 #### Update the `Dockerfile` and `development.Dockerfile` files
 
-Update the Dockerfiles to install all required packages that might be required by
-the model and the model itself:
+Update the Dockerfiles to install all required packages that might be required
+by the model and the model itself:
 
 ```dockerfile title="Dockerfile" hl_lines="6"
 # Base image
