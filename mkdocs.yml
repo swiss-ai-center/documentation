@@ -37,6 +37,7 @@ nav:
           - Service: reference/core-concepts/service.md
       - Services:
           - ae-ano-detection service: reference/services/ae-ano-detection.md
+          - audio-transcription service: reference/services/audio-transcription.md
           - average-shade service: reference/services/average-shade.md
           - class-rebalancing service: reference/services/class-rebalancing.md
           - classification-benchmark service: reference/services/classification-benchmark.md
