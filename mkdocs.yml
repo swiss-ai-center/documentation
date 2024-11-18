@@ -71,6 +71,7 @@ nav:
           - summarization service: reference/services/summarization.md
           - text-recognition-ocr service: reference/services/text-recognition-ocr.md
           - text-summarizer service: reference/services/text-summarizer.md
+          - text-to-speech service: reference/services/text-to-speech.md
           - time series anomaly detection service: reference/services/ts-anomaly-detection.md
           - urban-sound-classifier service: reference/services/urban-sound-classifier.md
           - ydata-profiling service: reference/services/ydata-profiling.md
