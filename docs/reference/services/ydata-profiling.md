@@ -3,7 +3,7 @@
 - [:material-account-group: Main author - HES-SO Valais-Wallis](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/ydata-profiling-service/)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/ydata-profiling-service/tree/main/kubernetes)
-- [:material-test-tube: Staging](https://ydata-profiling-swiss-ai-center.kube.isc.heia-fr.ch)
+- [:material-test-tube: Staging](https://ydata-profiling-swiss-ai-center.kube-ext.isc.heia-fr.ch)
 - [:material-factory: Production](https://ydata-profiling-service.swiss-ai-center.ch)
 
 ## Description

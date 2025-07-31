@@ -3,7 +3,7 @@
 - [:material-account-group: Main author - HE-Arc](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/document-vectorizer-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/document-vectorizer-service/tree/main/kubernetes)
-- [:material-test-tube: Staging](https://document-vectorizer-swiss-ai-center.kube.isc.heia-fr.ch/docs)
+- [:material-test-tube: Staging](https://document-vectorizer-swiss-ai-center.kube-ext.isc.heia-fr.ch/docs)
 - [:material-factory: Production](https://document-vectorizer-service.swiss-ai-center.ch)
 
 ## Description

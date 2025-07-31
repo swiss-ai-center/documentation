@@ -3,7 +3,7 @@
 - [:material-account-group: Main author - HE-Arc](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/summarization-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/summarization-service/tree/main/kubernetes)
-- [:material-test-tube: Staging](https://summarization-swiss-ai-center.kube.isc.heia-fr.ch/docs)
+- [:material-test-tube: Staging](https://summarization-swiss-ai-center.kube-ext.isc.heia-fr.ch/docs)
 - [:material-factory: Production](https://summarization-service.swiss-ai-center.ch)
 
 ## Description

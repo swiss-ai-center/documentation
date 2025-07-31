@@ -3,7 +3,7 @@
 - [:material-account-group: Main author - HEIA-FR](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/text-to-speech)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/text-to-speech/tree/main/kubernetes)
-- [:material-test-tube: Staging](https://text-to-speech-swiss-ai-center.kube.isc.heia-fr.ch)
+- [:material-test-tube: Staging](https://text-to-speech-swiss-ai-center.kube-ext.isc.heia-fr.ch)
 - [:material-factory: Production](https://text-to-speech-service.swiss-ai-center.ch)
 
 ## Description

@@ -3,7 +3,7 @@
 - [:material-account-group: Main author - HEIG-VD](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://gitlab.com/swiss-ai-center/image-sam-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/image-sam-service/tree/main/kubernetes)
-- [:material-test-tube: Staging](https://image-sam-swiss-ai-center.kube.isc.heia-fr.ch)
+- [:material-test-tube: Staging](https://image-sam-swiss-ai-center.kube-ext.isc.heia-fr.ch)
 - [:material-factory: Production](https://image-sam-service.swiss-ai-center.ch)
 
 ## Description

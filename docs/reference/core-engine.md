@@ -6,8 +6,8 @@
   ([backend](https://github.com/swiss-ai-center/core-engine/tree/main/backend/kubernetes))
   ([frontend](https://github.com/swiss-ai-center/core-engine/tree/main/frontend/kubernetes))
 - :material-test-tube: Staging
-  ([backend](https://backend-core-engine-swiss-ai-center.kube.isc.heia-fr.ch))
-  ([frontend](https://frontend-core-engine-swiss-ai-center.kube.isc.heia-fr.ch))
+  ([backend](https://backend-core-engine-swiss-ai-center.kube-ext.isc.heia-fr.ch))
+  ([frontend](https://frontend-core-engine-swiss-ai-center.kube-ext.isc.heia-fr.ch))
 - :material-factory: Production
   ([backend](https://core-engine.swiss-ai-center.ch))
   ([frontend](https://app.swiss-ai-center.ch))

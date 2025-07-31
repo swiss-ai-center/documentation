@@ -1,6 +1,6 @@
 # Team
 
-| Name                  | Site                          | Role      | Email                                     | Works on                              |
-| --------------------- | ----------------------------- | --------- | ----------------------------------------- | ------------------------------------- |
-| Andrea Petrucci       | HEIA-FR (Fribourg)            | Developer | <mailto:andrea.petrucci@hefr.ch>          | Monday, Wednesday, Thursday morning    |
-| Ludovic Delafontaine  | HEIG-VD (Yverdon-les-Bains)   | Developer | <mailto:ludovic.delafontaine@heig-vd.ch>  | Monday, Wednesday, Thursday            |
+| Name             | Site                          | Role      | Email                                     | Works on                                     |
+| -----------------| ----------------------------- | --------- | ----------------------------------------- | -------------------------------------------- |
+| Valentin Biolley | HEIA-FR (Fribourg)            | Developer | <mailto:valentin.biolley@hefr.ch>         | Monday, Tuesday, Wednesday, Thursday, Friday |
+| Rémy Marquis     | HEIG-VD (Yverdon-les-Bains)   | Developer | <mailto:remy.marquis@heig-vd.ch>          | Monday, Tuesday, Wednesday, Thursday, Friday |
