@@ -29,8 +29,8 @@ The first step is to prepare the services that will be used in the
 [Pipeline](../reference/core-concepts/pipeline.md). In this tutorial, we will
 use the following services:
 
-- [Face detection](https://face-detection-swiss-ai-center.kube.isc.heia-fr.ch)
-- [Image blur](https://image-blur-swiss-ai-center.kube.isc.heia-fr.ch)
+- [Face detection](https://face-detection-swiss-ai-center.kube-ext.isc.heia-fr.ch)
+- [Image blur](https://image-blur-swiss-ai-center.kube-ext.isc.heia-fr.ch)
 
 #### Launch the services
 

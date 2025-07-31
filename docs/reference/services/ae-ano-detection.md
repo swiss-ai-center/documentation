@@ -3,7 +3,7 @@
 - [:material-account-group: Main author - HE-Arc](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/ae-ano-detection-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/ae-ano-detection-service/tree/main/model-serving/kubernetes)
-- [:material-test-tube: Staging](https://ae-ano-detection-swiss-ai-center.kube.isc.heia-fr.ch)
+- [:material-test-tube: Staging](https://ae-ano-detection-swiss-ai-center.kube-ext.isc.heia-fr.ch)
 - [:material-factory: Production](https://ae-ano-detection-service.swiss-ai-center.ch)
 
 ## Description

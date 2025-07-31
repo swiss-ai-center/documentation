@@ -26,11 +26,11 @@ decide the right template for your use case.
 
 ```mermaid
 flowchart TD
-    which_template_to_choose["Which template\nto choose"]
-    does_your_service_use_ai{"Does your service\nuse AI?"}
-    how_to_you_obtain_the_model{"How do you\nobtain the model"}
-    use_the_create_a_new_service_generic_template["Use the 'Create a new service (generic)' template"]
-    use_the_create_a_new_service_model_from_scratch_template["Use the 'Create a new service (model from scratch)' template"]
+    which_template_to_choose@{ shape: rect, label: "Which template\n to choose" }
+    does_your_service_use_ai@{ shape: diam, label: "Does your service \n use AI?" }
+    how_to_you_obtain_the_model@{ shape: diam, label: "How do you\nobtain the model" }
+    use_the_create_a_new_service_generic_template@{ shape: rect, label: "Use the 'Create a new service (generic)' template" }
+    use_the_create_a_new_service_model_from_scratch_template@{ shape: rect, label: "Use the 'Create a new service (model from scratch)' template" }
 
     which_template_to_choose --> does_your_service_use_ai
     does_your_service_use_ai -->|"No"| use_the_create_a_new_service_generic_template

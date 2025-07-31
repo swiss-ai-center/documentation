@@ -3,7 +3,7 @@
 - [:material-account-group: Main author - HEIA-FR](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/pdf-extractor-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/pdf-extractor-service/tree/main/kubernetes)
-- [:material-test-tube: Staging](https://pdf-extractor-swiss-ai-center.kube.isc.heia-fr.ch)
+- [:material-test-tube: Staging](https://pdf-extractor-swiss-ai-center.kube-ext.isc.heia-fr.ch)
 - [:material-factory: Production](https://pdf-extractor-service.swiss-ai-center.ch)
 
 ## Description

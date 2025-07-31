@@ -3,7 +3,7 @@
 - [:material-account-group: Main author - HEIG-VD](https://www.hes-so.ch/swiss-ai-center/equipe)
 - [:material-git: Code](https://github.com/swiss-ai-center/gradcam-service)
 - [:material-kubernetes: Deployment configuration](https://github.com/swiss-ai-center/gradcam-service/tree/main/kubernetes)
-- [:material-test-tube: Staging](https://gradcam-swiss-ai-center.kube.isc.heia-fr.ch)
+- [:material-test-tube: Staging](https://gradcam-swiss-ai-center.kube-ext.isc.heia-fr.ch)
 - [:material-factory: Production](https://gradcam-service.swiss-ai-center.ch)
 
 ## Description
