@@ -5,7 +5,7 @@ site_author: Swiss AI Center contributors
 site_url: https://docs.swiss-ai-center.ch
 site_description: >-
   Documentation website for the Swiss AI Center project.
-copyright: Copyright &copy; 2022 - 2024 Swiss AI Center
+copyright: Copyright &copy; 2022 - 2025 Swiss AI Center
 nav:
   - Home:
       - index.md
@@ -80,6 +80,7 @@ nav:
       - Common code: reference/common-code.md
       - Core engine: reference/core-engine.md
       - mdwrap: reference/mdwrap.md
+      - Image utilities: reference/image-utilities.md
       - chatbot-ollama: reference/chatbot-ollama.md
       - Team: reference/team.md
   - Explanations:
