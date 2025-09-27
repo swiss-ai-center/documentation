@@ -33,7 +33,9 @@ mdwrap is a command line tool to format our Markdown documentation made with
 
 ## Image utilities
 
-We have two CLI utilities for image scraping and grooming: `image-scraper.py` to scrape images from the web based on a list of keywords, and `image-groomer.py` to groom and preprocess images for machine learning tasks.
+We have two CLI utilities for image scraping and grooming: `image-scraper.py` to
+scrape images from the web based on a list of keywords, and `image-groomer.py`
+to groom and preprocess images for machine learning tasks.
 
 - Documentation: [image-utilities](./image-utilities.md)
 - Code: <https://github.com/swiss-ai-center/image-groomer>
