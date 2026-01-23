@@ -84,9 +84,7 @@ You have two ways to build, publish and deploy your service:
     | `DEV_LOG_LEVEL`                   | The log level of the service of the development environment.                                                  | string    | `info`                                                                        |
     | `DEV_MAX_TASKS`                   | The maximum number of tasks the service of the development environment can accept in its queue.               | string    | `'50'`                                                                        |
     | `DEV_NAMESPACE`                   | The namespace of the service of the development environment.                                                  | string    | `swiss-ai-center-dev`                                                         |
-    | `DEV_KEDA_SERVICE`                | The name of the deployed KEDA service on kubernetes, to handle pods auto-scaling.                             | string    | `keda-interceptor-proxy`                                                      |
-    | `DEV_KEDA_PORT` | The port of the deployed KEDA service on kubernetes, to
-    handle pods auto-scaling. | string | `8080` |
+    | `DEV_KEDA_SERVICE`                | The name of the deployed KEDA service on kubernetes, to handle pods auto-scaling.                             | string    | `keda-interceptor-proxy`                                                      | | `DEV_KEDA_PORT` | The port of the deployed KEDA service on kubernetes, to handle pods auto-scaling. | string | `8080` |
 
     All `DEV_*` variables can be duplicated to `PROD_*` variables to deploy the
     service on the production environment.
