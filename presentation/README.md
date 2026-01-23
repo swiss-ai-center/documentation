@@ -145,6 +145,7 @@ _paginate: false
 - Must have the **required routes** to be “engine” compliant
 - The /compute route must accept the **“Task” model**
 - Can have its own routes (for specific purposes)
+- Can be auto-scaled with **KEDA** on Kubernetes
 
 </small>
 
@@ -219,9 +220,9 @@ _paginate: false
 
 <small>
 
-- Pipeline parallelization
+- Pipeline branching
+- Pipeline multiple outputs
 - Toy datasets
-- Functional tests on service declaration
 - And many more…
 
 

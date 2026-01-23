@@ -70,23 +70,32 @@ You have two ways to build, publish and deploy your service:
 
     The following variables are required to build, publish and deploy the service:
 
-    | Variable name                     | Description                                                                                                   | Type      | Default value[^1]                                                         |
-    | --------------------------------- | ------------------------------------------------------------------------------------------------------------- | --------- | ------------------------------------------------------------------------- |
-    | `RUN_CICD`                        | Whether to run the CI/CD pipeline.                                                                            | boolean   | `true`                                                                    |
-    | `DEPLOY_DEV`                      | Whether to deploy the service on the development environment.                                                 | boolean   | `false`                                                                   |
-    | `DEPLOY_PROD`                     | Whether to deploy the service on the production environment.                                                  | boolean   | `false`                                                                   |
-    | `SERVICE_NAME`                    | The name of the service.                                                                                      | string    |                                                                           |
-    | `MODEL_PATH`                      | The path to the model binary file, e.g. `./model-creation/model/my-model.h5`                                  | string    |                                                                           |
-    | `DEV_SERVICE_URL`                 | The URL of the service of the development environment.                                                        | string    |                                                                           |
+    | Variable name                     | Description                                                                                                   | Type      | Default value[^1]                                                             |
+    | --------------------------------- | ------------------------------------------------------------------------------------------------------------- | --------- | ----------------------------------------------------------------------------- |
+    | `RUN_CICD`                        | Whether to run the CI/CD pipeline.                                                                            | boolean   | `true`                                                                        |
+    | `DEPLOY_DEV`                      | Whether to deploy the service on the development environment.                                                 | boolean   | `false`                                                                       |
+    | `DEPLOY_PROD`                     | Whether to deploy the service on the production environment.                                                  | boolean   | `false`                                                                       |
+    | `SERVICE_NAME`                    | The name of the service.                                                                                      | string    |                                                                               |
+    | `MODEL_PATH`                      | The path to the model binary file, e.g. `./model-creation/model/my-model.h5`                                  | string    |                                                                               |
+    | `DEV_SERVICE_URL`                 | The URL of the service of the development environment.                                                        | string    |                                                                               |
     | `DEV_CORE_ENGINE_URLS`            | The URL(s) of the Core engine(s) of the development environment.                                              | string    | `'["https://backend-core-engine-swiss-ai-center.kube-ext.isc.heia-fr.ch"]'`   |
-    | `DEV_ENGINE_ANNOUNCE_RETRIES`     | The number of retries to announce the service to the Core engine(s) of the development environment.           | string    | `'5'`                                                                     |
-    | `DEV_ENGINE_ANNOUNCE_RETRY_DELAY` | The delay between each retry to announce the service to the Core engine(s) of the development environment.    | string    | `'3'`                                                                     |
-    | `DEV_LOG_LEVEL`                   | The log level of the service of the development environment.                                                  | string    | `info`                                                                    |
-    | `DEV_MAX_TASKS`                   | The maximum number of tasks the service of the development environment can accept in its queue.               | string    | `'50'`                                                                    |
-    | `DEV_NAMESPACE`                   | The namespace of the service of the development environment.                                                  | string    | `swiss-ai-center-dev`                                                     |
+    | `DEV_ENGINE_ANNOUNCE_RETRIES`     | The number of retries to announce the service to the Core engine(s) of the development environment.           | string    | `'5'`                                                                         |
+    | `DEV_ENGINE_ANNOUNCE_RETRY_DELAY` | The delay between each retry to announce the service to the Core engine(s) of the development environment.    | string    | `'3'`                                                                         |
+    | `DEV_LOG_LEVEL`                   | The log level of the service of the development environment.                                                  | string    | `info`                                                                        |
+    | `DEV_MAX_TASKS`                   | The maximum number of tasks the service of the development environment can accept in its queue.               | string    | `'50'`                                                                        |
+    | `DEV_NAMESPACE`                   | The namespace of the service of the development environment.                                                  | string    | `swiss-ai-center-dev`                                                         |
+    | `DEV_KEDA_SERVICE`                | The name of the deployed KEDA service on kubernetes, to handle pods auto-scaling.                             | string    | `keda-interceptor-proxy`                                                      |
+    | `DEV_KEDA_PORT`                   | The port of the deployed KEDA service on kubernetes, to handle pods auto-scaling.                             | string    | `8080`                                                                        | 
 
     All `DEV_*` variables can be duplicated to `PROD_*` variables to deploy the
     service on the production environment.
+
+    !!! note
+    
+        To be able to have KEDA auto-scaling working, make sure that the different
+        KEDA services are deployed on your Kubernetes cluster. You can find more
+        information about KEDA
+        [here](https://keda.sh/docs/2.18/deploy/).
 
     **Run the GitHub Actions workflow**
 
