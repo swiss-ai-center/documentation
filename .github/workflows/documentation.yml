@@ -63,7 +63,7 @@ jobs:
       - name: Install Material for MkDocs dependencies
         shell: bash
         run: |
-          sudo apt install --yes \
+          sudo apt update && sudo apt install --yes \
             libcairo2-dev \
             libfreetype6-dev \
             libffi-dev \
