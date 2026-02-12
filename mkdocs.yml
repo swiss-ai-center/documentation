@@ -64,6 +64,7 @@ nav:
           - image-rotate service: reference/services/image-rotate.md
           - image-sam service: reference/services/image-sam.md
           - integrity-checker service: reference/services/integrity-checker.md
+          - licence-plate-detection service: reference/services/licence-plate-detection.md
           - nlp-langid service: reference/services/nlp-langid.md
           - pdf-extractor service: reference/services/pdf-extractor.md
           - planet-recognition service: reference/services/planet-recognition.md
