@@ -1,6 +1,6 @@
-# How to deploy the Core engine on an Exoscale Kubernetes cluster
+# How to deploy the Core AI Engine on an Exoscale Kubernetes cluster
 
-This guide will help you to deploy the Core engine on an Exoscale Kubernetes
+This guide will help you to deploy the Core AI Engine on an Exoscale Kubernetes
 cluster.
 
 ## Guide
@@ -488,7 +488,7 @@ kubectl --kubeconfig exoscale.kubeconfig \
     delete -f dummy-pod.yaml
 ```
 
-### Deploy the Core engine
+### Deploy the Core AI Engine
 
 #### Create a PostgreSQL database
 
@@ -582,22 +582,22 @@ exo storage mb --zone ch-gva-2 sos://core-engine-prod-bucket
 exo storage ls --zone ch-gva-2
 ```
 
-#### Allow the Core engine to access the S3 bucket
+#### Allow the Core AI Engine to access the S3 bucket
 
-Allow the Core engine to access the S3 bucket by executing the following
+Allow the Core AI Engine to access the S3 bucket by executing the following
 commands:
 
 ```sh title="Execute the following command(s) in a terminal"
-# Create a new role for the Core engine
+# Create a new role for the Core AI Engine
 exo iam role create core-engine --policy '{"default-service-strategy":"deny","services":{"sos":{"type":"allow","rules":[]}}}'
 
-# Create a new API key for the Core engine
+# Create a new API key for the Core AI Engine
 exo iam api-key create s3 core-engine
 ```
 
-#### Update the Core engine GitHub Actions configuration
+#### Update the Core AI Engine GitHub Actions configuration
 
-Update the Core engine GitHub Actions configuration by adding/updating the
+Update the Core AI Engine GitHub Actions configuration by adding/updating the
 following secrets:
 
 !!! warning
@@ -613,21 +613,21 @@ following secrets:
 - `PROD_S3_HOST`: The host of the S3 bucket (ex: `https://sos-ch-gva-2.exo.io` -
   <https://community.exoscale.com/api/sos/>)
 
-Update the Core engine GitHub Actions configuration by adding/updating the
+Update the Core AI Engine GitHub Actions configuration by adding/updating the
 following variables:
 
 - `DEPLOY_PROD`: `true`
-- `PROD_HOST`: The host of the Core engine backend
-- `PROD_BACKEND_URL`: The URL of the Core engine backend used by the frontend
-- `PROD_BACKEND_WS_URL`: The WebSocket URL of the Core engine backend used by
+- `PROD_HOST`: The host of the Core AI Engine backend
+- `PROD_BACKEND_URL`: The URL of the Core AI Engine backend used by the frontend
+- `PROD_BACKEND_WS_URL`: The WebSocket URL of the Core AI Engine backend used by
   the frontend
-- `PROD_FRONTEND_HOST`: The URL of the Core engine frontend
+- `PROD_FRONTEND_HOST`: The URL of the Core AI Engine frontend
 - `PROD_S3_BUCKET`: The name of the S3 bucket
 - `PROD_S3_REGION`: The region of the S3 bucket (ex: `ch-gva-2`)
 
-#### Deploy the Core engine
+#### Deploy the Core AI Engine
 
-Run the GitHub Actions workflow to deploy the Core engine.
+Run the GitHub Actions workflow to deploy the Core AI Engine.
 
 #### Validate the deployment
 
@@ -645,8 +645,9 @@ kubectl --kubeconfig exoscale.kubeconfig \
 
 ### Deploy a service
 
-Deploying a service is similar to deploying the core engine. You need to update
-the GitHub Actions configuration by adding/updating the following secrets:
+Deploying a service is similar to deploying the Core AI Engine. You need to
+update the GitHub Actions configuration by adding/updating the following
+secrets:
 
 - `PROD_KUBE_CONFIG`: The content of the Kubernetes configuration file (this is
   an Organization secret in our repository)
@@ -752,10 +753,10 @@ exo iam api-key delete k8s-dbaas
 # Delete the role for Kubernetes
 exo iam role delete k8s
 
-# Delete the API key for the Core engine
+# Delete the API key for the Core AI Engine
 exo iam api-key delete s3
 
-# Delete the role for the Core engine
+# Delete the role for the Core AI Engine
 exo iam role delete core-engine
 ```
 

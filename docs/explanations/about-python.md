@@ -9,7 +9,7 @@ As the website of [Python](https://www.python.org/about/) mentions:
 
 ## How and why do we use Python
 
-The [Core engine](../reference/core-engine.md) and all the services are
+The [Core AI Engine](../reference/core-engine.md) and all the services are
 developed using Python.
 
 ## Install Python

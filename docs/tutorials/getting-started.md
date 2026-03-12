@@ -16,7 +16,7 @@ the following tools:
   - [Install minikube (optional)](#install-minikube-optional)
   - [Install Python](#install-python)
 - [Follow the tutorials](#follow-the-tutorials)
-  - [Start the Core engine](#start-the-core-engine)
+  - [Start the Core AI Engine](#start-the-core-engine)
   - [Create new services](#create-new-services)
   - [Create pipelines](#create-pipelines)
 - [Go further](#go-further)
@@ -59,7 +59,7 @@ to install and configure Git.
 
 !!! info
 
-    This is only required if you want to run the Core engine locally using
+    This is only required if you want to run the Core AI Engine locally using
     Kubernetes.
 
 [minikube](https://minikube.sigs.k8s.io/)
@@ -80,9 +80,9 @@ to install and configure Python.
 The tutorials will guide you through the Swiss AI Center projects and help you
 understand the concepts behind them.
 
-### Start the Core engine
+### Start the Core AI Engine
 
-- [Start the Core engine](./start-the-core-engine.md)
+- [Start the Core AI Engine](./start-the-core-engine.md)
 
 ### Create new services
 

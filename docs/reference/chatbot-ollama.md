@@ -56,10 +56,19 @@ python3 -m venv .venv
     .\venv\Scripts\activate
     ```
 
-```sh
-# Install the requirements
-pip install /code[ui]
-```
+=== "pyproject.toml + uv sync"
+
+    ```sh
+    # Sync dependencies
+    uv sync
+    ```
+
+=== "with pip (Legacy)"
+
+    ```sh
+    # Install the requirements
+    pip install /code[ui]
+    ```
 
 Start the application.
 
@@ -180,5 +189,5 @@ minikube tunnel --bind-address 127.0.0.1
 
 Access the `chatbot-ollama` app on <http://localhost:9090/docs>.
 
-Access the Core engine documentation on <http://localhost:8080/docs> to validate
-the backend has been successfully registered to the Core engine.
+Access the Core AI Engine documentation on <http://localhost:8080/docs> to
+validate the backend has been successfully registered to the Core AI Engine.

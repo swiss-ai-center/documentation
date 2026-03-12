@@ -21,7 +21,7 @@ sequenceDiagram
     participant S2 as s2 - Service 2
     participant C as c - Client
     participant S3 as s3 - Storage
-    participant E as e - Core engine
+    participant E as e - Core AI Engine
     C->>+E: POST(p.slug, data)
     E->>+S3: file_keys = for file in data: upload(file)
     S3-->>-E: return(200, file_key)
@@ -58,12 +58,13 @@ sequenceDiagram
 
 ## Specifications
 
-Any service can be part of a pipeline. It must be registered to the Core engine.
+Any service can be part of a pipeline. It must be registered to the Core AI
+Engine.
 
 ### Endpoints
 
-A pipeline will be registered on the Core engine URL with its slug. For example,
-if the pipeline slug is `my-pipeline`, the endpoints will be:
+A pipeline will be registered on the Core AI Engine URL with its slug. For
+example, if the pipeline slug is `my-pipeline`, the endpoints will be:
 
 - `POST /my-pipeline`: Add a task to the pipeline
 
@@ -251,16 +252,16 @@ the input of the step `face-detection` should be `pipeline.image`.
 On POST, the pipeline will be validated and the steps will be added to the
 Database.
 
-After the pipeline is registered, it will be available on the Core engine's
+After the pipeline is registered, it will be available on the Core AI Engine's
 `/pipeline-slug` endpoint.
 
 ## Execution
 
-When launching a pipeline, the Core engine will create a task for each step of
-the pipeline. The tasks will be executed in order. The Core engine will wait for
-the previous task to be finished before launching the next one. All the tasks
-will be executed linked to an element called PipelineExecution. This element
-will be used to store the inputs and outputs of the pipeline execution.
+When launching a pipeline, the Core AI Engine will create a task for each step
+of the pipeline. The tasks will be executed in order. The Core AI Engine will
+wait for the previous task to be finished before launching the next one. All the
+tasks will be executed linked to an element called PipelineExecution. This
+element will be used to store the inputs and outputs of the pipeline execution.
 
 ### PipelineExecution
 

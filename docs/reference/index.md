@@ -4,15 +4,15 @@ This page contains all the projects we manage at the Swiss AI Center.
 
 ## Common code
 
-The common code contains code that is shared between the Core engine and the
+The common code contains code that is shared between the Core AI Engine and the
 services.
 
 - Documentation: [common-code](./common-code.md)
 - Code: <https://github.com/swiss-ai-center/common-code>
 
-## Core engine
+## Core AI Engine
 
-The Core engine allows to create and manage pipelines of microservices.
+The Core AI Engine allows to create and manage pipelines of microservices.
 
 - Documentation: [core-engine](./core-engine.md)
 - Code: <https://github.com/swiss-ai-center/core-engine>

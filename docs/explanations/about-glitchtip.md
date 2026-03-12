@@ -15,7 +15,7 @@ tool that allows you to monitor errors in your applications. It is designed to
 be easy to use and to be integrated into your existing infrastructure.
 
 We use it to catch the errors thrown by the
-[Core engine](../reference/core-engine.md) and the services.
+[Core AI Engine](../reference/core-engine.md) and the services.
 
 ## Install GlitchTip
 
@@ -31,7 +31,7 @@ check the
 and modify them as you need.
 
 Once the instance is launched, create a project, copy the Sentry DSN variable
-and paste it in the [Core engine](../reference/core-engine.md) env variables.
+and paste it in the [Core AI Engine](../reference/core-engine.md) env variables.
 
 With that, the errors will automatically be sent to the interface and you can
 configure notifications to be notified if something happens.

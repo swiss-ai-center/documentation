@@ -7,10 +7,10 @@ theme: uncover
 size: 16:9
 paginate: true
 author: Swiss AI Center contributors
-title: 'Core Engine - Presentation'
-description: 'Presentation of the Swiss AI Center project Core Engine'
+title: 'Core AI Engine - Presentation'
+description: 'Presentation of the Swiss AI Center project Core AI Engine'
 url: https://docs.swiss-ai-center.ch/presentation/
-footer: '**Swiss AI Center** - 2022-2024 - AGPL 3.0'
+footer: '**Swiss AI Center** - 2022-2026 - Apache License 2.0'
 style: |
     blockquote {
         font-style: italic;
@@ -56,7 +56,7 @@ headingDivider: 4
 [documentation]: https://docs.swiss-ai-center.ch/core-engine/
 [guide]: https://mlops.swiss-ai-center.ch/
 
-# Core Engine
+# Core AI Engine
 
 <!--
 _class: lead
@@ -67,7 +67,7 @@ _paginate: false
 
 <small>Swiss AI Center contributors</small>
 
-<small>This work is licensed under the [AGPL 3.0][license] license.</small>
+<small>This work is licensed under the [Apache License 2.0][license] license.</small>
 
 ![](./images/logo.png)
 ## Introduction
@@ -87,6 +87,27 @@ _paginate: false
 - Project called **Centre Suisse d’Intelligence Artificiel à destination des PMEs (CSIA-PME)**, also known as the **Swiss AI Center**.
 - The center’s mission is to **accelerate the adoption of artificial
 intelligence in the digital transition of Swiss SMEs**.
+
+</small>
+
+## AIOnDemand Positioning
+
+<!-- _class: normal-text -->
+<small>
+
+- The platform at [app.swiss-ai-center.ch](https://app.swiss-ai-center.ch) is a Swiss/regional implementation aligned with the **AI on Demand (AIoD)** concept.
+- It is not the official pan-European AIoD platform, but it is technically and strategically aligned with it.
+- In the context of **AI4EU** and **AI4Europe**, AIoD is a marketplace and sandbox where companies, especially SMEs, can access pre-trained models, datasets, and compute without building massive infrastructure.
+
+</small>
+
+## AIOnDemand in Switzerland
+
+<!-- _class: normal-text -->
+<small>
+
+- The Swiss AI Center and its **Core AI Engine** perform this exact role for the Swiss ecosystem.
+- It provides a catalog of AI assets (algorithms, tools, and services) that SMEs can call upon to build prototypes.
 
 </small>
 
@@ -221,7 +242,7 @@ _paginate: false
 <small>
 
 - Pipeline branching
-- Pipeline multiple outputs
+- Auto-update of services based on the Github Template
 - Toy datasets
 - And many more…
 

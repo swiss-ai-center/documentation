@@ -8,11 +8,22 @@ This guide will help you add DVC to your service.
 
 <https://dvc.org/doc/install>
 
-You can install DVC with `pip`, but make sure to install with s3 optional dependencies.
+=== "pyproject.toml + uv sync"
 
-```sh
-pip install dvc[s3]
-```
+    Use `uv` to add DVC with S3 optional dependencies:
+
+    ```sh
+    uv add "dvc[s3]"
+    uv sync
+    ```
+
+=== "with pip (Legacy)"
+
+    You can install DVC with `pip`, but make sure to install with s3 optional dependencies.
+
+    ```sh
+    pip install dvc[s3]
+    ```
 
 ### Initialize DVC
 
@@ -42,9 +53,18 @@ dvc remote modify myremote endpointurl https://<SERVER_ADDRESS>:<PORT>
 
 To configure your credentials for DVC do not use the `dvc remote modify` instead install AWS CLI.
 
-```sh
-pip install awscli
-```
+=== "pyproject.toml + uv sync"
+
+    ```sh
+    uv add awscli
+    uv sync
+    ```
+
+=== "with pip (Legacy)"
+
+    ```sh
+    pip install awscli
+    ```
 
 Use aws configure to add your Access Key ID and your Secret Access Key.
 
