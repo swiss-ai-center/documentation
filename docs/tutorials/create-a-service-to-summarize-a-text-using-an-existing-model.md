@@ -377,8 +377,8 @@ app = FastAPI(
    key of the dictionary that will be used in the process function. The type of the
    field is the type of the data that will be sent to the service. They are defined
    in the FieldDescriptionType enum. The tags are used to identify the service in
-   the Core AI Engine. The `has_ai` variable is used to identify if the service is an
-   AI service.
+   the Core AI Engine. The `has_ai` variable is used to identify if the service is
+   an AI service.
 5. Optional: Edit the documentation URL of the service.
 6. Change the process function. This is the core of the service. The data is a
    dictionary with the keys being the field names set in the data_in_fields. The
@@ -582,8 +582,8 @@ Kubernetes Ingress file).
 
 You should be able to access the FastAPI Swagger UI.
 
-The service should be available in the **Services** section of the Core AI Engine
-it has announced itself to.
+The service should be available in the **Services** section of the Core AI
+Engine it has announced itself to.
 
 You should be able to send a request to the service and get a response.
 

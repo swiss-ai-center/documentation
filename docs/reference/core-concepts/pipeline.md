@@ -58,12 +58,13 @@ sequenceDiagram
 
 ## Specifications
 
-Any service can be part of a pipeline. It must be registered to the Core AI Engine.
+Any service can be part of a pipeline. It must be registered to the Core AI
+Engine.
 
 ### Endpoints
 
-A pipeline will be registered on the Core AI Engine URL with its slug. For example,
-if the pipeline slug is `my-pipeline`, the endpoints will be:
+A pipeline will be registered on the Core AI Engine URL with its slug. For
+example, if the pipeline slug is `my-pipeline`, the endpoints will be:
 
 - `POST /my-pipeline`: Add a task to the pipeline
 
@@ -256,11 +257,11 @@ After the pipeline is registered, it will be available on the Core AI Engine's
 
 ## Execution
 
-When launching a pipeline, the Core AI Engine will create a task for each step of
-the pipeline. The tasks will be executed in order. The Core AI Engine will wait for
-the previous task to be finished before launching the next one. All the tasks
-will be executed linked to an element called PipelineExecution. This element
-will be used to store the inputs and outputs of the pipeline execution.
+When launching a pipeline, the Core AI Engine will create a task for each step
+of the pipeline. The tasks will be executed in order. The Core AI Engine will
+wait for the previous task to be finished before launching the next one. All the
+tasks will be executed linked to an element called PipelineExecution. This
+element will be used to store the inputs and outputs of the pipeline execution.
 
 ### PipelineExecution
 

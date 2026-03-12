@@ -1,8 +1,9 @@
 # Start the Core AI Engine
 
-This tutorial shows how to start the [Core AI Engine](../reference/core-engine.md)
-that will orchestrate the [services](../reference/core-concepts/service.md) and
-the [pipelines](../reference/core-concepts/pipeline.md).
+This tutorial shows how to start the
+[Core AI Engine](../reference/core-engine.md) that will orchestrate the
+[services](../reference/core-concepts/service.md) and the
+[pipelines](../reference/core-concepts/pipeline.md).
 
 ## Introduction
 
@@ -28,8 +29,8 @@ git clone git@github.com:swiss-ai-center/core-engine
 
 ### Start the Core AI Engine locally with Docker Compose
 
-In the `core-engine/backend` directory, start the Core AI Engine Backend with the
-following commands:
+In the `core-engine/backend` directory, start the Core AI Engine Backend with
+the following commands:
 
 ```sh
 # Build the Docker image
@@ -41,8 +42,8 @@ docker compose up
 
 Access the Core AI Engine Backend documentation at <http://localhost:8080/docs>.
 
-In the `core-engine/frontend` directory, start the Core AI Engine Frontend with the
-following commands:
+In the `core-engine/frontend` directory, start the Core AI Engine Frontend with
+the following commands:
 
 ```sh
 # Build the Docker image

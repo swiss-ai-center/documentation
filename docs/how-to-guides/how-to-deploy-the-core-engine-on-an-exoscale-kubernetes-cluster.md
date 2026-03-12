@@ -645,8 +645,9 @@ kubectl --kubeconfig exoscale.kubeconfig \
 
 ### Deploy a service
 
-Deploying a service is similar to deploying the Core AI Engine. You need to update
-the GitHub Actions configuration by adding/updating the following secrets:
+Deploying a service is similar to deploying the Core AI Engine. You need to
+update the GitHub Actions configuration by adding/updating the following
+secrets:
 
 - `PROD_KUBE_CONFIG`: The content of the Kubernetes configuration file (this is
   an Organization secret in our repository)

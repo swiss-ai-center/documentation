@@ -1,7 +1,7 @@
 # About Python pitfalls
 
-During the development of the [Core AI Engine](../reference/core-engine.md) and all
-the services, we have encountered some pitfalls that are worth mentioning.
+During the development of the [Core AI Engine](../reference/core-engine.md) and
+all the services, we have encountered some pitfalls that are worth mentioning.
 
 ## Pitfalls
 

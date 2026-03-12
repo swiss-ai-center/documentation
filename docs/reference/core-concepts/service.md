@@ -182,8 +182,8 @@ A JSON representation would look like this:
 
 ### Register to the Core AI Engine
 
-To register the service to the Core AI Engine, the service must send a POST request
-to the Core AI Engine `/services` endpoint with the following model:
+To register the service to the Core AI Engine, the service must send a POST
+request to the Core AI Engine `/services` endpoint with the following model:
 
 ```python
 class ExecutionUnitTagName(str, Enum):
@@ -355,8 +355,8 @@ pytest
 
 !!! tip
 
-    If you are not familiar with the Core AI Engine and its services, we recommend to
-    follow the [**Getting started**](../../tutorials/getting-started.md) guide
+    If you are not familiar with the Core AI Engine and its services, we recommend
+    to follow the [**Getting started**](../../tutorials/getting-started.md) guide
     first.
 
     The Core AI Engine is highly recommended to test the service locally.

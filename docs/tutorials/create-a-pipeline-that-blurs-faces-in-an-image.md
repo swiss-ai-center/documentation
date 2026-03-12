@@ -193,8 +193,8 @@ documentation to start them.
 
     !!! note
         You can find the slug of your services by going to the FastAPI documentation of
-        the running [Core AI Engine](../reference/core-engine.md) and use the `/services`
-        endpoint. You will find the slug of your services in the response.
+        the running [Core AI Engine](../reference/core-engine.md) and use the
+        `/services` endpoint. You will find the slug of your services in the response.
 
         ```json hl_lines="6 11"
             [
@@ -232,11 +232,11 @@ documentation to start them.
 ### Post the pipeline
 
 Now that we have our [Pipeline](../reference/core-concepts/pipeline.md), we can
-post it to the [Core AI Engine](../reference/core-engine.md). To do so, go to the
-FastAPI documentation of the running [Core AI Engine](../reference/core-engine.md)
-and use the `/pipelines` endpoint to post the
-[Pipeline](../reference/core-concepts/pipeline.md) by clicking on the
-`Try it out` button
+post it to the [Core AI Engine](../reference/core-engine.md). To do so, go to
+the FastAPI documentation of the running
+[Core AI Engine](../reference/core-engine.md) and use the `/pipelines` endpoint
+to post the [Pipeline](../reference/core-concepts/pipeline.md) by clicking on
+the `Try it out` button
 
 Simply copy the content of the `face-blur-pipeline.json` file and paste it in
 the `body` field of the `/pipelines` endpoint and click on the `Execute` button.

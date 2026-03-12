@@ -176,9 +176,9 @@ classDiagram
 
 This diagram represents the future and ideal version of the Core AI Engine.
 
-At the time being, the Core AI Engine is not fully implemented as described in the
-diagram, mostly due to [SQLModel](../explanations/about-sqlmodel.md) limitations
-with inherence.
+At the time being, the Core AI Engine is not fully implemented as described in
+the diagram, mostly due to [SQLModel](../explanations/about-sqlmodel.md)
+limitations with inherence.
 
 The models defined for each class is represented as follow:
 
@@ -392,8 +392,8 @@ GitHub workflow file.
 
 ### Build the application
 
-In the `frontend` directory, build the Core AI Engine Frontend with the following
-commands.
+In the `frontend` directory, build the Core AI Engine Frontend with the
+following commands.
 
 ```sh
 # Install the dependencies
@@ -435,8 +435,9 @@ The Core AI Engine Frontend is available on <http://localhost:3000>.
 
 !!! tip
 
-    If you are not familiar with the Core AI Engine and its services, we recommend to
-    follow the [**Getting started**](../tutorials/getting-started.md) guide first.
+    If you are not familiar with the Core AI Engine and its services, we recommend
+    to follow the [**Getting started**](../tutorials/getting-started.md) guide
+    first.
 
 You have several options to start the Core AI Engine locally:
 
@@ -460,8 +461,8 @@ You have several options to start the Core AI Engine locally:
 
     Access the Core AI Engine Backend documentation at <http://localhost:8080/docs>.
 
-    In the `frontend` directory, start the Core AI Engine Frontend with the following
-    commands:
+    In the `frontend` directory, start the Core AI Engine Frontend with the
+    following commands:
 
     ```sh
     # Build the Docker image
@@ -531,8 +532,8 @@ You have several options to start the Core AI Engine locally:
 
     Access the Core AI Engine Backend documentation at <http://localhost:8080/docs>.
 
-    In the `frontend` directory, start the Core AI Engine Frontend with the following
-    commands:
+    In the `frontend` directory, start the Core AI Engine Frontend with the
+    following commands:
 
     ```sh
     # Install the dependencies
@@ -549,8 +550,8 @@ You have several options to start the Core AI Engine locally:
 
 === "minikube and official Docker images"
 
-    Start the Core AI Engine Backend with the following commands. This will start the
-    Core AI Engine with the official Docker images that are hosted on GitHub.
+    Start the Core AI Engine Backend with the following commands. This will start
+    the Core AI Engine with the official Docker images that are hosted on GitHub.
 
     In the `backend` directory, start the Core AI Engine Backend with the following
     commands:
@@ -587,11 +588,12 @@ You have several options to start the Core AI Engine locally:
 
     Access the Core AI Engine Backend documentation on <http://localhost:8080/docs>.
 
-    Start the Core AI Engine Frontend with the following commands. This will start the
-    Core AI Engine Frontend with the official Docker images that are hosted on GitHub.
+    Start the Core AI Engine Frontend with the following commands. This will start
+    the Core AI Engine Frontend with the official Docker images that are hosted on
+    GitHub.
 
-    In the `frontend` directory, start the Core AI Engine Frontend with the following
-    commands.
+    In the `frontend` directory, start the Core AI Engine Frontend with the
+    following commands.
 
     ```sh
     # Start the Core AI Engine Frontend

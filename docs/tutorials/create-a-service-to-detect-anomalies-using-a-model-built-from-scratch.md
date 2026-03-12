@@ -1199,8 +1199,8 @@ Kubernetes Ingress file).
 
 You should be able to access the FastAPI Swagger UI.
 
-The service should be available in the **Services** section of the Core AI Engine
-it has announced itself to.
+The service should be available in the **Services** section of the Core AI
+Engine it has announced itself to.
 
 You should be able to send a request to the service and get a response.
 
