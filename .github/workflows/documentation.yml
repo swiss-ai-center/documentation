@@ -134,18 +134,25 @@ jobs:
           pattern: "*-files"
 
       - name: Merge files
+        shell: bash
         run: |
-          # Copy Material for MkDocs files to the `public` directory
-          mv material-for-mkdocs-files public
-          
-          # Check if the `presentation` directory exists in the `public` directory
-          if [ -d "presentation" ]; then
-            echo "The 'presentation' directory already exists in the `public` directory"
-            exit 1
+          set -euo pipefail
+
+          # Normalize Material artifact shape and expose the site at ./public
+          if [ -d "material-for-mkdocs-files/public" ]; then
+            mv material-for-mkdocs-files/public public
+          else
+            mv material-for-mkdocs-files public
           fi
 
-          # Move the Marp files to the `presentation` directory
-          mv marp-files public/presentation
+          # Always replace presentation files with fresh Marp outputs
+          rm -rf public/presentation
+          mkdir -p public/presentation
+          cp -R marp-files/. public/presentation/
+
+          # Sanity checks
+          test -f public/presentation/index.html
+          test -f public/presentation/swiss-ai-center-presentation.pdf
 
       - name: Upload files to GitHub Pages
         # Only run on main
