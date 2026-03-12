@@ -5,7 +5,7 @@
 
 ## Description
 
-The common code contains code that is shared between the Core engine and the
+The common code contains code that is shared between the Core AI Engine and the
 services.
 
 The following elements are shared:

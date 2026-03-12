@@ -1,7 +1,7 @@
 # How to build, publish and deploy a service
 
 This guide will help you in the steps to build, publish and deploy a service for
-the [Core engine](../reference/core-engine.md).
+the [Core AI Engine](../reference/core-engine.md).
 
 ## Follow the official tutorials
 
@@ -78,9 +78,9 @@ You have two ways to build, publish and deploy your service:
     | `SERVICE_NAME`                    | The name of the service.                                                                                      | string    |                                                                               |
     | `MODEL_PATH`                      | The path to the model binary file, e.g. `./model-creation/model/my-model.h5`                                  | string    |                                                                               |
     | `DEV_SERVICE_URL`                 | The URL of the service of the development environment.                                                        | string    |                                                                               |
-    | `DEV_CORE_ENGINE_URLS`            | The URL(s) of the Core engine(s) of the development environment.                                              | string    | `'["https://backend-core-engine-swiss-ai-center.kube-ext.isc.heia-fr.ch"]'`   |
-    | `DEV_ENGINE_ANNOUNCE_RETRIES`     | The number of retries to announce the service to the Core engine(s) of the development environment.           | string    | `'5'`                                                                         |
-    | `DEV_ENGINE_ANNOUNCE_RETRY_DELAY` | The delay between each retry to announce the service to the Core engine(s) of the development environment.    | string    | `'3'`                                                                         |
+    | `DEV_CORE_ENGINE_URLS`            | The URL(s) of the Core AI Engine(s) of the development environment.                                              | string    | `'["https://backend-core-engine-swiss-ai-center.kube-ext.isc.heia-fr.ch"]'`   |
+    | `DEV_ENGINE_ANNOUNCE_RETRIES`     | The number of retries to announce the service to the Core AI Engine(s) of the development environment.           | string    | `'5'`                                                                         |
+    | `DEV_ENGINE_ANNOUNCE_RETRY_DELAY` | The delay between each retry to announce the service to the Core AI Engine(s) of the development environment.    | string    | `'3'`                                                                         |
     | `DEV_LOG_LEVEL`                   | The log level of the service of the development environment.                                                  | string    | `info`                                                                        |
     | `DEV_MAX_TASKS`                   | The maximum number of tasks the service of the development environment can accept in its queue.               | string    | `'50'`                                                                        |
     | `DEV_NAMESPACE`                   | The namespace of the service of the development environment.                                                  | string    | `swiss-ai-center-dev`                                                         |

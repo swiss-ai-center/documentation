@@ -1,7 +1,7 @@
 # How to create a new service
 
 This guide will help you in the steps to create a new service for the
-[Core engine](../reference/core-engine.md).
+[Core AI Engine](../reference/core-engine.md).
 
 ## Follow the official tutorials
 
@@ -74,7 +74,7 @@ implement your service with your own logic/model.
 
 ## Test your service
 
-We highly recommend to test your service locally by starting the Core engine,
+We highly recommend to test your service locally by starting the Core AI Engine,
 registering your service and trying your service from end-to-end.
 
 To ensure the service can run correctly, run the following commands:
@@ -120,7 +120,7 @@ guide.
 ### Which framework/language to use
 
 Any framework/language can be used to create a new service compatible with the
-Core engine as long as it follows the
+Core AI Engine as long as it follows the
 [specifications](../reference/core-concepts/service.md#specifications) of the
 Swiss AI Center project.
 
@@ -133,7 +133,7 @@ In all Swiss AI Center's services, we have chosen to use
 
 ### Where to host the service's code
 
-It is not mandatory to host the service's code to use the Core engine.
+It is not mandatory to host the service's code to use the Core AI Engine.
 
 If you want to host the service's code, we recommend Git with the help of
 [GitHub](../explanations/about-github.md).
@@ -144,7 +144,7 @@ If you want to host the service's code, we recommend Git with the help of
 
     This only applies to services that uses a machine learning model.
 
-It is not mandatory to host the service's model code to use the Core engine.
+It is not mandatory to host the service's model code to use the Core AI Engine.
 
 If you want to host the service's model code, we recommend Git with the help of
 [GitHub](../explanations/about-github.md).
@@ -156,7 +156,7 @@ If you want to host the service's model code, we recommend Git with the help of
     This only applies to services that uses a machine learning model built from
     scratch.
 
-It is not mandatory to host the service's model data to use the Core engine.
+It is not mandatory to host the service's model data to use the Core AI Engine.
 
 If you want to host the service's model data, we recommend
 [DVC](../explanations/about-dvc.md) with the help of Git and

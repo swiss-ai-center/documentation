@@ -16,7 +16,7 @@ nav:
   - Tutorials:
       - tutorials/index.md
       - Getting started: tutorials/getting-started.md
-      - Start the core engine: tutorials/start-the-core-engine.md
+      - Start the Core AI Engine: tutorials/start-the-core-engine.md
       - Create a service to rotate an image (generic template): tutorials/create-a-service-to-rotate-an-image.md
       - Create a service to summarize a text using an existing model (generic template): tutorials/create-a-service-to-summarize-a-text-using-an-existing-model.md
       - Create a service to detect anomalies using a model built from scratch (model from scratch template): tutorials/create-a-service-to-detect-anomalies-using-a-model-built-from-scratch.md
@@ -28,7 +28,7 @@ nav:
       - How to update the documentation: how-to-guides/how-to-update-the-documentation.md
       - How to configure a new GitHub repository: how-to-guides/how-to-configure-a-new-github-repository.md
       - How to add DVC to a service: how-to-guides/how-to-add-dvc-to-a-service.md
-      - How to deploy the Core engine on an Exoscale Kuburnetes cluster: how-to-guides/how-to-deploy-the-core-engine-on-an-exoscale-kubernetes-cluster.md
+      - How to deploy the Core AI Engine on an Exoscale Kuburnetes cluster: how-to-guides/how-to-deploy-the-core-engine-on-an-exoscale-kubernetes-cluster.md
   - Reference:
       - reference/index.md
       - Core concepts:
@@ -79,7 +79,7 @@ nav:
           - yolov8 service: reference/services/yolov8.md
           - zigzag-binarization service: reference/services/zigzag-binarization.md
       - Common code: reference/common-code.md
-      - Core engine: reference/core-engine.md
+      - Core AI Engine: reference/core-engine.md
       - mdwrap: reference/mdwrap.md
       - Image utilities: reference/image-utilities.md
       - chatbot-ollama: reference/chatbot-ollama.md

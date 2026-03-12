@@ -127,48 +127,73 @@ Then, activate the virtual environment:
 !!! warning
     Make sure you are in the virtual environment.
 
-Update the `requirements.txt` file with the following content:
+=== "pyproject.toml + uv sync"
 
-```txt hl_lines="2 3"
-common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main
-transformers==4.39.3
-torch==2.2.2
-```
+    Update the `pyproject.toml` file and set `[project].dependencies` with:
 
-The `common-code` package is required to serve the model over a FastAPI REST API
-and boilerplate code to handle the configuration.
+    ```toml title="pyproject.toml" hl_lines="2-6"
+    [project]
+    dependencies = [
+      "common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main",
+      "transformers==4.39.3",
+      "torch==2.2.2",
+    ]
+    ```
 
-We will also need to install transformers and torch for the service to work.
+    The `common-code` package is required to serve the model over a FastAPI REST API
+    and boilerplate code to handle the configuration.
 
-Install the dependencies as explained in the previous section:
+    We also need `transformers` and `torch` for the service to work.
 
-```sh title="Execute this in the virtual environment"
-# Install the dependencies
-pip install --requirement requirements.txt
-```
+    ```sh title="Execute this in the virtual environment"
+    # Sync the dependencies
+    uv sync
+    ```
 
-Create a freeze file to pin all dependencies to their current versions:
+=== "with pip (Legacy)"
 
-```sh title="Execute this in the virtual environment"
-# Freeze the dependencies
-pip freeze --local --all > requirements-all.txt
-```
+    Update the `requirements.txt` file with the following content:
 
-The specific
-`common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
-line will conflict with the more general line in `requirements.txt` due to the
-explicit commit reference.
+    ```txt title="requirements.txt" hl_lines="2 3"
+    common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main
+    transformers==4.39.3
+    torch==2.2.2
+    ```
 
-From there, you have two options:
+    The `common-code` package is required to serve the model over a FastAPI REST API
+    and boilerplate code to handle the configuration.
 
-* **Easier update:** Remove the specific
-  `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
-  line from `requirements-all.txt`. This allows for easier updates of the
-  common-code dependency without adjusting service dependencies.
-* **Consistent dependencies:** Remove the generic line in `requirements.txt` to
-  keep dependencies consistent across machines and time. This will ensure that the
-  same versions of the dependencies are installed on every machine if you ever
-  share your code with someone else.
+    We will also need to install transformers and torch for the service to work.
+
+    Install the dependencies as explained in the previous section:
+
+    ```sh title="Execute this in the virtual environment"
+    # Install the dependencies
+    pip install --requirement requirements.txt
+    ```
+
+    Create a freeze file to pin all dependencies to their current versions:
+
+    ```sh title="Execute this in the virtual environment"
+    # Freeze the dependencies
+    pip freeze --local --all > requirements-all.txt
+    ```
+
+    The specific
+    `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
+    line will conflict with the more general line in `requirements.txt` due to the
+    explicit commit reference.
+
+    From there, you have two options:
+
+    * **Easier update:** Remove the specific
+      `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
+      line from `requirements-all.txt`. This allows for easier updates of the
+      common-code dependency without adjusting service dependencies.
+    * **Consistent dependencies:** Remove the generic line in `requirements.txt` to
+      keep dependencies consistent across machines and time. This will ensure that the
+      same versions of the dependencies are installed on every machine if you ever
+      share your code with someone else.
 
 ### Update the template files
 
@@ -347,12 +372,12 @@ app = FastAPI(
 1. Import the required packages.
 2. Change the description of the service.
 3. Change the name and the slug of the service. This is used to identify the
-   service in the Core engine.
+   service in the Core AI Engine.
 4. Change the input/output fields of the service. The name of the field is the
    key of the dictionary that will be used in the process function. The type of the
    field is the type of the data that will be sent to the service. They are defined
    in the FieldDescriptionType enum. The tags are used to identify the service in
-   the Core engine. The `has_ai` variable is used to identify if the service is an
+   the Core AI Engine. The `has_ai` variable is used to identify if the service is an
    AI service.
 5. Optional: Edit the documentation URL of the service.
 6. Change the process function. This is the core of the service. The data is a
@@ -376,7 +401,7 @@ app = FastAPI(
 
 !!! tip
 
-    Start the Core engine as mentioned in the
+    Start the Core AI Engine as mentioned in the
     [Getting started](../tutorials/getting-started.md) guide for this step.
 
 === "Using docker"
@@ -387,7 +412,7 @@ app = FastAPI(
     # Build the Docker image
     docker compose build
 
-    # Start the Core engine Backend
+    # Start the Core AI Engine Backend
     docker compose up
     ```
 
@@ -410,11 +435,11 @@ app = FastAPI(
 
         For full testing, start with Docker or run the database outside Docker.
 
-The service should try to announce itself to the Core engine.
+The service should try to announce itself to the Core AI Engine.
 
 It will then be available at <http://localhost:9090>.
 
-Access the Core engine either at <http://localhost:3000> (Frontend UI) or
+Access the Core AI Engine either at <http://localhost:3000> (Frontend UI) or
 <http://localhost:9090> (Backend UI).
 
 The service should be listed in the **Services** section.
@@ -423,7 +448,7 @@ The service should be listed in the **Services** section.
 
 !!! tip
 
-    Start the Core engine as mentioned in the
+    Start the Core AI Engine as mentioned in the
     [Getting started](../tutorials/getting-started.md) guide for this step.
 
 Create a file called text.txt and add some text in it.
@@ -432,7 +457,7 @@ There are two ways to test the service:
 
 === "Using the Frontend UI (recommended)"
 
-    Access the Core engine at <http://localhost:3000>.
+    Access the Core AI Engine at <http://localhost:3000>.
 
     ![text-summarizer-frontend](../assets/screenshots/text-summarizer-frontend.png)
 
@@ -451,7 +476,7 @@ There are two ways to test the service:
 
 === "Using the Backend UI"
 
-    Access the Core engine at <http://localhost:9090>.
+    Access the Core AI Engine at <http://localhost:9090>.
 
     The service should be listed in the **Registered Services** section.
 
@@ -557,7 +582,7 @@ Kubernetes Ingress file).
 
 You should be able to access the FastAPI Swagger UI.
 
-The service should be available in the **Services** section of the Core engine
+The service should be available in the **Services** section of the Core AI Engine
 it has announced itself to.
 
 You should be able to send a request to the service and get a response.

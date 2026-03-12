@@ -37,19 +37,6 @@ sudo apt install --yes \
     libpng-dev \
     libz-dev
 
-# Create the virtual environment
-python3 -m venv .venv
-
-# Activate the virtual environment
-source .venv/bin/activate
-
-# Install the Python dependencies
-pip install \
-    --requirement requirements.txt \
-    --requirement requirements-all.txt
-
-# Run Material for MkDocs
-mkdocs serve
 ```
 
 You can now access the local development server at <http://localhost:8000>.
@@ -75,17 +62,25 @@ To format the Markdown documentation, run
 [mdwrap](https://github.com/swiss-ai-center/mdwrap) with the following commands:
 
 ```sh
-# Create the virtual environment
-python3 -m venv .venv
+# Install uv with pip (Python 3.12)
+python3.12 -m pip install --upgrade uv
 
-# Activate the virtual environment
-source .venv/bin/activate
-
-# Install the Python dependencies
-pip install \
-    --requirement requirements.txt \
-    --requirement requirements-all.txt
+# Sync dependencies from pyproject.toml into .venv
+uv sync --python 3.12 --all-groups
 
 # Run mdwrap
-mdwrap --fmt .
+uv run mdwrap --fmt .
+```
+
+## Preview presentation:
+
+To preview the presentation, run
+
+```bash
+docker run --rm -p 8080:8080 \
+  -v "$PWD":/home/marp/app \
+  -w /home/marp/app \
+  marpteam/marp-cli:v3.0.2 \
+  --config .github/workflows/marp.config.js \
+  --html --server --watch -I presentation
 ```

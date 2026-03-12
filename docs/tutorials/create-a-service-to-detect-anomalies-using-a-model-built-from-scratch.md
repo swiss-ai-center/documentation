@@ -152,31 +152,55 @@ Then, activate the virtual environment:
 !!! warning
     Make sure you are in the virtual environment.
 
-Create a `requirements.txt` file with the following content:
+=== "pyproject.toml + uv sync"
 
-```text title="requirements.txt"
-matplotlib==3.8.4
-numpy==1.26.4
-pandas==2.2.1
-scikit-learn==1.4.1.post1
-tensorflow==2.16.1
-```
+    Update the `pyproject.toml` file and set `[project].dependencies` with:
 
-These are the dependencies required to create the model to detect anomalies.
+    ```toml title="pyproject.toml" hl_lines="2-8"
+    [project]
+    dependencies = [
+      "matplotlib==3.8.4",
+      "numpy==1.26.4",
+      "pandas==2.2.1",
+      "scikit-learn==1.4.1.post1",
+      "tensorflow==2.16.1",
+    ]
+    ```
 
-Then, install the dependencies:
+    These are the dependencies required to create the model to detect anomalies.
 
-```sh title="Execute this in the 'model-creation' folder"
-# Install the dependencies
-pip install --requirement requirements.txt
-```
+    ```sh title="Execute this in the 'model-creation' folder"
+    # Sync the dependencies
+    uv sync
+    ```
 
-Create a freeze file to pin all dependencies to their current versions:
+=== "with pip (Legacy)"
 
-```sh title="Execute this in the 'model-creation' folder"
-# Freeze the dependencies
-pip freeze --local --all > requirements-all.txt
-```
+    Create a `requirements.txt` file with the following content:
+
+    ```text title="requirements.txt"
+    matplotlib==3.8.4
+    numpy==1.26.4
+    pandas==2.2.1
+    scikit-learn==1.4.1.post1
+    tensorflow==2.16.1
+    ```
+
+    These are the dependencies required to create the model to detect anomalies.
+
+    Then, install the dependencies:
+
+    ```sh title="Execute this in the 'model-creation' folder"
+    # Install the dependencies
+    pip install --requirement requirements.txt
+    ```
+
+    Create a freeze file to pin all dependencies to their current versions:
+
+    ```sh title="Execute this in the 'model-creation' folder"
+    # Freeze the dependencies
+    pip freeze --local --all > requirements-all.txt
+    ```
 
 #### Create the source files
 
@@ -467,53 +491,83 @@ serving are isolated.
 !!! warning
     Make sure you are in the virtual environment.
 
-Update the `requirements.txt` file with the following content:
+=== "pyproject.toml + uv sync"
 
-```text title="requirements.txt" hl_lines="2-6"
-common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main
-matplotlib==3.8.4
-numpy==1.26.4
-pandas==2.2.1
-scikit-learn==1.4.1.post1
-tensorflow==2.16.1
-```
+    Update the `pyproject.toml` file and set `[project].dependencies` with:
 
-The `common-code` package is required to serve the model over a FastAPI REST API
-and boilerplate code to handle the configuration.
+    ```toml title="pyproject.toml" hl_lines="2-9"
+    [project]
+    dependencies = [
+      "common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main",
+      "matplotlib==3.8.4",
+      "numpy==1.26.4",
+      "pandas==2.2.1",
+      "scikit-learn==1.4.1.post1",
+      "tensorflow==2.16.1",
+    ]
+    ```
 
-You must add to this file all the dependencies your model needs to be loaded and
-executed. In the case of this model, it is `matplotlib`, `numpy`, `pandas`,
-`scikit-learn` and `tensorflow`.
+    The `common-code` package is required to serve the model over a FastAPI REST API
+    and boilerplate code to handle the configuration.
 
-Install the dependencies as explained in the previous section:
+    You must add to this list all the dependencies your model needs to be loaded and
+    executed. In the case of this model, it is `matplotlib`, `numpy`, `pandas`,
+    `scikit-learn` and `tensorflow`.
 
-```sh title="Execute this in the virtual environment"
-# Install the dependencies
-pip install --requirement requirements.txt
-```
+    ```sh title="Execute this in the virtual environment"
+    # Sync the dependencies
+    uv sync
+    ```
 
-Create a freeze file to pin all dependencies to their current versions:
+=== "with pip (Legacy)"
 
-```sh title="Execute this in the virtual environment"
-# Freeze the dependencies
-pip freeze --local --all > requirements-all.txt
-```
+    Update the `requirements.txt` file with the following content:
 
-The specific
-`common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
-line will conflict with the more general line in `requirements.txt` due to the
-explicit commit reference.
+    ```text title="requirements.txt" hl_lines="2-6"
+    common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main
+    matplotlib==3.8.4
+    numpy==1.26.4
+    pandas==2.2.1
+    scikit-learn==1.4.1.post1
+    tensorflow==2.16.1
+    ```
 
-From there, you have two options:
+    The `common-code` package is required to serve the model over a FastAPI REST API
+    and boilerplate code to handle the configuration.
 
-* **Easier update:** Remove the specific
-  `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
-  line from `requirements-all.txt`. This allows for easier updates of the
-  common-code dependency without adjusting service dependencies.
-* **Consistent dependencies:** Remove the generic line in `requirements.txt` to
-  keep dependencies consistent across machines and time. This will ensure that the
-  same versions of the dependencies are installed on every machine if you ever
-  share your code with someone else.
+    You must add to this file all the dependencies your model needs to be loaded and
+    executed. In the case of this model, it is `matplotlib`, `numpy`, `pandas`,
+    `scikit-learn` and `tensorflow`.
+
+    Install the dependencies as explained in the previous section:
+
+    ```sh title="Execute this in the virtual environment"
+    # Install the dependencies
+    pip install --requirement requirements.txt
+    ```
+
+    Create a freeze file to pin all dependencies to their current versions:
+
+    ```sh title="Execute this in the virtual environment"
+    # Freeze the dependencies
+    pip freeze --local --all > requirements-all.txt
+    ```
+
+    The specific
+    `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
+    line will conflict with the more general line in `requirements.txt` due to the
+    explicit commit reference.
+
+    From there, you have two options:
+
+    * **Easier update:** Remove the specific
+      `common-code @ git+https://github.com/swiss-ai-center/common-code.git@<commit>`
+      line from `requirements-all.txt`. This allows for easier updates of the
+      common-code dependency without adjusting service dependencies.
+    * **Consistent dependencies:** Remove the generic line in `requirements.txt` to
+      keep dependencies consistent across machines and time. This will ensure that the
+      same versions of the dependencies are installed on every machine if you ever
+      share your code with someone else.
 
 #### Copy the model binary file
 
@@ -803,46 +857,91 @@ async def root():
 Update the Dockerfile to install all required packages that might be required by
 the model and the model itself:
 
-```dockerfile title="Dockerfile" hl_lines="4-5 20-21"
-# Base image
-FROM python:3.11
+=== "pyproject.toml + uv sync"
 
-# Install all required packages to run the model(1)
-# RUN apt update && apt install --yes package1 package2 ...
+    ```dockerfile title="Dockerfile" hl_lines="1-2 12-15 18"
+    # Base image with uv binaries
+    FROM ghcr.io/astral-sh/uv:python3.11-bookworm
 
-# Work directory
-WORKDIR /app
+    # Install all required packages to run the model(1)
+    # RUN apt update && apt install --yes package1 package2 ...
 
-# Copy requirements file
-COPY ./requirements.txt .
-COPY ./requirements-all.txt .
+    # Work directory
+    WORKDIR /app
 
-# Install dependencies
-RUN pip install --requirement requirements.txt --requirement requirements-all.txt
+    # Copy dependency files
+    COPY ./pyproject.toml .
+    COPY ./uv.lock .
 
-# Copy sources
-COPY src src
+    # Install dependencies
+    RUN uv sync --frozen --no-dev
 
-# Copy model(2)
-COPY anomalies_detection_model.h5 .
+    # Copy sources
+    COPY src src
 
-# Environment variables
-ENV ENVIRONMENT=${ENVIRONMENT}
-ENV LOG_LEVEL=${LOG_LEVEL}
-ENV ENGINE_URL=${ENGINE_URL}
-ENV MAX_TASKS=${MAX_TASKS}
-ENV ENGINE_ANNOUNCE_RETRIES=${ENGINE_ANNOUNCE_RETRIES}
-ENV ENGINE_ANNOUNCE_RETRY_DELAY=${ENGINE_ANNOUNCE_RETRY_DELAY}
+    # Copy model(2)
+    COPY anomalies_detection_model.h5 .
 
-# Exposed ports
-EXPOSE 80
+    # Environment variables
+    ENV ENVIRONMENT=${ENVIRONMENT}
+    ENV LOG_LEVEL=${LOG_LEVEL}
+    ENV ENGINE_URL=${ENGINE_URL}
+    ENV MAX_TASKS=${MAX_TASKS}
+    ENV ENGINE_ANNOUNCE_RETRIES=${ENGINE_ANNOUNCE_RETRIES}
+    ENV ENGINE_ANNOUNCE_RETRY_DELAY=${ENGINE_ANNOUNCE_RETRY_DELAY}
 
-# Switch to src directory
-WORKDIR "/app/src"
+    # Exposed ports
+    EXPOSE 80
 
-# Command to run on start
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
-```
+    # Switch to src directory
+    WORKDIR "/app/src"
+
+    # Command to run on start
+    CMD ["uv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+    ```
+
+=== "with pip (Legacy)"
+
+    ```dockerfile title="Dockerfile" hl_lines="4-5 20-21"
+    # Base image
+    FROM python:3.11
+
+    # Install all required packages to run the model(1)
+    # RUN apt update && apt install --yes package1 package2 ...
+
+    # Work directory
+    WORKDIR /app
+
+    # Copy requirements file
+    COPY ./requirements.txt .
+    COPY ./requirements-all.txt .
+
+    # Install dependencies
+    RUN pip install --requirement requirements.txt --requirement requirements-all.txt
+
+    # Copy sources
+    COPY src src
+
+    # Copy model(2)
+    COPY anomalies_detection_model.h5 .
+
+    # Environment variables
+    ENV ENVIRONMENT=${ENVIRONMENT}
+    ENV LOG_LEVEL=${LOG_LEVEL}
+    ENV ENGINE_URL=${ENGINE_URL}
+    ENV MAX_TASKS=${MAX_TASKS}
+    ENV ENGINE_ANNOUNCE_RETRIES=${ENGINE_ANNOUNCE_RETRIES}
+    ENV ENGINE_ANNOUNCE_RETRY_DELAY=${ENGINE_ANNOUNCE_RETRY_DELAY}
+
+    # Exposed ports
+    EXPOSE 80
+
+    # Switch to src directory
+    WORKDIR "/app/src"
+
+    # Command to run on start
+    CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+    ```
 
 1. Some OS packages might need to be installed in order to run the model. If
    needed, you can add them here.
@@ -864,7 +963,7 @@ anomalies_detection_model.h5 # (1)!
 
 !!! tip
 
-    Start the Core engine as mentioned in the
+    Start the Core AI Engine as mentioned in the
     [Getting started](../tutorials/getting-started.md) guide for this step.
 
 === "Using docker"
@@ -875,7 +974,7 @@ anomalies_detection_model.h5 # (1)!
     # Build the Docker image
     docker compose build
 
-    # Start the Core engine Backend
+    # Start the Core AI Engine Backend
     docker compose up
     ```
 
@@ -898,11 +997,11 @@ anomalies_detection_model.h5 # (1)!
 
         For full testing, start with Docker or run the database outside Docker.
 
-The service should try to announce itself to the Core engine.
+The service should try to announce itself to the Core AI Engine.
 
 It will then be available at <http://localhost:9090>.
 
-Access the Core engine either at <http://localhost:3000> (Frontend UI) or
+Access the Core AI Engine either at <http://localhost:3000> (Frontend UI) or
 <http://localhost:9090> (Backend UI).
 
 The service should be listed in the **Services** section.
@@ -911,14 +1010,14 @@ The service should be listed in the **Services** section.
 
 !!! tip
 
-    Start the Core engine as mentioned in the
+    Start the Core AI Engine as mentioned in the
     [Getting started](../tutorials/getting-started.md) guide for this step.
 
 There are two ways to test the service:
 
 === "Using the Frontend UI (recommended)"
 
-    Access the Core engine at <http://localhost:3000>.
+    Access the Core AI Engine at <http://localhost:3000>.
 
     The service should be listed in the **Services** section.
 
@@ -931,7 +1030,7 @@ There are two ways to test the service:
 
 === "Using the Backend UI"
 
-    Access the Core engine at <http://localhost:9090>.
+    Access the Core AI Engine at <http://localhost:9090>.
 
     The service should be listed in the **Registered Services** section.
 
@@ -1100,7 +1199,7 @@ Kubernetes Ingress file).
 
 You should be able to access the FastAPI Swagger UI.
 
-The service should be available in the **Services** section of the Core engine
+The service should be available in the **Services** section of the Core AI Engine
 it has announced itself to.
 
 You should be able to send a request to the service and get a response.

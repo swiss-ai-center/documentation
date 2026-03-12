@@ -12,7 +12,7 @@ To see the general architecture of the project, see the global
 [UML Diagram](../core-engine.md#uml-diagram).
 
 This sequence diagram illustrates the interaction between an user and a service,
-without using the Core engine.
+without using the Core AI Engine.
 
 ```mermaid
 sequenceDiagram
@@ -180,10 +180,10 @@ A JSON representation would look like this:
 }
 ```
 
-### Register to the Core engine
+### Register to the Core AI Engine
 
-To register the service to the Core engine, the service must send a POST request
-to the Core engine `/services` endpoint with the following model:
+To register the service to the Core AI Engine, the service must send a POST request
+to the Core AI Engine `/services` endpoint with the following model:
 
 ```python
 class ExecutionUnitTagName(str, Enum):
@@ -320,7 +320,7 @@ A JSON representation would look like this:
 }
 ```
 
-After the service is registered, it will be available on the Core engine's
+After the service is registered, it will be available on the Core AI Engine's
 `/service-slug` endpoint.
 
 ## Environment variables
@@ -355,11 +355,11 @@ pytest
 
 !!! tip
 
-    If you are not familiar with the Core engine and its services, we recommend to
+    If you are not familiar with the Core AI Engine and its services, we recommend to
     follow the [**Getting started**](../../tutorials/getting-started.md) guide
     first.
 
-    The Core engine is highly recommended to test the service locally.
+    The Core AI Engine is highly recommended to test the service locally.
 
 You have several options to start the service locally:
 
@@ -382,9 +382,9 @@ You have several options to start the service locally:
 
     Access the service documentation at <http://localhost:9090/docs>.
 
-    Access the Core engine on <http://localhost:3000> or
+    Access the Core AI Engine on <http://localhost:3000> or
     <http://localhost:8080/docs> to validate the service has been successfully
-    registered to the Core engine.
+    registered to the Core AI Engine.
 
 === "Plain Python"
 
@@ -414,12 +414,21 @@ You have several options to start the service locally:
         .\venv\Scripts\activate
         ```
 
-    ```sh
-    # Install the requirements
-    pip install \
-        --requirement requirements.txt \
-        --requirement requirements-all.txt
-    ```
+    === "pyproject.toml + uv sync"
+
+        ```sh
+        # Sync dependencies
+        uv sync
+        ```
+
+    === "with pip (Legacy)"
+
+        ```sh
+        # Install the requirements
+        pip install \
+            --requirement requirements.txt \
+            --requirement requirements-all.txt
+        ```
 
     Start the application.
 
@@ -433,9 +442,9 @@ You have several options to start the service locally:
 
     Access the service documentation on <http://localhost:9090/docs>.
 
-    Access the Core engine on <http://localhost:3000> or
+    Access the Core AI Engine on <http://localhost:3000> or
     <http://localhost:8080/docs> to validate the service has been successfully
-    registered to the Core engine.
+    registered to the Core AI Engine.
 
 === "minikube and official Docker images"
 
@@ -462,9 +471,9 @@ You have several options to start the service locally:
 
     Access the service documentation on <http://localhost:9090/docs>.
 
-    Access the Core engine on <http://localhost:3000> or
+    Access the Core AI Engine on <http://localhost:3000> or
     <http://localhost:8080/docs> to validate the service has been successfully
-    registered to the Core engine.
+    registered to the Core AI Engine.
 
 === "minikube and local Docker images"
 
@@ -519,6 +528,6 @@ You have several options to start the service locally:
 
     Access the service documentation on <http://localhost:9090/docs>.
 
-    Access the Core engine on <http://localhost:3000> or
+    Access the Core AI Engine on <http://localhost:3000> or
     <http://localhost:8080/docs> to validate the service has been successfully
-    registered to the Core engine.
+    registered to the Core AI Engine.

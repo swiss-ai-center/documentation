@@ -16,11 +16,11 @@ To follow this tutorial, you need to have the following tools installed:
   you encounter issues with Python 3.11)
 - An IDE (e.g. [Visual Studio Code](https://code.visualstudio.com/))
 
-### Prepare the Core engine
+### Prepare the Core AI Engine
 
 To implement a [Pipeline](../reference/core-concepts/pipeline.md), you need to
-have a running [Core engine](../reference/core-engine.md). If you don't have
-one, you can follow the [Core engine](../reference/core-engine.md)
+have a running [Core AI Engine](../reference/core-engine.md). If you don't have
+one, you can follow the [Core AI Engine](../reference/core-engine.md)
 documentation.
 
 ### Prepare the services
@@ -41,7 +41,7 @@ documentation to start them.
 - [Image blur](../reference/services/image-blur.md)
 
 ### Create the pipeline
-=== "Using the Core engine interface (recommended)"
+=== "Using the Core AI Engine interface (recommended)"
 
     [Start the frontend](start-the-core-engine.md#start-the-core-engine-locally-with-docker-compose)
     if you haven't already. Then navigate to the
@@ -136,7 +136,7 @@ documentation to start them.
 
     The [Pipeline](../reference/core-concepts/pipeline.md) is created by posting a
     JSON object to the `/pipelines` endpoint of the
-    [Core engine](../reference/core-engine.md). Create a file named
+    [Core AI Engine](../reference/core-engine.md). Create a file named
     `face-blur-pipeline.json` in your IDE with the following code:
 
     ```json hl_lines="29 36"
@@ -193,7 +193,7 @@ documentation to start them.
 
     !!! note
         You can find the slug of your services by going to the FastAPI documentation of
-        the running [Core engine](../reference/core-engine.md) and use the `/services`
+        the running [Core AI Engine](../reference/core-engine.md) and use the `/services`
         endpoint. You will find the slug of your services in the response.
 
         ```json hl_lines="6 11"
@@ -232,8 +232,8 @@ documentation to start them.
 ### Post the pipeline
 
 Now that we have our [Pipeline](../reference/core-concepts/pipeline.md), we can
-post it to the [Core engine](../reference/core-engine.md). To do so, go to the
-FastAPI documentation of the running [Core engine](../reference/core-engine.md)
+post it to the [Core AI Engine](../reference/core-engine.md). To do so, go to the
+FastAPI documentation of the running [Core AI Engine](../reference/core-engine.md)
 and use the `/pipelines` endpoint to post the
 [Pipeline](../reference/core-concepts/pipeline.md) by clicking on the
 `Try it out` button
@@ -249,12 +249,12 @@ You should receive a `200` response with the
 ### Run the pipeline
 
 You can run the pipeline using the FastAPI Swagger interface or by using the
-[Core engine](../reference/core-engine.md).
+[Core AI Engine](../reference/core-engine.md).
 
 === "Using the Webapp"
 
     You can also run the [Pipeline](../reference/core-concepts/pipeline.md) using
-    the [Core engine](../reference/core-engine.md). To do so, go to the Webapp in
+    the [Core AI Engine](../reference/core-engine.md). To do so, go to the Webapp in
     your browser and find the [Pipeline](../reference/core-concepts/pipeline.md) you
     just posted in the `Pipelines` section.
 
@@ -279,13 +279,13 @@ You can run the pipeline using the FastAPI Swagger interface or by using the
         You have successfully created a
         [Pipeline](../reference/core-concepts/pipeline.md) locally. Now, you can use the
         same process to create a [Pipeline](../reference/core-concepts/pipeline.md) on
-        the [Core engine](../reference/core-engine.md) deployed on the cloud.
+        the [Core AI Engine](../reference/core-engine.md) deployed on the cloud.
 
 === "Using the FastAPI Swagger interface"
 
     Now that we have our [Pipeline](../reference/core-concepts/pipeline.md), we can
     run it. To do so, go to the FastAPI documentation of the running
-    [Core engine](../reference/core-engine.md) and you should see the
+    [Core AI Engine](../reference/core-engine.md) and you should see the
     [Pipeline](../reference/core-concepts/pipeline.md) you just posted in the
     `Registered pipelines` endpoint with the slug `/face-blur`.
 

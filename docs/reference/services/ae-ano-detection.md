@@ -52,12 +52,21 @@ python3.11 -m venv .venv
     .\venv\Scripts\activate
     ```
 
-```sh
-# Install the requirements
-pip install \
-    --requirement requirements.txt \
-    --requirement requirements-all.txt
-```
+=== "pyproject.toml + uv sync"
+
+    ```sh
+    # Sync dependencies
+    uv sync
+    ```
+
+=== "with pip (Legacy)"
+
+    ```sh
+    # Install the requirements
+    pip install \
+        --requirement requirements.txt \
+        --requirement requirements-all.txt
+    ```
 
 ### Run the experiment
 

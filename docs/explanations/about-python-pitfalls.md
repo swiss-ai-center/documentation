@@ -1,6 +1,6 @@
 # About Python pitfalls
 
-During the development of the [Core engine](../reference/core-engine.md) and all
+During the development of the [Core AI Engine](../reference/core-engine.md) and all
 the services, we have encountered some pitfalls that are worth mentioning.
 
 ## Pitfalls
@@ -20,7 +20,7 @@ the services, we have encountered some pitfalls that are worth mentioning.
     ``` This way, you can avoid the circular dependency problem.
 - **Inheritance**: The
   [class diagram](../reference/core-engine.md/#uml-diagram-future-and-ideal-version)
-  we created for the Core engine is a good example of this. We wanted a unique
+  we created for the Core AI Engine is a good example of this. We wanted a unique
   entity called ExecutionUnit to be the parent of Service and Pipeline but we
   couldn't do it because of the way SQLModel works with inheritance for the
   database. For now we have two separate entities, Service and Pipeline, that have
@@ -29,7 +29,7 @@ the services, we have encountered some pitfalls that are worth mentioning.
 
 ## How and why do we use Python
 
-The [Core engine](../reference/core-engine.md) and all the services are
+The [Core AI Engine](../reference/core-engine.md) and all the services are
 developed using Python.
 
 ## Install Python

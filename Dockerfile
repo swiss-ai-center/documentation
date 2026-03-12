@@ -1,5 +1,5 @@
 # Base image
-FROM python:3.11
+FROM python:3.12
 
 # Working directory
 WORKDIR /workspaces/swiss-ai-center
@@ -13,11 +13,5 @@ RUN apt update && apt install --yes \
     libpng-dev \
     libz-dev
 
-# Copy the dependencies
-COPY requirements.txt .
-COPY requirements-all.txt .
-
-# Install Python dependencies
-RUN pip install \
-    --requirement requirements.txt \
-    --requirement requirements-all.txt
+# Install uv
+RUN pip install --no-cache-dir uv

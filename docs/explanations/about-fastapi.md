@@ -9,7 +9,7 @@ As the website of [FastAPI](https://fastapi.tiangolo.com/) mentions:
 
 ## How and why do we use FastAPI
 
-FastAPI is used in the [Core engine](../reference/core-engine.md) and all the
+FastAPI is used in the [Core AI Engine](../reference/core-engine.md) and all the
 services to expose the routes to the internet.
 
 ## Install FastAPI
