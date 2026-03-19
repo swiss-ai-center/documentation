@@ -100,27 +100,32 @@ virtual environment.
 
 To create a virtual environment, run the following command inside the project
 folder:
-
-```sh title="Execute this in the 'root' folder"
-# Create a virtual environment
-python3.11 -m venv .venv
-```
-
-Then, activate the virtual environment:
-
-=== ":simple-linux: Linux / :simple-apple: macOS"
-
+=== "Using uv (recommended)"
     ```sh title="Execute this in the 'root' folder"
-    # Activate the virtual environment
-    source .venv/bin/activate
+    # Create a virtual environment
+    uv sync
+    ```
+=== "Old way (venv)"
+    ```sh title="Execute this in the 'root' folder"
+    # Create a virtual environment
+    python3.11 -m venv .venv
     ```
 
-=== ":fontawesome-brands-windows: Windows"
-
-    ```sh title="Execute this in the 'root' folder"
-    # Activate the virtual environment
-    .\venv\Scripts\activate
-    ```
+    Then, activate the virtual environment:
+    
+    === ":simple-linux: Linux / :simple-apple: macOS"
+    
+        ```sh title="Execute this in the 'root' folder"
+        # Activate the virtual environment
+        source .venv/bin/activate
+        ```
+    
+    === ":fontawesome-brands-windows: Windows"
+    
+        ```sh title="Execute this in the 'root' folder"
+        # Activate the virtual environment
+        .\venv\Scripts\activate
+        ```
 
 ### Install the dependencies
 
@@ -225,65 +230,73 @@ This service rotates an image by 90, 180 or 270 degrees clockwise.
 
 #### Update the `pyproject.toml` file
 
-```toml title="pyproject.toml" hl_lines="2"
+```toml title="pyproject.toml" hl_lines="2 6-10"
 [project]
-name = "image-rotate" # (1)!
+name = "image-rotate"#(1)!
+version = "1.0.0"
 
+requires-python = ">=3.10"
+dependencies = [#(2)!
+    "common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main",
+    "numpy==1.26.4",
+    "opencv-python==4.9.0.80"
+
+]
 [tool.pytest.ini_options]
 pythonpath = [".", "src"]
 addopts = "--cov-config=.coveragerc --cov-report xml --cov-report term-missing --cov=./src"
 ```
 
 1. Change the name of the project to `image-rotate`.
+2. Add the dependencies required to run the service. 
 
-#### Update the `src/main.py` file
+#### Update the `src/my_service.py` file
 
 All the code of the [Service](../reference/core-concepts/service.md) is in the
-`main.py` file. The [Service](../reference/core-concepts/service.md) is a simple
-image rotation service that rotates the image by 90, 180, 270 degrees clockwise
-depending on the value of the `rotation` parameter.
+`my_service.py` file. The [Service](../reference/core-concepts/service.md) is a
+simple image rotation service that rotates the image by 90, 180, 270 degrees
+clockwise depending on the value of the `rotation` parameter.
 
-Open the `main.py` with your favorite editor and follow the instructions below.
+Open the `my_service.py` with your favorite editor and follow the instructions
+below.
 
-```py title="main.py" hl_lines="23-25 32-34 43-44 50-64 68-96 100-106 109-119"
-import asyncio
-import time
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import RedirectResponse
+```py title="my_service.py" hl_lines="8-12 14-23 29-32 40-42 47-61 62 67-94"
 from common_code.config import get_settings
-from common_code.http_client import HttpClient
 from common_code.logger.logger import get_logger, Logger
-from common_code.service.controller import router as service_router
-from common_code.service.service import ServiceService
-from common_code.storage.service import StorageService
-from common_code.tasks.controller import router as tasks_router
-from common_code.tasks.service import TasksService
-from common_code.tasks.models import TaskData
 from common_code.service.models import Service
 from common_code.service.enums import ServiceStatus
 from common_code.common.enums import FieldDescriptionType, ExecutionUnitTagName, ExecutionUnitTagAcronym
 from common_code.common.models import FieldDescription, ExecutionUnitTag
-from contextlib import asynccontextmanager
-
+from common_code.tasks.models import TaskData
 # Imports required by the service's model
-# TODO: 1. ADD REQUIRED IMPORTS (ALSO IN THE REQUIREMENTS.TXT) (1)!
+# TODO: 1. ADD REQUIRED IMPORTS (ALSO IN THE REQUIREMENTS.TXT) #(1)!
 import cv2
 import numpy as np
 from common_code.tasks.service import get_extension
+
+# TODO: 6. CHANGE THE API DESCRIPTION AND SUMMARY #(7)!
+api_description = """
+Rotate an image by 90 degrees clockwise depending on the value of the `rotation` parameter. (90, 180, 270)
+"""
+api_summary = """
+Rotate an image by 90 degrees clockwise.
+"""
+
+api_title = "Image Rotate API."#(8)!
+version = "1.0.0"
 
 settings = get_settings()
 
 
 class MyService(Service):
-    # TODO: 2. CHANGE THIS DESCRIPTION (2)!
+    # TODO: 2. CHANGE THIS DESCRIPTION #(2)!
     """
     Image rotate model
     """
 
-    # Any additional fields must be excluded of model by adding a leading underscore for Pydantic to work
-    model: object
-    logger: Logger
+    # Any additional fields must be excluded for Pydantic to work
+    _model: object
+    _logger: Logger
 
     def __init__(self):
         super().__init__(
@@ -309,11 +322,11 @@ class MyService(Service):
                 ),
             ],
             has_ai=False,
-            docs_url="https://docs.swiss-ai-center.ch/reference/services/image-rotate/", # (5)!
+            docs_url="https://docs.swiss-ai-center.ch/reference/services/image-rotate/", #(5)!
         )
         self._logger = get_logger(settings)
-
-    # TODO: 5. CHANGE THE PROCESS METHOD (CORE OF THE SERVICE) (6)!
+    
+    # TODO: 5. CHANGE THE PROCESS METHOD (CORE OF THE SERVICE) #(6)!
     def process(self, data):
         # NOTE that the data is a dictionary with the keys being the field names set in the data_in_fields
         raw = data["image"].data
@@ -343,38 +356,6 @@ class MyService(Service):
             )
         }
 
-...
-
-# TODO: 6. CHANGE THE API DESCRIPTION AND SUMMARY (7)!
-api_description = """
-Rotate an image by 90 degrees clockwise depending on the value of the `rotation` parameter. (90, 180, 270)
-"""
-api_summary = """
-Rotate an image by 90 degrees clockwise.
-"""
-
-# Define the FastAPI application with information
-# TODO: 7. CHANGE THE API TITLE, VERSION, CONTACT AND LICENSE (8)!
-app = FastAPI(
-    lifespan=lifespan,
-    title="Image Rotate API.",
-    description=api_description,
-    version="1.0.0",
-    contact={
-        "name": "Swiss AI Center",
-        "url": "https://swiss-ai-center.ch/",
-        "email": "info@swiss-ai-center.ch",
-    },
-    swagger_ui_parameters={
-        "tagsSorter": "alpha",
-        "operationsSorter": "method",
-    },
-    license_info={
-        "name": "GNU Affero General Public License v3.0 (GNU AGPLv3)",
-        "url": "https://choosealicense.com/licenses/agpl-3.0/",
-    },
-)
-...
 ```
 
 1. Import the OpenCV library and the get_extension function from the tasks
@@ -463,7 +444,7 @@ RUN apt update && apt install --yes ffmpeg libsm6 libxext6
     cd src
 
     # Start the application
-    uvicorn --reload --host 0.0.0.0 --port 9090 main:app
+    uv run uvicorn --reload --host 0.0.0.0 --port 9090 main:app
     ```
 
     !!! Warning
