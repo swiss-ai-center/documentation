@@ -9,7 +9,6 @@ If you have not already, we highly recommend you to follow the official
 tutorials to learn how to create a new service:
 
 - [Rotate an image (generic template)](../tutorials/create-a-service-to-rotate-an-image.md)
-- [Summarize a text using an existing model (generic template)](../tutorials/create-a-service-to-summarize-a-text-using-an-existing-model.md)
 - [Detect anomalies using a model built from scratch (model from scratch template)](../tutorials/create-a-service-to-detect-anomalies-using-a-model-built-from-scratch.md)
 
 ## Build, publish and deploy a service

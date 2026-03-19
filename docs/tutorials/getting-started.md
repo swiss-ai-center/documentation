@@ -87,7 +87,6 @@ understand the concepts behind them.
 ### Create new services
 
 - [Create a service to rotate an image (generic template)](./create-a-service-to-rotate-an-image.md)
-- [Create a service to summarize a text using an existing model (generic template)](./create-a-service-to-summarize-a-text-using-an-existing-model.md)
 - [Create a service to detect anomalies using a model built from scratch (model from scratch template)](./create-a-service-to-detect-anomalies-using-a-model-built-from-scratch.md)
 
 ### Create pipelines
