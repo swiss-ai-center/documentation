@@ -118,34 +118,39 @@ anomalies. This model will then be used in the next section to serve the model.
 !!! warning
     Make sure you are in the `model-creation` folder.
 
-#### Create a new Python virtual environment
+### Create a virtual environment
 
 Instead of installing the dependencies globally, it is recommended to create a
 virtual environment.
 
 To create a virtual environment, run the following command inside the project
 folder:
-
-```sh title="Execute this in the 'model-creation' folder"
-# Create a virtual environment
-python3.11 -m venv .venv
-```
-
-Then, activate the virtual environment:
-
-=== ":simple-linux: Linux / :simple-apple: macOS"
-
-    ```sh title="Execute this in the 'model-creation' folder"
-    # Activate the virtual environment
-    source .venv/bin/activate
+=== "Using uv (recommended)"
+    ```sh title="Execute this in the 'root' folder"
+    # Create a virtual environment
+    uv sync
+    ```
+=== "Old way (venv)"
+    ```sh title="Execute this in the 'root' folder"
+    # Create a virtual environment
+    python3.11 -m venv .venv
     ```
 
-=== ":fontawesome-brands-windows: Windows"
-
-    ```sh title="Execute this in the 'model-creation' folder"
-    # Activate the virtual environment
-    .\venv\Scripts\activate
-    ```
+    Then, activate the virtual environment:
+    
+    === ":simple-linux: Linux / :simple-apple: macOS"
+    
+        ```sh title="Execute this in the 'root' folder"
+        # Activate the virtual environment
+        source .venv/bin/activate
+        ```
+    
+    === ":fontawesome-brands-windows: Windows"
+    
+        ```sh title="Execute this in the 'root' folder"
+        # Activate the virtual environment
+        .\venv\Scripts\activate
+        ```
 
 #### Install the dependencies
 
@@ -441,7 +446,7 @@ The model binary file is saved in the `model-creation/model` folder under the
 name `anomalies_detection_model.h5`. You will need this file in the next
 section.
 
-#### Exit the virtual environment
+#### Exit the virtual environment (pip legacy only)
 
 Run the following command to exit the virtual environment:
 
@@ -458,30 +463,39 @@ anomalies you created in the previous section.
 !!! warning
     Make sure you are in the `model-serving` folder.
 
-#### Create a new Python virtual environment
+### Create a virtual environment
 
-Create a new Python virtual environment as explained in the previous section:
+Instead of installing the dependencies globally, it is recommended to create a
+virtual environment.
 
-```sh title="Execute this in the 'model-serving' folder"
-# Create a virtual environment
-python3.11 -m venv .venv
-```
-
-Then, activate the virtual environment:
-
-=== ":simple-linux: Linux / :simple-apple: macOS"
-
-    ```sh title="Execute this in the 'model-serving' folder"
-    # Activate the virtual environment
-    source .venv/bin/activate
+To create a virtual environment, run the following command inside the project
+folder:
+=== "Using uv (recommended)"
+    ```sh title="Execute this in the 'root' folder"
+    # Create a virtual environment
+    uv sync
+    ```
+=== "Old way (venv)"
+    ```sh title="Execute this in the 'root' folder"
+    # Create a virtual environment
+    python3.11 -m venv .venv
     ```
 
-=== ":fontawesome-brands-windows: Windows"
-
-    ```sh title="Execute this in the 'model-serving' folder"
-    # Activate the virtual environment
-    .\venv\Scripts\activate
-    ```
+    Then, activate the virtual environment:
+    
+    === ":simple-linux: Linux / :simple-apple: macOS"
+    
+        ```sh title="Execute this in the 'root' folder"
+        # Activate the virtual environment
+        source .venv/bin/activate
+        ```
+    
+    === ":fontawesome-brands-windows: Windows"
+    
+        ```sh title="Execute this in the 'root' folder"
+        # Activate the virtual environment
+        .\venv\Scripts\activate
+        ```
 
 This will ensure that the dependencies of the model creation and the model
 serving are isolated.
@@ -597,50 +611,42 @@ addopts = "--cov-config=.coveragerc --cov-report xml --cov-report term-missing -
 
 1. The name is usually the name of the repository.
 
-##### Update the `src/main.py` file
+##### Update the `model-model-creation/src/my_service.py` file
 
-Update the `src/main.py` file to load the model binary file and serve it over
+Update the `model-serving/src/src/main.py` file to load the model binary file and serve it over
 FastAPI:
 
-```py title="src/main.py" hl_lines="21-31 37-39 47 48 53-78 82-84 86-119 174-179 180-181 186 188 189-193 198-201"
-import asyncio
-import time
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import RedirectResponse
+```py title="src/main.py" hl_lines="9-14 16-18 19-21 22 23 39-40 45-64"
 from common_code.config import get_settings
-from common_code.http_client import HttpClient
 from common_code.logger.logger import get_logger, Logger
-from common_code.service.controller import router as service_router
-from common_code.service.service import ServiceService
-from common_code.storage.service import StorageService
-from common_code.tasks.controller import router as tasks_router
-from common_code.tasks.service import TasksService
-from common_code.tasks.models import TaskData
 from common_code.service.models import Service
 from common_code.service.enums import ServiceStatus
 from common_code.common.enums import FieldDescriptionType, ExecutionUnitTagName, ExecutionUnitTagAcronym
 from common_code.common.models import FieldDescription, ExecutionUnitTag
-from contextlib import asynccontextmanager
-
-# Imports required by the service's model(1)
-import numpy as np
+from common_code.tasks.models import TaskData
+# Imports required by the service's model (1)
 import tensorflow as tf
-import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt
+import numpy as np
 import pandas as pd
-
-import os
 import io
-import matplotlib
+import os
 
-matplotlib.use('agg')
+api_description = """ 
+Anomaly detection of a time series with an autoencoder.
+""" #(2)!
+api_summary = """
+Anomaly detection of a time series with an autoencoder.
+"""#(16)!
+api_title = "Autoencoder Anomaly Detection" #(17)!
+version = "1.0.0" #(18)!
 
 settings = get_settings()
 
 
-class MyService(Service):# (2)!
+class MyService(Service):
     """
-    My anomalies detection service model
+    Autoencoder Anomaly detection
     """
 
     # Any additional fields must be excluded for Pydantic to work
@@ -649,27 +655,19 @@ class MyService(Service):# (2)!
 
     def __init__(self):
         super().__init__(
-            name="My anomalies detection service",# (3)!
-            slug="my-anomalies-detection-service",# (4)!
+            name="Autoencoder Anomaly Detection", #(3)!
+            slug="ae-anomaly-detection",#(4)!
             url=settings.service_url,
             summary=api_summary,
             description=api_description,
             status=ServiceStatus.AVAILABLE,
-            data_in_fields=[# (5)!
-                FieldDescription(
-                    name="dataset",
-                    type=[
-                        FieldDescriptionType.TEXT_CSV,
-                        FieldDescriptionType.TEXT_PLAIN,
-                    ],
-                ),
+            data_in_fields=[ #(5)!
+                FieldDescription(name="text", type=[FieldDescriptionType.TEXT_CSV, FieldDescriptionType.TEXT_PLAIN]),
             ],
-            data_out_fields=[# (6)!
-                FieldDescription(
-                    name="result", type=[FieldDescriptionType.IMAGE_PNG]
-                ),
+            data_out_fields=[ #(6)!
+                FieldDescription(name="result", type=[FieldDescriptionType.IMAGE_PNG]),
             ],
-            tags=[# (7)!
+            tags=[ #(7)!
                 ExecutionUnitTag(
                     name=ExecutionUnitTagName.ANOMALY_DETECTION,
                     acronym=ExecutionUnitTagAcronym.ANOMALY_DETECTION
@@ -679,26 +677,19 @@ class MyService(Service):# (2)!
                     acronym=ExecutionUnitTagAcronym.TIME_SERIES
                 ),
             ],
-            has_ai=True,# (8)!
             docs_url="https://docs.swiss-ai-center.ch/reference/services/ae-ano-detection/", # (9)!
+            has_ai=True #(8)!
         )
+        self._model = tf.keras.models.load_model(os.path.join(os.path.dirname(__file__), "..", "ae_model.h5"))#(10)!
         self._logger = get_logger(settings)
 
-        self._model = tf.keras.models.load_model(# (10)!
-            os.path.join(os.path.dirname(__file__), "..", "anomalies_detection_model.h5")
-        )
-
     def process(self, data):
-        # NOTE that the data is a dictionary with the keys being the field names set in the data_in_fields
-        raw = data["dataset"].data# (11)!
-        input_type = data["dataset"].type# (12)!
-
-        print("Input type: ", str(input_type))
-
-        X_test = pd.read_csv(io.BytesIO(raw))
+        raw = str(data["text"].data)[2:-1]
+        raw = raw.replace('\\t', ',').replace('\\n', '\n').replace('\\r', '\n')
+        X_test = pd.read_csv(io.StringIO(raw), dtype={"value": np.float64})
 
         # Use the model to reconstruct the original time series data
-        reconstructed_X = self._model.predict(X_test)# (13)!
+        reconstructed_X = self._model.predict(X_test)
 
         # Calculate the reconstruction error for each point in the time series
         reconstruction_error = np.square(X_test - reconstructed_X).mean(axis=1)
@@ -706,123 +697,21 @@ class MyService(Service):# (2)!
         err = X_test
         fig, ax = plt.subplots(figsize=(20, 6))
 
-        a = err.loc[reconstruction_error >= np.mean(reconstruction_error)]  # anomaly
+        a = err.loc[reconstruction_error >= np.max(reconstruction_error)]  # anomaly
+
         ax.plot(err, color='blue', label='Normal')
+
         ax.scatter(a.index, a, color='red', label='Anomaly')
         plt.legend()
-
-        # Save the plot
         buf = io.BytesIO()
         plt.savefig(buf, format='png')
-
-        # Reset the buffer
         buf.seek(0)
 
         # NOTE that the result must be a dictionary with the keys being the field names set in the data_out_fields
         return {
-            "result": TaskData(data=buf.read(), type=FieldDescriptionType.IMAGE_PNG)# (14)!
+            "result": TaskData(data=buf.read(), type=FieldDescriptionType.IMAGE_PNG)
         }
 
-
-service_service: ServiceService | None = None
-
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # Manual instances because startup events doesn't support Dependency Injection
-    # https://github.com/tiangolo/fastapi/issues/2057
-    # https://github.com/tiangolo/fastapi/issues/425
-
-    # Global variable
-    global service_service
-
-    # Startup
-    logger = get_logger(settings)
-    http_client = HttpClient()
-    storage_service = StorageService(logger)
-    my_service = MyService()
-    tasks_service = TasksService(logger, settings, http_client, storage_service)
-    service_service = ServiceService(logger, settings, http_client, tasks_service)
-
-    tasks_service.set_service(my_service)
-
-    # Start the tasks service
-    tasks_service.start()
-
-    async def announce():
-        retries = settings.engine_announce_retries
-        for engine_url in settings.engine_urls:
-            announced = False
-            while not announced and retries > 0:
-                announced = await service_service.announce_service(
-                    my_service, engine_url
-                )
-                retries -= 1
-                if not announced:
-                    time.sleep(settings.engine_announce_retry_delay)
-                    if retries == 0:
-                        logger.warning(
-                            f"Aborting service announcement after "
-                            f"{settings.engine_announce_retries} retries"
-                        )
-
-    # Announce the service to its engine
-    asyncio.ensure_future(announce())
-
-    yield
-
-    # Shutdown
-    for engine_url in settings.engine_urls:
-        await service_service.graceful_shutdown(my_service, engine_url)
-
-
-api_description = """This service detects anomalies in a time series using an autoencoder.
-
-The service expects a CSV file with a single column containing the time series data.
-
-The service returns a plot of the time series with the detected anomalies highlighted in red.
-"""# (15)!
-api_summary = """My anomalies detection service detects anomalies in a time series using an autoencoder.
-"""# (16)!
-
-# Define the FastAPI application with information
-app = FastAPI(
-    lifespan=lifespan,
-    title="My anomalies detection service API.",# (16)!
-    description=api_description,
-    version="0.0.1",# (18)!
-    contact={# (19)!
-        "name": "Swiss AI Center",
-        "url": "https://swiss-ai-center.ch/",
-        "email": "info@swiss-ai-center.ch",
-    },
-    swagger_ui_parameters={
-        "tagsSorter": "alpha",
-        "operationsSorter": "method",
-    },
-    license_info={# (20)!
-        "name": "GNU Affero General Public License v3.0 (GNU AGPLv3)",
-        "url": "https://choosealicense.com/licenses/agpl-3.0/",
-    },
-)
-
-# Include routers from other files
-app.include_router(service_router, tags=["Service"])
-app.include_router(tasks_router, tags=["Tasks"])
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
-# Redirect to docs
-@app.get("/", include_in_schema=False)
-async def root():
-    return RedirectResponse("/docs", status_code=301)
 ```
 
 1. Import the dependencies required by the model.
@@ -987,7 +876,7 @@ anomalies_detection_model.h5 # (1)!
     cd src
 
     # Start the application
-    uvicorn --reload --host 0.0.0.0 --port 9090 main:app
+    uv run uvicorn --reload --host 0.0.0.0 --port 9090 main:app
     ```
 
     !!! Warning
