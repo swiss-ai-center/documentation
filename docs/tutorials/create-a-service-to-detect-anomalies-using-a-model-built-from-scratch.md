@@ -613,8 +613,8 @@ addopts = "--cov-config=.coveragerc --cov-report xml --cov-report term-missing -
 
 ##### Update the `model-model-creation/src/my_service.py` file
 
-Update the `model-serving/src/src/main.py` file to load the model binary file and serve it over
-FastAPI:
+Update the `model-serving/src/src/main.py` file to load the model binary file
+and serve it over FastAPI:
 
 ```py title="src/main.py" hl_lines="9-14 16-18 19-21 22 23 39-40 45-64"
 from common_code.config import get_settings
