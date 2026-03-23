@@ -90,18 +90,18 @@ intelligence in the digital transition of Swiss SMEs**.
 
 </small>
 
-## AIOnDemand Positioning
+## AI-On-Demand Positioning
 
 <!-- _class: normal-text -->
 <small>
 
-- The platform at [app.swiss-ai-center.ch](https://app.swiss-ai-center.ch) is a Swiss/regional implementation aligned with the **AI on Demand (AIoD)** concept.
+- The platform at [app.swiss-ai-center.ch](https://app.swiss-ai-center.ch) is a Swiss/regional implementation aligned with the **AI-on-Demand (AIoD)** concept.
 - It is not the official pan-European AIoD platform, but it is technically and strategically aligned with it.
 - In the context of **AI4EU** and **AI4Europe**, AIoD is a marketplace and sandbox where companies, especially SMEs, can access pre-trained models, datasets, and compute without building massive infrastructure.
 
 </small>
 
-## AIOnDemand in Switzerland
+## AI-On-Demand in Switzerland
 
 <!-- _class: normal-text -->
 <small>
