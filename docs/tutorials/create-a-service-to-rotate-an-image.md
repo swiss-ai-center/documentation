@@ -112,16 +112,16 @@ folder:
     ```
 
     Then, activate the virtual environment:
-    
+
     === ":simple-linux: Linux / :simple-apple: macOS"
-    
+
         ```sh title="Execute this in the 'root' folder"
         # Activate the virtual environment
         source .venv/bin/activate
         ```
-    
+
     === ":fontawesome-brands-windows: Windows"
-    
+
         ```sh title="Execute this in the 'root' folder"
         # Activate the virtual environment
         .\venv\Scripts\activate
@@ -248,7 +248,7 @@ addopts = "--cov-config=.coveragerc --cov-report xml --cov-report term-missing -
 ```
 
 1. Change the name of the project to `image-rotate`.
-2. Add the dependencies required to run the service. 
+2. Add the dependencies required to run the service.
 
 #### Update the `src/my_service.py` file
 
@@ -325,7 +325,7 @@ class MyService(Service):
             docs_url="https://docs.swiss-ai-center.ch/reference/services/image-rotate/", #(5)!
         )
         self._logger = get_logger(settings)
-    
+
     # TODO: 5. CHANGE THE PROCESS METHOD (CORE OF THE SERVICE) #(6)!
     def process(self, data):
         # NOTE that the data is a dictionary with the keys being the field names set in the data_in_fields
@@ -387,6 +387,109 @@ class MyService(Service):
     The input and output data of the process function are bytes. Depending on the
     wanted type of the data, you might need to convert the data to the expected
     type.
+
+#### Update the Format Hint
+
+The `format_hint` field is an **optional metadata object** that can be added to
+a `FieldDescription` (typically for outputs) to provide
+**additional information about the expected data format**.
+
+It is **not used for validation or execution**, but improves:
+
+* Debugging experience
+* Developer understanding
+* Documentation clarity
+
+---
+
+##### Why use `format_hint`?
+
+Some input/output formats (JSON, CSV, ZIP, etc.) can be ambiguous.
+The `format_hint` helps describe the structure of the data, the meaning
+of fields or columns and the organization of files
+
+---
+
+##### JSON Format
+
+For **JSON inputs or outputs**, the `format_hint` should ideally be an
+**example of the expected JSON structure**.
+
+This is the most helpful way to communicate field names, nested structure and
+expected values
+
+```python hl_lines="4-12"
+FieldDescription(
+    name="result",
+    type=[FieldDescriptionType.APPLICATION_JSON],
+    format_hint={
+        "objects": [
+            {
+                "label": "cat",
+                "confidence": 0.98,
+                "bbox": [12, 45, 200, 300]
+            }
+        ]
+    }
+)
+```
+
+---
+
+##### CSV Example
+
+If you have a CSV output, you can use `format_hint` to describe the expected columns and their meaning.
+
+```python
+format_hint={
+    "columns": [
+        {"name": "id", "description": "Unique identifier"},
+        {"name": "label", "description": "Predicted label"},
+        {"name": "confidence", "description": "Prediction confidence score"},
+    ]
+}
+```
+
+!!! note
+    You need to respect this exact format in order for the UI to display it in the documentation as a table.
+
+---
+
+##### File Tree Example (ZIP / multiple files)
+
+If your output is a ZIP file or a directory with multiple files, you can use
+`format_hint` to describe the expected file structure.
+
+```python
+format_hint={
+    "tree": [
+        {"name": "image1.png", "kind": "file"},
+        {
+            "name": "cropped",
+            "kind": "directory",
+            "children": [
+                {"name": "crop1.png", "kind": "file"},
+                {"name": "crop2.png", "kind": "file"},
+            ],
+        },
+    ]
+}
+```
+
+!!! note
+    You need to respect this exact format in order for the UI to display it as a
+    file tree.
+
+---
+
+##### Simple Description (Any format)
+
+```python
+format_hint={
+    "description": "Text file containing one prediction per line"
+}
+```
+
 
 #### Update the `Dockerfile` and `development.Dockerfile` files
 
