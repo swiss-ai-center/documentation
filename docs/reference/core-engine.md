@@ -356,6 +356,20 @@ in the
 [`backend.yml`](https://github.com/swiss-ai-center/core-engine/blob/main/.github/workflows/backend.yml)
 GitHub workflow file.
 
+### Database migrations
+
+When changing SQLModel models, create and review an Alembic migration:
+
+```bash
+uv run alembic revision --autogenerate -m "describe change"
+```
+
+Committed migrations are applied automatically on backend startup with:
+
+```bash
+uv run alembic upgrade head
+```
+
 ### Run the tests with Python
 
 !!! info
