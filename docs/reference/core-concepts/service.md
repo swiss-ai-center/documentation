@@ -42,6 +42,38 @@ sequenceDiagram
 Inside the project, the services are implemented using Python. But the service
 is a REST API, so it can be implemented in any language.
 
+### Access levels
+
+Each service registered in the Core AI Engine has an `access_level`. New and
+existing services default to `public`.
+
+| Access level | Anonymous visitor | User | Admin |
+| --- | --- | --- | --- |
+| `public` | Yes | Yes | Yes |
+| `user` | No | Yes | Yes |
+| `admin` | No | No | Yes |
+| `disabled` | No | No | No |
+
+The access level controls both discovery and execution:
+
+- `GET /services` returns only services available to the caller's role.
+- Service detail, wake-up and code-snippet endpoints return `404 Not Found` for
+  an inaccessible service. This avoids revealing a restricted service through the
+  regular catalog API.
+- A generated service execution endpoint checks the current database value on
+  every request and returns `403 Forbidden` when the caller lacks access.
+- `GET /admin/services` returns all services, including disabled ones. An
+  administrator changes access with `PATCH /admin/services/{service_id}/access`.
+
+Public catalog routes accept an optional bearer token. Without one, the caller
+is treated as anonymous. See [Authentication and authorization](auth.md) for
+login and role details.
+
+!!! note
+
+    Access level is separate from operational status. A service can be public but
+    unavailable, or running but disabled for regular discovery and use.
+
 ### Endpoints
 
 To match the specifications, the service must implement the following endpoints:

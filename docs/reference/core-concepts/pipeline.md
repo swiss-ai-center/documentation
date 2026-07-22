@@ -61,6 +61,30 @@ sequenceDiagram
 Any service can be part of a pipeline. It must be registered to the Core AI
 Engine.
 
+### Access control
+
+A pipeline does not store a separate access level. Instead, it is accessible
+only when the caller can access every service used by its steps. Consequently:
+
+- anonymous visitors see pipelines composed entirely of public services;
+- users see pipelines composed of public and user-level services;
+- administrators additionally see pipelines that contain admin-level services;
+- a pipeline containing a disabled service is hidden from every regular
+  audience.
+
+The `GET /pipelines` count and page results are filtered before pagination.
+Pipeline detail and code-snippet endpoints return `404 Not Found` when a
+pipeline is inaccessible. Generated pipeline execution endpoints repeat the
+access check for every service at request time and return `403 Forbidden` before
+uploading files or creating tasks when access is denied.
+
+`GET /admin/pipelines` is administrator-only and returns every pipeline,
+including those containing restricted, disabled or operationally unavailable
+services.
+
+See [service access levels](service.md#access-levels) for the audience matrix
+and [Authentication and authorization](auth.md) for bearer-token usage.
+
 ### Endpoints
 
 A pipeline will be registered on the Core AI Engine URL with its slug. For

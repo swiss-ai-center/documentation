@@ -22,6 +22,7 @@ nav:
       - Create a pipeline that blurs faces in an image: tutorials/create-a-pipeline-that-blurs-faces-in-an-image.md
   - How-to guides:
       - how-to-guides/index.md
+      - How to use authentication and the admin panel: how-to-guides/how-to-use-authentication-and-the-admin-panel.md
       - How to create a new service: how-to-guides/how-to-create-a-new-service.md
       - How to build, publish and deploy a service: how-to-guides/how-to-build-publish-and-deploy-a-service.md
       - How to update the documentation: how-to-guides/how-to-update-the-documentation.md
