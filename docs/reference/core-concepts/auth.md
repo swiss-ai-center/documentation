@@ -7,7 +7,8 @@ passwords and issue JSON Web Tokens (JWTs).
 
 Authentication is optional for the public service and pipeline catalogs. When a
 valid bearer token is supplied, those same endpoints return the resources that
-the user's role is allowed to access (see [services access level](service.md#access-levels)).
+the user's role is allowed to access (see
+[services access level](service.md#access-levels)).
 
 ## Login and session lifecycle
 
