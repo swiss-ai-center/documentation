@@ -158,19 +158,18 @@ _paginate: false
 
 ---
 
-<!-- _class: lead -->
-
 <small>
 
 - Can be in **any language** that can implement a **REST API**
 - Must have the **required routes** to be “engine” compliant
+  - Required routes: `/status`, task status, and `/compute`
 - The /compute route must accept the **“Task” model**
 - Can have its own routes (for specific purposes)
 - Can be auto-scaled with **KEDA** on Kubernetes
 
 </small>
 
-![bg right:50% 95%](./images/service.png)
+![bg right:52% 92%](./images/service.png)
 
 
 ## Pipeline specification
