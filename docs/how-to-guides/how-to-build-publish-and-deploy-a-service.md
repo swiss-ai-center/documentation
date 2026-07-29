@@ -72,8 +72,6 @@ You have two ways to build, publish and deploy your service:
     | Variable name                     | Description                                                                                                   | Type      | Default value[^1]                                                             |
     | --------------------------------- | ------------------------------------------------------------------------------------------------------------- | --------- | ----------------------------------------------------------------------------- |
     | `RUN_CICD`                        | Whether to run the CI/CD pipeline.                                                                            | boolean   | `true`                                                                        |
-    | `DEPLOY_DEV`                      | Whether to deploy the service on the development environment.                                                 | boolean   | `false`                                                                       |
-    | `DEPLOY_PROD`                     | Whether to deploy the service on the production environment.                                                  | boolean   | `false`                                                                       |
     | `SERVICE_NAME`                    | The name of the service.                                                                                      | string    |                                                                               |
     | `MODEL_PATH`                      | The path to the model binary file, e.g. `./model-creation/model/my-model.h5`                                  | string    |                                                                               |
     | `DEV_SERVICE_URL`                 | The URL of the service of the development environment.                                                        | string    |                                                                               |
@@ -94,22 +92,23 @@ You have two ways to build, publish and deploy your service:
         services are deployed on your Kubernetes cluster. You can find more information
         about KEDA [here](https://keda.sh/docs/2.18/deploy/).
 
-    **Run the GitHub Actions workflow**
+    **Use the deployment branches**
 
     !!! note
 
         Your code must be pushed to a GitHub repository to trigger the GitHub Actions
-        workflow.
+        workflow. The repository must contain both `dev` and `main`.
 
-    In the GitHub repository, open the **Actions** tab.
+    Create each feature or issue branch from `dev`. When the change is ready, open a
+    pull request back to `dev`. The pull request must pass its checks and be
+    approved by at least one person other than the author.
 
-    If a workflow is already running, you can click on it to see its progress.
+    Merging the pull request into `dev` builds, publishes and deploys the service to
+    the development environment.
 
-    If no workflow is running, you can click on the **github_workflow** on the left
-    side of the **Actions** tab.
-
-    Click on the **Run workflow** button. Select the `main` branch and click on the
-    **Run workflow** button.
+    To release the service to production, open a pull request from `dev` to `main`.
+    Merging that reviewed pull request builds, publishes and deploys the service to
+    the production environment.
 
     The workflow should start and your service should be built, published and
     deployed automatically:
@@ -121,9 +120,11 @@ You have two ways to build, publish and deploy your service:
     4. The service is tested in the `model-serving` directory with the help of
        [pytest](../explanations/about-pytest.md)
     5. The service is released to the GitHub container registry
-    6. The service is deployed on the development/production environment
+    6. The service is deployed to the environment selected by the merged branch:
+       `dev` for development or `main` for production
 
-    The service should be deployed on the development/production environment.
+    The `dev` and `main` branches must be protected against direct pushes, force
+    pushes and deletion.
 
 === "Build, publish and deploy manually"
 

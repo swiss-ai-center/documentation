@@ -595,6 +595,57 @@ exo iam role create core-engine --policy '{"default-service-strategy":"deny","se
 exo iam api-key create s3 core-engine
 ```
 
+#### Configure the Core AI Engine deployment branches
+
+Core AI Engine deployments are selected by the branch that receives the change.
+The repository must contain both of the following long-lived branches:
+
+- `dev` represents the development environment.
+- `main` represents the production environment.
+
+The normal development and release workflow is:
+
+```mermaid
+gitGraph LR:
+    commit id: "Current production"
+    branch dev
+    checkout dev
+    commit id: "Current development"
+    branch issue-123
+    checkout issue-123
+    commit id: "Implement issue"
+    checkout dev
+    merge issue-123 id: "PR approved - deploy dev" tag: "DEV"
+    checkout main
+    merge dev id: "Release approved - deploy prod" tag: "PROD"
+```
+
+Create every change branch, such as `issue-123`, from `dev`. When the change is
+ready, open a pull request back to `dev`. At least one person other than the
+author must approve the pull request before it is merged. The merge into `dev`
+triggers deployment to the development environment.
+
+To release the tested development version, open a pull request from `dev` to
+`main`. Merging that pull request triggers deployment to the production
+environment. Do not create production releases from feature branches.
+
+The `dev` branch is mandatory and must be protected. Protect both `dev` and
+`main` so that:
+
+- changes can only be introduced through pull requests;
+- at least one approval is required;
+- direct pushes are blocked;
+- force pushes are blocked;
+- branch deletion is blocked.
+
+!!! note
+
+    In the Core AI Engine repository, some pull-request and branch protections are
+    configured at Swiss AI Center organization level and inherited by the
+    repository. Verify that the organization rules apply to both `dev` and `main`,
+    then add repository-level rules only for requirements that are not already
+    covered. Repository settings must not weaken or bypass the organization rules.
+
 #### Update the Core AI Engine GitHub Actions configuration
 
 Update the Core AI Engine GitHub Actions configuration by adding/updating the
@@ -616,7 +667,8 @@ following secrets:
 Update the Core AI Engine GitHub Actions configuration by adding/updating the
 following variables:
 
-- `DEPLOY_PROD`: `true`
+- `RUN_CICD`: `true` to enable the CI/CD jobs. This variable does not select an
+  environment; the target environment is selected by the `dev` or `main` branch.
 - `PROD_HOST`: The host of the Core AI Engine backend
 - `PROD_BACKEND_URL`: The URL of the Core AI Engine backend used by the frontend
 - `PROD_BACKEND_WS_URL`: The WebSocket URL of the Core AI Engine backend used by
@@ -627,7 +679,9 @@ following variables:
 
 #### Deploy the Core AI Engine
 
-Run the GitHub Actions workflow to deploy the Core AI Engine.
+Merge a reviewed pull request into `dev` to deploy the development environment.
+Merge a reviewed pull request from `dev` into `main` to deploy the production
+environment.
 
 #### Validate the deployment
 
@@ -655,11 +709,14 @@ secrets:
 Update the GitHub Actions configuration by adding/updating the following
 variables:
 
-- `DEPLOY_PROD`: `true`
+- `RUN_CICD`: `true`
 - `PROD_SERVICE_URL`: The URL of the service
 - `SERVICE_NAME`: The name of the service
 
-Run the GitHub Actions workflow to deploy the service.
+The service repository must have a `dev` branch. Create change branches from
+`dev` and merge them into `dev` through reviewed pull requests to deploy the
+development environment. Merge `dev` into `main` through a reviewed pull request
+to deploy the production environment.
 
 #### Validate the deployment
 

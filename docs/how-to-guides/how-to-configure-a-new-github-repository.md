@@ -68,17 +68,32 @@ AI Center projects, we recommend to add the following teams:
 
 ### Branches
 
-Add a new branch protection rule for the `main` branch with the following
-settings:
+Repositories deployed through the Swiss AI Center workflows, including service
+repositories, must contain both `dev` and `main` as long-lived branches:
 
-- **Branch name pattern**: `main`.
+- Create feature and issue branches from `dev`.
+- Merge changes back into `dev` through a pull request.
+- Require at least one approval from someone other than the author.
+- Merge `dev` into `main` through a reviewed pull request for a production
+  release.
+
+Add protection rules for both branches with the following settings:
+
+- **Branch name pattern**: `dev` or `main`.
 - Enable **Require a pull request before merging**.
-  - Enable **Require approvals** with **1** required approval.
-- Enable **Restrict who can push to matching branches**.
-  - Enable **Restrict pushes that create matching branches**.
-    - Add the `@swiss-ai-center/core-developers` team.
-- Enable **Allow force pushes**.
-  - Select **Specify who can force push**.
-    - Add the `@swiss-ai-center/core-developers` team.
+- Enable **Require approvals** with **1** required approval.
+- Block direct pushes.
+- Disable force pushes.
+- Disable branch deletion.
 
 All the other settings can be left to their default values.
+
+#### Core AI Engine organization rules
+
+!!! note
+
+    Some Core AI Engine pull-request and branch protections are configured at Swiss
+    AI Center organization level. Verify which rules the repository already inherits
+    before adding repository-level rules. The effective rules must still cover both
+    `dev` and `main`, and repository settings must not weaken or bypass the
+    organization rules.
