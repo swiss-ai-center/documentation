@@ -317,33 +317,44 @@ sequenceDiagram
     participant E as e - Core AI Engine
     participant S as s - Service
     participant C as c - Client
-    participant S3 as s3 - Storage
+    participant O as o - Object storage
     S->>+E: POST(core-engine_url: str, service_json: ServiceCreate)
     E->>E: service: Service = Service.from_orm(service_json)
     E->>E: enable_service(service)
     E->>E: add_api_route(service.slug, handler)
     E-->>-S: return(200, service: ServiceRead)
     C->>+E: POST(/s.slug, data: UploadFile[])
-    E->>+S3: file_keys = for file in data: storage_service.upload(file)
-    S3-->>-E: return(200, file_key)
+    E->>+O: Store input files
+    O-->>-E: Return file keys
     E->>E: task = create_task(data_in: file_keys[])
-    E->>E: service_task = new ServiceTask(s3_infos: str[], task)
-    E->>+S: POST(s.url, service_task)
+    E->>E: service_task = new ServiceTask(storage_url, task, callback_url)
+    E->>+S: POST(s.url/compute, service_task)
     S-->>-E: return(200, {status: Task added to the queue})
     E-->>-C: return(200, task: TaskReadWithServiceAndPipeline)
-    S->>+S3: data = for key in service_task.task.data_in: get_file(service_task.s3_infos, key)
-    S3-->>-S: return(200, stream)
+    S->>+E: GET(service_task.storage_url/{key})
+    E->>+O: Read input file
+    O-->>-E: Return file
+    E-->>-S: return(200, file)
     S->>S: result = process(data)
-    S->>+S3: data_out = for res in result: upload_file(service_task.s3_infos, data_out)
-    S3-->>-S: return(200, key)
+    S->>+E: POST(service_task.storage_url, result file)
+    E->>+O: Store result file
+    O-->>-E: Return file key
+    E-->>-S: return(200, key)
     S->>S: task_update = jsonable_encoder(TaskUpdate({status: finished, task.data_out: data_out}))
-    S->>+E: PATCH(core-engine_url: str, task_update)
+    S->>+E: PATCH(service_task.callback_url, task_update)
     E-->-S: return(200, service: ServiceRead)
     C->>+E: GET(/tasks, task_id: str)
     E-->>-C: return(200, task: TaskReadWithServiceAndPipeline)
-    C->>+S3: GET(task.data_out)
-    S3-->>-C: return(200, stream)
+    C->>+E: GET(/storage/{key})
+    E->>+O: Read result file
+    O-->>-E: Return file
+    E-->>-C: return(200, file)
 ```
+
+The Core AI Engine constructs `storage_url` from its public `HOST` setting by
+appending `/storage`. Services use this URL for input downloads and result
+uploads. The Core AI Engine remains the only component in this flow that uses
+the configured S3 host, bucket, region and credentials.
 
 ### Environment variables
 

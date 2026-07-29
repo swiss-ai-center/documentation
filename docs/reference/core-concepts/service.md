@@ -11,30 +11,40 @@ data.
 To see the general architecture of the project, see the global
 [UML Diagram](../core-engine.md#uml-diagram).
 
-This sequence diagram illustrates the interaction between an user and a service,
-without using the Core AI Engine.
+This sequence diagram illustrates how a client executes a service through the
+Core AI Engine. The Core AI Engine owns the connection to its S3-compatible
+object storage. The service transfers task files through the Core AI Engine's
+HTTP storage endpoint and does not receive storage credentials.
 
 ```mermaid
 sequenceDiagram
-    participant S as s - Service
     participant C as c - Client
-    participant S3 as s3 - Storage
-    C->>+S3: file_keys = for file in data: upload(file)
-    S3-->>-C: return(200, file_key)
-    C->>+S: POST(s.url/process, callback_url: str, service_task: ServiceTask)
-    Note right of S: callback_url is the url where the service should send the response
-    Note right of S: service_task should match the model
-    S-->>-C: return(200, Task added to the queue)
-    S->>+S3: data = for key in service_task.task.data_in: get_file(service_task.s3_infos, key)
-    S3-->>-S: return(200, stream)
+    participant E as e - Core AI Engine
+    participant S as s - Service
+    participant O as o - Object storage
+    C->>+E: POST(/service-slug, data)
+    E->>+O: Store input files
+    O-->>-E: Return file keys
+    E->>E: Create ServiceTask(storage_url, task, callback_url)
+    E->>+S: POST(/compute, service_task)
+    S-->>-E: return(200, Task added to the queue)
+    E-->>-C: return(200, task)
+    S->>+E: GET(service_task.storage_url/{key})
+    E->>+O: Read input file
+    O-->>-E: Return file
+    E-->>-S: return(200, file)
     S->>S: result = process(data)
-    S->>+S3: data_out = for res in result: upload_file(service_task.s3_infos, data_out)
-    S3-->>-S: return(200, key)
+    S->>+E: POST(service_task.storage_url, result file)
+    E->>+O: Store result file
+    O-->>-E: Return file key
+    E-->>-S: return(200, key)
     S->>S: task_update = jsonable_encoder(TaskUpdate({status: finished, task.data_out: data_out}))
-    S->>+C: PATCH(callback_url, task_update)
-    C-->>-S: return(200, OK)
-    C->>+S3: GET(task_update.data_out)
-    S3-->>-C: return(200, stream)
+    S->>+E: PATCH(service_task.callback_url, task_update)
+    E-->>-S: return(200, OK)
+    C->>+E: GET(/storage/{key})
+    E->>+O: Read result file
+    O-->>-E: Return file
+    E-->>-C: return(200, file)
 ```
 
 ## Specifications
@@ -115,17 +125,13 @@ class ServiceTaskBase(BaseModel):
     This model is used in subclasses
     """
 
-    s3_access_key_id: str
-    s3_secret_access_key: str
-    s3_region: str
-    s3_host: str
-    s3_bucket: str
+    storage_url: str
     task: ServiceTaskTask
     callback_url: str
 ```
 
-The `data_in` and `data_out` fields are lists of S3 object keys. The `status`
-field is a string that can be one of the following values:
+The `data_in` and `data_out` fields are lists of storage object keys. The
+`status` field is a string that can be one of the following values:
 
 ```python
 class TaskStatus(str, Enum):
@@ -140,19 +146,20 @@ class TaskStatus(str, Enum):
     UNAVAILABLE = "unavailable"
 ```
 
-The S3 settings are used to connect to the S3 storage where the data is stored
-and where the result will be stored. The `callback_url` is the url where the
-service should send the response.
+The `storage_url` is the Core AI Engine storage endpoint. The service downloads
+each input with `GET {storage_url}/{key}` and uploads each result as multipart
+form data with `POST {storage_url}`. The upload response contains the result
+object's `key`. The `callback_url` is the URL where the service sends its task
+status and output keys.
+
+The Core AI Engine keeps the S3-compatible storage configuration and
+credentials. They are not part of `ServiceTask` and are not sent to services.
 
 A JSON representation would look like this:
 
 ```json
 {
-  "s3_access_key_id": "access_key",
-  "s3_secret_access_key": "secret_key",
-  "s3_region": "eu-west-3",
-  "s3_host": "test.s3.com",
-  "s3_bucket": "test-bucket",
+  "storage_url": "https://core-engine.example/storage",
   "task": {
     "data_in": [
       "key1-in.png",
@@ -162,7 +169,7 @@ A JSON representation would look like this:
     "pipeline_id": "45a85f64-5717-4562-b3fc-34a6f66afa6",
     "id": "76ba4e6a-3b8a-4bda-8407-6eaf5a8e1100"
   },
-  "callback_url": "http://my-url.com/callback"
+  "callback_url": "https://core-engine.example/tasks/76ba4e6a-3b8a-4bda-8407-6eaf5a8e1100"
 }
 ```
 
@@ -183,8 +190,8 @@ class TaskUpdate(BaseModel):
     status: TaskStatus | None = None
 ```
 
-The `data_out` field is a list of S3 object keys. The `status` field is a string
-that can be one of the following values:
+The `data_out` field is a list of storage object keys. The `status` field is a
+string that can be one of the following values:
 
 ```python
 class TaskStatus(str, Enum):

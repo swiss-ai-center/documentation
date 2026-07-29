@@ -20,41 +20,54 @@ sequenceDiagram
     participant S1 as s1 - Service 1
     participant S2 as s2 - Service 2
     participant C as c - Client
-    participant S3 as s3 - Storage
     participant E as e - Core AI Engine
+    participant O as o - Object storage
     C->>+E: POST(p.slug, data)
-    E->>+S3: file_keys = for file in data: upload(file)
-    S3-->>-E: return(200, file_key)
+    E->>+O: Store input files
+    O-->>-E: Return file keys
     E->>E: service_tasks = create_tasks()
-    E->>+S1: POST(s.url, callback_url: str, service_tasks[0]: ServiceTask)
-    Note right of S1: callback_url is the url where the service should send the response
-    Note right of S1: service_task should match the model
+    E->>+S1: POST(s.url/compute, service_tasks[0]: ServiceTask)
     S1-->>-E: return(200, Task added to the queue)
     E-->>-C: return(200, service_tasks)
-    S1->>+S3: data = for key in service_task.task.data_in: get_file(service_task.s3_infos, key)
-    S3-->>-S1: return(200, stream)
+    S1->>+E: GET(service_task.storage_url/{key})
+    E->>+O: Read input file
+    O-->>-E: Return file
+    E-->>-S1: return(200, file)
     S1->>S1: result = process(data)
-    S1->>+S3: data_out = for res in result: upload_file(service_task.s3_infos, data_out)
-    S3-->>-S1: return(200, key)
+    S1->>+E: POST(service_task.storage_url, result file)
+    E->>+O: Store result file
+    O-->>-E: Return file key
+    E-->>-S1: return(200, key)
     S1->>S1: task_update = jsonable_encoder(TaskUpdate({status: finished, task.data_out: data_out}))
-    S1->>+E: PATCH(callback_url, task_update)
+    S1->>+E: PATCH(service_task.callback_url, task_update)
     E-->>-S1: return(200, OK)
-    E->>+S2: POST(s.url, callback_url: str, service_tasks[1]: ServiceTask)
+    E->>+S2: POST(s.url/compute, service_tasks[1]: ServiceTask)
     S2-->>-E: return(200, Task added to the queue)
-    S2->>+S3: data = for key in service_task.task.data_in: get_file(service_task.s3_infos, key)
-    S3-->>-S2: return(200, stream)
+    S2->>+E: GET(service_task.storage_url/{key})
+    E->>+O: Read input file
+    O-->>-E: Return file
+    E-->>-S2: return(200, file)
     S2->>S2: result = process(data)
-    S2->>+S3: data_out = for res in result: upload_file(service_task.s3_infos, data_out)
-    S3-->>-S2: return(200, key)
+    S2->>+E: POST(service_task.storage_url, result file)
+    E->>+O: Store result file
+    O-->>-E: Return file key
+    E-->>-S2: return(200, key)
     S2->>S2: task_update = jsonable_encoder(TaskUpdate({status: finished, task.data_out: data_out}))
-    S2->>+E: PATCH(callback_url, task_update)
+    S2->>+E: PATCH(service_task.callback_url, task_update)
     E-->>-S2: return(200, OK)
     loop Every second until status is FINISHED
         C-->E: GET(service_tasks[last])
     end
-    C->>+S3: GET(service_tasks[last].data_out)
-    S3-->>-C: return(200, stream)
+    C->>+E: GET(/storage/{key})
+    E->>+O: Read result file
+    O-->>-E: Return file
+    E-->>-C: return(200, file)
 ```
+
+Every pipeline step receives the same `ServiceTask` contract described in the
+[service specifications](service.md#task-input). Its `storage_url` points to the
+Core AI Engine `/storage` endpoint, so pipeline services do not receive or use
+the Core AI Engine's S3 credentials.
 
 ## Specifications
 

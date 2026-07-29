@@ -72,6 +72,12 @@ service based on the chosen template:
 Follow the instructions mentioned in the template you just bootstrapped to
 implement your service with your own logic/model.
 
+The service does not need S3-compatible storage configuration or credentials.
+For each task, the Core AI Engine supplies a `storage_url`. The common-code
+package downloads task inputs from `GET {storage_url}/{key}` and uploads task
+outputs to `POST {storage_url}`. Ensure that the deployed service has outbound
+HTTP access to every Core AI Engine where it is registered.
+
 ## Test your service
 
 We highly recommend to test your service locally by starting the Core AI Engine,
